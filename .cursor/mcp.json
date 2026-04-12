@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "lism-css": {
+      "command": "npx",
+      "args": ["-y", "@lism-css/mcp"]
+    }
+  }
+}

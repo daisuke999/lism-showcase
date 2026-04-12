@@ -1,0 +1,10 @@
+{
+  "version": 1,
+  "skills": {
+    "lism-css-guide": {
+      "source": "lism-css/lism-css",
+      "sourceType": "github",
+      "computedHash": "ace6f98ea63ab052b068c4db7874328bd61e8aadad54ba05555df44e42653173"
+    }
+  }
+}
