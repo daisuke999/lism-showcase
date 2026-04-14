@@ -1,0 +1,57 @@
+---
+import { Container, Stack, Grid, Frame } from "lism-css/astro";
+import HGroup from "@/components/page001/HGroup.astro";
+---
+
+<Container id="information" class="z--information" size="m" py="60" set="gutter">
+  <Stack jc="c" g="40" w="100%">
+    <HGroup text="Information" subText="お知らせ" />
+    <Grid as="dl" class="z--information_dl u--collapseGrid" gtc="auto 1fr" cg="40" p="0" ov="clip">
+      <Grid gtc="subgrid" gc="1/-1" p="30">
+        <dt>会社名</dt>
+        <dd>株式会社シンプル</dd>
+      </Grid>
+      <Grid gtc="subgrid" gc="1/-1" p="30">
+        <dt>所在地</dt>
+        <dd>東京都千代田区丸の内1-1-1 シンプルビル5F</dd>
+      </Grid>
+      <Grid gtc="subgrid" gc="1/-1" p="30">
+        <dt>設立</dt>
+        <dd>2020年1月15日</dd>
+      </Grid>
+      <Grid gtc="subgrid" gc="1/-1" p="30">
+        <dt>代表者</dt>
+        <dd>山田 利頭六</dd>
+      </Grid>
+      <Grid gtc="subgrid" gc="1/-1" p="30">
+        <dt>事業内容</dt>
+        <dd>ウェブ開発、モバイルアプリ開発、ITコンサルティング、クラウドソリューション提供</dd>
+      </Grid>
+    </Grid>
+    <Frame class="z--information_map" ar={["1/1", "5/2"]}>
+      <iframe
+        src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d7654.831243350634!2d139.76655044358094!3d35.68079012010135!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sja!2sjp!4v1769675880883!5m2!1sja!2sjp"
+        width="1200"
+        height="600"
+        style="border:0;"
+        allowfullscreen=""
+        loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade"
+      />
+    </Frame>
+  </Stack>
+</Container>
+
+<style>
+  /* ページ全体の .u--fadeIn は同名 view-timeline が衝突するため、本セクションは view() で独立させる */
+  .z--information .z--information_dl {
+    animation: u--fadeIn linear both;
+    animation-timeline: view(block);
+    animation-range: var(--u--fadeIn--animation-range);
+  }
+  .z--information .z--information_map {
+    animation: u--fadeIn linear both;
+    animation-timeline: view(block);
+    animation-range: var(--u--fadeIn--animation-range);
+  }
+</style>

@@ -50,6 +50,8 @@
 </div>
 ```
 
+親に **`p="0"`** と **`ov="clip"`** を付けると、`box-shadow` の外周がクリップされ、**上下（周囲）のボーダーが見えにくくなり、アイテム同士の間の区切りだけが残る**見え方にできる（[Utility Class — u--collapseGrid](https://lism-css.com/docs/utility-class/)）。この場合、外周を消す目的だけの **追加 CSS（子の `box-shadow` 上書きなど）は不要**になりやすい。
+
 ```jsx
 // JSX での使用（className で指定）
 <Lism className="u--cbox" keycolor="red" bd p="20">...</Lism>

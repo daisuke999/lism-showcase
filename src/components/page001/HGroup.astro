@@ -1,0 +1,89 @@
+---
+import { Stack, Heading } from "lism-css/astro";
+
+interface Props {
+  text: string;
+  subText: string;
+  variant?: "light";
+}
+
+const { text, subText, variant } = Astro.props;
+---
+
+<Stack class:list={["z--hgroup", { "z--hgroup--light": variant === "light" }]} as="hgroup" ai="c" g="5">
+  <Heading level="2" class="z--hgroup_heading" fz="4xl" fw="400" lts="l" m="0">{text}</Heading>
+  <Heading
+    level="3"
+    class="z--hgroup_subHeading"
+    d="inline-flex"
+    ai="c"
+    g="20"
+    fz="s"
+    fw="normal"
+    lts="l"
+    m="0"
+  >
+    {subText}
+  </Heading>
+</Stack>
+
+<style>
+  .z--hgroup {
+    view-timeline: --z-hgroup y;
+  }
+  .z--hgroup.z--hgroup--light {
+    color: var(--white);
+  }
+  .z--hgroup .z--hgroup_heading {
+    animation: z--hgroup_heading linear both;
+    animation-timeline: --z-hgroup;
+    animation-range: var(--u--fadeIn--animation-range);
+  }
+  @keyframes z--hgroup_heading {
+    from {
+      opacity: 0;
+      letter-spacing: 0.1em;
+      text-indent: 0.1em;
+      transform: translateY(32px);
+    }
+    to {
+      opacity: 1;
+      letter-spacing: var(--lts--l);
+      text-indent: var(--lts--l);
+      transform: translateY(0);
+    }
+  }
+  .z--hgroup .z--hgroup_subHeading {
+    position: relative;
+    animation: z--hgroup_heading linear both;
+    animation-timeline: --z-hgroup;
+    animation-range: var(--u--fadeIn--animation-range);
+  }
+  .z--hgroup .z--hgroup_subHeading:before,
+  .z--hgroup .z--hgroup_subHeading:after {
+    display: block;
+    content: "";
+    width: 12px;
+    height: 1px;
+    background-color: var(--text);
+    transform-origin: center right;
+    animation: z--hgroup_subHeading_beforeAfter linear both;
+    animation-timeline: --z-hgroup;
+    animation-range: contain 25% contain 45%;
+  }
+  .z--hgroup .z--hgroup_subHeading:after {
+    transform-origin: center left;
+  }
+  .z--hgroup.z--hgroup--light .z--hgroup_subHeading:before,
+  .z--hgroup.z--hgroup--light .z--hgroup_subHeading:after {
+    background-color: var(--white);
+  }
+  @keyframes z--hgroup_subHeading_beforeAfter {
+    from {
+      transform: scaleX(0);
+    }
+    to {
+      transform: scaleX(1);
+    }
+  }
+</style>

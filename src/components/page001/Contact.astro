@@ -1,0 +1,80 @@
+---
+import { Frame, Stack, Container, Layer, Box, Icon, Cluster, Text, Inline, LinkBox, Lism } from "lism-css/astro";
+import HGroup from "@/components/page001/HGroup.astro";
+
+const bg = {
+  src: "https://cdn.lism-css.com/img/random-2510?r=contact",
+  alt: "",
+  width: 960,
+  height: 640,
+};
+---
+
+<Box id="contact" class="z--contact" pos="relative">
+  <Frame isLayer>
+    <Lism
+      as="img"
+      class="z--contact_media"
+      pos="absolute"
+      t="-20%"
+      h="140%"
+      src={bg.src}
+      alt={bg.alt}
+      w="100%"
+      exProps={{ width: bg.width, height: bg.height, loading: "lazy", decoding: "async" }}
+    />
+  </Frame>
+  <Layer style={{ backgroundColor: "hsl(0 0% 0% / 0.5)" }} />
+  <Container size="s" bgc="base-2" py="60" h="65vh" set="gutter">
+    <Stack pos="relative" jc="c" g="40" c="white" h="100%">
+      <HGroup text="Contact" subText="お問い合わせ" variant="light" />
+      <Text as="p" class="u--fadeIn" max-sz="full" mx="auto" m="0">
+        これはLism CSSを使用して作成されたサンプルページです。Lism
+        CSSは、シンプルで直感的なクラス名を提供し、迅速なWeb開発を可能にするCSSフレームワークです。このページでは、Lism
+        CSSの基本的な機能とスタイリングオプションを紹介しています。
+      </Text>
+      <Cluster class="u--fadeIn" jc="c" g="15">
+        <LinkBox
+          href="###"
+          layout="grid"
+          gtc="1em 1fr 1em"
+          ji="center"
+          ai="center"
+          px="20"
+          py="15"
+          g="30"
+          w="14rem"
+          td="none"
+          bgc="black"
+          c="white"
+          bdrs="99"
+          hov="neutral"
+        >
+          <Inline gc="2" fz="m" m="0">
+            Try Lism CSS
+          </Inline>
+          <Icon icon="arrow-right" />
+        </LinkBox>
+      </Cluster>
+    </Stack>
+  </Container>
+</Box>
+
+<style>
+  .z--contact {
+    view-timeline: --z-contact y;
+  }
+  .z--contact_media {
+    animation: z--contact_media linear both;
+    animation-timeline: --z-contact;
+    animation-range: entry 0% cover 100%;
+  }
+  @keyframes z--contact_media {
+    from {
+      transform: translateY(-10%);
+    }
+    to {
+      transform: translateY(10%);
+    }
+  }
+</style>

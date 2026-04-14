@@ -1,0 +1,113 @@
+---
+import { Frame, Stack, Container, LinkBox, FluidCols, Layer, Center, Text, Heading, Inline, Lism } from "lism-css/astro";
+import HGroup from "@/components/page001/HGroup.astro";
+
+const items = [1, 2, 3, 4, 5, 6];
+
+const shot = (n: number) => ({
+  src: `https://cdn.lism-css.com/img/random-2510?r=works${n}`,
+  alt: "Beautiful Landscape",
+  width: 960,
+  height: 540,
+});
+---
+
+<Container id="works" class="z--works" size="l" py="60" set="gutter">
+  <Stack g="40">
+    <HGroup text="Works" subText="制作実績" />
+    <Text as="p" class="u--fadeIn" max-sz="full" mx="auto" m="0">
+      迅速なWeb開発を可能にするCSSフレームワークです。
+    </Text>
+    <FluidCols cols="20rem" g="40">
+      {
+        items.map((n) => (
+          <LinkBox class="z--works_item" href="#" layout="stack" set="hov">
+            <Frame class="z--works_frame" ar="16/9" pos="relative" bdrs="20">
+              <Lism
+                as="img"
+                class="z--works_media"
+                src={shot(n).src}
+                alt={shot(n).alt}
+                w="100%"
+                h="auto"
+                set="transition"
+                hov="to:zoom"
+                exProps={{
+                  width: shot(n).width,
+                  height: shot(n).height,
+                  loading: "lazy",
+                  decoding: "async",
+                }}
+              />
+              <Layer
+                set="transition"
+                hov="to:show"
+                style={{
+                  backgroundColor: "rgb(0 0 0 / 30%)",
+                  backdropFilter: "blur(4px)",
+                }}
+              >
+                <Center h="100%" c="white">
+                  <Inline as="span" fz="xl" fs="italic" fw="light" lts="l" px="20" py="10">
+                    View More
+                  </Inline>
+                </Center>
+              </Layer>
+            </Frame>
+            <Stack g="10" py="20">
+              <Heading level="3" fz="l" m="0">
+                Card Title
+              </Heading>
+              <Text as="p" m="0">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et
+                dolore magna aliqua. Ut enim ad minim veniam
+              </Text>
+            </Stack>
+          </LinkBox>
+        ))
+      }
+    </FluidCols>
+  </Stack>
+</Container>
+
+<style>
+  .z--works .z--works_item {
+    view-timeline: --z-works_item y;
+    animation: z--works_item linear both;
+    animation-timeline: --z-works_item;
+    animation-range: var(--u--fadeIn--animation-range);
+  }
+  @keyframes z--works_item {
+    from {
+      transform: translateY(32px) scale(1.04);
+      filter: blur(8px);
+      opacity: 0;
+    }
+    to {
+      transform: translateY(0) scale(1);
+      filter: blur(0);
+      opacity: 1;
+    }
+  }
+  .z--works .z--works_frame {
+    view-timeline: --z-works_frame y;
+  }
+  .z--works .z--works_media {
+    animation: z--works_media linear both;
+    animation-timeline: --z-works_frame;
+    animation-range: var(--u--fadeIn--animation-range);
+  }
+  @keyframes z--works_media {
+    from {
+      transform: scale(1.2);
+    }
+    to {
+      transform: scale(1);
+    }
+  }
+  @media (any-hover: hover) {
+    .-hov\:to\:zoom {
+      scale: var(--_isHov, 1.1);
+    }
+  }
+</style>

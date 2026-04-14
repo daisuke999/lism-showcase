@@ -1,0 +1,73 @@
+---
+import { Frame, Stack, Container, Grid, Flex, FluidCols, Text, Inline, Lism } from "lism-css/astro";
+import HGroup from "@/components/page001/HGroup.astro";
+
+const avatars = [
+  { title: "自由な時間が増えた", meta: "東京都 / 30代 / 会社員", r: "testimonials1", body: "仕事から帰ると部屋がきれいになっているのが嬉しいです。\n面倒な掃除から解放されて、平日の夜にゆとりができました。" },
+  { title: "まるでもう一人の自分", meta: "神奈川県 / 40代 / 主婦", r: "testimonials2", body: "材料を入れてボタンを押すだけで本格的な煮込み料理が完成。\n火を使わないので、子供から目を離さずに調理できて安心です。" },
+  { title: "気づいた時にすぐ！", meta: "北海道 / 20代 / 大学生", r: "testimonials3", body: "気づいた時にサッと掃除できる手軽さが最高です。\nコードレスなので、車の中の掃除にも使えて本当に便利だと思います。\nコードレスなので、車の中の掃除にも使えて本当に便利だと思います。\nコードレスなので、車の中の掃除にも使えて本当に便利だと思います。" },
+  { title: "食後の時間にゆとりを", meta: "沖縄県 / 30代 / パート", r: "testimonials4", body: "毎日の食器洗いの手間がなくなり、食後に家族とゆっくり過ごせる時間が増えました。\n手洗いよりきれいに洗える気がします。" },
+  { title: "食後の時間にゆとりを", meta: "沖縄県 / 30代 / パート", r: "testimonials5", body: "毎日の食器洗いの手間がなくなり、食後に家族とゆっくり過ごせる時間が増えました。\n手洗いよりきれいに洗える気がします。" },
+  { title: "食後の時間にゆとりを", meta: "沖縄県 / 30代 / パート", r: "testimonials6", body: "毎日の食器洗いの手間がなくなり、食後に家族とゆっくり過ごせる時間が増えました。\n手洗いよりきれいに洗える気がします。" },
+];
+
+const img = (r: string) => ({
+  src: `https://cdn.lism-css.com/img/random-2510?category=avatar&r=${r}`,
+  width: 256,
+  height: 256,
+  alt: "",
+});
+---
+
+<Container id="testimonials" class="z--testimonials" size="l" bgc="base-2" py="60" set="gutter">
+  <Stack g="40">
+    <HGroup text="Testimonials" subText="お客様の声" />
+    <FluidCols cols="20rem" g="40">
+      {
+        avatars.map((item) => (
+          <Grid class="z--testimonials_item" gtr="subgrid" gr="span 3" g="30">
+            <Grid gtc="auto 1fr" ai="center" g="20">
+              <Frame as="figure" ar="1/1" w="3.5rem" bdrs="99">
+                <Lism
+                  as="img"
+                  src={img(item.r).src}
+                  alt={img(item.r).alt}
+                  w="100%"
+                  h="100%"
+                  exProps={{
+                    width: img(item.r).width,
+                    height: img(item.r).height,
+                    loading: "lazy",
+                    decoding: "async",
+                  }}
+                />
+              </Frame>
+              <Stack w="stretch" g="15">
+                <Text class="u-trim" fz="m" fw="bold" m="0">
+                  {item.title}
+                </Text>
+              </Stack>
+            </Grid>
+            <Text class="u-trim" fz="m" o="-10" m="0" style={{ whiteSpace: "pre-line" }}>
+              {item.body}
+            </Text>
+            <Flex jc="fe">
+              <Inline class="u-trim" fz="xs" fs="italic" o="-20" as="span">
+                {item.meta}
+              </Inline>
+            </Flex>
+          </Grid>
+        ))
+      }
+    </FluidCols>
+  </Stack>
+</Container>
+
+<style>
+  .z--testimonials .z--testimonials_item {
+    view-timeline: --z-testimonials_item y;
+    animation: u--fadeIn linear both;
+    animation-timeline: --z-testimonials_item;
+    animation-range: var(--u--fadeIn--animation-range);
+  }
+</style>

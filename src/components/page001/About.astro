@@ -1,0 +1,167 @@
+---
+import { Frame, Stack, Container, Box, Flow, Layer, Text, Lism } from 'lism-css/astro';
+import HGroup from '@/components/page001/HGroup.astro';
+
+const img = (r: string) => ({
+  src: `https://cdn.lism-css.com/img/random-2510?r=${r}`,
+  alt: 'Beautiful Landscape',
+  width: 800,
+  height: 600,
+});
+
+/** Layer の backdrop-filter で背面の写真をグレースケール化（lism-css.com docs / is--layer） */
+const aboutPhotoOverlay = (alpha: string) => ({
+  backdropFilter: 'grayscale(1)',
+  backgroundColor: `hsl(224 4% 99% / ${alpha})`,
+});
+---
+
+<Container id='about' class='z--about' size='s' pos='relative' py='70' set='gutter'>
+  <Stack ai='c' jc='c' g='40' pos='relative'>
+    <HGroup text='About' subText='私たちについて' />
+    <Box class='z--about_visuals' pos='absolute' w='100%' h='100%' z='0'>
+      <Frame class='z--about_frame' ar='4/3' pos='absolute' w='20rem' bgc='base-2' bdrs='20'>
+        <Lism
+          as='img'
+          class='z--about_media'
+          src={img('1').src}
+          alt={img('1').alt}
+          w='100%'
+          h='100%'
+          exProps={{ width: img('1').width, height: img('1').height, loading: 'lazy', decoding: 'async' }}
+        />
+        <Layer style={aboutPhotoOverlay('0.2')} />
+      </Frame>
+      <Frame class='z--about_frame' ar='3/4' pos='absolute' w='16rem' bgc='base-2' bdrs='20'>
+        <Lism
+          as='img'
+          class='z--about_media'
+          src={img('2').src}
+          alt={img('2').alt}
+          w='100%'
+          h='100%'
+          exProps={{ width: img('2').width, height: img('2').height, loading: 'lazy', decoding: 'async' }}
+        />
+        <Layer style={aboutPhotoOverlay('0.4')} />
+      </Frame>
+      <Frame class='z--about_frame' ar='4/3' pos='absolute' w='16rem' bgc='base-2' bdrs='20'>
+        <Lism
+          as='img'
+          class='z--about_media'
+          src={img('3').src}
+          alt={img('3').alt}
+          w='100%'
+          h='100%'
+          exProps={{ width: img('3').width, height: img('3').height, loading: 'lazy', decoding: 'async' }}
+        />
+        <Layer style={aboutPhotoOverlay('0.8')} />
+      </Frame>
+    </Box>
+    <Flow class='z--about_body u--fadeIn' pos='relative' z='1'>
+      <Text as='p' max-sz='full' mx='auto' m='0'>
+        Lism CSSはシンプルで直感的なクラス名を提供し、迅速なWeb開発を可能にするCSSフレームワークです。
+        このページでは、Lism CSSの基本的な使い方と主要なコンポーネントを紹介します。
+      </Text>
+      <Text as='p' max-sz='full' mx='auto' m='0'>
+        Lism CSSはシンプルで直感的なクラス名を提供し、迅速なWeb開発を可能にするCSSフレームワークです。
+        このページでは、Lism CSSの基本的な使い方と主要なコンポーネントを紹介します。
+      </Text>
+      <Text as='p' max-sz='full' mx='auto' m='0'>
+        Lism CSSはシンプルで直感的なクラス名を提供し、迅速なWeb開発を可能にするCSSフレームワークです。
+        このページでは、Lism CSSの基本的な使い方と主要なコンポーネントを紹介します。
+      </Text>
+      <Text as='p' max-sz='full' mx='auto' m='0'>
+        Lism CSSはシンプルで直感的なクラス名を提供し、迅速なWeb開発を可能にするCSSフレームワークです。
+        このページでは、Lism CSSの基本的な使い方と主要なコンポーネントを紹介します。
+      </Text>
+    </Flow>
+  </Stack>
+</Container>
+
+<style>
+  .z--about {
+    isolation: isolate;
+    view-timeline: --z--about-timeline y;
+    --z--about_range-start: 25%;
+    --z--about_range-end: 20%;
+  }
+  .z--about .z--hgroup {
+    position: relative;
+    z-index: 1;
+  }
+  .z--about .z--about_visuals {
+    pointer-events: none;
+  }
+  .z--about .z--about_frame {
+    animation: z--about_frame linear both;
+    animation-timeline: --z--about-timeline;
+  }
+  .z--about .z--about_frame:nth-child(1) {
+    top: -2rem;
+    right: 90%;
+    animation-range: entry 0% cover 30%;
+  }
+  .z--about .z--about_frame:nth-child(2) {
+    top: 6rem;
+    left: 90%;
+    animation-range: entry 20% cover 40%;
+  }
+  .z--about .z--about_frame:nth-child(3) {
+    bottom: -6rem;
+    right: 80%;
+    animation-range: entry 40% cover 50%;
+  }
+  @keyframes z--about_frame {
+    from {
+      opacity: 0;
+      filter: blur(16px);
+    }
+    to {
+      opacity: 0.3;
+      filter: blur(0);
+    }
+  }
+  @container (min-width: 800px) {
+    .z--about .z--about_frame {
+      animation: z--about_frame__lg linear both;
+      animation-timeline: --z--about-timeline;
+    }
+    .z--about .z--about_frame:nth-child(1) {
+      top: -2rem;
+      right: calc(100% + 4rem);
+    }
+    .z--about .z--about_frame:nth-child(2) {
+      top: 6rem;
+      left: calc(100% + 4rem);
+    }
+    .z--about .z--about_frame:nth-child(3) {
+      bottom: -6rem;
+      right: calc(100% - 4rem);
+    }
+  }
+  @keyframes z--about_frame__lg {
+    from {
+      opacity: 0;
+      filter: blur(16px);
+      transform: scale(1.16);
+    }
+    to {
+      opacity: 1;
+      filter: blur(0);
+      transform: scale(1);
+    }
+  }
+  .z--about .z--about_media {
+    animation: z--about_media linear both;
+    animation-timeline: --z--about-timeline;
+    animation-range: entry cover;
+  }
+  @keyframes z--about_media {
+    from {
+      transform: scale(1.2);
+    }
+    to {
+      transform: scale(1);
+    }
+  }
+</style>

@@ -1,0 +1,73 @@
+---
+import { Stack, Container, Text } from "lism-css/astro";
+import { Accordion } from "@lism-css/ui/astro";
+import HGroup from "@/components/page001/HGroup.astro";
+
+/** 各項目は質問・回答とも別テキストを想定 */
+const faqItems: { question: string; answer: string }[] = [
+  {
+    question: "Lism CSSとは何ですか？",
+    answer:
+      "レイアウトとデザイントークンを中心に設計されたCSSフレームワークです。ユーティリティクラスとレイアウトモジュールを組み合わせて、一貫したUIを素早く組み立てられます。",
+  },
+  {
+    question: "他のCSSフレームワークとの違いは？",
+    answer:
+      "コンテナクエリを前提にしたレスポンシブ切り替えや、`@layer`によるスタイルの整理など、現代的なCSSの使い方に寄せた設計が特徴です。詳細は公式ドキュメントの概要ページを参照してください。",
+  },
+  {
+    question: "ReactやAstroでも使えますか？",
+    answer:
+      "はい。`lism-css/react` や `lism-css/astro` からコンポーネントをインポートして利用できます。本ページもAstro向けコンポーネントで構成しています。",
+  },
+  {
+    question: "商用プロジェクトで利用できますか？",
+    answer:
+      "パッケージのライセンス条項に従ってご利用ください。チーム内のデザインルールやコンポーネント設計とあわせて、導入前に要件に合うか検証することをおすすめします。",
+  },
+  {
+    question: "カスタマイズや独自スタイルはどこに書けばよいですか？",
+    answer:
+      "Lismにない装飾やアニメーションは、プロジェクトの `@layer` 方針に沿ってモジュールクラス（例: `c--`）やページローカルの `<style>` に追加する形が無難です。",
+  },
+  {
+    question: "不具合や要望はどこに報告すればよいですか？",
+    answer:
+      "GitHubのIssueやパッケージのリポジトリに記載されている連絡先をご確認ください。再現手順や期待する挙動を添えると対応がスムーズです。",
+  },
+];
+---
+
+<Container id="faq" class="z--faq" size="m" py="60" set="gutter">
+  <Stack g="40">
+    <HGroup text="FAQ" subText="よくある質問" />
+    <Accordion.Root lismClass="u--collapseGrid" p="0" ov="clip">
+      {
+        faqItems.map((item) => (
+          <Accordion.Item>
+            <Accordion.Heading p="30">
+              <Accordion.Button>{item.question}</Accordion.Button>
+            </Accordion.Heading>
+            <Accordion.Panel py="30" px="30">
+              <Text m="0">{item.answer}</Text>
+            </Accordion.Panel>
+          </Accordion.Item>
+        ))
+      }
+    </Accordion.Root>
+  </Stack>
+</Container>
+
+<style>
+  .z--faq .c--accordion {
+    view-timeline: --z-faq_accordion y;
+    animation: u--fadeIn linear both;
+    animation-timeline: --z-faq_accordion;
+    animation-range: var(--u--fadeIn--animation-range);
+  }
+  @media (any-hover: hover) {
+    .-hov\:to\:underline {
+      text-decoration: var(--_isHov, underline);
+    }
+  }
+</style>

@@ -1,0 +1,99 @@
+---
+import { Stack, Container, LinkBox, Frame, Layer, Box, Text, Inline, Lism } from "lism-css/astro";
+import HGroup from "@/components/page001/HGroup.astro";
+
+const bg = {
+  src: "https://cdn.lism-css.com/img/random-2510?r=news",
+  alt: "",
+  width: 960,
+  height: 640,
+};
+
+const newsRows = [
+  { long: true },
+  { long: false },
+  { long: true },
+  { long: false },
+];
+---
+
+<Box id="news" class="z--news" pos="relative">
+  <Frame isLayer>
+    <Lism
+      as="img"
+      class="z--news_media"
+      src={bg.src}
+      alt={bg.alt}
+      w="100%"
+      h="100%"
+      exProps={{ width: bg.width, height: bg.height, loading: "lazy", decoding: "async" }}
+    />
+  </Frame>
+  <Layer style={{ filter: "grayscale(1)", backgroundColor: "hsl(224 4% 8% / 0.85)" }} />
+  <Container size="m" py="60" set="gutter">
+    <Stack g="40">
+      <HGroup text="News" subText="お知らせ" variant="light" />
+      <Stack g="20" c="white">
+        {
+          newsRows.map((row) => (
+            <LinkBox class="z--news_item" href="#" layout="grid" gtc={["auto", "auto 1fr"]} g="20 40" py="15" set="hov">
+              <Inline as="span">2024.06.01</Inline>
+              <Stack g="10">
+                <Text as="p" hov="to:underline" td="none" m="0">
+                  Lism CSS version 1.0.0 released!
+                </Text>
+                <Text as="p" fz="s" o="-20" m="0">
+                  Lism CSSの新バージョン1.0.0がリリースされました。新機能や改善点についてはこちらをご覧ください。
+                  {row.long ? " 更に長い文章を入れてみて、改行の挙動を確認します。" : ""}
+                </Text>
+              </Stack>
+            </LinkBox>
+          ))
+        }
+      </Stack>
+    </Stack>
+  </Container>
+</Box>
+
+<style>
+  .z--news {
+    view-timeline: --z-news y;
+  }
+  .z--news .z--news_media {
+    position: absolute;
+    top: -20%;
+    height: 140%;
+    animation: z--news_media linear both;
+    animation-timeline: --z-news;
+    animation-range: entry 0% cover 100%;
+  }
+  @keyframes z--news_media {
+    from {
+      transform: translateY(-10%);
+    }
+    to {
+      transform: translateY(10%);
+    }
+  }
+  .z--news .z--news_item {
+    view-timeline: --z-news_item y;
+    animation: z--news_item linear both;
+    animation-timeline: --z-news_item;
+    animation-range: var(--u--fadeIn--animation-range);
+  }
+  @media (any-hover: hover) {
+    .-hov\:to\:underline {
+      text-decoration: var(--_isHov, underline);
+    }
+  }
+  @keyframes z--news_item {
+    from {
+      opacity: 0;
+      transform: translateX(-16px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+</style>

@@ -1,0 +1,135 @@
+---
+import { Frame, Stack, Container, Layer, LinkBox, Icon, Text, Inline, Lism } from 'lism-css/astro';
+
+const mvImage = {
+  src: 'https://cdn.lism-css.com/img/u-WFUSqJTxVc.jpg',
+  alt: 'Beautiful Landscape',
+  width: 1920,
+  height: 1080,
+};
+---
+
+<Container class='z--mv' pos='relative'>
+  <Frame class='z--mv_frame' pos='relative' h='100%'>
+    <Lism
+      as='img'
+      class='z--mv_media'
+      src={mvImage.src}
+      alt={mvImage.alt}
+      w='100%'
+      h='100%'
+      exProps={{ width: mvImage.width, height: mvImage.height, loading: 'eager' }}
+    />
+    <Layer
+      style={{
+        filter: 'grayscale(50%)',
+        backgroundColor: 'hsl(0 0% 0% / 0.2)',
+      }}
+    />
+    <Stack
+      class='z--mv_content'
+      ai='c'
+      jc='c'
+      g='10'
+      pos='absolute'
+      t='0'
+      l='0'
+      w='100%'
+      h='100%'
+      c='white'
+      set='gutter'
+    >
+      <Text as='p' fz='4xl' fw='400' ta='center' lts='l' m='0'>Order and Harmony</Text>
+      <Text as='p' fz='l' fw='200' ta='center' lts='l' m='0'>Lorem ipsum dolor sit amet.</Text>
+    </Stack>
+  </Frame>
+  <LinkBox href='#about' class='z--mv_scrollDown' layout='stack' ai='center' g='5' pos='absolute' c='white'>
+    <Inline as='span' class='z--mv_scrollDownText' fz='xs' fs='italic' lts='l'>SCROLL DOWN</Inline>
+    <Icon class='z--mv_scrollDownIcon' icon='caret-down' fz='m' />
+  </LinkBox>
+</Container>
+
+<style>
+  .z--mv {
+    --z--mv_animation-range: 0px 75vh;
+    height: 100svh;
+  }
+  .z--mv .z--mv_frame {
+    animation: z--mv_frame linear both;
+    animation-timeline: scroll(root);
+    animation-range: var(--z--mv_animation-range);
+  }
+  @keyframes z--mv_frame {
+    from {
+      filter: blur(0px);
+      opacity: 1;
+    }
+    to {
+      filter: blur(16px);
+      opacity: 0;
+      transform: scale(1.05);
+    }
+  }
+  .z--mv .z--mv_media {
+    animation: z--mv_media linear both;
+    animation-timeline: scroll(root);
+    animation-range: var(--z--mv_animation-range);
+  }
+  @keyframes z--mv_media {
+    from {
+      transform: translateY(0);
+    }
+    to {
+      transform: translateY(15%);
+    }
+  }
+  .z--mv_content {
+    top: calc(var(--z--header-height) / 2 * -1);
+    height: calc(100% + var(--z--header-height) / 2);
+    animation: z--mv_content linear both;
+    animation-timeline: scroll(root);
+    animation-range: var(--z--mv_animation-range);
+  }
+  @keyframes z--mv_content {
+    from {
+      transform: scale(1);
+    }
+    to {
+      transform: scale(1.2);
+    }
+  }
+  .z--mv_scrollDown {
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    animation: z--mv_scrollDown linear both;
+    animation-timeline: scroll(root);
+    animation-range: var(--z--mv_animation-range);
+  }
+  @keyframes z--mv_scrollDown {
+    from {
+      opacity: 1;
+    }
+    to {
+      opacity: 0;
+      transform: translateX(-50%) translateY(32px);
+      filter: blur(8px);
+    }
+  }
+  .z--mv_scrollDownIcon {
+    animation: z--mv_scrollDownIcon 2.4s infinite;
+  }
+  @keyframes z--mv_scrollDownIcon {
+    0% {
+      transform: translateY(0);
+      opacity: 0;
+    }
+    50% {
+      opacity: 1;
+    }
+    100% {
+      transform: translateY(8px);
+      opacity: 0;
+    }
+  }
+</style>

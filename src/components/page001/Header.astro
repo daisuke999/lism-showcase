@@ -1,0 +1,274 @@
+---
+import { Stack, Container, Grid, Flex, Link, LinkBox, Box, Icon, Center, Inline, ListItem } from 'lism-css/astro';
+import { Modal, Accordion, Button } from '@lism-css/ui/astro';
+---
+
+<Container class='z--header' as='header' pos='fixed' t='0' l='0' w='100%' z='1' set='gutter transition'>
+  <Grid class='z--header_inner' gtc='10rem 1fr' ai='center' h='100%' px={['0', null, '40']}>
+    <Stack class='z--header_logo'>
+      <Link class='z--header_logoLink' href='#' fz='xl' lts='l' c='white' td='none'>
+        <Inline fw='200'>The</Inline>Minimal
+      </Link>
+    </Stack>
+    <Flex jc='fe' g='30'>
+      <Flex class='z--headerNav' as='ul' d={['none', null, 'inline-flex']} ai='c' g='30' lts='l'>
+        <ListItem>
+          <Link class='z--headerNav_link' href='#about' d='block' c='white' td='none' py='10' set='transition' hov='o'>
+            About
+          </Link>
+        </ListItem>
+        <ListItem>
+          <Link class='z--headerNav_link' href='#service' c='white' td='none' py='10' set='transition' hov='o'>
+            Service
+          </Link>
+        </ListItem>
+        <ListItem>
+          <Link class='z--headerNav_link' href='#works' c='white' td='none' py='10' set='transition' hov='o'>
+            Works
+          </Link>
+        </ListItem>
+        <ListItem>
+          <Link class='z--headerNav_link' href='#news' c='white' td='none' py='10' set='transition' hov='o'>
+            News
+          </Link>
+        </ListItem>
+        <ListItem>
+          <Button
+            class='z--headerNav_subMenuButton'
+            href='#others'
+            set='plain transition'
+            d='inline-flex'
+            g='10'
+            ai='c'
+            c='white'
+            td='none'
+            px='0'
+            py='10'
+            bgc='transparent'
+            bd='none'
+            hov='o'
+          >
+            Others
+            <Icon icon='caret-down' fz='s' o='-20' />
+          </Button>
+        </ListItem>
+        <Box
+          id='others-child'
+          class='z--headerNav_subMenu'
+          set='plain'
+          bgc='base-2'
+          min-w='14rem'
+          mx='20'
+          my={[null, '5']}
+          p='20'
+          bxsh='20'
+          bdrs='20'
+        >
+          <Stack class='z--subMenu u--collapseGrid' p='0' ov='clip'>
+            <LinkBox href='#faq' layout='grid' gtc='1fr auto' ai='c' td='none' py='15' px='10' set='transition' hov='o'>
+              <Inline>FAQ</Inline>
+            </LinkBox>
+            <LinkBox
+              href='#testimonials'
+              layout='grid'
+              gtc='1fr auto'
+              ai='c'
+              td='none'
+              py='15'
+              px='10'
+              set='transition'
+              hov='o'
+            >
+              <Inline>Testimonials</Inline>
+            </LinkBox>
+            <LinkBox
+              href='#information'
+              layout='grid'
+              gtc='1fr auto'
+              ai='c'
+              td='none'
+              py='15'
+              px='10'
+              set='transition'
+              hov='o'
+            >
+              <Inline>Information</Inline>
+            </LinkBox>
+            <LinkBox
+              href='#contact'
+              layout='grid'
+              gtc='1fr auto'
+              ai='c'
+              td='none'
+              py='15'
+              px='10'
+              set='transition'
+              hov='o'
+            >
+              <Inline>Contact</Inline>
+            </LinkBox>
+          </Stack>
+        </Box>
+      </Flex>
+      <Modal.OpenBtn modalId='menu' d={['block', null, 'none']}>
+        <Center p='10' bd bdc='divider' bdrs='10'>
+          <Icon class='z--subMenu_buttonIcon' icon='menu' c='white' />
+        </Center>
+      </Modal.OpenBtn>
+    </Flex>
+    <Modal.Root id='menu' isContainer isWrapper='s' p='30'>
+      <Modal.Inner layout='stack' pos='relative' w='100%' p='30' bdrs='20' bxsh='40'>
+        <Modal.CloseBtn modalId='menu' autofocus pos='absolute' t='0' r='0' z='1' fz='xl' p='10' m='15' />
+        <Modal.Body layout='stack' g='30' py='40'>
+          <Stack class='z--header_menuNav u--collapseGrid' p='0' ov='clip'>
+            <LinkBox href='#about' layout='grid' gtc='1fr auto' ai='c' fz='l' td='none' py='15' px='5'>
+              <Inline>About</Inline>
+              <Icon icon='caret-right' fz='s' o='-20' />
+            </LinkBox>
+            <LinkBox href='#service' layout='grid' gtc='1fr auto' ai='c' fz='l' td='none' py='15' px='5'>
+              <Inline>Service</Inline>
+              <Icon icon='caret-right' fz='s' o='-20' />
+            </LinkBox>
+            <LinkBox href='#works' layout='grid' gtc='1fr auto' ai='c' fz='l' td='none' py='15' px='5'>
+              <Inline>Works</Inline>
+              <Icon icon='caret-right' fz='s' o='-20' />
+            </LinkBox>
+            <LinkBox href='#news' layout='grid' gtc='1fr auto' ai='c' fz='l' td='none' py='15' px='5'>
+              <Inline>News</Inline>
+              <Icon icon='caret-right' fz='s' o='-20' />
+            </LinkBox>
+            <Accordion.Root>
+              <Accordion.Item>
+                <Accordion.Heading m='0' p='0' w='100%'>
+                  <Accordion.Button
+                    layout='grid'
+                    gtc='1fr auto'
+                    ai='c'
+                    fz='l'
+                    py='15'
+                    px='5'
+                    w='100%'
+                    td='none'
+                    g='0'
+                    jc='start'
+                    ji='start'
+                    ta='left'
+                  >
+                    <Inline>Others</Inline>
+                  </Accordion.Button>
+                </Accordion.Heading>
+                <Accordion.Panel p='0' ov='clip'>
+                  <Stack class='z--header_menuNav_sub u--collapseGrid' ml='20' p='0' ov='clip'>
+                    <LinkBox href='#faq' layout='grid' gtc='1fr auto' ai='c' fz='l' td='none' py='15' px='5'>
+                      <Inline>FAQ</Inline>
+                      <Icon icon='caret-right' fz='s' o='-20' />
+                    </LinkBox>
+                    <LinkBox href='#testimonials' layout='grid' gtc='1fr auto' ai='c' fz='l' td='none' py='15' px='5'>
+                      <Inline>Testimonials</Inline>
+                      <Icon icon='caret-right' fz='s' o='-20' />
+                    </LinkBox>
+                    <LinkBox href='#information' layout='grid' gtc='1fr auto' ai='c' fz='l' td='none' py='15' px='5'>
+                      <Inline>Information</Inline>
+                      <Icon icon='caret-right' fz='s' o='-20' />
+                    </LinkBox>
+                    <LinkBox href='#contact' layout='grid' gtc='1fr auto' ai='c' fz='l' td='none' py='15' px='5'>
+                      <Inline>Contact</Inline>
+                      <Icon icon='caret-right' fz='s' o='-20' />
+                    </LinkBox>
+                  </Stack>
+                </Accordion.Panel>
+              </Accordion.Item>
+            </Accordion.Root>
+          </Stack>
+        </Modal.Body>
+      </Modal.Inner>
+    </Modal.Root>
+  </Grid>
+</Container>
+
+<style>
+  .z--header {
+    height: var(--z--header-height);
+    /* この量スクロールしてからヘッダー変化アニメーションを開始（終了は +160px スクロール地点） */
+    --z--header-scroll-animation-start: 100px;
+    --z--header-animation-range: var(--z--header-scroll-animation-start)
+      calc(var(--z--header-scroll-animation-start) + 160px);
+    animation: z--header linear both;
+    animation-timeline: scroll(root);
+    animation-range: var(--z--header-animation-range);
+  }
+  @keyframes z--header {
+    to {
+      background-color: var(--white);
+      height: var(--z--header-height--thin);
+      box-shadow: var(--bxsh--10);
+    }
+  }
+  .z--header_logoLink {
+    animation: z--header_logoLink linear both;
+    animation-timeline: scroll(root);
+    animation-range: var(--z--header-animation-range);
+  }
+  @keyframes z--header_logoLink {
+    to {
+      color: var(--black);
+    }
+  }
+  /* Header nav */
+  .z--headerNav_subMenuButton {
+    anchor-name: --parent-anchor;
+  }
+  .z--headerNav_link,
+  .z--headerNav_subMenuButton {
+    animation: z--headerNav_link linear both;
+    animation-timeline: scroll(root);
+    animation-range: var(--z--header-animation-range);
+  }
+  @keyframes z--headerNav_link {
+    to {
+      color: var(--text-2);
+    }
+  }
+  .z--headerNav_subMenu {
+    position-anchor: --parent-anchor;
+    top: anchor(bottom);
+    justify-self: anchor-center;
+    position: absolute;
+
+    /* 画面端（右端）で切れる場合の自動回避設定 */
+    position-try-fallbacks: flip-inline;
+    position-try-order: most-width;
+
+    visibility: hidden;
+    opacity: 0;
+    transform: translateY(8px);
+    transition:
+      visibility 0.3s ease,
+      transform 0.3s ease,
+      opacity 0.3s ease;
+  }
+  .z--headerNav:has(.z--headerNav_subMenuButton:hover, .z--headerNav_subMenu:hover) .z--headerNav_subMenu {
+    visibility: visible;
+    opacity: 1;
+    transform: translateY(0);
+  }
+  /* Sub menu */
+  .z--subMenu_buttonIcon {
+    animation: z--subMenu_buttonIcon linear both;
+    animation-timeline: scroll(root);
+    animation-range: var(--z--header-animation-range);
+  }
+  @keyframes z--subMenu_buttonIcon {
+    to {
+      color: var(--text-2);
+    }
+  }
+  /* モバイルメニュー: +/- を caret-right（fz--s）に近い視覚サイズへ（@lism-css/ui 内 DOM は Astro スコープ外のため :global） */
+  .z--header_menuNav :global(.c--accordion_icon) {
+    font-size: var(--fz--s);
+    width: 1em;
+    height: 1em;
+    transform: scale(0.75);
+    transform-origin: center;
+  }
+</style>
