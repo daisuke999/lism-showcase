@@ -1,28 +1,18 @@
 ---
-import { Stack, Heading } from "lism-css/astro";
+import { Stack, Heading } from 'lism-css/astro';
 
 interface Props {
   text: string;
   subText: string;
-  variant?: "light";
+  variant?: 'light';
 }
 
 const { text, subText, variant } = Astro.props;
 ---
 
-<Stack class:list={["z--hgroup", { "z--hgroup--light": variant === "light" }]} as="hgroup" ai="c" g="5">
-  <Heading level="2" class="z--hgroup_heading" fz="4xl" fw="400" lts="l" m="0">{text}</Heading>
-  <Heading
-    level="3"
-    class="z--hgroup_subHeading"
-    d="inline-flex"
-    ai="c"
-    g="20"
-    fz="s"
-    fw="normal"
-    lts="l"
-    m="0"
-  >
+<Stack class:list={['z--hgroup', { 'z--hgroup--light': variant === 'light' }]} as='hgroup' ai='c' g='5'>
+  <Heading level='2' class='z--hgroup_heading' fz='3xl' fw='400' lts='l' m='0'>{text}</Heading>
+  <Heading level='3' class='z--hgroup_subHeading' d='inline-flex' ai='c' g='20' fz='s' fw='normal' lts='l' m='0'>
     {subText}
   </Heading>
 </Stack>
@@ -62,7 +52,7 @@ const { text, subText, variant } = Astro.props;
   .z--hgroup .z--hgroup_subHeading:before,
   .z--hgroup .z--hgroup_subHeading:after {
     display: block;
-    content: "";
+    content: '';
     width: 12px;
     height: 1px;
     background-color: var(--text);

@@ -10,10 +10,32 @@ const bg = {
 };
 
 const newsRows = [
-  { long: true },
-  { long: false },
-  { long: true },
-  { long: false },
+  {
+    date: "2026.03.18",
+    title: "Lism UI：TabsとDrawerの挙動を更新",
+    summary:
+      "キーボード操作とフォーカス管理を中心に改善し、Astro／React双方で同じAPI感に近づけました。既存プロジェクトは移行ガイドのチェックリストを参照してください。",
+    long: true,
+  },
+  {
+    date: "2026.02.04",
+    title: "MCPサーバー：ドキュメント検索の応答を高速化",
+    summary: "キャッシュ方針を見直し、よく参照されるページ（レイアウトプリミティブ／Customize）の取得を最適化しました。",
+    long: false,
+  },
+  {
+    date: "2026.01.22",
+    title: "テンプレート集にブログ詳細レイアウトを追加",
+    summary:
+      "目次・引用・コードブロックのスタイルをテンプレート化し、コピー後にトークンへ寄せる手順もページ内に記載しています。",
+    long: true,
+  },
+  {
+    date: "2025.12.10",
+    title: "Skills：実装ガイドの構成を整理",
+    summary: "Layer規則とユーティリティの優先順位を冒頭に集約し、エージェントが参照しやすい見出し階層へ再編しました。",
+    long: false,
+  },
 ];
 ---
 
@@ -37,14 +59,14 @@ const newsRows = [
         {
           newsRows.map((row) => (
             <LinkBox class="z--news_item" href="#" layout="grid" gtc={["auto", "auto 1fr"]} g="20 40" py="15" set="hov">
-              <Inline as="span">2024.06.01</Inline>
+              <Inline as="span">{row.date}</Inline>
               <Stack g="10">
                 <Text as="p" hov="to:underline" td="none" m="0">
-                  Lism CSS version 1.0.0 released!
+                  {row.title}
                 </Text>
                 <Text as="p" fz="s" o="-20" m="0">
-                  Lism CSSの新バージョン1.0.0がリリースされました。新機能や改善点についてはこちらをご覧ください。
-                  {row.long ? " 更に長い文章を入れてみて、改行の挙動を確認します。" : ""}
+                  {row.summary}
+                  {row.long ? " 互換性に関する注意点はChangelogの該当バージョンにもまとめています。" : ""}
                 </Text>
               </Stack>
             </LinkBox>

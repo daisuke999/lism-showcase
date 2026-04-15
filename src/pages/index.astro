@@ -1,6 +1,41 @@
 ---
 import "lism-css/main.css";
 import { Link, Stack, Text } from "lism-css/astro";
+
+function slugToLabel(slug: string): string {
+  return slug
+    .split("-")
+    .filter(Boolean)
+    .map((w) => w.charAt(0).toUpperCase() + w.slice(1))
+    .join(" ");
+}
+
+type PageModule = { title?: string };
+
+const modules = import.meta.glob<PageModule>("./*.astro", { eager: true });
+
+type PageLink = { href: string; label: string };
+
+const pageLinks: PageLink[] = [];
+
+for (const path of Object.keys(modules).sort()) {
+  if (path === "./index.astro") continue;
+
+  const fileName = path.split("/").pop() ?? path;
+  if (fileName.startsWith("_")) continue;
+
+  const slug = fileName.replace(/\.astro$/i, "");
+  if (!slug || slug.includes("[") || slug.includes("]")) continue;
+
+  const mod = modules[path]!;
+  const href = `/${slug}`;
+  const label =
+    typeof mod.title === "string" && mod.title.trim().length > 0
+      ? mod.title.trim()
+      : slugToLabel(slug);
+
+  pageLinks.push({ href, label });
+}
 ---
 
 <html lang="ja">
@@ -12,9 +47,13 @@ import { Link, Stack, Text } from "lism-css/astro";
   <body>
     <Stack p="40" g="15">
       <h1>Lism Showcase</h1>
-      <Text m="0">
-        <Link href="/simple-lp-design">Simple LP Design（Lism CSS デモ）</Link>
-      </Text>
+      {
+        pageLinks.map(({ href, label }) => (
+          <Text m="0">
+            <Link href={href}>{label}</Link>
+          </Text>
+        ))
+      }
     </Stack>
   </body>
 </html>

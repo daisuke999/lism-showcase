@@ -1,58 +1,88 @@
 ---
-import { Frame, Stack, Container, Grid, Flex, FluidCols, Text, Inline, Lism } from "lism-css/astro";
-import HGroup from "@/components/page001/HGroup.astro";
+import { Frame, Stack, Container, Grid, Flex, FluidCols, Text, Inline, Lism } from 'lism-css/astro';
+import HGroup from '@/components/page001/HGroup.astro';
 
 const avatars = [
-  { title: "自由な時間が増えた", meta: "東京都 / 30代 / 会社員", r: "testimonials1", body: "仕事から帰ると部屋がきれいになっているのが嬉しいです。\n面倒な掃除から解放されて、平日の夜にゆとりができました。" },
-  { title: "まるでもう一人の自分", meta: "神奈川県 / 40代 / 主婦", r: "testimonials2", body: "材料を入れてボタンを押すだけで本格的な煮込み料理が完成。\n火を使わないので、子供から目を離さずに調理できて安心です。" },
-  { title: "気づいた時にすぐ！", meta: "北海道 / 20代 / 大学生", r: "testimonials3", body: "気づいた時にサッと掃除できる手軽さが最高です。\nコードレスなので、車の中の掃除にも使えて本当に便利だと思います。\nコードレスなので、車の中の掃除にも使えて本当に便利だと思います。\nコードレスなので、車の中の掃除にも使えて本当に便利だと思います。" },
-  { title: "食後の時間にゆとりを", meta: "沖縄県 / 30代 / パート", r: "testimonials4", body: "毎日の食器洗いの手間がなくなり、食後に家族とゆっくり過ごせる時間が増えました。\n手洗いよりきれいに洗える気がします。" },
-  { title: "食後の時間にゆとりを", meta: "沖縄県 / 30代 / パート", r: "testimonials5", body: "毎日の食器洗いの手間がなくなり、食後に家族とゆっくり過ごせる時間が増えました。\n手洗いよりきれいに洗える気がします。" },
-  { title: "食後の時間にゆとりを", meta: "沖縄県 / 30代 / パート", r: "testimonials6", body: "毎日の食器洗いの手間がなくなり、食後に家族とゆっくり過ごせる時間が増えました。\n手洗いよりきれいに洗える気がします。" },
+  {
+    title: 'レビュー観点が揃い、差分が小さくなった',
+    meta: '東京都 / 30代 / フロントエンドエンジニア',
+    r: 'testimonials1',
+    body: 'Skillsのガイドに沿って書くと、レイヤー規則やユーティリティの粒度が自然と揃います。\n「なぜこのクラス？」の説明コストが下がり、PRのやり取りがかなり速くなりました。',
+  },
+  {
+    title: 'デザインと実装の言語が一致した',
+    meta: '大阪府 / 40代 / デザイナー（UI）',
+    r: 'testimonials2',
+    body: 'トークン表とProperty Classの対応が読み取りやすく、余白やタイポの指示がブレません。\nコンポーネント調整のたびに「独自ルールが増える」悩みから解放されました。',
+  },
+  {
+    title: 'MCPで仕様確認がループしなくなった',
+    meta: '福岡県 / 20代 / 個人開発者',
+    r: 'testimonials3',
+    body: 'エディタからドキュメントの該当箇所を引けるので、レイアウトプリミティブの使い分けを迷わず進められます。\n細かい記法は生成後にドキュメントへ照合するだけで十分でした。',
+  },
+  {
+    title: 'テンプレから最短で公開まで持っていけた',
+    meta: '愛知県 / 30代 / マークアップエンジニア',
+    r: 'testimonials4',
+    body: 'ランディングの型をテンプレートから取り込み、写真背景やセクションのリズムだけ差し替えました。\nアニメーションはページ側に閉じる方針も理解しやすかったです。',
+  },
+  {
+    title: 'Astro案件でも迷いどころが減った',
+    meta: '北海道 / 30代 / フルスタックエンジニア',
+    r: 'testimonials5',
+    body: 'lism-css/astroのコンポーネントとpropsの癖がドキュメントにまとまっていて、初日から実装に入れました。\n既存CSSとの共存も@layerの説明が明確で助かりました。',
+  },
+  {
+    title: '小さく始めて段階的に拡張できた',
+    meta: '沖縄県 / 40代 / テックリード',
+    r: 'testimonials6',
+    body: 'まずはユーティリティとレイアウトだけ導入し、UIキットは後から追加する進め方ができました。\n「全部入れ替え」にならないのがチーム的に嬉しいポイントでした。',
+  },
 ];
 
 const img = (r: string) => ({
   src: `https://cdn.lism-css.com/img/random-2510?category=avatar&r=${r}`,
   width: 256,
   height: 256,
-  alt: "",
+  alt: '',
 });
 ---
 
-<Container id="testimonials" class="z--testimonials" size="l" bgc="base-2" py="60" set="gutter">
-  <Stack g="40">
-    <HGroup text="Testimonials" subText="お客様の声" />
-    <FluidCols cols="20rem" g="40">
+<Container id='testimonials' class='z--testimonials' size='l' bgc='base-2' py='60' set='gutter'>
+  <Stack g='40'>
+    <HGroup text='Testimonials' subText='お客様の声' />
+    <FluidCols cols='20rem' g='40'>
       {
         avatars.map((item) => (
-          <Grid class="z--testimonials_item" gtr="subgrid" gr="span 3" g="30">
-            <Grid gtc="auto 1fr" ai="center" g="20">
-              <Frame as="figure" ar="1/1" w="3.5rem" bdrs="99">
+          <Grid class='z--testimonials_item' gtr='subgrid' gr='span 3' g='30'>
+            <Grid gtc='auto 1fr' ai='center' g='20'>
+              <Frame as='figure' ar='1/1' w='4rem' bdrs='99'>
                 <Lism
-                  as="img"
+                  as='img'
                   src={img(item.r).src}
                   alt={img(item.r).alt}
-                  w="100%"
-                  h="100%"
+                  w='100%'
+                  h='100%'
                   exProps={{
                     width: img(item.r).width,
                     height: img(item.r).height,
-                    loading: "lazy",
-                    decoding: "async",
+                    loading: 'lazy',
+                    decoding: 'async',
                   }}
                 />
               </Frame>
-              <Stack w="stretch" g="15">
-                <Text class="u-trim" fz="m" fw="bold" m="0">
+              <Stack w='stretch' g='15'>
+                <Text class='u-trim' fz='m' fw='bold' lh='s' m='0'>
                   {item.title}
                 </Text>
               </Stack>
             </Grid>
-            <Text class="u-trim" fz="m" o="-10" m="0" style={{ whiteSpace: "pre-line" }}>
+            <Text class='u-trim' fz='s' o='-10' m='0' style={{ whiteSpace: 'pre-line' }}>
               {item.body}
             </Text>
-            <Flex jc="fe">
-              <Inline class="u-trim" fz="xs" fs="italic" o="-20" as="span">
+            <Flex jc='fe'>
+              <Inline class='u-trim' fz='xs' fs='italic' o='-20' as='span'>
                 {item.meta}
               </Inline>
             </Flex>

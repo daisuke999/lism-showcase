@@ -9,16 +9,16 @@ const img = (r: string) => ({
   height: 600,
 });
 
-/** Layer の backdrop-filter で背面の写真をグレースケール化（lism-css.com docs / is--layer） */
-const aboutPhotoOverlay = (alpha: string) => ({
-  backdropFilter: 'grayscale(1)',
-  backgroundColor: `hsl(224 4% 99% / ${alpha})`,
-});
+/** Feature セクションと同じオーバーレイ（filter + hsl、背後の写真に程よく色が残る） */
+const aboutPhotoOverlay = {
+  filter: 'grayscale(1)',
+  backgroundColor: 'hsl(224 4% 99% / 0.85)',
+};
 ---
 
 <Container id='about' class='z--about' size='s' pos='relative' py='70' set='gutter'>
   <Stack ai='c' jc='c' g='40' pos='relative'>
-    <HGroup text='About' subText='私たちについて' />
+    <HGroup text='About' subText='Lism CSSとは' />
     <Box class='z--about_visuals' pos='absolute' w='100%' h='100%' z='0'>
       <Frame class='z--about_frame' ar='4/3' pos='absolute' w='20rem' bgc='base-2' bdrs='20'>
         <Lism
@@ -30,9 +30,9 @@ const aboutPhotoOverlay = (alpha: string) => ({
           h='100%'
           exProps={{ width: img('1').width, height: img('1').height, loading: 'lazy', decoding: 'async' }}
         />
-        <Layer style={aboutPhotoOverlay('0.2')} />
+        <Layer style={aboutPhotoOverlay} />
       </Frame>
-      <Frame class='z--about_frame' ar='3/4' pos='absolute' w='16rem' bgc='base-2' bdrs='20'>
+      <Frame class='z--about_frame' ar='4/3' pos='absolute' w='16rem' bgc='base-2' bdrs='20'>
         <Lism
           as='img'
           class='z--about_media'
@@ -42,7 +42,7 @@ const aboutPhotoOverlay = (alpha: string) => ({
           h='100%'
           exProps={{ width: img('2').width, height: img('2').height, loading: 'lazy', decoding: 'async' }}
         />
-        <Layer style={aboutPhotoOverlay('0.4')} />
+        <Layer style={aboutPhotoOverlay} />
       </Frame>
       <Frame class='z--about_frame' ar='4/3' pos='absolute' w='16rem' bgc='base-2' bdrs='20'>
         <Lism
@@ -54,25 +54,26 @@ const aboutPhotoOverlay = (alpha: string) => ({
           h='100%'
           exProps={{ width: img('3').width, height: img('3').height, loading: 'lazy', decoding: 'async' }}
         />
-        <Layer style={aboutPhotoOverlay('0.8')} />
+        <Layer style={aboutPhotoOverlay} />
       </Frame>
     </Box>
-    <Flow class='z--about_body u--fadeIn' pos='relative' z='1'>
-      <Text as='p' max-sz='full' mx='auto' m='0'>
-        Lism CSSはシンプルで直感的なクラス名を提供し、迅速なWeb開発を可能にするCSSフレームワークです。
-        このページでは、Lism CSSの基本的な使い方と主要なコンポーネントを紹介します。
+    <Flow class='z--about_body u--fadeIn' flow='s' pos='relative' z='1'>
+      <Text as='p' max-sz='full' mx='auto'>
+        Lism CSSは、AIと人の両方が迷いにくい命名規則とレイヤー設計を軸にしたCSS設計フレームワークです。
+        ファイルを一つ読み込むだけで導入でき、ビルド工程に縛られない軽量さが魅力です。
       </Text>
-      <Text as='p' max-sz='full' mx='auto' m='0'>
-        Lism CSSはシンプルで直感的なクラス名を提供し、迅速なWeb開発を可能にするCSSフレームワークです。
-        このページでは、Lism CSSの基本的な使い方と主要なコンポーネントを紹介します。
+      <Text as='p' max-sz='full' mx='auto'>
+        StackやFlex、Gridといったレイアウトプリミティブを組み合わせるだけで、ページの骨格を素早く組み立てられます。
+        余白・タイポグラフィはハーモニックスケールに沿って整え、自然なリズムを保ちやすい設計になっています。
       </Text>
-      <Text as='p' max-sz='full' mx='auto' m='0'>
-        Lism CSSはシンプルで直感的なクラス名を提供し、迅速なWeb開発を可能にするCSSフレームワークです。
-        このページでは、Lism CSSの基本的な使い方と主要なコンポーネントを紹介します。
+      <Text as='p' max-sz='full' mx='auto'>
+        カラーや角丸、影などのデザイントークンはCSS変数で一元管理され、Property Class（例:
+        -p:20）で意図を短く表現できます。
+        @layerによるレイヤー構造で詳細度の衝突を抑え、チーム開発でも拡張しやすい土台を用意しています。
       </Text>
-      <Text as='p' max-sz='full' mx='auto' m='0'>
-        Lism CSSはシンプルで直感的なクラス名を提供し、迅速なWeb開発を可能にするCSSフレームワークです。
-        このページでは、Lism CSSの基本的な使い方と主要なコンポーネントを紹介します。
+      <Text as='p' max-sz='full' mx='auto'>
+        公式にはSkillsやMCPサーバー、UIコンポーネント、テンプレートなどのエコシステムも用意され、ドキュメントとあわせて学習コストを下げられます。
+        本ページはその世界観を体験できるデモとして、代表的なセクション構成をまとめています。
       </Text>
     </Flow>
   </Stack>
@@ -111,21 +112,7 @@ const aboutPhotoOverlay = (alpha: string) => ({
     right: 80%;
     animation-range: entry 40% cover 50%;
   }
-  @keyframes z--about_frame {
-    from {
-      opacity: 0;
-      filter: blur(16px);
-    }
-    to {
-      opacity: 0.3;
-      filter: blur(0);
-    }
-  }
   @container (min-width: 800px) {
-    .z--about .z--about_frame {
-      animation: z--about_frame__lg linear both;
-      animation-timeline: --z--about-timeline;
-    }
     .z--about .z--about_frame:nth-child(1) {
       top: -2rem;
       right: calc(100% + 4rem);
@@ -139,7 +126,7 @@ const aboutPhotoOverlay = (alpha: string) => ({
       right: calc(100% - 4rem);
     }
   }
-  @keyframes z--about_frame__lg {
+  @keyframes z--about_frame {
     from {
       opacity: 0;
       filter: blur(16px);

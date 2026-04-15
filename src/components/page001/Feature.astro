@@ -1,0 +1,187 @@
+---
+import { Frame, Stack, Container, Grid, Layer, Box, Text, Heading, Lism } from 'lism-css/astro';
+import HGroup from '@/components/page001/HGroup.astro';
+
+const hero = {
+  src: 'https://cdn.lism-css.com/img/random-2510?r=service',
+  alt: '',
+  width: 960,
+  height: 640,
+};
+
+const cardMedia = (r: string) => ({
+  src: `https://cdn.lism-css.com/img/random-2510?r=${r}`,
+  alt: 'Beautiful Landscape',
+  width: 960,
+  height: 540,
+});
+---
+
+<Box id='feature' class='z--feature' pos='relative'>
+  <Frame isLayer>
+    <Lism
+      as='img'
+      class='z--feature_media'
+      src={hero.src}
+      alt={hero.alt}
+      w='100%'
+      h='100%'
+      exProps={{ width: hero.width, height: hero.height, loading: 'lazy', decoding: 'async' }}
+    />
+  </Frame>
+  <Layer style={{ filter: 'grayscale(1)', backgroundColor: 'hsl(224 4% 99% / 0.85)' }} />
+  <Container size='l' py='60' set='gutter'>
+    <Stack g='40'>
+      <HGroup text='Feature' subText='Lism CSSの特徴' />
+      <Stack g='40'>
+        <Grid class='z--feature_item' gtc={['auto', null, '2fr 3fr']} cg='30'>
+          <Frame ar='16/9' pos='relative' bdrs='20'>
+            <Lism
+              as='img'
+              class='z--feature_itemMedia'
+              src={cardMedia('service1').src}
+              alt={cardMedia('service1').alt}
+              w='100%'
+              h='100%'
+              exProps={{
+                width: cardMedia('service1').width,
+                height: cardMedia('service1').height,
+                loading: 'lazy',
+                decoding: 'async',
+              }}
+            />
+          </Frame>
+          <Stack class='z--feature_itemContent' g='15' max-w='36rem' py='20'>
+            <Heading level='3' fz='l' m='0'>レイアウト設計サポート</Heading>
+            <Text as='p' m='0' o='-10'>
+              Stack／Flex／Gridなどのレイアウトプリミティブを選定し、ワイヤーからコンポーネント単位まで一貫した組み方へ落とし込みます。
+              コンテナを意識した切り替え方針も含め、再現性の高いマークアップ指針を整備します。
+            </Text>
+          </Stack>
+        </Grid>
+        <Grid class='z--feature_item' gtc={['auto', null, '3fr 2fr']} cg='30'>
+          <Frame ar='16/9' pos='relative' bdrs='20' gr={['auto', null, '1']} gc={['auto', null, '2']}>
+            <Lism
+              as='img'
+              class='z--feature_itemMedia'
+              src={cardMedia('service2').src}
+              alt={cardMedia('service2').alt}
+              w='100%'
+              h='100%'
+              exProps={{
+                width: cardMedia('service2').width,
+                height: cardMedia('service2').height,
+                loading: 'lazy',
+                decoding: 'async',
+              }}
+            />
+          </Frame>
+          <Stack class='z--feature_itemContent' g='15' max-w='36rem' py='20'>
+            <Heading level='3' fz='l' m='0'>デザイントークン整備</Heading>
+            <Text as='p' m='0' o='-10'>
+              カラー・タイポグラフィ・余白・角丸・影を段階的なCSS変数へ整理し、Figmaのトークンと実装の差分を最小化します。
+              Property Classの運用ルールまで含め、チームで迷わない表記に揃えます。
+            </Text>
+          </Stack>
+        </Grid>
+        <Grid class='z--feature_item' gtc={['auto', null, '2fr 3fr']} cg='30'>
+          <Frame ar='16/9' pos='relative' bdrs='20'>
+            <Lism
+              as='img'
+              class='z--feature_itemMedia'
+              src={cardMedia('service3').src}
+              alt={cardMedia('service3').alt}
+              w='100%'
+              h='100%'
+              exProps={{
+                width: cardMedia('service3').width,
+                height: cardMedia('service3').height,
+                loading: 'lazy',
+                decoding: 'async',
+              }}
+            />
+          </Frame>
+          <Stack class='z--feature_itemContent' g='15' max-w='36rem' py='20'>
+            <Heading level='3' fz='l' m='0'>AI連携ワークフロー</Heading>
+            <Text as='p' m='0' o='-10'>
+              SkillsとMCPサーバーを活用し、エディタ上で仕様を参照しながら実装が進む体制を設計します。
+              生成コードのレビュー観点（レイヤー規則・ユーティリティの粒度）もテンプレ化してお渡しします。
+            </Text>
+          </Stack>
+        </Grid>
+        <Grid class='z--feature_item' gtc={['auto', null, '3fr 2fr']} cg='30'>
+          <Frame ar='16/9' pos='relative' bdrs='20' gr={['auto', null, '1']} gc={['auto', null, '2']}>
+            <Lism
+              as='img'
+              class='z--feature_itemMedia'
+              src={cardMedia('service4').src}
+              alt={cardMedia('service4').alt}
+              w='100%'
+              h='100%'
+              exProps={{
+                width: cardMedia('service4').width,
+                height: cardMedia('service4').height,
+                loading: 'lazy',
+                decoding: 'async',
+              }}
+            />
+          </Frame>
+          <Stack class='z--feature_itemContent' g='15' max-w='36rem' py='20'>
+            <Heading level='3' fz='l' m='0'>UIキット／テンプレート導入</Heading>
+            <Text as='p' m='0' o='-10'>
+              AccordionやModalなどのUIコンポーネント、ランディングやブログ向けテンプレートを選定し、既存デザインへ段階的に移植します。
+              Astro／React双方の要件に合わせ、運用しやすいディレクトリ構成まで含めて支援します。
+            </Text>
+          </Stack>
+        </Grid>
+      </Stack>
+    </Stack>
+  </Container>
+</Box>
+
+<style>
+  .z--feature {
+    view-timeline: --z-feature y;
+  }
+  .z--feature .z--feature_media {
+    position: absolute;
+    top: -20%;
+    height: 140%;
+    animation: z--feature_media linear both;
+    animation-timeline: --z-feature;
+    animation-range: entry 0% cover 100%;
+  }
+  @keyframes z--feature_media {
+    from {
+      transform: translateY(-10%);
+    }
+    to {
+      transform: translateY(10%);
+    }
+  }
+  .z--feature .z--feature_item {
+    view-timeline: --z-feature_item y;
+    animation: u--fadeIn linear both;
+    animation-timeline: --z-feature_item;
+    animation-range: var(--u--fadeIn--animation-range);
+  }
+  .z--feature .z--feature_itemMedia {
+    position: absolute;
+    top: -20%;
+    height: 140%;
+    animation: z--feature_itemMedia linear both;
+    animation-timeline: --z-feature_item;
+    animation-range: entry 0% cover 100%;
+  }
+  @keyframes z--feature_itemMedia {
+    from {
+      transform: translateY(-10%);
+    }
+    to {
+      transform: translateY(10%);
+    }
+  }
+  .z--feature .z--feature_item:nth-child(even) .z--feature_itemContent {
+    justify-self: end;
+  }
+</style>

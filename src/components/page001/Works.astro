@@ -1,66 +1,108 @@
 ---
-import { Frame, Stack, Container, LinkBox, FluidCols, Layer, Center, Text, Heading, Inline, Lism } from "lism-css/astro";
-import HGroup from "@/components/page001/HGroup.astro";
+import {
+  Frame,
+  Stack,
+  Container,
+  LinkBox,
+  FluidCols,
+  Layer,
+  Center,
+  Text,
+  Heading,
+  Inline,
+  Lism,
+} from 'lism-css/astro';
+import HGroup from '@/components/page001/HGroup.astro';
 
-const items = [1, 2, 3, 4, 5, 6];
+const worksItems = [
+  {
+    n: 1,
+    title: 'ドキュメントサイト刷新',
+    body: 'ナビゲーションと検索を軸に、概要からカスタマイズまで辿りやすい情報設計へ再編。レスポンシブ切り替えのルールもページ内で再利用できる形に整理しました。',
+  },
+  {
+    n: 2,
+    title: 'デザインシステムLP',
+    body: 'レイアウトプリミティブとトークン表を並べて、チーム内共有用のミニマルなランディングを制作。スクロール演出はページローカルのスタイルに閉じ込めています。',
+  },
+  {
+    n: 3,
+    title: 'ブログテンプレート適用',
+    body: '記事一覧・詳細・著者情報の型をテンプレートから移植し、タグや関連記事の導線を軽量マークアップで実装。読み込み戦略は画像の遅延読み込みを前提に設計しました。',
+  },
+  {
+    n: 4,
+    title: 'UIコンポーネントギャラリー',
+    body: 'AccordionやModalなどの挙動を、実装サンプルとあわせて一覧化。アクセシブルな開閉操作とフォーカス移動のパターンを揃えた展示ページです。',
+  },
+  {
+    n: 5,
+    title: 'コーポレートサイト再構築',
+    body: 'セクションごとにStackとGridを切り替え、写真背景とオーバーレイのコントラストを調整。ブランドカラーはデザイントークンへ寄せて運用しやすくしています。',
+  },
+  {
+    n: 6,
+    title: '開発者向けオンボーディング',
+    body: 'SkillsとMCPの導入手順を1ページに集約し、よくある設計判断（レイヤー・命名・レスポンシブ）へのリンクを配置。新メンバーの初日から迷いにくい構成です。',
+  },
+];
 
 const shot = (n: number) => ({
   src: `https://cdn.lism-css.com/img/random-2510?r=works${n}`,
-  alt: "Beautiful Landscape",
+  alt: 'Beautiful Landscape',
   width: 960,
   height: 540,
 });
 ---
 
-<Container id="works" class="z--works" size="l" py="60" set="gutter">
-  <Stack g="40">
-    <HGroup text="Works" subText="制作実績" />
-    <Text as="p" class="u--fadeIn" max-sz="full" mx="auto" m="0">
-      迅速なWeb開発を可能にするCSSフレームワークです。
+<Container id='works' class='z--works' size='l' py='60' set='gutter'>
+  <Stack g='40'>
+    <HGroup text='Works' subText='制作実績' />
+    <Text as='p' class='u--fadeIn' max-sz='full' mx='auto' m='0'>
+      Lism CSSの設計思想に沿ったマークアップで組み上げた、公開用ランディングや社内向けツールの制作例です。
     </Text>
-    <FluidCols cols="20rem" g="40">
+    <FluidCols cols='20rem' g='40'>
       {
-        items.map((n) => (
-          <LinkBox class="z--works_item" href="#" layout="stack" set="hov">
-            <Frame class="z--works_frame" ar="16/9" pos="relative" bdrs="20">
+        worksItems.map((item) => (
+          <LinkBox class='z--works_item' href='#' layout='stack' set='hov'>
+            <Frame class='z--works_frame' ar='16/9' pos='relative' bdrs='20'>
               <Lism
-                as="img"
-                class="z--works_media"
-                src={shot(n).src}
-                alt={shot(n).alt}
-                w="100%"
-                h="auto"
-                set="transition"
-                hov="to:zoom"
+                as='img'
+                class='z--works_media'
+                src={shot(item.n).src}
+                alt={shot(item.n).alt}
+                w='100%'
+                h='auto'
+                set='transition'
+                hov='to:zoom'
                 exProps={{
-                  width: shot(n).width,
-                  height: shot(n).height,
-                  loading: "lazy",
-                  decoding: "async",
+                  width: shot(item.n).width,
+                  height: shot(item.n).height,
+                  loading: 'lazy',
+                  decoding: 'async',
                 }}
               />
               <Layer
-                set="transition"
-                hov="to:show"
+                set='transition'
+                hov='to:show'
                 style={{
-                  backgroundColor: "rgb(0 0 0 / 30%)",
-                  backdropFilter: "blur(4px)",
+                  backgroundColor: 'rgb(0 0 0 / 30%)',
+                  backdropFilter: 'blur(4px)',
                 }}
               >
-                <Center h="100%" c="white">
-                  <Inline as="span" fz="xl" fs="italic" fw="light" lts="l" px="20" py="10">
+                <Center h='100%' c='white'>
+                  <Inline as='span' fz='xl' fs='italic' fw='light' lts='l' px='20' py='10'>
                     View More
                   </Inline>
                 </Center>
               </Layer>
             </Frame>
-            <Stack g="10" py="20">
-              <Heading level="3" fz="l" m="0">
-                Card Title
+            <Stack g='15' py='20'>
+              <Heading level='3' fz='m' m='0'>
+                {item.title}
               </Heading>
-              <Text as="p" m="0">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et
-                dolore magna aliqua. Ut enim ad minim veniam
+              <Text as='p' fz='s' m='0' o='-10'>
+                {item.body}
               </Text>
             </Stack>
           </LinkBox>
