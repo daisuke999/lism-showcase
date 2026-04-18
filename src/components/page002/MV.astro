@@ -1,0 +1,38 @@
+---
+import { Box, Frame, Stack, Container, Layer, LinkBox, Icon, Text, Inline, Lism, Wrapper } from 'lism-css/astro';
+
+const mvImage = {
+  src: 'https://cdn.lism-css.com/img/room/a-Rrr1UZO5Ji.jpg',
+  alt: 'Simple LP Design',
+  width: 1920,
+  height: 1080,
+};
+---
+
+<Container class='z--mv' pos='relative'>
+  <Wrapper class='z--mv_content' contentSize='l' pos='relative' set='gutter'>
+    <Stack class='z--mv_copy' ai='c' jc='c' g='10' pos='relative' w='100%' h='100%' c='white' set='gutter'>
+      <Text as='p' fz='7rem' fw='bold' ta='center' lts='l' m='0'>Simple<br />LP Design</Text>
+    </Stack>
+    <Frame class='z--mv_frame' ar='16/9' h='100%' my-s='-3rem'>
+      <Lism
+        as='img'
+        class='z--mv_media'
+        src={mvImage.src}
+        alt={mvImage.alt}
+        w='100%'
+        h='100%'
+        exProps={{ width: mvImage.width, height: mvImage.height, loading: 'eager' }}
+      />
+    </Frame>
+  </Wrapper>
+</Container>
+
+<style>
+  .z--mv {
+    background: linear-gradient(to bottom, var(--base-2) 85%, transparent 85%);
+  }
+  .z--mv_content {
+    padding-block-start: calc(var(--z--header-height) + var(--s30));
+  }
+</style>

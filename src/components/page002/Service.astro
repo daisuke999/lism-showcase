@@ -1,0 +1,145 @@
+---
+import { Stack, Grid, Flex, Frame, Media, Heading, Text, Box, Container } from 'lism-css/astro';
+
+const heroImage = {
+  src: 'https://cdn.lism-css.com/img/room/a-Rrr1UZO5Ji.jpg',
+  alt: '明るいホームオフィスのワークスペース',
+  width: 1920,
+  height: 1080,
+};
+
+const subFeatures: {
+  index: string;
+  titleJa: string;
+  titleEn: string;
+  body: string;
+  image: { src: string; alt: string; width: number; height: number };
+}[] = [
+  {
+    index: '01',
+    titleJa: '様々な要望に対応',
+    titleEn: 'Respond to various requests',
+    body: 'ご利用シーンや人数、ご予算に応じて柔軟にプランをご提案します。ご相談からお見積りまで、お気軽にお問い合わせください。',
+    image: {
+      src: 'https://cdn.lism-css.com/img/room/u-jh2GpjGKEp.jpg',
+      alt: 'リビングのインテリア',
+      width: 1600,
+      height: 1067,
+    },
+  },
+  {
+    index: '02',
+    titleJa: '伝統と革新が溶け合う空間',
+    titleEn: 'Tradition meets innovation',
+    body: '落ち着きのある佇まいの中に、快適さを支える設備を備えました。長く愛されるデザインと、日々の使いやすさを両立しています。',
+    image: {
+      src: 'https://cdn.lism-css.com/img/u-WFUSqJTxVc.jpg',
+      alt: '書斎コーナー',
+      width: 1920,
+      height: 1080,
+    },
+  },
+  {
+    index: '03',
+    titleJa: '何もしない贅沢な時間',
+    titleEn: 'Luxurious time of doing nothing',
+    body: '日常から離れ、ゆったりと過ごせる環境づくりにこだわりました。読書や音楽を楽しむなど、ご自身のペースでお過ごしください。',
+    image: {
+      src: 'https://cdn.lism-css.com/img/room/a-Rrr1UZO5Ji.jpg',
+      alt: '明るい室内とデスク',
+      width: 1920,
+      height: 1080,
+    },
+  },
+];
+---
+
+<Box as='section' class='c--service' bgc='base-2' py='50'>
+  <Container size='l' set='gutter'>
+    <Stack g='50'>
+      <Stack g='10' ai='c'>
+        <Heading level='2' fz='3xl' lts='l' m='0' ta='center'>Service</Heading>
+        <Text as='p' fz='m' fw='bold' lts='l' m='0' c='text-2' ta='center'>様々な要望に対応</Text>
+      </Stack>
+
+      <!-- md 未満: 1列（画像上・テキスト下）。md 以上: 2列（画像左・テキスト右） -->
+      <Grid gtc={['1fr', null, 'minmax(0, 1fr) minmax(0, 1fr)']} g={['30', null, '40']} ai='center'>
+        <Frame ar='4/3' bdrs='20' ov='hidden'>
+          <Media
+            src={heroImage.src}
+            alt={heroImage.alt}
+            width={heroImage.width}
+            height={heroImage.height}
+            exProps={{ loading: 'lazy', decoding: 'async' }}
+          />
+        </Frame>
+        <Stack g='20' jc='c'>
+          <Heading level='3' fz='2xl' lts='l' m='0'>
+            あなたの希望に合わせて
+            <br />
+            最適なプランを計画
+          </Heading>
+          <Text as='p' m='0' c='text-2'>
+            お客様一人ひとりのライフスタイルやご希望を丁寧にお伺いし、最適なご提案をまとめます。ご相談はオンラインでも対応可能です。
+          </Text>
+          <Text as='p' m='0' c='text-2'>
+            伝統的な温かみと、暮らしやすさを支える最新の設備を両立した空間で、何もしない贅沢な時間をお過ごしいただけます。
+          </Text>
+        </Stack>
+      </Grid>
+
+      <Stack g='30'>
+        <Heading level='3' fz='xl' lts='l' m='0' ta='center'>更なる特徴</Heading>
+        <!-- md 未満: 1列。md 以上: 3列 -->
+        <Grid gtc={['1fr', null, 'repeat(3, minmax(0, 1fr))']} g={['30', null, '30']} ai='start'>
+          {
+            subFeatures.map((item) => (
+              <Stack g='20' class='c--serviceCard'>
+                <Frame ar='3/2' bdrs='20' ov='hidden'>
+                  <Media
+                    src={item.image.src}
+                    alt={item.image.alt}
+                    width={item.image.width}
+                    height={item.image.height}
+                    exProps={{ loading: 'lazy', decoding: 'async' }}
+                  />
+                </Frame>
+                <Flex ai='stretch' g='15'>
+                  <Box as='span' class='c--serviceNum' fz='4xl' fw='bold' ff='accent' c='text'>
+                    {item.index}
+                  </Box>
+                  <Box class='c--serviceRule' w='1px' bgc='divider' fxsh='0' />
+                  <Stack g='5' class='c--serviceCardTitles'>
+                    <Heading level='4' fz='m' m='0'>
+                      {item.titleJa}
+                    </Heading>
+                    <Text as='p' fz='s' m='0' c='text-2'>
+                      {item.titleEn}
+                    </Text>
+                  </Stack>
+                </Flex>
+                <Text as='p' fz='s' m='0' c='text-2'>
+                  {item.body}
+                </Text>
+              </Stack>
+            ))
+          }
+        </Grid>
+      </Stack>
+    </Stack>
+  </Container>
+</Box>
+
+<style>
+  @layer lism-modules {
+    /* 番号と縦罫線の見た目をモックに寄せる */
+    .c--serviceRule {
+      min-height: 3.5em;
+      align-self: center;
+    }
+
+    .c--serviceNum {
+      line-height: 1;
+    }
+  }
+</style>

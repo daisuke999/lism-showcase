@@ -1,0 +1,151 @@
+---
+import { Stack, Grid, Flex, Frame, Media, Heading, Text, Box, Container, Icon } from 'lism-css/astro';
+
+const pointImage = {
+  src: 'https://cdn.lism-css.com/img/room/u-jh2GpjGKEp.jpg',
+  alt: '明るいリビングにイエローのアームチェアとフロアランプが置かれたインテリア',
+  width: 1600,
+  height: 1067,
+};
+
+/** Lism プリセットアイコン名（ https://lism-css.com/docs/primitives/a--icon/ ） */
+type PointCardIcon =
+  | 'home'
+  | 'heart'
+  | 'calendar'
+  | 'book'
+  | 'chat'
+  | 'tag'
+  | 'clock'
+  | 'lightbulb'
+  | 'cart'
+  | 'star'
+  | 'bookmark'
+  | 'user'
+  | 'gear'
+  | 'arrow-right';
+
+/** カードごとの表示内容（タイトル・本文・アイコンを独立して管理） */
+const pointCards: { title: string; body: string; icon: PointCardIcon }[] = [
+  {
+    icon: 'home',
+    title: 'どなたにも合う、快適なプラン',
+    body: 'ご人数やご予算に合わせて選べる宿泊プランをご用意しています。シンプルな素泊まりから、地元食材を活かした料理付きまで、旅のスタイルに合わせてお選びください。',
+  },
+  {
+    icon: 'heart',
+    title: 'お部屋付きの露天風呂で、贅沢な湯時間',
+    body: '他のお客様を気にせず、好きなタイミングで湯浴みを楽しめる専用の露天風呂を備えたお部屋をご用意。プライベートな空間で、旅の疲れをゆっくりと癒してください。',
+  },
+  {
+    icon: 'arrow-right',
+    title: 'アクセス良好で、観光の拠点にも最適',
+    body: '駅やICからのアクセスがしやすく、周辺の観光スポットへもスムーズに移動できます。チェックイン前後の荷物預かりなど、お気軽にフロントへお声がけください。',
+  },
+  {
+    icon: 'book',
+    title: 'こだわりの朝食で、一日の始まりを彩る',
+    body: '地元の農家さんから届く野菜や、契約漁港から直送の魚介を使った和洋の朝食バイキング。季節の味わいを、心ゆくまでお楽しみいただけます。',
+  },
+  {
+    icon: 'chat',
+    title: 'スタッフがそばにいる安心のおもてなし',
+    body: 'ご到着からご出発まで、滞在中のちょっとしたご相談にも丁寧にお応えします。記念日やサプライズのご相談も、事前にお知らせいただければお手伝いいたします。',
+  },
+];
+---
+
+<Box as='section' class='c--point' ov-x='clip'>
+  <Container size='l' set='gutter' py='50'>
+    <Grid gtc={['1fr', null, 'minmax(0, 1fr) minmax(0, 1fr)']} g={['30', null, '40']} ai='stretch'>
+      <Stack class='c--pointMain' g='30' jc='start'>
+        <Stack g='10' ai='c' class='c--pointHead'>
+          <Heading level='2' fz='3xl' lts='l' m='0' ta='center'> Point </Heading>
+          <Text as='p' fz='m' fw='bold' lts='l' m='0' c='text-2' ta='center'>沢山の魅力があります</Text>
+        </Stack>
+
+        <Stack g='20'>
+          {
+            pointCards.map((card) => (
+              <Box class='c--pointCard' p='30' bgc='base' bd bdc='divider' bdrs='20'>
+                <Flex ai='start' g='20' class='c--pointCardInner'>
+                  <Icon icon={card.icon} size='40px' c='text-2' />
+                  <Stack g='10' class='c--pointCardBody'>
+                    <Heading level='3' fz='l' m='0'>
+                      {card.title}
+                    </Heading>
+                    <Text as='p' fz='s' m='0' c='text-2'>
+                      {card.body}
+                    </Text>
+                  </Stack>
+                </Flex>
+              </Box>
+            ))
+          }
+        </Stack>
+      </Stack>
+
+      <Box class='c--pointRail'>
+        <Box class='c--pointSticky'>
+          <Frame class='c--pointFrame' ov='hidden' bdrs={['20', null, '0']}>
+            <Media
+              src={pointImage.src}
+              alt={pointImage.alt}
+              width={pointImage.width}
+              height={pointImage.height}
+              exProps={{ loading: 'lazy', decoding: 'async' }}
+            />
+          </Frame>
+        </Box>
+      </Box>
+    </Grid>
+  </Container>
+</Box>
+
+<style>
+  @layer lism-modules {
+    .c--pointRail {
+      min-width: 0;
+      /* グリッド行の高さ（＝左カラムの内容高さ）を子の % 計算に渡す */
+      align-self: stretch;
+    }
+
+    .c--pointSticky {
+      position: relative;
+    }
+
+    .c--pointFrame {
+      aspect-ratio: 4 / 3;
+    }
+
+    @container (min-width: 800px) {
+      /**
+       * 画面上端で固定。高さは「ビューポート全高」と「左テキスト列の高さ」の小さい方
+       * （グリッド行高＝左カラムのため、100% は左側コンテンツの高さに一致）
+       */
+      .c--pointSticky {
+        position: sticky;
+        top: 0;
+        align-self: start;
+        height: min(100dvh, 100%);
+        min-height: 0;
+      }
+
+      .c--pointFrame {
+        aspect-ratio: auto;
+        height: 100%;
+        min-height: 0;
+      }
+
+      /**
+       * 画像列だけ右端をビューポート端まで伸ばす（左端は2カラム境界のまま）
+       * 中央寄せの `size=l` コンテナ外側〜画面右端の余白 + 右ガターを吸収
+       */
+      .c--pointRail {
+        width: calc(100% + max(0px, (100vw - min(100vw, var(--sz--l))) / 2) + var(--gutter-size, 0px));
+        max-width: none;
+        height: 100%;
+      }
+    }
+  }
+</style>

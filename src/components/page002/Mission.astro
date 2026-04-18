@@ -1,0 +1,44 @@
+---
+import {
+  Stack,
+  Container,
+  LinkBox,
+  Icon,
+  Cluster,
+  Text,
+  Inline,
+  SideMain,
+  Box,
+  Frame,
+  Media,
+  Heading,
+} from 'lism-css/astro';
+---
+
+<Box pos='relative' py='50' my-s='60'>
+  <Box class='z--mission_bg' pos='absolute' i='0' w='100%' h='100%' bgc='base-2' />
+  <Container class='z--mission_inner' size='l' pos='relative' jc='c' ai='c' g='30' set='gutter'>
+    <SideMain sideW='12rem' mainW='20rem' g='20'>
+      <Stack jc='c' g='40'>
+        <Stack>
+          <Heading level='2' fz='5xl' lts='l'>Mission</Heading>
+          <Text fz='xl' fw='bold' lts='l'> 私たちのミッション</Text>
+        </Stack>
+        <p>
+          Lorem ipsum dolor sit amet. Consectetur adipiscing elit, sed do eiusmod tempor Incididunt ut. Labore et dolore
+          magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut.
+        </p>
+      </Stack>
+      <Frame>
+        <Media
+          src='https://placehold.co/1000x1000/e2e8f0/0f172a/png?text=Mission'
+          alt='Mission'
+          width={1000}
+          height={1000}
+        />
+      </Frame>
+    </SideMain>
+  </Container>
+</Box>
+
+<style></style>
