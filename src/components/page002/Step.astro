@@ -1,0 +1,138 @@
+---
+import { Stack, Grid, Flex, Frame, Media, Heading, Text, Box, Container, Icon } from 'lism-css/astro';
+
+const stepImage = {
+  src: 'https://cdn.lism-css.com/img/room/a-0ojkYuqTrl.jpg',
+  alt: '日差しの入るホームオフィスとソファ、デスクが並んだ室内',
+  width: 1920,
+  height: 1080,
+};
+
+const stepCards: { title: string; body: string }[] = [
+  {
+    title: 'どなたにも合う、快適なプラン',
+    body: 'ご人数やご予算に合わせて選べる宿泊プランをご用意しています。シンプルな素泊まりから、地元食材を活かした料理付きまで、旅のスタイルに合わせてお選びください。',
+  },
+  {
+    title: 'お部屋付きの露天風呂で、贅沢な湯時間',
+    body: '他のお客様を気にせず、好きなタイミングで湯浴みを楽しめる専用の露天風呂を備えたお部屋をご用意。プライベートな空間で、旅の疲れをゆっくりと癒してください。',
+  },
+  {
+    title: 'アクセス良好で、観光の拠点にも最適',
+    body: '駅やICからのアクセスがしやすく、周辺の観光スポットへもスムーズに移動できます。チェックイン前後の荷物預かりなど、お気軽にフロントへお声がけください。',
+  },
+  {
+    title: 'こだわりの朝食で、一日の始まりを彩る',
+    body: '地元の農家さんから届く野菜や、契約漁港から直送の魚介を使った和洋の朝食バイキング。季節の味わいを、心ゆくまでお楽しみいただけます。',
+  },
+  {
+    title: 'スタッフがそばにいる安心のおもてなし',
+    body: 'ご到着からご出発まで、滞在中のちょっとしたご相談にも丁寧にお応えします。記念日やサプライズのご相談も、事前にお知らせいただければお手伝いいたします。',
+  },
+];
+---
+
+<Box as='section' class='c--step' ov-x='clip'>
+  <Container size='l' set='gutter' py='50'>
+    <Grid class='c--stepGrid' gtc={['1fr', null, 'minmax(0, 1fr) minmax(0, 1fr)']} g={['30', null, '40']} ai='stretch'>
+      <Stack class='c--stepMain' g='30' jc='start'>
+        <Stack g='10' ai='c' class='c--stepHead'>
+          <Heading level='2' fz='3xl' lts='l' m='0' ta='center'>Step</Heading>
+          <Text as='p' fz='m' fw='bold' lts='l' m='0' c='text-2' ta='center'>ご利用の流れ</Text>
+        </Stack>
+
+        <Stack g='0'>
+          {
+            stepCards.flatMap((card, i) => {
+              const cardEl = (
+                <Box class='c--stepCard' p='30' bgc='base' bd bdc='divider' bdrs='20'>
+                  <Stack g='10'>
+                    <Heading level='3' fz='l' m='0'>
+                      {card.title}
+                    </Heading>
+                    <Text as='p' fz='s' m='0' c='text-2'>
+                      {card.body}
+                    </Text>
+                  </Stack>
+                </Box>
+              );
+              if (i === 0) return [cardEl];
+              return [
+                <Flex class='c--stepBetween' jc='c' py='12' aria-hidden='true'>
+                  <Icon icon='caret-down-fill' fz='2xl' c='text-2' />
+                </Flex>,
+                cardEl,
+              ];
+            })
+          }
+        </Stack>
+      </Stack>
+
+      <Box class='c--stepRail'>
+        <Box class='c--stepSticky'>
+          <Frame class='c--stepFrame' ov='hidden'>
+            <Media
+              src={stepImage.src}
+              alt={stepImage.alt}
+              width={stepImage.width}
+              height={stepImage.height}
+              exProps={{ loading: 'lazy', decoding: 'async' }}
+            />
+          </Frame>
+        </Box>
+      </Box>
+    </Grid>
+  </Container>
+</Box>
+
+<style>
+  @layer lism-modules {
+    .c--stepRail {
+      min-width: 0;
+      align-self: stretch;
+    }
+
+    .c--stepSticky {
+      position: relative;
+    }
+
+    .c--stepFrame {
+      aspect-ratio: 4 / 3;
+      border-radius: var(--bdrs--20);
+    }
+
+    @container (min-width: 800px) {
+      /**
+       * 2列時は同一行に固定（grid-column のみだと配置が次行に落ちることがある）
+       * DOM は「テキスト → 画像」のまま、order で視覚順のみ左に画像（狭い幅は order 未指定でテキスト上・画像下）
+       */
+      .c--stepGrid > .c--stepMain,
+      .c--stepGrid > .c--stepRail {
+        grid-row: 1;
+      }
+
+      .c--stepRail {
+        order: -1;
+        width: calc(100% + max(0px, (100vw - min(100vw, var(--sz--l))) / 2) + var(--gutter-size, 0px));
+        margin-inline-start: calc(-1 * (max(0px, (100vw - min(100vw, var(--sz--l))) / 2) + var(--gutter-size, 0px)));
+        max-width: none;
+        height: 100%;
+      }
+
+      .c--stepSticky {
+        position: sticky;
+        top: 0;
+        align-self: start;
+        height: min(100dvh, 100%);
+        min-height: 0;
+      }
+
+      .c--stepFrame {
+        aspect-ratio: auto;
+        height: 100%;
+        min-height: 0;
+        border-radius: 0 var(--bdrs--20) var(--bdrs--20) 0;
+      }
+    }
+  }
+</style>
