@@ -1,28 +1,14 @@
 ---
-import { Stack, Container, LinkBox, Icon, Cluster, Text, Inline } from 'lism-css/astro';
+import { Container, Flex, Link, Text } from 'lism-css/astro';
 ---
 
-<Container as='footer' size='m' py='40' set='gutter'>
-  <Stack jc='c' ai='c' g='30'>
-    <Stack class='z--header_logo'>
-      <Text as='p' fz='xl' fw='400' lts='l' m='0'>
-        <Inline fw='200'>The</Inline>Minimal
-      </Text>
-    </Stack>
-    <Cluster g='20'>
-      <LinkBox href='#' hov='o'>
-        <Icon icon='logo-x' fz='l' c='text-2' />
-      </LinkBox>
-      <LinkBox href='#' hov='o'>
-        <Icon icon='logo-instagram' fz='l' c='text-2' />
-      </LinkBox>
-      <LinkBox href='#' hov='o'>
-        <Icon icon='logo-youtube' fz='l' c='text-2' />
-      </LinkBox>
-      <LinkBox href='#' hov='o'>
-        <Icon icon='logo-line' fz='l' c='text-2' />
-      </LinkBox>
-    </Cluster>
-    <Text as='p' fz='s' c='text-2' m='0'>© 2026 The Minimal.</Text>
-  </Stack>
+<Container as='footer' size='xl' set='gutter' bgc='base-2' py='40'>
+  <Flex jc='between' ai='center' g='20' fxw='wrap'>
+    <Link href='#' fz='2xl' fw='bold' lts='l' c='text' td='none' hov='o'>
+      LISM Life
+    </Link>
+    <Text as='p' fz='s' fw='normal' m='0' c='text' lh='l'>
+      © 2026 Lism CSS
+    </Text>
+  </Flex>
 </Container>

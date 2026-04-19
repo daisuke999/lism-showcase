@@ -1,0 +1,70 @@
+---
+import { Stack, Container, Box, Heading, Text } from 'lism-css/astro';
+import { Accordion } from '@lism-css/ui/astro';
+
+/** 各項目は質問・回答を独立して管理（必要に応じて初期展開を指定） */
+const faqItems: { question: string; answer: string; defaultOpen?: boolean }[] = [
+  {
+    question: 'スケジュール管理はどのように行っていただけますか？',
+    answer:
+      'こんな時代だからこそ私たちが求めるものはただ作るだけではない斬新な発想を要求するモノづくりです。こんな時代だからこそ私たちが求めるものはただ作るだけではない。',
+    defaultOpen: true,
+  },
+  {
+    question: 'プランを変えたくなったのですがどうすれば良いですか？',
+    answer:
+      'ご予約確定後の変更は、空室状況とキャンセル規定に応じてフロントにて承ります。お早めにご連絡いただくと、ご希望に近いお部屋タイプへ調整しやすくなります。',
+  },
+  {
+    question: 'クレジットカードの支払いには対応していますか？',
+    answer:
+      '各種クレジットカードに対応しております。事前決済や当日精算など、ご予約時にお選びいただける場合がございます。詳細はプラン内容をご確認ください。',
+  },
+  {
+    question: 'チェックイン前・チェックアウト後に荷物を預かってもらえますか？',
+    answer:
+      '空き状況に応じてお預かりできる場合がございます。貴重品の管理についてはフロントまでお声がけください。大型荷物は事前にご相談いただけるとスムーズです。',
+  },
+  {
+    question: '駐車場はありますか？',
+    answer:
+      '敷地内に限られた台数の駐車スペースをご用意しています。満車の際は近隣のコインパーキングをご案内する場合がございますので、お車でお越しの際は事前にお知らせください。',
+  },
+];
+---
+
+<Box as='section' class='c--faq' bgc='base-2'>
+  <Container size='l' set='gutter' py='50'>
+    <Stack g='40'>
+      <Stack g='10' ai='c'>
+        <Heading level='2' fz='3xl' lts='l' m='0' ta='center'>FAQ</Heading>
+        <Text as='p' fz='m' fw='bold' lts='l' m='0' c='text-2' ta='center'>よくあるご質問</Text>
+      </Stack>
+
+      <Accordion.Root lismClass='u--collapseGrid' p='0' ov='clip' g='20'>
+        {
+          faqItems.map((item) => (
+            <Accordion.Item
+              bgc='base'
+              bdrs='20'
+              bxsh='10'
+              ov='hidden'
+              {...(item.defaultOpen ? { 'data-opened': '' } : {})}
+            >
+              <Accordion.Heading p='30'>
+                <Accordion.Button fw='bold' ta='start' isOpen={item.defaultOpen === true}>
+                  {item.question}
+                </Accordion.Button>
+              </Accordion.Heading>
+              <Accordion.Panel py='30' px='30' isOpen={item.defaultOpen === true}>
+                <Text m='0' fz='s' c='text-2' lh='l'>
+                  {item.answer}
+                </Text>
+              </Accordion.Panel>
+            </Accordion.Item>
+          ))
+        }
+      </Accordion.Root>
+    </Stack>
+  </Container>
+</Box>

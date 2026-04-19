@@ -1,0 +1,180 @@
+---
+import { Stack, Flex, Heading, Text, Box, Container, Link } from 'lism-css/astro';
+import { Avatar } from '@lism-css/ui/astro';
+
+/**
+ * アバター画像（Lism 公式ドキュメントの Avatar 例と同じ CDN パス）
+ * @see https://lism-css.com/docs/ui/avatar/
+ * 注: `https://cdn.lism-css.com/images/avatar/` は Basic 認証のため未認証では取得できません。公開されている `img/avatar` を使用しています。
+ */
+const avatarBase = 'https://cdn.lism-css.com/img/avatar';
+
+/** カードごとの表示内容（アバター・見出し・本文・属性ラベルを独立して管理） */
+type VoiceCard = {
+  avatar: { src: string; alt: string };
+  title: string;
+  body: string;
+  attribution: string;
+};
+
+const voiceCards: VoiceCard[] = [
+  {
+    avatar: { src: `${avatarBase}/a-01.jpg`, alt: '笑顔の女性のポートレート' },
+    title: '素晴らしいです！',
+    body: '静けさの贅沢と、誰にも邪魔されないプライベートな時間を味わえました。お部屋付きの露天風呂も最高で、心からリフレッシュできました。また必ず伺いたいです。',
+    attribution: '20代のお客様',
+  },
+  {
+    avatar: { src: `${avatarBase}/a-02.jpg`, alt: '穏やかな表情の男性のポートレート' },
+    title: '心から満足しています',
+    body: 'フロントの対応が丁寧で、細かなリクエストにも快く応じていただけました。お食事のボリュームと味のバランスが絶妙で、旅のハイライトになりました。',
+    attribution: '30代のお客様',
+  },
+  {
+    avatar: { src: `${avatarBase}/a-03.jpg`, alt: '柔らかい印象の女性のポートレート' },
+    title: 'また家族で来たいです',
+    body: '子ども連れでも過ごしやすい動線と、落ち着いた雰囲気が両立していました。夕方の散策路から望む景色も忘れられず、写真に収めきれない美しさでした。',
+    attribution: '40代のお客様',
+  },
+  {
+    avatar: { src: `${avatarBase}/a-04.jpg`, alt: '爽やかな笑みの女性のポートレート' },
+    title: '非日常を味わえました',
+    body: '内装の質感やアメニティの選び方にこだわりを感じます。朝の光が差し込むラウンジでのひとときは、本を読むのにも最適でした。',
+    attribution: '50代のお客様',
+  },
+  {
+    /* CDN 上に a-05 が無いため a-02 を流用 */
+    avatar: { src: `${avatarBase}/a-02.jpg`, alt: '記念日にご宿泊のお客様のポートレート' },
+    title: '記念日にぴったりでした',
+    body: 'サプライズの相談から当日の演出まで、安心してお任せできました。料理の説明も分かりやすく、ワインとのペアリングも楽しめました。',
+    attribution: '60代のお客様',
+  },
+];
+
+const cardAnchorPrefix = 'page002-voice';
+---
+
+<Box as='section' class='c--voice' bgc='base'>
+  <Container size='l' set='gutter' py='50'>
+    <Stack g='30'>
+      <Stack g='10' ai='c'>
+        <Heading level='2' fz='3xl' lts='l' m='0' ta='center'>Voice</Heading>
+        <Text as='p' fz='m' fw='bold' lts='l' m='0' c='text-2' ta='center'>お客様の声です</Text>
+      </Stack>
+
+      <Stack g='24'>
+        <!-- リール: Grid の gac パーセントは幅が不定だと列が潰れるため、Flex + 固定ベース幅で横スクロール（Lism Reel 例の考え方） -->
+        <Box class='c--voiceReelOuter'>
+          <Flex
+            class='c--voiceReel u--snap'
+            ov='auto'
+            g='20'
+            fxd='row'
+            fxw='nowrap'
+            ai='stretch'
+            w='100%'
+            min-w='0'
+            tabindex='0'
+            exProps={{
+              style: '--snapAlign: start; scroll-behavior: smooth;',
+            }}
+          >
+            {
+              voiceCards.map((card, i) => (
+                <Box
+                  id={`${cardAnchorPrefix}-${i + 1}`}
+                  class='c--voiceSlide'
+                  p='30'
+                  bgc='base'
+                  bd
+                  bdc='divider'
+                  bdrs='20'
+                  fxsh='0'
+                >
+                  <Stack g='20' ai='c'>
+                    <Avatar src={card.avatar.src} alt={card.avatar.alt} size='5.5rem' mx='auto' />
+                    <Heading level='3' fz='l' fw='bold' m='0' ta='center'>
+                      {card.title}
+                    </Heading>
+                    <Text as='p' fz='s' m='0' c='text' lh='l' ta='center'>
+                      {card.body}
+                    </Text>
+                    <Text as='p' fz='xs' m='0' c='text-2' ta='end' w='100%'>
+                      {card.attribution}
+                    </Text>
+                  </Stack>
+                </Box>
+              ))
+            }
+          </Flex>
+        </Box>
+
+        <Flex as='nav' aria-label='お客様の声のカードへ' g='15' jc='center' ai='c' lh='1'>
+          {
+            voiceCards.map((_, i) => (
+              <Link
+                href={`#${cardAnchorPrefix}-${i + 1}`}
+                class='c--voiceDot'
+                aria-label={`お客様の声 ${i + 1} 枚目へ`}
+                td='none'
+                bgc='base-2'
+                w='1rem'
+                h='1rem'
+                bdrs='full'
+                p='0'
+                hov='o'
+              />
+            ))
+          }
+        </Flex>
+      </Stack>
+    </Stack>
+  </Container>
+</Box>
+
+<style>
+  @layer lism-modules {
+    /**
+     * リール帯をビューポート幅にしつつ、先頭カードは size=l + gutter のコンテンツ左に揃える。
+     * - `50% - 50vw` は親がほぼ100vwだと 0 になり先頭が画面端に寄るため使わない。
+     * - コンテンツ左までの距離 L = max(gutter, (100vw - min(100vw, --sz--l)) / 2)（gutter を二重に足さない）
+     */
+    .c--voice {
+      --voice-edge-pad: max(var(--gutter-size, 0px), calc((100vw - min(100vw, var(--sz--l, 1280px))) / 2));
+    }
+
+    .c--voiceReelOuter {
+      box-sizing: border-box;
+      width: 100vw;
+      margin-inline-start: calc(-1 * var(--voice-edge-pad));
+    }
+
+    /**
+     * scroll-padding: レイアウトの padding と別に、scroll-snap の基準枠を内側へずらす。
+     * 無いと snap がスクロールポートの物理左に吸い付き、先頭カードが画面端へ寄る（Lism Reel 例の scroll-padding と同趣旨）。
+     * @see https://lism-css.com/ui/examples/reel
+     */
+    .c--voiceReel {
+      box-sizing: border-box;
+      width: 100%;
+      min-width: 0;
+      padding-inline: var(--voice-edge-pad);
+      scroll-padding-inline: var(--voice-edge-pad);
+    }
+
+    .c--voiceSlide {
+      flex: 0 0 min(22rem, 82%);
+      min-width: 0;
+    }
+
+    .c--voiceDot {
+      display: block;
+      flex-shrink: 0;
+    }
+
+    .c--voiceDot:focus-visible {
+      outline: 2px solid var(--c--text, currentColor);
+      outline-offset: 3px;
+    }
+  }
+</style>
