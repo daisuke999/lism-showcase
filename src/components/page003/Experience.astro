@@ -1,0 +1,209 @@
+---
+import { Container, Grid, Stack, Flex, Lism, Text, Heading } from 'lism-css/astro';
+
+const img = {
+  src: 'https://cdn.lism-css.com/img/japan/u-L4YLmcBryx.jpg',
+  alt: '千本鳥居が続く参道',
+  width: 1920,
+  height: 1280,
+};
+
+const lead = '春の桜、秋の紅葉。';
+const body =
+  '四季の移ろいが最も美しい瞬間を切り取る当宿は、まるで一幅の絵画のように自然と調和いたします。名湯と旬の味わいを、大切な方々とご一緒にお楽しみください。';
+---
+
+<Lism as='section' id='experience' class='z--p003-experience' bgc='base' py='60'>
+  <Container isWrapper='l' set='gutter' isContainer pos='relative'>
+    <Grid
+      class='z--p003-experience_grid'
+      gtc={['1fr', '1fr', 'minmax(0, 1.05fr) minmax(0, 1fr)']}
+      rg={['30', '30', '0']}
+      cg={['0', '0', '50']}
+      ai={['stretch', 'stretch', 'stretch']}
+    >
+      <Lism as='figure' class='z--p003-experience_figure' m='0' ov='hidden' bdrs='10'>
+        <img src={img.src} alt={img.alt} width={img.width} height={img.height} loading='lazy' decoding='async' />
+      </Lism>
+      <Stack class='z--p003-experience_textCol' pos='relative' g='0' ai='stretch' min-w='0' h='100%'>
+        <span class='z--p003-experience_watermark' aria-hidden='true'>Experience</span>
+        <Flex
+          class='z--p003-experience_copyRow'
+          fxd={['column', 'column', 'row']}
+          g={['20', '20', '40']}
+          ai='stretch'
+          pos='relative'
+        >
+          <Heading level='2' class='z--p003-experience_title' m='0' fz={['xl', null, '3xl']} fw='500' lts='l'>
+            <span class='z--p003-experience_titleInner'>
+              <span class='z--p003-experience_titleLine1'>特別な旅と</span>
+              <span class='z--p003-experience_titleLine2'>静寂の体験</span>
+            </span>
+          </Heading>
+          <Stack class='z--p003-experience_bodyStack' g='15' ai='start' min-w='0'>
+            <Text as='p' class='z--p003-experience_lead' m='0' fz='l' fw='500' lts='l' c='text'>
+              {lead}
+            </Text>
+            <Text as='p' class='z--p003-experience_body' m='0' fz='m' lh='l' lts='s' c='text' max-w='100%'>
+              {body}
+            </Text>
+          </Stack>
+        </Flex>
+      </Stack>
+    </Grid>
+  </Container>
+</Lism>
+
+<style>
+  /* コンテンツ左端〜画面左端までの距離（size=l + gutter と整合） */
+  .z--p003-experience {
+    --p003-exp-pull: max(var(--gutter-size, 0px), calc((100vw - min(100vw, var(--sz--l))) / 2));
+    position: relative;
+    color: var(--text);
+  }
+  @media (max-width: 799px) {
+    .z--p003-experience_textCol {
+      order: 1;
+    }
+    .z--p003-experience_figure {
+      order: 2;
+      margin-inline: 0;
+      inline-size: 100%;
+      max-inline-size: none;
+      aspect-ratio: 16 / 10;
+      max-block-size: none;
+    }
+    .z--p003-experience_bodyStack {
+      align-self: stretch;
+      margin-inline-start: 0;
+      max-inline-size: 100%;
+    }
+    .z--p003-experience_lead,
+    .z--p003-experience_body {
+      text-align: start;
+      text-wrap: pretty;
+    }
+  }
+  .z--p003-experience_figure {
+    position: relative;
+    box-sizing: border-box;
+    align-self: stretch;
+  }
+  .z--p003-experience_figure > img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  @media (min-width: 800px) {
+    .z--p003-experience_figure {
+      margin-inline-start: calc(-1 * var(--p003-exp-pull));
+      width: calc(100% + var(--p003-exp-pull));
+      max-width: none;
+      border-radius: 0 var(--bdrs--10) var(--bdrs--10) 0;
+      min-height: min(22rem, 52vw);
+    }
+    .z--p003-experience_figure > img {
+      min-height: min(22rem, 52vw);
+    }
+  }
+  .z--p003-experience_textCol {
+    min-height: 0;
+    overflow-x: visible;
+  }
+  .z--p003-experience_copyRow {
+    flex: 1;
+    min-height: 0;
+    width: 100%;
+  }
+  /* md+: 縦見出しは上端、横文は下端（2列グリッド） */
+  @media (min-width: 800px) {
+    .z--p003-experience_copyRow {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      grid-template-rows: 1fr auto;
+      min-height: min(22rem, 52vw);
+    }
+    .z--p003-experience_title {
+      grid-column: 2;
+      grid-row: 1 / -1;
+      align-self: start;
+      justify-self: end;
+    }
+    .z--p003-experience_bodyStack {
+      grid-column: 1;
+      grid-row: 2;
+      align-self: end;
+    }
+  }
+  /* 英字ウォーターマーク: 右 Grid 列の inline-start（左端）基準。E が画像に隠れないよう左へはみ出さない */
+  .z--p003-experience_watermark {
+    position: absolute;
+    z-index: 0;
+    margin: 0;
+    padding: 0;
+    inset-inline-start: 0;
+    inset-inline-end: auto;
+    inset-block-start: clamp(0.25rem, 2.5cqi, 1.75rem);
+    transform: none;
+    transform-origin: left center;
+    font-family: ui-serif, 'Times New Roman', Times, serif;
+    font-size: clamp(2.75rem, 11cqi, 7.5rem);
+    font-weight: 300;
+    line-height: 0.82;
+    letter-spacing: 0.03em;
+    color: rgb(0 0 0 / 0.07);
+    white-space: nowrap;
+    pointer-events: none;
+    user-select: none;
+    direction: ltr;
+    unicode-bidi: isolate;
+  }
+  /* md 以下: ウォーターマークはテキスト列（グリッドアイテム）の右端基準 */
+  @media (max-width: 799px) {
+    .z--p003-experience_watermark {
+      inset-inline-start: auto;
+      inset-inline-end: 0;
+      transform-origin: right center;
+    }
+  }
+  /* md 超: 春の桜〜ブロックの最大幅 */
+  @media (min-width: 800px) {
+    .z--p003-experience_bodyStack {
+      max-inline-size: min(100%, 26rem);
+    }
+    .z--p003-experience_lead,
+    .z--p003-experience_body {
+      text-align: start;
+    }
+  }
+  .z--p003-experience_title {
+    flex-shrink: 0;
+    line-height: 1.65;
+  }
+  /*
+   * 縦組み2列: 親は横書きのまま flex で列を並べ、各子に vertical-rl。
+   * row-reverse で右列（先に読む列）に「特別な旅と」を置く。
+   */
+  .z--p003-experience_titleInner {
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: flex-start;
+    gap: 0.35em;
+  }
+  .z--p003-experience_titleLine1,
+  .z--p003-experience_titleLine2 {
+    display: block;
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+  }
+  /* 2列目の字下げ（横並び時は上方向オフセット） */
+  .z--p003-experience_titleLine2 {
+    margin-block-start: 1.75em;
+  }
+  @media (max-width: 799px) {
+    .z--p003-experience_title {
+      align-self: end;
+    }
+  }
+</style>

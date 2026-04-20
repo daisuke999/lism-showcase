@@ -1,5 +1,5 @@
 ---
-import { Frame, Stack, Container, Layer, LinkBox, Icon, Text, Inline, Lism } from 'lism-css/astro';
+import { Frame, Stack, Container, Layer, BoxLink, Icon, Text, Inline, Lism } from 'lism-css/astro';
 
 const mvImage = {
   src: 'https://cdn.lism-css.com/img/u-WFUSqJTxVc.jpg',
@@ -43,10 +43,10 @@ const mvImage = {
       <Text as='p' fz='l' fw='200' ta='center' lts='l' m='0'>Lorem ipsum dolor sit amet.</Text>
     </Stack>
   </Frame>
-  <LinkBox href='#about' class='z--mv_scrollDown' layout='stack' ai='center' g='5' pos='absolute' c='white'>
+  <BoxLink href='#about' class='z--mv_scrollDown' layout='stack' ai='center' g='5' pos='absolute' c='white'>
     <Inline as='span' class='z--mv_scrollDownText' fz='xs' fs='italic' lts='l'>SCROLL DOWN</Inline>
     <Icon class='z--mv_scrollDownIcon' icon='caret-down' fz='m' />
-  </LinkBox>
+  </BoxLink>
 </Container>
 
 <style>

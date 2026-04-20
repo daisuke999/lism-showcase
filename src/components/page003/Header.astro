@@ -1,0 +1,168 @@
+---
+import { Lism, Stack, Container, Grid, Flex, Link, BoxLink, Icon, Center, Inline, ListItem } from 'lism-css/astro';
+import { Modal } from '@lism-css/ui/astro';
+
+const navItems = [
+  { href: '#about', ja: '当宿について', en: 'About' },
+  { href: '#plans', ja: '宿泊プラン', en: 'Plan' },
+  { href: '#facilities', ja: '設備紹介', en: 'Facilities' },
+  { href: '#room', ja: '部屋案内', en: 'Room' },
+  { href: '#faq', ja: 'よくあるご質問', en: 'Faq' },
+] as const;
+---
+
+<Lism as='header' class='z--header' pos='fixed' i='0' w='100%' z='1' set='transition'>
+  <Container class='z--header_bar' isWrapper='xl' mx='auto' set='gutter' h='100%'>
+    <Grid class='z--header_inner' gtc='minmax(0,auto) 1fr' ai='center' h='100%' g='20'>
+      <Stack class='z--header_logo'>
+        <Link
+          class='z--header_logoLink'
+          href='#'
+          td='none'
+          fw='bold'
+          lts='l'
+          fz={['xl', null, '2xl']}
+          lh='s'
+          whs='nowrap'
+        >
+          静寂の隠宿
+        </Link>
+      </Stack>
+      <Flex class='z--header_actions' jc='fe' g='20' ai='c'>
+        <Flex
+          class='z--headerNav'
+          as='ul'
+          d={['none', null, 'inline-flex']}
+          ai='c'
+          m='0'
+          p='0'
+          fxw='nowrap'
+          g={['15', null, '20']}
+        >
+          {
+            navItems.map(({ href, ja, en }) => (
+              <ListItem>
+                <Link
+                  class='z--headerNav_link'
+                  href={href}
+                  d='grid'
+                  jc='c'
+                  ji='c'
+                  td='none'
+                  py='8'
+                  px='4'
+                  set='transition'
+                  hov='o'
+                  ta='c'
+                  g='4'
+                >
+                  <Inline>{ja}</Inline>
+                  <Inline as='span' class='z--headerNav_en' fz='2xs' fw='normal' lts='l' lh='xs' m='0' ta='c' d='block'>
+                    {en}
+                  </Inline>
+                </Link>
+              </ListItem>
+            ))
+          }
+        </Flex>
+        <Modal.OpenBtn modalId='p003-menu' d={['block', null, 'none']}>
+          <Center class='z--menuOpenBtn' p='10' bd bdrs='10'>
+            <Icon class='z--subMenu_buttonIcon' icon='menu' c='white' />
+          </Center>
+        </Modal.OpenBtn>
+      </Flex>
+    </Grid>
+  </Container>
+</Lism>
+<Modal.Root id='p003-menu' isContainer isWrapper='s' p='30'>
+  <Modal.Inner layout='stack' pos='relative' w='100%' p='30' bdrs='20' bxsh='40'>
+    <Modal.CloseBtn modalId='p003-menu' autofocus pos='absolute' t='0' r='0' z='1' fz='xl' p='10' m='15' />
+    <Modal.Body layout='stack' g='30' py='40'>
+      <Stack class='z--header_menuNav u--collapseGrid' p='0' ov='clip'>
+        {
+          navItems.map(({ href, ja, en }) => (
+            <BoxLink href={href} layout='grid' gtc='1fr auto' ai='c' fz='l' td='none' py='15' px='5'>
+              <Stack g='4'>
+                <Inline>{ja}</Inline>
+                <Inline as='span' class='z--header_menuNav_en' fz='s' m='0' o='-20'>
+                  {en}
+                </Inline>
+              </Stack>
+              <Icon icon='caret-right' fz='s' o='-20' />
+            </BoxLink>
+          ))
+        }
+        <BoxLink href='#contact' layout='grid' gtc='1fr auto' ai='c' fz='l' td='none' py='15' px='5'>
+          <Stack g='4'>
+            <Inline>ご予約はこちら</Inline>
+            <Inline as='span' class='z--header_menuNav_en' fz='s' m='0' o='-20'> Reservation </Inline>
+          </Stack>
+          <Icon icon='caret-right' fz='s' o='-20' />
+        </BoxLink>
+      </Stack>
+    </Modal.Body>
+  </Modal.Inner>
+</Modal.Root>
+
+<style>
+  .z--header {
+    height: var(--z--header-height);
+    color: var(--white);
+    background-color: transparent;
+    box-sizing: border-box;
+    --z--header-scroll-animation-start: 80px;
+    --z--header-animation-range: var(--z--header-scroll-animation-start)
+      calc(var(--z--header-scroll-animation-start) + 140px);
+    animation: z--header_p003 linear both;
+    animation-timeline: scroll(root);
+    animation-range: var(--z--header-animation-range);
+  }
+  .z--header :where(a) {
+    color: inherit;
+  }
+  .z--header_logoLink {
+    transform-origin: left center;
+    animation: z--header_logo_p003 linear both;
+    animation-timeline: scroll(root);
+    animation-range: var(--z--header-animation-range);
+  }
+  @keyframes z--header_p003 {
+    to {
+      background-color: var(--black);
+      color: var(--white);
+      height: var(--z--header-height--thin);
+      box-shadow: 0 6px 28px rgb(0 0 0 / 0.45);
+    }
+  }
+  @keyframes z--header_logo_p003 {
+    to {
+      transform: scale(0.9);
+    }
+  }
+  .z--headerNav_en {
+    max-height: 2.5em;
+    overflow: hidden;
+    animation: z--headerNav_en_p003 linear both;
+    animation-timeline: scroll(root);
+    animation-range: var(--z--header-animation-range);
+  }
+  @keyframes z--headerNav_en_p003 {
+    to {
+      opacity: 0;
+      max-height: 0;
+      margin: 0;
+      padding: 0;
+    }
+  }
+  .z--menuOpenBtn {
+    border-color: rgba(255, 255, 255, 0.45);
+    animation: z--menuOpenBtn_p003 linear both;
+    animation-timeline: scroll(root);
+    animation-range: var(--z--header-animation-range);
+  }
+  @keyframes z--menuOpenBtn_p003 {
+    to {
+      border-color: rgba(255, 255, 255, 0.38);
+    }
+  }
+</style>

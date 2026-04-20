@@ -1,5 +1,5 @@
 ---
-import { Frame, Stack, Container, Layer, Box, Icon, Cluster, Text, Inline, LinkBox, Lism } from "lism-css/astro";
+import { Frame, Stack, Container, Layer, Box, Icon, Cluster, Text, Inline, BoxLink, Lism } from "lism-css/astro";
 import HGroup from "@/components/page001/HGroup.astro";
 
 const bg = {
@@ -25,7 +25,7 @@ const bg = {
     />
   </Frame>
   <Layer style={{ backgroundColor: "hsl(0 0% 0% / 0.5)" }} />
-  <Container size="s" bgc="base-2" py="60" h="65vh" set="gutter">
+  <Container isWrapper="s" bgc="base-2" py="60" h="65vh" set="gutter">
     <Stack pos="relative" jc="c" g="40" c="white" h="100%">
       <HGroup text="Contact" subText="お問い合わせ" variant="light" />
       <Text as="p" class="u--fadeIn" max-sz="full" mx="auto" m="0">
@@ -33,7 +33,7 @@ const bg = {
         実案件の相談やサポート体制については、公式サイトのドキュメントとリポジトリの案内をご確認ください。
       </Text>
       <Cluster class="u--fadeIn" jc="c" g="15">
-        <LinkBox
+        <BoxLink
           href="###"
           layout="grid"
           gtc="1em 1fr 1em"
@@ -53,7 +53,7 @@ const bg = {
             Try Lism CSS
           </Inline>
           <Icon icon="arrow-right" />
-        </LinkBox>
+        </BoxLink>
       </Cluster>
     </Stack>
   </Container>

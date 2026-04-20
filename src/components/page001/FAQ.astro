@@ -38,10 +38,10 @@ const faqItems: { question: string; answer: string }[] = [
 ];
 ---
 
-<Container id="faq" class="z--faq" size="m" py="60" set="gutter">
+<Container id="faq" class="z--faq" isWrapper="m" py="60" set="gutter">
   <Stack g="40">
     <HGroup text="FAQ" subText="よくある質問" />
-    <Accordion.Root lismClass="u--collapseGrid" p="0" ov="clip">
+    <Accordion.Root class="u--collapseGrid" p="0" ov="clip">
       {
         faqItems.map((item) => (
           <Accordion.Item>

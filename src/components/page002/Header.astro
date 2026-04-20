@@ -1,9 +1,9 @@
 ---
-import { Stack, Container, Grid, Flex, Link, LinkBox, Box, Icon, Center, Inline, ListItem } from 'lism-css/astro';
+import { Stack, Container, Grid, Flex, Link, BoxLink, Box, Icon, Center, Inline, ListItem } from 'lism-css/astro';
 import { Modal, Accordion, Button } from '@lism-css/ui/astro';
 ---
 
-<Container class='z--header' as='header' size='xl' pos='fixed' i='0' w='100%' z='1' set='gutter transition'>
+<Container class='z--header' as='header' isWrapper='xl' pos='fixed' i='0' w='100%' z='1' set='gutter transition'>
   <Grid class='z--header_inner' gtc='10rem 1fr' ai='center' h='100%'>
     <Stack class='z--header_logo'>
       <Link class='z--header_logoLink' href='#' fz='2xl' fw='bold' lts='l' c='text' td='none'> LISM Life </Link>
@@ -43,22 +43,22 @@ import { Modal, Accordion, Button } from '@lism-css/ui/astro';
         <Modal.CloseBtn modalId='menu' autofocus pos='absolute' t='0' r='0' z='1' fz='xl' p='10' m='15' />
         <Modal.Body layout='stack' g='30' py='40'>
           <Stack class='z--header_menuNav u--collapseGrid' p='0' ov='clip'>
-            <LinkBox href='#about' layout='grid' gtc='1fr auto' ai='c' fz='l' td='none' py='15' px='5'>
+            <BoxLink href='#about' layout='grid' gtc='1fr auto' ai='c' fz='l' td='none' py='15' px='5'>
               <Inline>About</Inline>
               <Icon icon='caret-right' fz='s' o='-20' />
-            </LinkBox>
-            <LinkBox href='#feature' layout='grid' gtc='1fr auto' ai='c' fz='l' td='none' py='15' px='5'>
+            </BoxLink>
+            <BoxLink href='#feature' layout='grid' gtc='1fr auto' ai='c' fz='l' td='none' py='15' px='5'>
               <Inline>Feature</Inline>
               <Icon icon='caret-right' fz='s' o='-20' />
-            </LinkBox>
-            <LinkBox href='#works' layout='grid' gtc='1fr auto' ai='c' fz='l' td='none' py='15' px='5'>
+            </BoxLink>
+            <BoxLink href='#works' layout='grid' gtc='1fr auto' ai='c' fz='l' td='none' py='15' px='5'>
               <Inline>Works</Inline>
               <Icon icon='caret-right' fz='s' o='-20' />
-            </LinkBox>
-            <LinkBox href='#news' layout='grid' gtc='1fr auto' ai='c' fz='l' td='none' py='15' px='5'>
+            </BoxLink>
+            <BoxLink href='#news' layout='grid' gtc='1fr auto' ai='c' fz='l' td='none' py='15' px='5'>
               <Inline>News</Inline>
               <Icon icon='caret-right' fz='s' o='-20' />
-            </LinkBox>
+            </BoxLink>
             <Accordion.Root>
               <Accordion.Item>
                 <Accordion.Heading m='0' p='0' w='100%'>
@@ -81,22 +81,22 @@ import { Modal, Accordion, Button } from '@lism-css/ui/astro';
                 </Accordion.Heading>
                 <Accordion.Panel p='0' ov='clip'>
                   <Stack class='z--header_menuNav_sub u--collapseGrid' ml='20' p='0' ov='clip'>
-                    <LinkBox href='#faq' layout='grid' gtc='1fr auto' ai='c' fz='l' td='none' py='15' px='5'>
+                    <BoxLink href='#faq' layout='grid' gtc='1fr auto' ai='c' fz='l' td='none' py='15' px='5'>
                       <Inline>FAQ</Inline>
                       <Icon icon='caret-right' fz='s' o='-20' />
-                    </LinkBox>
-                    <LinkBox href='#testimonials' layout='grid' gtc='1fr auto' ai='c' fz='l' td='none' py='15' px='5'>
+                    </BoxLink>
+                    <BoxLink href='#testimonials' layout='grid' gtc='1fr auto' ai='c' fz='l' td='none' py='15' px='5'>
                       <Inline>Testimonials</Inline>
                       <Icon icon='caret-right' fz='s' o='-20' />
-                    </LinkBox>
-                    <LinkBox href='#information' layout='grid' gtc='1fr auto' ai='c' fz='l' td='none' py='15' px='5'>
+                    </BoxLink>
+                    <BoxLink href='#information' layout='grid' gtc='1fr auto' ai='c' fz='l' td='none' py='15' px='5'>
                       <Inline>Information</Inline>
                       <Icon icon='caret-right' fz='s' o='-20' />
-                    </LinkBox>
-                    <LinkBox href='#contact' layout='grid' gtc='1fr auto' ai='c' fz='l' td='none' py='15' px='5'>
+                    </BoxLink>
+                    <BoxLink href='#contact' layout='grid' gtc='1fr auto' ai='c' fz='l' td='none' py='15' px='5'>
                       <Inline>Contact</Inline>
                       <Icon icon='caret-right' fz='s' o='-20' />
-                    </LinkBox>
+                    </BoxLink>
                   </Stack>
                 </Accordion.Panel>
               </Accordion.Item>

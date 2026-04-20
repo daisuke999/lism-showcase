@@ -1,0 +1,116 @@
+---
+import { Container, Grid, Stack, Frame, Lism, Text, Heading, Flex, Layer, Inline } from 'lism-css/astro';
+
+const seasonsBg = {
+  src: 'https://cdn.lism-css.com/img/japan/u-MES3nTNrVq.jpg',
+  alt: '',
+  width: 1920,
+  height: 1080,
+} as const;
+
+/**
+ * japan カテゴリのランダム配信（CDN の `random-2510?category=japan`）。
+ * 固定の u-* が手元で未検証のため、クエリで 4 枚を区別。運用では /img/japan/u-*.jpg に差し替え可。
+ */
+const galleryPhotos = [
+  { src: 'https://cdn.lism-css.com/img/random-2510?category=japan&r=p003seasons-a', alt: '富士と朝焼けの風景' },
+  { src: 'https://cdn.lism-css.com/img/random-2510?category=japan&r=p003seasons-b', alt: '日本の山並みと雲海' },
+  { src: 'https://cdn.lism-css.com/img/random-2510?category=japan&r=p003seasons-c', alt: '湖畔の夕景' },
+  { src: 'https://cdn.lism-css.com/img/random-2510?category=japan&r=p003seasons-d', alt: '雪化粧の峰' },
+] as const;
+
+const introBody =
+  '静寂に包まれた隠れ宿で、四季の移ろいを五感で味わうひととき。露天風呂に身をゆだねれば木々のざわめきと鳥の声、移ろう空の色が心を解きほぐします。伝統美と現代の心地よさが溶け合う空間で、大切な方と過ごす至福の時間をお約束いたします。';
+---
+
+<Lism as='section' id='seasons' pos='relative' ov-x='clip' c='white'>
+  <Frame isLayer>
+    <Lism
+      as='img'
+      src={seasonsBg.src}
+      alt={seasonsBg.alt}
+      w='100%'
+      h='100%'
+      exProps={{
+        width: seasonsBg.width,
+        height: seasonsBg.height,
+        loading: 'lazy',
+        decoding: 'async',
+        'aria-hidden': 'true',
+      }}
+    />
+  </Frame>
+  <Layer bgc='black:52%' exProps={{ 'aria-hidden': 'true' }} />
+  <Container isWrapper='l' set='gutter' pos='relative' z='1' py='60'>
+    <Grid
+      gtc={['1fr', '1fr', 'minmax(0, min(100%, 20rem)) minmax(0, 1fr)']}
+      rg={['30', '30', '40']}
+      cg={['0', '0', '50']}
+      ai='start'
+    >
+      <Stack g='12' ai='start' max-sz='m' w='100%'>
+        <Heading level='2' m='0' fz={['xl', null, '3xl']} fw='500' lts='l' lh='l'>
+          季節の移ろいを、<br />肌で感じる。
+        </Heading>
+        <Flex g='10' ai='baseline' fxd='row' fxw={['wrap', 'wrap', 'nowrap']} w='100%'>
+          <Inline as='span' fz='xs' tt='upper' lts='l' m='0' c='white' o='-20'>Seasons</Inline>
+          <Inline as='span' fz='s' ff='accent' m='0' c='white' o='-30'>Feel the experience</Inline>
+        </Flex>
+      </Stack>
+      <Stack g='0' ai='start' min-w='0'>
+        <Text as='p' m='0' fz='m' lh='l' lts='s' c='white' o='-10'>
+          {introBody}
+        </Text>
+      </Stack>
+    </Grid>
+    <div class='z--p003-seasons_galleryBleed'>
+      <Grid
+        gtc={['repeat(2, minmax(0, 1fr))', 'repeat(2, minmax(0, 1fr))', 'repeat(4, minmax(0, 1fr))']}
+        g={['15', null, '40']}
+        ai='start'
+      >
+        {
+          galleryPhotos.map(({ src, alt }, i) => (
+            <Frame
+              as='figure'
+              ar='4/3'
+              m='0'
+              w='100%'
+              min-w='0'
+              jslf='stretch'
+              pos='relative'
+              bdrs='10'
+              ov='hidden'
+              mt={i === 1 || i === 3 ? ['0', '0', '40'] : '0'}
+            >
+              <img src={src} alt={alt} width={800} height={600} loading='lazy' decoding='async' />
+            </Frame>
+          ))
+        }
+      </Grid>
+    </div>
+  </Container>
+</Lism>
+
+<style>
+  /* ギャラリー全幅ブレイクアウトのみ（Lism 単体では viewport センタリングが冗長になりやすいため） */
+  .z--p003-seasons_galleryBleed {
+    position: relative;
+    width: 100vw;
+    max-width: 100vw;
+    left: 50%;
+    transform: translateX(-50%);
+    margin-top: var(--s40);
+    box-sizing: border-box;
+  }
+  @media (max-width: 799px) {
+    .z--p003-seasons_galleryBleed {
+      width: 100%;
+      max-width: 100%;
+      left: auto;
+      transform: none;
+      margin-top: var(--s30);
+      padding-inline: var(--gutter-size, var(--s30));
+    }
+  }
+</style>

@@ -1,5 +1,5 @@
 ---
-import { Stack, Container, LinkBox, Frame, Layer, Box, Text, Inline, Lism } from "lism-css/astro";
+import { Stack, Container, BoxLink, Frame, Layer, Box, Text, Inline, Lism } from "lism-css/astro";
 import HGroup from "@/components/page001/HGroup.astro";
 
 const bg = {
@@ -52,13 +52,13 @@ const newsRows = [
     />
   </Frame>
   <Layer style={{ filter: "grayscale(1)", backgroundColor: "hsl(224 4% 8% / 0.85)" }} />
-  <Container size="m" py="60" set="gutter">
+  <Container isWrapper="m" py="60" set="gutter">
     <Stack g="40">
       <HGroup text="News" subText="お知らせ" variant="light" />
       <Stack g="20" c="white">
         {
           newsRows.map((row) => (
-            <LinkBox class="z--news_item" href="#" layout="grid" gtc={["auto", "auto 1fr"]} g="20 40" py="15" set="hov">
+            <BoxLink class="z--news_item" href="#" layout="grid" gtc={["auto", "auto 1fr"]} g="20 40" py="15" set="hov">
               <Inline as="span">{row.date}</Inline>
               <Stack g="10">
                 <Text as="p" hov="to:underline" td="none" m="0">
@@ -69,7 +69,7 @@ const newsRows = [
                   {row.long ? " 互換性に関する注意点はChangelogの該当バージョンにもまとめています。" : ""}
                 </Text>
               </Stack>
-            </LinkBox>
+            </BoxLink>
           ))
         }
       </Stack>

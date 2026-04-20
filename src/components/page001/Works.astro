@@ -3,7 +3,7 @@ import {
   Frame,
   Stack,
   Container,
-  LinkBox,
+  BoxLink,
   FluidCols,
   Layer,
   Center,
@@ -55,7 +55,7 @@ const shot = (n: number) => ({
 });
 ---
 
-<Container id='works' class='z--works' size='l' py='60' set='gutter'>
+<Container id='works' class='z--works' isWrapper='l' py='60' set='gutter'>
   <Stack g='40'>
     <HGroup text='Works' subText='制作実績' />
     <Text as='p' class='u--fadeIn' max-sz='full' mx='auto' m='0'>
@@ -64,7 +64,7 @@ const shot = (n: number) => ({
     <FluidCols cols='20rem' g='40'>
       {
         worksItems.map((item) => (
-          <LinkBox class='z--works_item' href='#' layout='stack' set='hov'>
+          <BoxLink class='z--works_item' href='#' layout='stack' set='hov'>
             <Frame class='z--works_frame' ar='16/9' pos='relative' bdrs='20'>
               <Lism
                 as='img'
@@ -105,7 +105,7 @@ const shot = (n: number) => ({
                 {item.body}
               </Text>
             </Stack>
-          </LinkBox>
+          </BoxLink>
         ))
       }
     </FluidCols>

@@ -1,0 +1,101 @@
+---
+import DemoLayout from '@/layouts/DemoLayout.astro';
+import { Container, Wrapper } from 'lism-css/astro';
+import Header from '@/components/page003/Header.astro';
+import MV from '@/components/page003/MV.astro';
+import About from '@/components/page003/About.astro';
+import Experience from '@/components/page003/Experience.astro';
+import Seasons from '@/components/page003/Seasons.astro';
+import Plans from '@/components/page003/Plans.astro';
+import Features from '@/components/page003/Features.astro';
+import FAQ from '@/components/page003/FAQ.astro';
+import Contact from '@/components/page003/Contact.astro';
+import Footer from '@/components/page003/Footer.astro';
+import ReservationFab from '@/components/page003/ReservationFab.astro';
+
+export const title = 'page003：静寂の隠宿 LP Design';
+---
+
+<DemoLayout title={title}>
+  <link rel='preconnect' href='https://fonts.googleapis.com' slot='head' />
+  <link rel='preconnect' href='https://fonts.gstatic.com' crossorigin slot='head' />
+  <link
+    href='https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@200..900&display=swap'
+    rel='stylesheet'
+    slot='head'
+  />
+  <Wrapper class='z--page003' contentSize='full'>
+    <!-- Header -->
+    <Header />
+    <!-- Main Content -->
+    <Container as='main' class='z--main' pos='relative' z='0'>
+      <MV />
+      <About />
+      <Experience />
+      <Seasons />
+      <Plans />
+      <Features />
+      <FAQ />
+      <Contact />
+    </Container>
+    <!-- Footer -->
+    <Footer />
+    <ReservationFab />
+  </Wrapper>
+</DemoLayout>
+
+<style is:global>
+  /* page003: 明朝ベース（Google Fonts / Noto Serif JP） */
+  .z--page003 {
+    font-family: 'Noto Serif JP', 'Yu Mincho', YuMincho, 'Hiragino Mincho ProN', 'Hiragino Mincho Pro', serif;
+    font-optical-sizing: auto;
+    /* Experience ほか和紙調のベージュ背景（セマンティック `--base` を上書き） */
+    --base: hsl(38 32% 92%);
+  }
+</style>
+
+<style>
+  /* Root */
+  :root {
+    --z--header-height: 100px;
+    --z--header-height--thin: 56px;
+    --u--fadeIn--animation-range: entry 0% contain 20%;
+  }
+  /* Fadein */
+  .u--fadeIn {
+    view-timeline: --u--fadeIn y;
+    animation: u--fadeIn linear both;
+    animation-timeline: --u--fadeIn;
+    animation-range: var(--u--fadeIn--animation-range);
+  }
+  @keyframes u--fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(32px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  /* Background Parallax */
+  .u--bgParallax {
+    view-timeline: --u--bgParallax y;
+  }
+  .u--bgParallax .a--media {
+    position: absolute;
+    top: -20%;
+    height: 140%;
+    animation: u--bgParallax_media linear both;
+    animation-timeline: --u--bgParallax;
+    animation-range: entry 0% cover 100%;
+  }
+  @keyframes u--bgParallax_media {
+    from {
+      transform: translateY(-10%);
+    }
+    to {
+      transform: translateY(10%);
+    }
+  }
+</style>

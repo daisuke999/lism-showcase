@@ -1,0 +1,40 @@
+---
+import { Lism } from 'lism-css/astro';
+---
+
+<Lism
+  as='a'
+  class='z--reservationFab'
+  href='#contact'
+  pos='fixed'
+  z='60'
+  d='inline-flex'
+  ai='c'
+  jc='c'
+  py='10'
+  px='20'
+  bdrs='99'
+  bd
+  bdc='white'
+  bgc='black'
+  c='white'
+  bxsh='10'
+  set='shadow'
+  td='none'
+  fz='s'
+  lts='s'
+  whs='nowrap'
+  style={{
+    right: 'max(var(--s20), env(safe-area-inset-right))',
+    bottom: 'max(var(--s20), env(safe-area-inset-bottom))',
+  }}
+>
+  ご予約はこちら
+</Lism>
+
+<style>
+  .z--reservationFab:focus-visible {
+    outline: 2px solid var(--white);
+    outline-offset: 3px;
+  }
+</style>
