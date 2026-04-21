@@ -1,5 +1,160 @@
 ---
-import { Lism } from 'lism-css/astro';
+import {
+  Lism,
+  Stack,
+  Container,
+  Flex,
+  Link,
+  BoxLink,
+  Icon,
+  Inline,
+  ListItem,
+  Text,
+  Heading,
+  Cluster,
+} from 'lism-css/astro';
+
+/** ヘッダーと同一のナビ（アンカー） */
+const navItems = [
+  { href: '#about', ja: '当宿について', en: 'About' },
+  { href: '#plans', ja: '宿泊プラン', en: 'Plan' },
+  { href: '#facilities', ja: '設備紹介', en: 'Facilities' },
+  { href: '#room', ja: '部屋案内', en: 'Room' },
+  { href: '#faq', ja: 'よくあるご質問', en: 'Faq' },
+] as const;
+
+const snsLinks = [
+  { href: '#', icon: 'logo-x' as const, label: 'X' },
+  { href: '#', icon: 'logo-instagram' as const, label: 'Instagram' },
+  { href: '#', icon: 'logo-youtube' as const, label: 'YouTube' },
+  { href: '#', icon: 'logo-tiktok' as const, label: 'TikTok' },
+  { href: '#', icon: 'logo-line' as const, label: 'LINE' },
+];
 ---
 
-<Lism as='footer' />
+<Lism as='footer' id='footer' class='z--p003-footer' bgc='black' c='white' py={['50', null, '60']}>
+  <Container isWrapper='l' set='gutter'>
+    <Stack g={['40', null, '50']} ai='stretch' w='100%'>
+      <!-- キャッチコピーをロゴの左隣に。下揃え（flex-end） -->
+      <Flex fxd='row' ai='end' jc='start' fxw='wrap' g={['15', null, '40']} w='100%'>
+        <Heading level='2' m='0' fz={['xl', null, '2xl']} fw='500' lts='l' lh='l'> 静寂の隠れ宿 </Heading>
+        <Text as='p' m='0' fz={['s', null, 'm']} lh='l' lts='s' o='-10' max-sz='m'>
+          都会の喧騒から離れ、心安らぐ自然の中で、至福のひとときを。
+        </Text>
+      </Flex>
+
+      <!-- ナビと SNS を下揃え（flex-end） -->
+      <Flex fxd={['column', null, 'row']} ai='end' jc='between' g={['30', null, '40']} w='100%'>
+        <Flex
+          as='ul'
+          class='z--p003-footer_nav'
+          fxd={['column', null, 'row']}
+          ai='stretch'
+          m='0'
+          p='0'
+          g={['0', null, '0']}
+          fxw={['nowrap', null, 'wrap']}
+          w={['100%', null, 'auto']}
+          fx='1'
+          min-w='0'
+        >
+          {
+            navItems.map(({ href, ja, en }) => (
+              <ListItem>
+                <BoxLink
+                  class='z--p003-footer_navLink'
+                  href={href}
+                  layout='grid'
+                  gtc={['1fr auto', null, '1fr']}
+                  ji={['start', 'start', 'center']}
+                  ai='center'
+                  fz='m'
+                  td='none'
+                  py={['15', null, '12']}
+                  px={['5', null, '8']}
+                  c='inherit'
+                  hov='o'
+                >
+                  <Stack class='z--p003-footer_navStack' g='4' ai='start' ta='start'>
+                    <Inline>{ja}</Inline>
+                    <Inline as='span' class='z--p003-footer_navEn' fz='s' m='0' o='-20'>
+                      {en}
+                    </Inline>
+                  </Stack>
+                  <Icon class='z--p003-footer_navCaret' icon='caret-right' fz='s' o='-20' />
+                </BoxLink>
+              </ListItem>
+            ))
+          }
+        </Flex>
+
+        <Cluster class='z--p003-footer_sns' g='20' jc={['center', null, 'end']} ai='end' fxw='wrap' w={['100%', null, 'auto']}>
+          {
+            snsLinks.map(({ href, icon, label }) => (
+              <Link href={href} td='none' c='inherit' hov='o' aria-label={label}>
+                <Icon icon={icon} fz='xl' />
+              </Link>
+            ))
+          }
+        </Cluster>
+      </Flex>
+
+      <Text as='p' m='0' fz='xs' o='-20' lts='s' ta='center'> © 2026 Lism CSS. </Text>
+    </Stack>
+  </Container>
+</Lism>
+
+<style>
+  .z--p003-footer :where(a) {
+    color: inherit;
+  }
+  .z--p003-footer_nav :global(li) {
+    list-style: none;
+  }
+
+  /* md 未満: 縦並びの項目間に区切り（最後の行の下には付けない） */
+  .z--p003-footer_nav > :global(li:not(:last-child)) {
+    border-block-end: 1px dashed color-mix(in srgb, var(--white) 38%, transparent);
+  }
+
+  /* md 以上: 縦の区切りをやめ、項目の「間」だけ左に縦線（先頭左・末尾右には付けない） */
+  @container (min-width: 800px) {
+    .z--p003-footer_nav > :global(li:not(:last-child)) {
+      border-block-end: none;
+    }
+    .z--p003-footer_nav > :global(li + li) {
+      border-inline-start: 1px dashed color-mix(in srgb, var(--white) 38%, transparent);
+      padding-inline-start: var(--s20);
+      margin-inline-start: var(--s20);
+    }
+  }
+
+  /* md 以上: caret は非表示 */
+  .z--p003-footer_navCaret {
+    display: block;
+  }
+  @container (min-width: 800px) {
+    .z--p003-footer_navCaret {
+      display: none;
+    }
+    .z--p003-footer_navStack {
+      align-items: center;
+      text-align: center;
+    }
+  }
+
+  /*
+   * SNS アイコンの明るさ（0=透明 … 1=そのまま）。
+   * 数値だけ変えれば全体のトーンを調整できます。
+   */
+  .z--p003-footer_sns {
+    --p003-footer-sns-opacity: 0.55;
+  }
+  .z--p003-footer_sns :where(a) {
+    opacity: var(--p003-footer-sns-opacity);
+    transition: opacity 0.2s ease;
+  }
+  .z--p003-footer_sns :where(a:is(:hover, :focus-visible)) {
+    opacity: 1;
+  }
+</style>

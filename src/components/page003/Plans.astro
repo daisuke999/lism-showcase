@@ -1,5 +1,207 @@
 ---
-import { Lism } from 'lism-css/astro';
+import { Container, Stack, Grid, Flex, Frame, Text, Heading, Lism, Inline } from 'lism-css/astro';
+import { Button } from '@lism-css/ui/astro';
+
+/**
+ * 画像は CDN の japan 配下（実URLは `https://cdn.lism-css.com/img/japan/u-*.jpg`）。
+ * `.../images/japan` は未使用のため `img/japan` を利用。
+ */
+type PlanStat = {
+  label: string;
+  value: string;
+};
+
+type Plan = {
+  title: string;
+  description: string;
+  stats: readonly [PlanStat, PlanStat, PlanStat];
+  image: {
+    src: string;
+    alt: string;
+    width: number;
+    height: number;
+  };
+};
+
+const plans = [
+  {
+    title: '夕朝食・露天風呂付きゆったりプラン',
+    description:
+      '季節の会席と朝の御膳、そして湯冷めしない露天風呂までひと続きの時間。お部屋でゆっくりとお食事をご堪能いただき、湯浴みの合間には庭園を眺めながらのんびりとお過ごしください。',
+    stats: [
+      { label: 'ご予約可能人数', value: '1〜2名様' },
+      { label: '料金', value: '29,800円〜' },
+      { label: 'お部屋タイプ', value: '露天付き和室' },
+    ],
+    image: {
+      src: 'https://cdn.lism-css.com/img/japan/a_YWq6k0dioX.jpg',
+      alt: '紅葉の庭園と母屋',
+      width: 1920,
+      height: 1080,
+    },
+  },
+  {
+    title: '旬会席・半露天付き特別室ステイ',
+    description:
+      'その日の仕入れで組み立てる旬会席と、半露天から望む山並みのグラデーション。記念日やご家族のお祝いに、少し贅沢なお時間をご用意いたしました。',
+    stats: [
+      { label: 'ご予約可能人数', value: '2〜4名様' },
+      { label: '料金', value: '39,800円〜' },
+      { label: 'お部屋タイプ', value: '半露天付き特別室' },
+    ],
+    image: {
+      src: 'https://cdn.lism-css.com/img/japan/a_AgvZ1VdMXz.jpg',
+      alt: '千本鳥居が続く参道',
+      width: 1920,
+      height: 1280,
+    },
+  },
+  {
+    title: '一泊朝食のみ・湯めぐり楽々プラン',
+    description:
+      '夕食は外で自由に、朝は当宿の炊きたてご飯と汁物で。近隣の外湯めぐりや散策を楽しみたい方に、身軽な滞在スタイルをご提案します。',
+    stats: [
+      { label: 'ご予約可能人数', value: '1〜3名様' },
+      { label: '料金', value: '18,500円〜' },
+      { label: 'お部屋タイプ', value: '和室10畳＋広縁' },
+    ],
+    image: {
+      src: 'https://cdn.lism-css.com/img/japan/u-qQGCFQFlkT.jpg',
+      alt: '池を泳ぐ鯉と庭園',
+      width: 1920,
+      height: 1280,
+    },
+  },
+  {
+    title: '連泊エコノミー・温泉三昧プラン',
+    description:
+      'お得な連泊料金で、名湯と静寂にどっぷり浸かる旅。お食事はシンプルな定番御膳に、湯上がりの甘味までお部屋にお届けする心地よさをご用意しました。',
+    stats: [
+      { label: 'ご予約可能人数', value: '2名様〜' },
+      { label: '料金', value: '52,000円〜 / 2泊' },
+      { label: 'お部屋タイプ', value: '和洋室ツイン' },
+    ],
+    image: {
+      src: 'https://cdn.lism-css.com/img/japan/a_BybmIMidVa.jpg',
+      alt: '座敷から望む秋の庭園',
+      width: 1600,
+      height: 1200,
+    },
+  },
+] as const satisfies readonly Plan[];
 ---
 
-<Lism as='section' />
+<Lism as='section' id='plans' bgc='black' c='white' py='60'>
+  <Container isWrapper='l' set='gutter'>
+    <Stack g='50' ai='stretch' w='100%'>
+      <Stack g='10' ai='center' ta='center'>
+        <Text as='p' m='0' fz='s' tt='upper' lts='l' ff='accent' o='-20'>Plan</Text>
+        <Heading level='2' m='0' fz={['2xl', null, '3xl']} fw='500' lts='l'> 宿泊プラン </Heading>
+      </Stack>
+
+      <Stack g={['50', '50', '60']} w='100%' ai='stretch'>
+        {
+          plans.map((plan) => (
+            <Flex fxd={['column', 'column', 'row-reverse']} ai='stretch' g={['30', '30', '50']} w='100%'>
+              <Frame
+                as='figure'
+                class='z--p003-plans_media'
+                m='0'
+                ar='16/10'
+                ov='hidden'
+                bdrs='10'
+                w='100%'
+                min-w='0'
+              >
+                <img
+                  src={plan.image.src}
+                  alt={plan.image.alt}
+                  width={plan.image.width}
+                  height={plan.image.height}
+                  loading='lazy'
+                  decoding='async'
+                />
+              </Frame>
+
+              <Lism fx='1' min-w='0'>
+                <Stack g='30' ai='stretch'>
+                  <Heading level='3' m='0' fz={['l', null, 'xl']} fw='500' lts='l' lh='l'>
+                    {plan.title}
+                  </Heading>
+                  <Text as='p' m='0' fz='s' lh='l' lts='s' o='-10'>
+                    {plan.description}
+                  </Text>
+
+                  <Stack bd bdrs='10' bdc='white:40%' ov='hidden' w='100%' m='0' p='0'>
+                    <Grid gtc='repeat(3, minmax(0, 1fr))' ai='stretch' w='100%'>
+                      {plan.stats.map((stat, i) => (
+                        <Stack g='10' p='15' ai='center' ta='center' bd-x-e={i < 2 ? '-' : undefined} bdc='white:35%'>
+                          <Text as='p' m='0' fz='xs' lts='s' o='-20'>
+                            {stat.label}
+                          </Text>
+                          <Text as='p' m='0' fz='l' fw='500' lts='l'>
+                            {stat.value}
+                          </Text>
+                        </Stack>
+                      ))}
+                    </Grid>
+                  </Stack>
+
+                  <Lism isContainer w='100%' min-w='0'>
+                    <Button
+                      class='z--p003-plans_reserve'
+                      href='#contact'
+                      layout='flex'
+                      w='100%'
+                      fxd={['column', 'row', 'row']}
+                      jc='center'
+                      ai='center'
+                      g='10'
+                      bgc='white'
+                      c='black'
+                      bdrs='99'
+                      py='15'
+                      px='20'
+                      max-w='100%'
+                      ta='center'
+                    >
+                      <Inline as='span' m='0' fz='m' fw='500' lts='l'>
+                        このプランを予約する
+                      </Inline>
+                      <Inline as='span' m='0' fz='xs' o='-20' lts='s'>
+                        （予約サイトに移動します）
+                      </Inline>
+                    </Button>
+                  </Lism>
+                </Stack>
+              </Lism>
+            </Flex>
+          ))
+        }
+      </Stack>
+    </Stack>
+  </Container>
+</Lism>
+
+<style>
+  /*
+   * Lism の md は viewport の @media ではなく @container (min-width: 800px)（prop-responsive.md）。
+   * また -max-w:100%（max-width）と max-inline-size の併用や、flex 子の % 解決で上限が効かないことがあるため、
+   * コンテナクエリ内で max-width + cqi を使い、fxd の row 切替と同じ基準で min(36rem, コンテナの半分) に揃える。
+   */
+  .z--p003-plans_media {
+    max-width: 100%;
+  }
+  @container (min-width: 800px) {
+    .z--p003-plans_media {
+      max-width: min(36rem, 50cqi);
+    }
+  }
+
+  /* UI Button のデフォルト（--text 地）を上書きし、デザインどおり白ピル＋黒字に */
+  .z--p003-plans_reserve.c--button {
+    --bgc: var(--white);
+    --c: var(--black);
+    --bdc: var(--white);
+  }
+</style>

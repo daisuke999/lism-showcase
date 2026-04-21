@@ -56,7 +56,7 @@ const mvImage = {
   /* vertical-rl + 列方向 flex（Lism Props に無い組み合わせ） */
   .z--mv_copy {
     font-feature-settings: 'palt' 1;
-    font-size: clamp(0.95rem, 2.8vw, 1.25rem);
+    font-size: clamp(1.1rem, 3.4vw, 1.75rem);
     line-height: 1.85;
     letter-spacing: 0.22em;
     writing-mode: vertical-rl;
@@ -65,6 +65,13 @@ const mvImage = {
     flex-direction: column;
     flex-wrap: nowrap;
     align-items: stretch;
-    gap: clamp(1.25rem, 3.5vw, 2.75rem);
+    gap: clamp(1.4rem, 4vw, 3rem);
+  }
+  /* 一行目を一字分ほど上へ、三行目を一字分ほど下へ（縦書きブロックの見かけ上の位置調整） */
+  .z--mv_copy .z--mv_line:nth-child(1) {
+    transform: translateY(-1em);
+  }
+  .z--mv_copy .z--mv_line:nth-child(3) {
+    transform: translateY(1em);
   }
 </style>

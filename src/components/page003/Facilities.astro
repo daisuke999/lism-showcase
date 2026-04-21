@@ -1,0 +1,123 @@
+---
+import { Container, Stack, Grid, Flex, Text, Heading, Lism, Icon, Layer } from 'lism-css/astro';
+
+/** Lism プリセットアイコン名（ https://lism-css.com/docs/primitives/a--icon/ ） */
+type FacilityIcon =
+  | 'home'
+  | 'clock'
+  | 'cart'
+  | 'gear'
+  | 'book'
+  | 'chat'
+  | 'heart'
+  | 'lightbulb'
+  | 'search'
+  | 'note'
+  | 'bookmark'
+  | 'user'
+  | 'lock';
+
+type Facility = {
+  icon: FacilityIcon;
+  title: string;
+  description: string;
+};
+
+/** 各カードのアイコン・見出し・本文は別レコードで管理（内容の差し替えが容易） */
+const facilities = [
+  {
+    icon: 'home',
+    title: 'ロビー・ラウンジ',
+    description:
+      '到着直後のひとときから夜の湯上がりまで。珈琲や茶菓のセルフサービスとともに、庭側の座敷席で静かにお過ごしいただけます。',
+  },
+  {
+    icon: 'clock',
+    title: '24時間対応のフロント',
+    description:
+      'チェックインのご案内、周辺の散策コース、タクシーや送迎の手配まで。お困りごとがあれば、いつでもお声がけください。',
+  },
+  {
+    icon: 'cart',
+    title: '館内売店・土産コーナー',
+    description:
+      '地酒や銘菓、オリジナルタオルに浴用アメニティまで。旅のちょっとした備えやお土産選びに、ぜひお立ち寄りください。',
+  },
+  {
+    icon: 'book',
+    title: '閲覧室・書斎コーナー',
+    description:
+      '旅館・温泉郷のガイドブックや写真集をご用意しました。湯上がりにページをめくりながら、翌日の予定をゆっくり練るのもおすすめです。',
+  },
+] as const satisfies readonly Facility[];
+
+const intro =
+  '湯治から滞在型の寛ぎまで、館内の設備で旅のリズムを整えられます。湯殿から客室まで動線を短くし、夜遅くのご利用にも配慮した案内でお迎えいたします。';
+---
+
+<Lism as='section' id='facilities' pos='relative' bgc='black' c='white' py='60' ov='hidden'>
+  <!-- Plan セクションよりわずかに明るいチャコール: 黒ベースの上に薄い白膜（Layer + bgc トークン） -->
+  <Layer aria-hidden='true' bgc='white:6%' />
+  <Container isWrapper='l' set='gutter' pos='relative' z='1'>
+    <Stack g={['40', null, '50']} ai='stretch' w='100%'>
+      <!-- jc=start / 狭い gap で見出しブロックのすぐ右にリード文（max-sz で折返し幅を制限） -->
+      <Flex
+        fxd={['column', null, 'row']}
+        g={['20', null, '30']}
+        ai={['start', null, 'end']}
+        jc='start'
+        w='100%'
+        fxw='wrap'
+      >
+        <Stack g='10' ai='start' min-w='0' fxsh='0'>
+          <Text as='p' m='0' fz='s' tt='upper' lts='l' ff='accent' o='-20'>Facilities</Text>
+          <Flex g='15' ai='end' jc='start' w='100%' class='z--p003-facilities_headingRow'>
+            <Heading level='2' m='0' fz={['xl', null, '2xl']} fw='500' lts='l'> 館内設備 </Heading>
+            <Lism as='span' aria-hidden='true' class='z--p003-facilities_rule' w='1px' bgc='white:35%' />
+          </Flex>
+        </Stack>
+        <Text as='p' m='0' fz='s' lh='l' lts='s' o='-10' max-sz='s' min-w='0' fx='1'>
+          {intro}
+        </Text>
+      </Flex>
+
+      <Grid gtc={['1fr', null, 'repeat(2, minmax(0, 1fr))']} g={['20', null, '30']} ai='stretch'>
+        {
+          facilities.map((item) => (
+            <Lism bd bdrs='10' bdc='white:35%' ov='hidden' w='100%' p={['20', null, '30']}>
+              <Flex g={['20', null, '30']} ai='center' w='100%' min-w='0'>
+                <Icon icon={item.icon} size='48px' c='white' />
+                <Stack g='10' ai='stretch' min-w='0' fx='1'>
+                  <Heading level='3' m='0' fz={['m', null, 'l']} fw='500' lts='l' lh='l'>
+                    {item.title}
+                  </Heading>
+                  <Text as='p' m='0' fz='s' lh='l' lts='s' o='-10'>
+                    {item.description}
+                  </Text>
+                </Stack>
+              </Flex>
+            </Lism>
+          ))
+        }
+      </Grid>
+    </Stack>
+  </Container>
+</Lism>
+
+<style>
+  /*
+   * 縦線: 見出し「館内設備」の右側・下辺に揃える（親 Flex は ai:end）。
+   * md 未満（Lism のコンテナ幅 800px 未満）では非表示 — prop-responsive と同じ @container。
+   */
+  .z--p003-facilities_rule {
+    display: none;
+    flex-shrink: 0;
+    align-self: flex-end;
+    block-size: 2.75em;
+  }
+  @container (min-width: 800px) {
+    .z--p003-facilities_rule {
+      display: block;
+    }
+  }
+</style>

@@ -1,16 +1,18 @@
 ---
-import { Lism } from 'lism-css/astro';
+import { Inline } from 'lism-css/astro';
+import { Button } from '@lism-css/ui/astro';
 ---
 
-<Lism
-  as='a'
+<Button
   class='z--reservationFab'
-  href='#contact'
+  href='#reservation'
   pos='fixed'
   z='60'
-  d='inline-flex'
-  ai='c'
-  jc='c'
+  layout='flex'
+  fxd='column'
+  ai='center'
+  jc='center'
+  g='4'
   py='10'
   px='20'
   bdrs='99'
@@ -23,16 +25,27 @@ import { Lism } from 'lism-css/astro';
   td='none'
   fz='s'
   lts='s'
-  whs='nowrap'
+  ta='center'
   style={{
     right: 'max(var(--s20), env(safe-area-inset-right))',
     bottom: 'max(var(--s20), env(safe-area-inset-bottom))',
   }}
 >
-  ご予約はこちら
-</Lism>
+  <Inline as='span' m='0' fz='s' fw='500' lts='s'>
+    ご予約はこちら
+  </Inline>
+  <Inline as='span' m='0' fz='2xs' o='-20' lts='l'>
+    Reservation
+  </Inline>
+</Button>
 
 <style>
+  /* ピル型 FAB: UI Button のセマンティック色を上書き */
+  .z--reservationFab.c--button {
+    --bgc: var(--black);
+    --c: var(--white);
+    --bdc: var(--white);
+  }
   .z--reservationFab:focus-visible {
     outline: 2px solid var(--white);
     outline-offset: 3px;

@@ -1,5 +1,158 @@
 ---
-import { Lism } from 'lism-css/astro';
+import { Container, Grid, Stack, Frame, Heading, Text, Lism } from 'lism-css/astro';
+import { Accordion } from '@lism-css/ui/astro';
+
+/** 各項目は質問・回答を独立して管理（必要に応じて初期展開を指定） */
+const faqItems: { question: string; answer: string; defaultOpen?: boolean }[] = [
+  {
+    question: '初めて利用するのですが難しくないですか？',
+    answer:
+      'はい、全く問題ありません。初めての方でも戸惑うことなくご利用いただけます。もしお困りの際はフロントがお問い合わせにも対応いたしますので、安心してご利用ください。',
+    defaultOpen: true,
+  },
+  {
+    question: '予約のキャンセルはできますか？',
+    answer:
+      'プランごとにキャンセル規定が定められております。ご予約確定メールに記載の期限までにマイページまたはお電話にてお手続きください。直前の変更については空室状況を確認のうえご案内いたします。',
+  },
+  {
+    question: '宿泊プランを予約後に変更したくなった場合は、どのように変更できますか？',
+    answer:
+      'ご希望の日付・人数・お部屋タイプをお知らせいただければ、空室状況を確認のうえ差し替えを承ります。アップグレードに伴う差額やキャンセル規定の適用については、フロントにてご説明いたします。',
+  },
+  {
+    question: 'チェックイン・アウトの時間は決まっていますか？',
+    answer:
+      'チェックインは15時、チェックアウトは11時を目安としております。早めのご到着や遅めのご出発をご希望の場合は、事前にフロントまでお問い合わせください。空き状況に応じてご相談に乗れます。',
+  },
+  {
+    question: 'お食事のアレルギー・苦手な食材には対応できますか？',
+    answer:
+      'ご予約時にできる限り詳しくお知らせください。取り扱いの難しい食材もございますが、可能な範囲で代替や調整をいたします。当日のご変更は調理の都合上お受けできない場合がございます。',
+  },
+  {
+    question: 'お部屋に露天風呂は付いていますか？',
+    answer:
+      'プランおよびお部屋タイプにより異なります。露天風呂付きの客室、大浴場のみのプランなどをご用意しております。ご予約画面の設備欄またはフロントまでお問い合わせください。',
+  },
+  {
+    question: 'Wi-Fi は利用できますか？',
+    answer:
+      '全館で無料の Wi-Fi をご利用いただけます。お部屋番号とご案内のパスワードで接続ください。混雑時は速度が落ちる場合がございますのでご了承ください。',
+  },
+  {
+    question: '子ども連れの宿泊は可能ですか？',
+    answer:
+      '可能です。添い寝のお子様の料金やベッドのご用意はプランにより異なります。ベビーベッドの貸し出しは台数に限りがございますので、事前にご予約ください。',
+  },
+  {
+    question: '記念日のサプライズを依頼できますか？',
+    answer:
+      'ケーキや花束の手配、お食事のメッセージプレートなど、事前にご相談いただければ可能な範囲でお手伝いいたします。ご予算やお届けタイミングをお聞きしたうえでご提案いたします。',
+  },
+  {
+    question: '近隣の観光地へのアクセスや送迎はありますか？',
+    answer:
+      '最寄り駅からの送迎は定時運行のシャトルをご利用いただけます（要予約・台数限定）。観光地までのタクシー手配や地図の貸し出しも承りますので、フロントまでお声がけください。',
+  },
+];
+
+const faqImage = {
+  src: 'https://cdn.lism-css.com/img/japan/u-v9tUs6AiFT.jpg',
+  alt: '雨上がりの石畳の路地を、赤い和傘を差して歩く舞妓さんの後ろ姿',
+  width: 1920,
+  height: 1280,
+};
 ---
 
-<Lism as='section' />
+<Lism as='section' id='faq' bgc='base' c='text' py='60'>
+  <Container isWrapper='l' set='gutter'>
+    <Grid class='z--p003-faq_layout' w='100%' g={['30', null, '50']} ai='stretch'>
+      <Stack class='z--p003-faq_head' g='10' ai='center' ta='center'>
+        <Text as='p' m='0' fz='s' tt='upper' lts='l' ff='accent' c='text-2' o='-20'>
+          FAQ
+        </Text>
+        <Heading level='2' m='0' fz={['2xl', null, '3xl']} fw='500' lts='l'>
+          よくあるご質問
+        </Heading>
+      </Stack>
+
+      <Frame
+        as='figure'
+        class='z--p003-faq_media'
+        m='0'
+        ar={['16/10', null, '1/1']}
+        ov='hidden'
+        bdrs='10'
+        w='100%'
+        min-w='0'
+      >
+        <img
+          src={faqImage.src}
+          alt={faqImage.alt}
+          width={faqImage.width}
+          height={faqImage.height}
+          loading='lazy'
+          decoding='async'
+        />
+      </Frame>
+
+      <Lism class='z--p003-faq_acc' min-w='0'>
+        <Accordion.Root g='0' p='0' ov='visible'>
+          {
+            faqItems.map((item) => (
+              <Accordion.Item bgc='transparent' bdrs='0' bxsh='0' ov='visible' {...(item.defaultOpen ? { 'data-opened': '' } : {})}>
+                <Accordion.Heading p='0'>
+                  <Accordion.Button fw='500' fz={['s', null, 'm']} ta='start' py='20' isOpen={item.defaultOpen === true}>
+                    {item.question}
+                  </Accordion.Button>
+                </Accordion.Heading>
+                <Accordion.Panel py='0' pb='20' isOpen={item.defaultOpen === true}>
+                  <Text m='0' fz='s' c='text-2' lh='l' lts='s'>
+                    {item.answer}
+                  </Text>
+                </Accordion.Panel>
+              </Accordion.Item>
+            ))
+          }
+        </Accordion.Root>
+      </Lism>
+    </Grid>
+  </Container>
+</Lism>
+
+<style>
+  /*
+   * 見出し＋（画像｜質問）をひとつの Grid で管理。
+   * md 以上: 画像列と質問列を repeat(2, 1fr) で 1:1。
+   */
+  .z--p003-faq_layout {
+    display: grid;
+    grid-template-areas: 'head' 'acc' 'img';
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .z--p003-faq_head {
+    grid-area: head;
+  }
+  .z--p003-faq_acc {
+    grid-area: acc;
+  }
+  .z--p003-faq_media {
+    grid-area: img;
+  }
+  @container (min-width: 800px) {
+    .z--p003-faq_layout {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      grid-template-areas:
+        'head head'
+        'img acc';
+    }
+  }
+
+  .z--p003-faq_acc :global(.c--accordion_item) {
+    border-block-end: 1px solid var(--divider);
+  }
+  .z--p003-faq_acc :global(.c--accordion_item:last-of-type) {
+    border-block-end: none;
+  }
+</style>

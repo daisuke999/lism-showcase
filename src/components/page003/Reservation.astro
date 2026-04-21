@@ -1,0 +1,104 @@
+---
+import { Container, Stack, Grid, Frame, Layer, Lism, Text, Heading } from 'lism-css/astro';
+import { Button } from '@lism-css/ui/astro';
+
+/** 背景（指定 URL） */
+const bgImage = {
+  src: 'https://cdn.lism-css.com/img/japan/u-xJdqvxp0ak.jpg',
+  alt: '夕暮れの京都の路地と五重塔',
+  width: 1920,
+  height: 1080,
+};
+
+/**
+ * カード用サムネイル（CDN の japan 配下。`.../images/japan` は未使用のため `img/japan` を利用）
+ * @see Plans.astro 冒頭コメント
+ */
+type SiteCard = {
+  title: string;
+  body: string;
+  href: string;
+  image: { src: string; alt: string; width: number; height: number };
+};
+
+const reservationSites: readonly SiteCard[] = [
+  {
+    title: 'トラベルトリップ',
+    body: '特典：早期予約で料金が割引になるキャンペーンを実施中です。空室カレンダーから日程を選べます。',
+    href: '#',
+    image: {
+      src: 'https://cdn.lism-css.com/img/japan/a_YWq6k0dioX.jpg',
+      alt: '紅葉の庭園と母屋',
+      width: 1920,
+      height: 1080,
+    },
+  },
+  {
+    title: 'らくらく旅行予約',
+    body: '特典：地域密着サポート付きプランをご用意しています。変更・キャンセルは各サイトの規定に従います。',
+    href: '#',
+    image: {
+      src: 'https://cdn.lism-css.com/img/japan/u-qQGCFQFlkT.jpg',
+      alt: '池を泳ぐ鯉と庭園',
+      width: 1920,
+      height: 1280,
+    },
+  },
+];
+---
+
+<Lism as='section' id='reservation' pos='relative' py={['50', null, '70']} ov='hidden' c='white'>
+  <Frame isLayer m='0'>
+    <Lism
+      as='img'
+      src={bgImage.src}
+      alt={bgImage.alt}
+      w='100%'
+      h='100%'
+      exProps={{
+        width: bgImage.width,
+        height: bgImage.height,
+        loading: 'lazy',
+        decoding: 'async',
+      }}
+    />
+  </Frame>
+  <Layer bgc='black:50%' exProps={{ 'aria-hidden': 'true' }} />
+
+  <Container isWrapper='l' set='gutter' pos='relative' z='1' max-sz='full'>
+    <Grid gtc={['1fr', null, 'minmax(0, 1.05fr) repeat(2, minmax(0, 1fr))']} g={['40', null, '50']} ai='stretch'>
+      <Stack g='20' ai='start' min-w='0'>
+        <Text as='p' m='0' fz='s' tt='upper' lts='l' ff='accent' o='-20'>
+          Reservation
+        </Text>
+        <Heading level='2' m='0' fz={['2xl', null, '3xl']} fw='500' lts='l'>
+          ご予約はこちら
+        </Heading>
+        <Text as='p' m='0' fz='s' lh='l' lts='s' o='-10' max-sz='m'>
+          お好みの予約サイトからご予約いただけます。予約完了後は各サイトから確認メールが届きます。キャンセルや変更はご利用のサイトの案内に従ってお手続きください。
+        </Text>
+      </Stack>
+
+      {
+        reservationSites.map((site) => (
+          <Lism bgc='white' c='text' bdrs='10' ov='hidden' min-w='0' class='z--p003-reservation_card'>
+            <Frame as='figure' m='0' ar='16/10' ov='hidden' bdrs='0'>
+              <img src={site.image.src} alt={site.image.alt} width={site.image.width} height={site.image.height} loading='lazy' decoding='async' />
+            </Frame>
+            <Stack g='15' p='20' ai='stretch'>
+              <Heading level='3' m='0' fz='l' fw='600' lts='l' lh='l'>
+                {site.title}
+              </Heading>
+              <Text as='p' m='0' fz='s' lh='l' c='text-2' lts='s'>
+                {site.body}
+              </Text>
+              <Button href={site.href} w='100%' bdrs='10' py='15' px='20' fz='s' fw='500' lts='s' ta='center'>
+                サイトに移動する
+              </Button>
+            </Stack>
+          </Lism>
+        ))
+      }
+    </Grid>
+  </Container>
+</Lism>
