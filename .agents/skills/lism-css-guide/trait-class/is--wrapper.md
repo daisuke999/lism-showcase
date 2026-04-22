@@ -6,8 +6,8 @@
 
 - クラス名: `is--wrapper`
 - コンポーネント: `<Wrapper>`
-- SCSSソース: https://raw.githubusercontent.com/lism-css/lism-css/main/packages/lism-css/src/scss/primitives/trait/_wrapper.scss
-- ドキュメント（人間向け）: https://lism-css.com/docs/primitives/is--wrapper/
+- SCSSソース: https://raw.githubusercontent.com/lism-css/lism-css/main/packages/lism-css/src/scss/trait/is/_wrapper.scss
+- ドキュメント（人間向け）: https://lism-css.com/docs/trait-class/is--wrapper/
 
 ## 使い方
 
@@ -83,5 +83,5 @@
 ## 関連プリミティブ
 
 - [is--container](./is--container.md) — コンテナクエリ基準（`isContainer` と併用可）
-- [l--flow](./l--flow.md) — 記事フローレイアウト（`layout="flow"` で結合）
-- [l--box](./l--box.md) — 汎用ボックス
+- [l--flow](../primitives/l--flow.md) — 記事フローレイアウト（`layout="flow"` で結合）
+- [l--box](../primitives/l--box.md) — 汎用ボックス

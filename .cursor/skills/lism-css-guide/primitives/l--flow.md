@@ -11,7 +11,7 @@
 
 ## 余白の仕組み
 
-`l--flow` 直下の子要素は、`--flow` 変数と `margin-block-start` で間隔が管理されます。見出しタグ（`h2`〜`h6`）のみ余白が大きくなる（`--flow-hScale` で調整可能）。
+`l--flow` 直下の子要素は、`--flow` 変数と `margin-block-start` で間隔が管理されます。見出しタグ（`h1`〜`h6`）のみ余白が大きくなり、`calc(var(--flow) * 2 + 0.5em)` で計算されます。
 
 | クラス | 余白量 |
 |--------|-------|
@@ -131,4 +131,4 @@
 ## 関連プリミティブ
 
 - [l--stack](./l--stack.md) — `gap` で余白を管理する縦積み（こちらは Flexbox）
-- [is--wrapper](./is--wrapper.md) — 記事コンテンツ幅の制限用ラッパー（`l--flow` とセットで使うことが多い）
+- [is--wrapper](../trait-class/is--wrapper.md) — 記事コンテンツ幅の制限用ラッパー（`l--flow` とセットで使うことが多い）

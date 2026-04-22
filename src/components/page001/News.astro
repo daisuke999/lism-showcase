@@ -52,19 +52,19 @@ const newsRows = [
     />
   </Frame>
   <Layer style={{ filter: "grayscale(1)", backgroundColor: "hsl(224 4% 8% / 0.85)" }} />
-  <Container isWrapper="m" py="60" set="gutter">
+  <Container isWrapper="m" py="60" hasGutter>
     <Stack g="40">
       <HGroup text="News" subText="お知らせ" variant="light" />
       <Stack g="20" c="white">
         {
           newsRows.map((row) => (
-            <BoxLink class="z--news_item" href="#" layout="grid" gtc={["auto", "auto 1fr"]} g="20 40" py="15" set="hov">
+            <BoxLink class="z--news_item" href="#" layout="grid" gtc={["auto", "auto 1fr"]} g="20 40" py="15" set="var:hov">
               <Inline as="span">{row.date}</Inline>
               <Stack g="10">
-                <Text as="p" hov="to:underline" td="none" m="0">
+                <Text as="p" hov="in:underline" td="none" m="0">
                   {row.title}
                 </Text>
-                <Text as="p" fz="s" o="-20" m="0">
+                <Text as="p" fz="s" o="pp" m="0">
                   {row.summary}
                   {row.long ? " 互換性に関する注意点はChangelogの該当バージョンにもまとめています。" : ""}
                 </Text>
@@ -104,7 +104,7 @@ const newsRows = [
     animation-range: var(--u--fadeIn--animation-range);
   }
   @media (any-hover: hover) {
-    .-hov\:to\:underline {
+    .-hov\:in\:underline {
       text-decoration: var(--_isHov, underline);
     }
   }

@@ -65,16 +65,16 @@ const reservationSites: readonly SiteCard[] = [
   </Frame>
   <Layer bgc='black:50%' exProps={{ 'aria-hidden': 'true' }} />
 
-  <Container isWrapper='l' set='gutter' pos='relative' z='1' max-sz='full'>
+  <Container isWrapper='l' hasGutter pos='relative' z='1' max-sz='full'>
     <Grid gtc={['1fr', null, 'minmax(0, 1.05fr) repeat(2, minmax(0, 1fr))']} g={['40', null, '50']} ai='stretch'>
       <Stack g='20' ai='start' min-w='0'>
-        <Text as='p' m='0' fz='s' tt='upper' lts='l' ff='accent' o='-20'>
+        <Text as='p' m='0' fz='s' tt='upper' lts='l' ff='accent' o='pp'>
           Reservation
         </Text>
         <Heading level='2' m='0' fz={['2xl', null, '3xl']} fw='500' lts='l'>
           ご予約はこちら
         </Heading>
-        <Text as='p' m='0' fz='s' lh='l' lts='s' o='-10' max-sz='m'>
+        <Text as='p' m='0' fz='s' lh='l' lts='s' o='p' max-sz='m'>
           お好みの予約サイトからご予約いただけます。予約完了後は各サイトから確認メールが届きます。キャンセルや変更はご利用のサイトの案内に従ってお手続きください。
         </Text>
       </Stack>

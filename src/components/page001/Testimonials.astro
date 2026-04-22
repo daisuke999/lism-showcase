@@ -1,5 +1,5 @@
 ---
-import { Frame, Stack, Container, Grid, Flex, FluidCols, Text, Inline, Lism } from 'lism-css/astro';
+import { Frame, Stack, Container, Grid, Flex, AutoColumns, Text, Inline, Lism } from 'lism-css/astro';
 import HGroup from '@/components/page001/HGroup.astro';
 
 const avatars = [
@@ -49,10 +49,10 @@ const img = (r: string) => ({
 });
 ---
 
-<Container id='testimonials' class='z--testimonials' isWrapper='l' bgc='base-2' py='60' set='gutter'>
+<Container id='testimonials' class='z--testimonials' isWrapper='l' bgc='base-2' py='60' hasGutter>
   <Stack g='40'>
     <HGroup text='Testimonials' subText='お客様の声' />
-    <FluidCols cols='20rem' g='40'>
+    <AutoColumns cols='20rem' g='40'>
       {
         avatars.map((item) => (
           <Grid class='z--testimonials_item' gtr='subgrid' gr='span 3' g='30'>
@@ -73,23 +73,23 @@ const img = (r: string) => ({
                 />
               </Frame>
               <Stack w='stretch' g='15'>
-                <Text class='u-trim' fz='m' fw='bold' lh='s' m='0'>
+                <Text class='u--trim' fz='m' fw='bold' lh='s' m='0'>
                   {item.title}
                 </Text>
               </Stack>
             </Grid>
-            <Text class='u-trim' fz='s' o='-10' m='0' style={{ whiteSpace: 'pre-line' }}>
+            <Text class='u--trim' fz='s' o='p' m='0' style={{ whiteSpace: 'pre-line' }}>
               {item.body}
             </Text>
             <Flex jc='fe'>
-              <Inline class='u-trim' fz='xs' fs='italic' o='-20' as='span'>
+              <Inline class='u--trim' fz='xs' fs='italic' o='pp' as='span'>
                 {item.meta}
               </Inline>
             </Flex>
           </Grid>
         ))
       }
-    </FluidCols>
+    </AutoColumns>
   </Stack>
 </Container>
 

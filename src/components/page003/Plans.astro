@@ -92,10 +92,10 @@ const plans = [
 ---
 
 <Lism as='section' id='plans' bgc='black' c='white' py='60'>
-  <Container isWrapper='l' set='gutter'>
+  <Container isWrapper='l' hasGutter>
     <Stack g='50' ai='stretch' w='100%'>
       <Stack g='10' ai='center' ta='center'>
-        <Text as='p' m='0' fz='s' tt='upper' lts='l' ff='accent' o='-20'>Plan</Text>
+        <Text as='p' m='0' fz='s' tt='upper' lts='l' ff='accent' o='pp'>Plan</Text>
         <Heading level='2' m='0' fz={['2xl', null, '3xl']} fw='500' lts='l'> 宿泊プラン </Heading>
       </Stack>
 
@@ -128,7 +128,7 @@ const plans = [
                   <Heading level='3' m='0' fz={['l', null, 'xl']} fw='500' lts='l' lh='l'>
                     {plan.title}
                   </Heading>
-                  <Text as='p' m='0' fz='s' lh='l' lts='s' o='-10'>
+                  <Text as='p' m='0' fz='s' lh='l' lts='s' o='p'>
                     {plan.description}
                   </Text>
 
@@ -136,7 +136,7 @@ const plans = [
                     <Grid gtc='repeat(3, minmax(0, 1fr))' ai='stretch' w='100%'>
                       {plan.stats.map((stat, i) => (
                         <Stack g='10' p='15' ai='center' ta='center' bd-x-e={i < 2 ? '-' : undefined} bdc='white:35%'>
-                          <Text as='p' m='0' fz='xs' lts='s' o='-20'>
+                          <Text as='p' m='0' fz='xs' lts='s' o='pp'>
                             {stat.label}
                           </Text>
                           <Text as='p' m='0' fz='l' fw='500' lts='l'>
@@ -168,7 +168,7 @@ const plans = [
                       <Inline as='span' m='0' fz='m' fw='500' lts='l'>
                         このプランを予約する
                       </Inline>
-                      <Inline as='span' m='0' fz='xs' o='-20' lts='s'>
+                      <Inline as='span' m='0' fz='xs' o='pp' lts='s'>
                         （予約サイトに移動します）
                       </Inline>
                     </Button>

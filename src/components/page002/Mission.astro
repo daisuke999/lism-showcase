@@ -6,7 +6,7 @@ import {
   Cluster,
   Text,
   Inline,
-  SideMain,
+  WithSide,
   Box,
   Frame,
   Media,
@@ -16,8 +16,8 @@ import {
 
 <Box pos='relative' py='50' my-s='60'>
   <Box class='z--mission_bg' pos='absolute' i='0' w='100%' h='100%' bgc='base-2' />
-  <Container class='z--mission_inner' isWrapper='l' pos='relative' jc='c' ai='c' g='30' set='gutter'>
-    <SideMain sideW='12rem' mainW='20rem' g='20'>
+  <Container class='z--mission_inner' isWrapper='l' pos='relative' jc='c' ai='c' g='30' hasGutter>
+    <WithSide sideW='12rem' mainW='20rem' g='20'>
       <Stack jc='c' g='40'>
         <Stack>
           <Heading level='2' fz='5xl' lts='l'>Mission</Heading>
@@ -36,7 +36,7 @@ import {
           height={1000}
         />
       </Frame>
-    </SideMain>
+    </WithSide>
   </Container>
 </Box>
 

@@ -4,7 +4,7 @@ import {
   Stack,
   Container,
   BoxLink,
-  FluidCols,
+  AutoColumns,
   Layer,
   Center,
   Text,
@@ -55,16 +55,16 @@ const shot = (n: number) => ({
 });
 ---
 
-<Container id='works' class='z--works' isWrapper='l' py='60' set='gutter'>
+<Container id='works' class='z--works' isWrapper='l' py='60' hasGutter>
   <Stack g='40'>
     <HGroup text='Works' subText='制作実績' />
     <Text as='p' class='u--fadeIn' max-sz='full' mx='auto' m='0'>
       Lism CSSの設計思想に沿ったマークアップで組み上げた、公開用ランディングや社内向けツールの制作例です。
     </Text>
-    <FluidCols cols='20rem' g='40'>
+    <AutoColumns cols='20rem' g='40'>
       {
         worksItems.map((item) => (
-          <BoxLink class='z--works_item' href='#' layout='stack' set='hov'>
+          <BoxLink class='z--works_item' href='#' layout='stack' set='var:hov'>
             <Frame class='z--works_frame' ar='16/9' pos='relative' bdrs='20'>
               <Lism
                 as='img'
@@ -73,8 +73,8 @@ const shot = (n: number) => ({
                 alt={shot(item.n).alt}
                 w='100%'
                 h='auto'
-                set='transition'
-                hov='to:zoom'
+                hasTransition
+                hov='in:zoom'
                 exProps={{
                   width: shot(item.n).width,
                   height: shot(item.n).height,
@@ -83,8 +83,8 @@ const shot = (n: number) => ({
                 }}
               />
               <Layer
-                set='transition'
-                hov='to:show'
+                hasTransition
+                hov='in:show'
                 style={{
                   backgroundColor: 'rgb(0 0 0 / 30%)',
                   backdropFilter: 'blur(4px)',
@@ -101,14 +101,14 @@ const shot = (n: number) => ({
               <Heading level='3' fz='m' m='0'>
                 {item.title}
               </Heading>
-              <Text as='p' fz='s' m='0' o='-10'>
+              <Text as='p' fz='s' m='0' o='p'>
                 {item.body}
               </Text>
             </Stack>
           </BoxLink>
         ))
       }
-    </FluidCols>
+    </AutoColumns>
   </Stack>
 </Container>
 
@@ -148,7 +148,7 @@ const shot = (n: number) => ({
     }
   }
   @media (any-hover: hover) {
-    .-hov\:to\:zoom {
+    .-hov\:in\:zoom {
       scale: var(--_isHov, 1.1);
     }
   }

@@ -30,8 +30,10 @@
 | `s`, `m`, `l`, `xl`... | ベース値を中心に大小の段階を示す | `--fz--s`, `--fz--l` |
 | `base` | `:root`/`body` の初期値にセットされるもの | `--fz--base`, `--lh--base` |
 | `10`, `20`, `30`... | `0`(`none`)基準で段階的に増加 | `--bdrs--20`, `--bxsh--30` |
-| `-10`, `-20`, `-30`... | `0`(`none`)基準で段階的に減少 | `--o---10`, `--o---20` |
 | セマンティック名 | 上記に当てはまらない場合 | `--ar--og` |
+
+> 🎵 **例外: opacity トークン**
+> opacity（`--o--mp` / `--o--p` / `--o--pp` / `--o--ppp`）は、音楽の強弱記号（piano 系列）に由来するセマンティック命名を採用している。`p`（piano / 弱く）の反復回数が多いほど透明度が増す構造で、「文字の反復回数で段階を表す」命名は Lism 内で opacity のみの例外。
 
 ### Property Class 用の変数
 
@@ -45,7 +47,7 @@
 | 形式 | 用途 | 例 |
 |------|------|-----|
 | `--{target}-{prop}` | 要素・クラスに対するプロパティ（`:root`で上書き可） | `--link-td`, `--headings-ff` |
-| `--{propName}` | プリミティブの主要機能変数 | `--sideW`, `--mainW` |
+| `--{propName}` | クラス自身の主要機能を制御する変数。要素側で値が初期化され、`:root` からは初期値の定義ができないもの | `--sideW`, `--mainW` |
 | `--_{item}-{propName}` | `c--` の子要素プロパティ | `--_icon-size` |
 | `--_{varName}` | 状態管理用の内部変数 | `--_isHov`, `--_notHov` |
 
@@ -57,17 +59,31 @@
 - Component: `c--`
 - Atomic Primitives: `a--`
 - Layout Primitives: `l--`
-- Trait Primitives: `is--`
+- Trait（役割宣言）: `is--`
+- Trait（機能付与）: `has--`
 - Set Class: `set--`
 - Utility Class: `u--`
 
 プレフィックスに続く名称は camelCase（例: `c--myComponent`）。
+
+**使い分けの判断軸:**
+
+| プレフィックス | 責務 | 代表例 |
+|---|---|---|
+| `set--` | HTML 要素の基礎スタイリング / 変数セット | `set--plain`, `set--revert`, `set--var:hov`, `set--var:bxsh` |
+| `is--` | 〜である（役割・存在の宣言）。CSS 変数は必須ではない | `is--container`, `is--wrapper`, `is--layer` |
+| `has--` | 〜を持つ（単一機能 trait の付与）。CSS 変数でカスタマイズ可 | `has--transition`, `has--gutter`, `has--snap`, `has--mask` |
+| `u--` | 装飾的効果（単独 or 子要素の装飾） | `u--trim`, `u--cbox`, `u--divide`, `u--cells` |
+
+- `set--` は `@lism-base` 層で HTML 要素の基礎スタイル・変数を提供するもの。
+- `is--` / `has--` は `@lism-trait` 層に属する。
 
 Property Class の形式:
 
 - 特定の値とセット: `-{prop}:{value}`
 - `--{prop}` 変数を受け取る: `-{prop}`
 - ブレークポイント値を受け取る: `-{prop}_{bp}`
+- 修飾子 + Property Class 合成: `-{modifier}:-{prop}`（例: `-hov:-c` は `-c` の hover バリアント）
 
 
 ## `{prop}` の省略ルール
@@ -180,15 +196,18 @@ NG例: `flex` → `fx` としたうえで `flex-shrink` を `fsh` にする（`f
 ```
 .-c:text-2        → color: var(--text-2);
 .-fz:l            → font-size: var(--fz--l);
-.-p10             → padding: var(--s10);
+.-p:10            → padding: var(--s10);
 .-fw:bold         → font-weight: var(--fw--bold);
 .-bdrs:20         → border-radius: var(--bdrs--20);
 ```
 
-トークン値が `-{NUM}` のものも、値をそのまま連結した変数名になる。
+opacity トークンは音楽記号に由来する例外的な命名で、そのままクラス化される。
 
 ```
-.-o:-10          → opacity: var(--o---10);
+.-o:mp            → opacity: var(--o--mp);
+.-o:p             → opacity: var(--o--p);
+.-o:pp            → opacity: var(--o--pp);
+.-o:ppp           → opacity: var(--o--ppp);
 ```
 
 ### 長いキーワード値の省略

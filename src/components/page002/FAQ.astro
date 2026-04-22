@@ -34,20 +34,20 @@ const faqItems: { question: string; answer: string; defaultOpen?: boolean }[] = 
 ---
 
 <Box as='section' class='c--faq' bgc='base-2'>
-  <Container isWrapper='l' set='gutter' py='50'>
+  <Container isWrapper='l' hasGutter py='50'>
     <Stack g='40'>
       <Stack g='10' ai='c'>
         <Heading level='2' fz='3xl' lts='l' m='0' ta='center'>FAQ</Heading>
         <Text as='p' fz='m' fw='bold' lts='l' m='0' c='text-2' ta='center'>よくあるご質問</Text>
       </Stack>
 
-      <Accordion.Root class='u--collapseGrid' p='0' ov='clip' g='20'>
+      <Accordion.Root class='u--divide' p='0' ov='clip' g='20'>
         {
           faqItems.map((item) => (
             <Accordion.Item
               bgc='base'
               bdrs='20'
-              bxsh='10'
+              bxsh='20'
               ov='hidden'
               {...(item.defaultOpen ? { 'data-opened': '' } : {})}
             >

@@ -27,11 +27,11 @@ Lism コンポーネントでの `util` prop による指定方法は [component
 | クラス | 用途 | ソースファイル |
 |--------|------|---------------|
 | `u--trim` | ハーフレディングのネガティブマージンでテキスト上下の余白を詰める | [`_trimHL.scss`](https://raw.githubusercontent.com/lism-css/lism-css/main/packages/lism-css/src/scss/utility/_trimHL.scss) |
-| `u--trimChildren` | 子要素すべてにハーフレディングトリムを適用（`img`, `figure`, `button` は除外） | [`_trimHL.scss`](https://raw.githubusercontent.com/lism-css/lism-css/main/packages/lism-css/src/scss/utility/_trimHL.scss) |
+| `u--trimAll` | 直下の子要素（`:empty`, `figure`, `picture`, `video`, `button`, `textarea`, `table` を除く）にハーフレディングトリムを一括適用する除外方式のクラス | [`_trimHL.scss`](https://raw.githubusercontent.com/lism-css/lism-css/main/packages/lism-css/src/scss/utility/_trimHL.scss) |
 | `u--cbox` | `--keycolor` を使い `color-mix()` で `--c` / `--bgc` / `--bdc` を自動生成する色付きボックス | [`_cbox.scss`](https://raw.githubusercontent.com/lism-css/lism-css/main/packages/lism-css/src/scss/utility/_cbox.scss) |
-| `u--collapseGrid` | Grid / Flex の子要素間に `box-shadow` で境界線を表現する | [`_itemDivider.scss`](https://raw.githubusercontent.com/lism-css/lism-css/main/packages/lism-css/src/scss/utility/_itemDivider.scss) |
+| `u--divide` | Grid / Flex の子要素**間**にのみ `box-shadow` で区切り線を表示する | [`_divide.scss`](https://raw.githubusercontent.com/lism-css/lism-css/main/packages/lism-css/src/scss/utility/_divide.scss) |
+| `u--cells` | Grid / Flex の各子要素を `box-shadow` で枠囲みし、table セル風に表示する | [`_divide.scss`](https://raw.githubusercontent.com/lism-css/lism-css/main/packages/lism-css/src/scss/utility/_divide.scss) |
 | `u--srOnly` | スクリーンリーダー専用（視覚的に非表示）。`clip-path: inset(50%)` で実装 | [`_hidden.scss`](https://raw.githubusercontent.com/lism-css/lism-css/main/packages/lism-css/src/scss/utility/_hidden.scss) |
-| `u--snap` | スクロールスナップコンテナ。`--snapType`, `--snapAlign`, `--snapStop` で制御 | [`_snap.scss`](https://raw.githubusercontent.com/lism-css/lism-css/main/packages/lism-css/src/scss/utility/_snap.scss) |
 | `u--clipText` | テキストで背景をクリッピング（`background-clip: text`） | [`_clipText.scss`](https://raw.githubusercontent.com/lism-css/lism-css/main/packages/lism-css/src/scss/utility/_clipText.scss) |
 
 
@@ -44,8 +44,8 @@ Lism コンポーネントでの `util` prop による指定方法は [component
 <!-- u--trim: テキスト余白の詰め -->
 <p class="u--trim">テキスト...</p>
 
-<!-- u--collapseGrid: グリッド子要素間の境界線 -->
-<div class="l--grid u--collapseGrid" style="--gtc: 1fr 1fr">
+<!-- u--divide: グリッド子要素間の区切り線 -->
+<div class="l--grid u--divide" style="--gtc: 1fr 1fr">
   <div>A</div>
   <div>B</div>
 </div>
@@ -55,7 +55,7 @@ Lism コンポーネントでの `util` prop による指定方法は [component
 // JSX での使用（className で指定）
 <Lism className="u--cbox" keycolor="red" bd p="20">...</Lism>
 <Text className="u--trim">テキスト...</Text>
-<Grid className="u--collapseGrid" gtc="1fr 1fr">...</Grid>
+<Grid className="u--divide" gtc="1fr 1fr">...</Grid>
 ```
 
 

@@ -11,8 +11,8 @@ const navItems = [
 ] as const;
 ---
 
-<Lism as='header' class='z--header' pos='fixed' i='0' w='100%' z='1' set='transition'>
-  <Container class='z--header_bar' isWrapper='xl' mx='auto' set='gutter' h='100%'>
+<Lism as='header' class='z--header' pos='fixed' i='0' w='100%' z='1' hasTransition>
+  <Container class='z--header_bar' isWrapper='xl' mx='auto' hasGutter h='100%'>
     <Grid class='z--header_inner' gtc='minmax(0,auto) 1fr' ai='center' h='100%' g='20'>
       <Stack class='z--header_logo'>
         <Link
@@ -51,8 +51,8 @@ const navItems = [
                   td='none'
                   py='8'
                   px='4'
-                  set='transition'
-                  hov='o'
+                  hasTransition
+                  hov='-o'
                   ta='c'
                   g='4'
                 >
@@ -75,29 +75,29 @@ const navItems = [
   </Container>
 </Lism>
 <Modal.Root id='p003-menu' isContainer isWrapper='s' p='30'>
-  <Modal.Inner layout='stack' pos='relative' w='100%' p='30' bdrs='20' bxsh='40'>
+  <Modal.Inner layout='stack' pos='relative' w='100%' p='30' bdrs='20' bxsh='50'>
     <Modal.CloseBtn modalId='p003-menu' autofocus pos='absolute' t='0' r='0' z='1' fz='xl' p='10' m='15' />
     <Modal.Body layout='stack' g='30' py='40'>
-      <Stack class='z--header_menuNav u--collapseGrid' p='0' ov='clip'>
+      <Stack class='z--header_menuNav u--divide' p='0' ov='clip'>
         {
           navItems.map(({ href, ja, en }) => (
             <BoxLink href={href} layout='grid' gtc='1fr auto' ai='c' fz='l' td='none' py='15' px='5'>
               <Stack g='4'>
                 <Inline>{ja}</Inline>
-                <Inline as='span' class='z--header_menuNav_en' fz='s' m='0' o='-20'>
+                <Inline as='span' class='z--header_menuNav_en' fz='s' m='0' o='pp'>
                   {en}
                 </Inline>
               </Stack>
-              <Icon icon='caret-right' fz='s' o='-20' />
+              <Icon icon='caret-right' fz='s' o='pp' />
             </BoxLink>
           ))
         }
         <BoxLink href='#contact' layout='grid' gtc='1fr auto' ai='c' fz='l' td='none' py='15' px='5'>
           <Stack g='4'>
             <Inline>ご予約はこちら</Inline>
-            <Inline as='span' class='z--header_menuNav_en' fz='s' m='0' o='-20'> Reservation </Inline>
+            <Inline as='span' class='z--header_menuNav_en' fz='s' m='0' o='pp'> Reservation </Inline>
           </Stack>
-          <Icon icon='caret-right' fz='s' o='-20' />
+          <Icon icon='caret-right' fz='s' o='pp' />
         </BoxLink>
       </Stack>
     </Modal.Body>

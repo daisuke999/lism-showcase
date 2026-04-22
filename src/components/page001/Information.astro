@@ -3,10 +3,10 @@ import { Container, Stack, Grid, Frame } from 'lism-css/astro';
 import HGroup from '@/components/page001/HGroup.astro';
 ---
 
-<Container id='information' class='z--information' isWrapper='m' py='60' set='gutter'>
+<Container id='information' class='z--information' isWrapper='m' py='60' hasGutter>
   <Stack jc='c' g='40' w='100%'>
     <HGroup text='Information' subText='お知らせ' />
-    <Grid as='dl' class='z--information_dl u--collapseGrid' gtc='auto 1fr' cg='40' p='0' ov='clip'>
+    <Grid as='dl' class='z--information_dl u--divide' gtc='auto 1fr' cg='40' p='0' ov='clip'>
       <Grid gtc='subgrid' gc='1/-1' p='30'>
         <dt>運営名</dt>
         <dd>Lism CSS プロジェクト（デモ掲載用の架空組織）</dd>

@@ -41,7 +41,7 @@ const introBody =
     />
   </Frame>
   <Layer bgc='black:52%' exProps={{ 'aria-hidden': 'true' }} />
-  <Container isWrapper='l' set='gutter' pos='relative' z='1' py='60'>
+  <Container isWrapper='l' hasGutter pos='relative' z='1' py='60'>
     <Grid
       gtc={['1fr', '1fr', 'minmax(0, min(100%, 20rem)) minmax(0, 1fr)']}
       rg={['30', '30', '40']}
@@ -53,12 +53,12 @@ const introBody =
           季節の移ろいを、<br />肌で感じる。
         </Heading>
         <Flex g='10' ai='baseline' fxd='row' fxw={['wrap', 'wrap', 'nowrap']} w='100%'>
-          <Inline as='span' fz='xs' tt='upper' lts='l' m='0' c='white' o='-20'>Seasons</Inline>
-          <Inline as='span' fz='s' ff='accent' m='0' c='white' o='-30'>Feel the experience</Inline>
+          <Inline as='span' fz='xs' tt='upper' lts='l' m='0' c='white' o='pp'>Seasons</Inline>
+          <Inline as='span' fz='s' ff='accent' m='0' c='white' o='ppp'>Feel the experience</Inline>
         </Flex>
       </Stack>
       <Stack g='0' ai='start' min-w='0'>
-        <Text as='p' m='0' fz='m' lh='l' lts='s' c='white' o='-10'>
+        <Text as='p' m='0' fz='m' lh='l' lts='s' c='white' o='p'>
           {introBody}
         </Text>
       </Stack>

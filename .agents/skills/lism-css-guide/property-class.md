@@ -18,6 +18,12 @@ CSS Layer の外（最も高い詳細度）に配置され、`-{prop}(:{value})`
 
 [詳細](https://lism-css.com/docs/property-class/)
 
+個別ドキュメント:
+
+- [property-class/bd.md](./property-class/bd.md) — ボーダー（`-bd` / `-bd-{side}` 系）
+- [property-class/hov.md](./property-class/hov.md) — ホバー（`-hov:*` 系）
+- [property-class/max-sz.md](./property-class/max-sz.md) — 最大幅（`-max-sz:full` / `-max-sz:container` 等）
+
 ---
 
 ## 基本書式
@@ -78,7 +84,7 @@ CSS Layer の外（最も高い詳細度）に配置され、`-{prop}(:{value})`
 | Prop | CSS プロパティ | プリセット値クラス | BP クラス |
 |------|--------------|-------------|-----|
 | `d` | `display` | `-d:none`, `-d:block`, `-d:flex`, `-d:inline-flex`, `-d:grid`, `-d:inline-grid`, `-d:inline`, `-d:inline-block` | `-d_sm`, `-d_md` |
-| `o` | `opacity` | `-o:0`, `-o:-10`, `-o:-20`, `-o:-30` | — |
+| `o` | `opacity` | `-o:0`, `-o:mp`, `-o:p`, `-o:pp`, `-o:ppp` | — |
 | `v` | `visibility` | `-v:hidden` | — |
 | `ov` | `overflow` | `-ov:hidden`, `-ov:auto`, `-ov:clip` | — |
 | `ov-x` | `overflow-x` | `-ov-x:clip`, `-ov-x:auto`, `-ov-x:scroll` | — |
@@ -103,8 +109,10 @@ CSS Layer の外（最も高い詳細度）に配置され、`-{prop}(:{value})`
 | `max-bsz` | `max-block-size` | — | — |
 
 **`max-sz` の特殊クラス:**
-- `-max-sz:full` — `max-inline-size: 100%`。`.set--gutter` 内では gutter 分を含めた全幅に拡張
+- `-max-sz:full` — `.has--gutter` 内では gutter 分を含めた全幅に拡張
 - `-max-sz:container` — コンテナ幅に合わせる（`margin-inline` で中央配置）
+
+→ 詳細は [property-class/max-sz.md](./property-class/max-sz.md) 参照
 
 ### 背景
 
@@ -146,9 +154,9 @@ CSS Layer の外（最も高い詳細度）に配置され、`-{prop}(:{value})`
 
 | Prop | CSS プロパティ | プリセット値クラス | BP クラス |
 |------|--------------|-------------|-----|
-| `bxsh` | `box-shadow` | `-bxsh:0`, `-bxsh:10`, `-bxsh:20`, `-bxsh:30`, `-bxsh:40` | `-bxsh_sm`, `-bxsh_md` |
+| `bxsh` | `box-shadow` | `-bxsh:0`, `-bxsh:10`, `-bxsh:20`, `-bxsh:30`, `-bxsh:40`, `-bxsh:50` | `-bxsh_sm`, `-bxsh_md` |
 
-**注意:** `bxsh` の使用時は `set--shadow` クラスの併用が必要です（影色 `--shc` の再計算のため）。
+**補足:** 影色（`--shc`）を要素内で上書きして再計算させたい場合は、`set--var:bxsh` クラスを併用する。
 
 ### ポジション
 
@@ -271,89 +279,32 @@ SPACE トークン（全値）: `5`, `10`, `15`, `20`, `30`, `40`, `50`, `60`, `
 
 ### ボーダー（`bd` 系）
 
-[詳細](https://lism-css.com/docs/property-class/bd/)
+Lism CSS のボーダーは CSS 変数（`--bds` / `--bdw` / `--bdc`）で管理される特殊仕様。`-bd` または `-bd-{side}` を付けると初期値（`solid` / `1px` / `var(--divider)`）がセットされ、`bds` / `bdc` / `bdw` Prop で上書きする。
 
-Lism CSS のボーダーは CSS 変数（`--bds`, `--bdw`, `--bdc`）で管理される特殊な仕様です。  
-`-bd` または `-bd-{side}` クラスを付けると、初期値（`--bds: solid`, `--bdw: 1px`, `--bdc: var(--divider)`）がセットされ、`bds`, `bdc`, `bdw` Prop で個別に上書きできます。
+| Prop | CSS プロパティ / 変数 | 主なクラス |
+|------|-----------------------|------------|
+| `bd` | `border`（変数管理を有効化） | `-bd`, `-bd-{x\|y\|x-s\|x-e\|y-s\|y-e\|t\|b\|l\|r}`, `-bd:none` |
+| `bds` | `--bds` | `-bds:dashed`, `-bds:dotted`, `-bds:double` |
+| `bdc` | `--bdc` | `-bdc:brand`, `-bdc:accent`, `-bdc:divider`, `-bdc:inherit`, `-bdc:transparent`, `-bdc:current` |
+| `bdw` | `--bdw` | BP クラス: `-bdw_sm`, `-bdw_md` |
 
-| Prop | CSS プロパティ | プリセット値クラス | BP クラス |
-|------|--------------|-------------|-----|
-| `bd` | `border`（変数管理を有効化） | `-bd:none` | — |
-| `bds` | `--bds` 変数 | `-bds:dashed`, `-bds:dotted`, `-bds:double` | — |
-| `bdc` | `--bdc` 変数 | `-bdc:brand`, `-bdc:accent`, `-bdc:divider`, `-bdc:inherit`, `-bdc:transparent`, `-bdc:current` | — |
-| `bdw` | `--bdw` 変数 | — | `-bdw_sm`, `-bdw_md` |
-
-**方向指定:**
-
-| Prop | CSS プロパティ |
-|------|--------------|
-| `bd-x` | `border-inline` |
-| `bd-y` | `border-block` |
-| `bd-x-s` | `border-inline-start` |
-| `bd-x-e` | `border-inline-end` |
-| `bd-y-s` | `border-block-start` |
-| `bd-y-e` | `border-block-end` |
-| `bd-t` | `border-top` |
-| `bd-b` | `border-bottom` |
-| `bd-l` | `border-left` |
-| `bd-r` | `border-right` |
-
-```jsx
-// JSX: ボーダー + カスタマイズ
-<Box bd bdc="brand" bdw="2px" bds="dashed">...</Box>
-
-// HTML
-<div class="l--box -bd -bdc:brand" style="--bdw: 2px; --bds: dashed">...</div>
-
-// 方向指定
-<Box bd-y bdc="divider">...</Box>
-// → <div class="l--box -bd-y -bdc:divider">...</div>
-```
+→ 詳細（方向ごとのスタイル指定、BP での方向切り替え等）は [property-class/bd.md](./property-class/bd.md) 参照
 
 ### ホバー（`hov` 系）
 
-[詳細](https://lism-css.com/docs/property-class/hov/)
+ホバーエフェクト用のクラス群。以下の 3 形式がある。
 
-ホバーエフェクト用のクラスです。`-hov:{prop}` 系と `-hov:to:*` 系の2種類があります。
+| 形式 | 役割 | 動作条件 |
+|------|------|---------|
+| `.-hov:-{prop}` | `--hov-{prop}` 変数で hover 時の値を変化させる | `:hover`（`@media (any-hover: hover)` 内） |
+| `.-hov:{preset}` | hover 時のスタイルをプリセットで適用 | `:hover`（同上） |
+| `.-hov:in:{preset}` | 親の `set--var:hov` を起点に子のスタイルを変化させる | 親に `set--var:hov` が必要 |
 
-**`-hov:{prop}` — ホバー時のプロパティ変更**
+**標準プリセット:** `.-hov:-c`, `.-hov:-bgc`, `.-hov:-bdc`, `.-hov:-o`, `.-hov:-bxsh`, `.-hov:underline`, `.-hov:neutral`, `.-hov:in:hide`, `.-hov:in:show`, `.-hov:in:zoom`
 
-`:hover` 擬似クラスで直接動作します（`set--hov` は不要）。`@media (any-hover: hover)` 内で定義され、タッチデバイスでは無効になります。
+**`<Lism>` の `hov` prop:** 文字列指定（`hov="-c"` → `-hov:-c`。自動変換なし、カンマ区切りで複数可）とオブジェクト指定（`hov={{ c: 'red' }}` → `-hov:-c` + `--hov-c: var(--red)`。値 `true` でクラスのみ出力）が可能。
 
-| クラス | 効果 | デフォルト値 |
-|--------|------|-------------|
-| `-hov:c` | テキスト色を変更 | `var(--hov-c, var(--link))` |
-| `-hov:bgc` | 背景色を変更 | `var(--hov-bgc, var(--base-2))` |
-| `-hov:bdc` | ボーダー色を変更 | `var(--hov-bdc, currentColor)` |
-| `-hov:o` | 不透明度を変更 | `var(--hov-o, 0.7)` |
-| `-hov:bxsh` | シャドウを変更 | `var(--hov-bxsh, var(--bxsh--40))` |
-| `-hov:neutral` | ニュートラルグレーを混合 | `color-mix(...)` |
-
-```jsx
-// JSX: ホバーで色変更（set--hov なしで動作する）
-<Link hov={{ c: true }}>リンク</Link>
-// → <a class="-hov:c" href="...">リンク</a>
-
-// カスタム値を指定
-<Box hov={{ bgc: true }} style={{ '--hov-bgc': 'var(--brand)' }}>...</Box>
-```
-
-**`-hov:to:*` — `set--hov` 連動のトランジションクラス**
-
-`set--hov` がセットする `--_isHov` / `--_notHov` 変数を利用して動作します。`set--hov` と `set--transition` の併用が必要です。
-
-| クラス | 効果 | 仕組み |
-|--------|------|--------|
-| `-hov:to:hide` | ホバー時にフェードアウト | `opacity: var(--_isHov, 0)` |
-| `-hov:to:show` | ホバー時にフェードイン | `opacity: var(--_notHov, 0)` |
-| `-hov:to:zoom` | ホバー時にズーム | `scale: var(--_isHov, 1.1)` |
-
-```jsx
-// set--hov + set--transition が必要
-<Box set="hov transition">
-  <Box hov={{ to: 'show' }}>ホバーで表示</Box>
-</Box>
-```
+→ 詳細は [property-class/hov.md](./property-class/hov.md) 参照
 
 ## その他
 
@@ -384,8 +335,22 @@ Property Class の値名は基本的に CSS の実値と同じですが、以下
 
 ### `alwaysVar` タイプ
 
-`fz`, `p`, `px`, `py`, `m`, `mx`, `my`, `g`, `c`, `bgc`, `bdrs`, `bxsh` など。  
-プリセット値クラス（`-p:20`）でも常に CSS 変数（`--p`）経由で値が適用されます。これにより、子要素や疑似要素から `var(--p)` で親の値を参照できます。
+`c`, `bgc`, `p`, `m`, `bdrs` の 5 つ。
+
+例えば`-p`の場合、プリセット値クラス（`-p:20`）でも常に CSS 変数（`--p`）経由で値が適用されます。  
+さらに BP クラスでも `padding:var(--p);--p:var(--p_sm) !important;` の形で出力されるため、`--p` は常に現在適用中の値を指します。
+
+これにより、子要素や疑似要素から `var(--p)` で親の値を参照できます。
+
+**CSS 出力例:**
+
+```css
+.-p, [class*="-p:"] { padding: var(--p) }
+.-p\:20 { --p: var(--s20) }
+@container (min-width: 480px) {
+  .-p_sm { padding: var(--p); --p: var(--p_sm) !important }
+}
+```
 
 
 ## Property Class の検索・一括修正

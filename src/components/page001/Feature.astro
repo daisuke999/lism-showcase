@@ -30,7 +30,7 @@ const cardMedia = (r: string) => ({
     />
   </Frame>
   <Layer style={{ filter: 'grayscale(1)', backgroundColor: 'hsl(224 4% 99% / 0.85)' }} />
-  <Container isWrapper='l' py='60' set='gutter'>
+  <Container isWrapper='l' py='60' hasGutter>
     <Stack g='40'>
       <HGroup text='Feature' subText='Lism CSSの特徴' />
       <Stack g='40'>
@@ -53,7 +53,7 @@ const cardMedia = (r: string) => ({
           </Frame>
           <Stack class='z--feature_itemContent' g='15' max-w='36rem' py='20'>
             <Heading level='3' fz='l' m='0'>レイアウト設計サポート</Heading>
-            <Text as='p' m='0' o='-10'>
+            <Text as='p' m='0' o='p'>
               Stack／Flex／Gridなどのレイアウトプリミティブを選定し、ワイヤーからコンポーネント単位まで一貫した組み方へ落とし込みます。
               コンテナを意識した切り替え方針も含め、再現性の高いマークアップ指針を整備します。
             </Text>
@@ -78,7 +78,7 @@ const cardMedia = (r: string) => ({
           </Frame>
           <Stack class='z--feature_itemContent' g='15' max-w='36rem' py='20'>
             <Heading level='3' fz='l' m='0'>デザイントークン整備</Heading>
-            <Text as='p' m='0' o='-10'>
+            <Text as='p' m='0' o='p'>
               カラー・タイポグラフィ・余白・角丸・影を段階的なCSS変数へ整理し、Figmaのトークンと実装の差分を最小化します。
               Property Classの運用ルールまで含め、チームで迷わない表記に揃えます。
             </Text>
@@ -103,7 +103,7 @@ const cardMedia = (r: string) => ({
           </Frame>
           <Stack class='z--feature_itemContent' g='15' max-w='36rem' py='20'>
             <Heading level='3' fz='l' m='0'>AI連携ワークフロー</Heading>
-            <Text as='p' m='0' o='-10'>
+            <Text as='p' m='0' o='p'>
               SkillsとMCPサーバーを活用し、エディタ上で仕様を参照しながら実装が進む体制を設計します。
               生成コードのレビュー観点（レイヤー規則・ユーティリティの粒度）もテンプレ化してお渡しします。
             </Text>
@@ -128,7 +128,7 @@ const cardMedia = (r: string) => ({
           </Frame>
           <Stack class='z--feature_itemContent' g='15' max-w='36rem' py='20'>
             <Heading level='3' fz='l' m='0'>UIキット／テンプレート導入</Heading>
-            <Text as='p' m='0' o='-10'>
+            <Text as='p' m='0' o='p'>
               AccordionやModalなどのUIコンポーネント、ランディングやブログ向けテンプレートを選定し、既存デザインへ段階的に移植します。
               Astro／React双方の要件に合わせ、運用しやすいディレクトリ構成まで含めて支援します。
             </Text>

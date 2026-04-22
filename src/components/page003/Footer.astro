@@ -33,12 +33,12 @@ const snsLinks = [
 ---
 
 <Lism as='footer' id='footer' class='z--p003-footer' bgc='black' c='white' py={['50', null, '60']}>
-  <Container isWrapper='l' set='gutter'>
+  <Container isWrapper='l' hasGutter>
     <Stack g={['40', null, '50']} ai='stretch' w='100%'>
       <!-- キャッチコピーをロゴの左隣に。下揃え（flex-end） -->
       <Flex fxd='row' ai='end' jc='start' fxw='wrap' g={['15', null, '40']} w='100%'>
         <Heading level='2' m='0' fz={['xl', null, '2xl']} fw='500' lts='l' lh='l'> 静寂の隠れ宿 </Heading>
-        <Text as='p' m='0' fz={['s', null, 'm']} lh='l' lts='s' o='-10' max-sz='m'>
+        <Text as='p' m='0' fz={['s', null, 'm']} lh='l' lts='s' o='p' max-sz='m'>
           都会の喧騒から離れ、心安らぐ自然の中で、至福のひとときを。
         </Text>
       </Flex>
@@ -73,15 +73,15 @@ const snsLinks = [
                   py={['15', null, '12']}
                   px={['5', null, '8']}
                   c='inherit'
-                  hov='o'
+                  hov='-o'
                 >
                   <Stack class='z--p003-footer_navStack' g='4' ai='start' ta='start'>
                     <Inline>{ja}</Inline>
-                    <Inline as='span' class='z--p003-footer_navEn' fz='s' m='0' o='-20'>
+                    <Inline as='span' class='z--p003-footer_navEn' fz='s' m='0' o='pp'>
                       {en}
                     </Inline>
                   </Stack>
-                  <Icon class='z--p003-footer_navCaret' icon='caret-right' fz='s' o='-20' />
+                  <Icon class='z--p003-footer_navCaret' icon='caret-right' fz='s' o='pp' />
                 </BoxLink>
               </ListItem>
             ))
@@ -91,7 +91,7 @@ const snsLinks = [
         <Cluster class='z--p003-footer_sns' g='20' jc={['center', null, 'end']} ai='end' fxw='wrap' w={['100%', null, 'auto']}>
           {
             snsLinks.map(({ href, icon, label }) => (
-              <Link href={href} td='none' c='inherit' hov='o' aria-label={label}>
+              <Link href={href} td='none' c='inherit' hov='-o' aria-label={label}>
                 <Icon icon={icon} fz='xl' />
               </Link>
             ))
@@ -99,7 +99,7 @@ const snsLinks = [
         </Cluster>
       </Flex>
 
-      <Text as='p' m='0' fz='xs' o='-20' lts='s' ta='center'> © 2026 Lism CSS. </Text>
+      <Text as='p' m='0' fz='xs' o='pp' lts='s' ta='center'> © 2026 Lism CSS. </Text>
     </Stack>
   </Container>
 </Lism>

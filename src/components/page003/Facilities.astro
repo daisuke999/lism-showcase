@@ -58,7 +58,7 @@ const intro =
 <Lism as='section' id='facilities' pos='relative' bgc='black' c='white' py='60' ov='hidden'>
   <!-- Plan セクションよりわずかに明るいチャコール: 黒ベースの上に薄い白膜（Layer + bgc トークン） -->
   <Layer aria-hidden='true' bgc='white:6%' />
-  <Container isWrapper='l' set='gutter' pos='relative' z='1'>
+  <Container isWrapper='l' hasGutter pos='relative' z='1'>
     <Stack g={['40', null, '50']} ai='stretch' w='100%'>
       <!-- jc=start / 狭い gap で見出しブロックのすぐ右にリード文（max-sz で折返し幅を制限） -->
       <Flex
@@ -70,13 +70,13 @@ const intro =
         fxw='wrap'
       >
         <Stack g='10' ai='start' min-w='0' fxsh='0'>
-          <Text as='p' m='0' fz='s' tt='upper' lts='l' ff='accent' o='-20'>Facilities</Text>
+          <Text as='p' m='0' fz='s' tt='upper' lts='l' ff='accent' o='pp'>Facilities</Text>
           <Flex g='15' ai='end' jc='start' w='100%' class='z--p003-facilities_headingRow'>
             <Heading level='2' m='0' fz={['xl', null, '2xl']} fw='500' lts='l'> 館内設備 </Heading>
             <Lism as='span' aria-hidden='true' class='z--p003-facilities_rule' w='1px' bgc='white:35%' />
           </Flex>
         </Stack>
-        <Text as='p' m='0' fz='s' lh='l' lts='s' o='-10' max-sz='s' min-w='0' fx='1'>
+        <Text as='p' m='0' fz='s' lh='l' lts='s' o='p' max-sz='s' min-w='0' fx='1'>
           {intro}
         </Text>
       </Flex>
@@ -91,7 +91,7 @@ const intro =
                   <Heading level='3' m='0' fz={['m', null, 'l']} fw='500' lts='l' lh='l'>
                     {item.title}
                   </Heading>
-                  <Text as='p' m='0' fz='s' lh='l' lts='s' o='-10'>
+                  <Text as='p' m='0' fz='s' lh='l' lts='s' o='p'>
                     {item.description}
                   </Text>
                 </Stack>

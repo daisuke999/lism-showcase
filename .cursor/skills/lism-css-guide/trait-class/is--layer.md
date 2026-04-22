@@ -6,8 +6,8 @@
 
 - クラス名: `is--layer`
 - コンポーネント: `<Layer>`
-- SCSSソース: https://raw.githubusercontent.com/lism-css/lism-css/main/packages/lism-css/src/scss/primitives/trait/_layer.scss
-- ドキュメント（人間向け）: https://lism-css.com/docs/primitives/is--layer/
+- SCSSソース: https://raw.githubusercontent.com/lism-css/lism-css/main/packages/lism-css/src/scss/trait/is/_layer.scss
+- ドキュメント（人間向け）: https://lism-css.com/docs/trait-class/is--layer/
 
 ## 使い方
 
@@ -66,6 +66,6 @@
 
 ## 関連プリミティブ
 
-- [l--frame](./l--frame.md) — `isLayer` 併用でメディア背景のレイヤー化
-- [l--grid](./l--grid.md) — `ga="1/1"` で position を使わずに重ね配置する代替パターン
-- [l--center](./l--center.md) — レイヤー内のコンテンツ中央寄せ
+- [l--frame](../primitives/l--frame.md) — `isLayer` 併用でメディア背景のレイヤー化
+- [l--grid](../primitives/l--grid.md) — `ga="1/1"` で position を使わずに重ね配置する代替パターン
+- [l--center](../primitives/l--center.md) — レイヤー内のコンテンツ中央寄せ

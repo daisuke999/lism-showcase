@@ -68,7 +68,7 @@ import { Accordion, Tabs, Modal, Button } from '@lism-css/ui/astro';
 | `type` | `'alert' \| 'point' \| 'warning' \| 'check' \| 'help' \| 'info'` | `'alert'` | アラートタイプ。keycolor と icon の組み合わせプリセット |
 | `keycolor` | `string` | — | キーカラー |
 | `icon` | `ReactNode \| string` | — | カスタムアイコン |
-| `layout` | `'flex' \| 'sideMain'` | `'flex'` | レイアウトプリミティブ |
+| `layout` | `'flex' \| 'withSide'` | `'flex'` | レイアウトプリミティブ |
 | `flow` | `string` | `'s'` | コンテンツを囲む要素のフロー余白 |
 
 ```jsx
@@ -316,16 +316,19 @@ HTML の `details/summary` 要素をラップしたコンポーネント。Accor
 
 `@lism-css/ui` の UI コンポーネントは、CLI コマンドで自分のプロジェクトにソースコードをコピーして使うこともできます。コピーしたファイルは自由にカスタマイズ可能です。
 
+コンポーネント名は `import` するときと同じ PascalCase で指定します。
+
 ```bash
 # 初期設定（framework、出力先ディレクトリを対話的に設定）
-npx @lism-css/cli ui init
+npx lism-cli ui init
 
 # コンポーネントを追加
-npx @lism-css/cli ui add Button Modal
-npx @lism-css/cli ui add -a          # 全コンポーネントを追加
+npx lism-cli ui add Button Modal
+npx lism-cli ui add NavMenu
+npx lism-cli ui add --all        # 全コンポーネントを追加
 
 # 利用可能なコンポーネント一覧を表示
-npx @lism-css/cli ui list
+npx lism-cli ui list
 ```
 
 `ui init` で生成される `lism.config.js` の `cli` セクション:

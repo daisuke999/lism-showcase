@@ -2,7 +2,7 @@
 import { Stack, Container, BoxLink, Icon, Cluster, Text, Inline } from 'lism-css/astro';
 ---
 
-<Container as='footer' isWrapper='m' py='40' set='gutter'>
+<Container as='footer' isWrapper='m' py='40' hasGutter>
   <Stack jc='c' ai='c' g='30'>
     <Stack class='z--header_logo'>
       <Text as='p' fz='xl' fw='400' lts='l' m='0'>
@@ -10,16 +10,16 @@ import { Stack, Container, BoxLink, Icon, Cluster, Text, Inline } from 'lism-css
       </Text>
     </Stack>
     <Cluster g='20'>
-      <BoxLink href='#' hov='o'>
+      <BoxLink href='#' hov='-o'>
         <Icon icon='logo-x' fz='l' c='text-2' />
       </BoxLink>
-      <BoxLink href='#' hov='o'>
+      <BoxLink href='#' hov='-o'>
         <Icon icon='logo-instagram' fz='l' c='text-2' />
       </BoxLink>
-      <BoxLink href='#' hov='o'>
+      <BoxLink href='#' hov='-o'>
         <Icon icon='logo-youtube' fz='l' c='text-2' />
       </BoxLink>
-      <BoxLink href='#' hov='o'>
+      <BoxLink href='#' hov='-o'>
         <Icon icon='logo-line' fz='l' c='text-2' />
       </BoxLink>
     </Cluster>
