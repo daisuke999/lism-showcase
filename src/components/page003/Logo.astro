@@ -1,0 +1,36 @@
+---
+import { Link, Heading } from 'lism-css/astro';
+
+export interface Props {
+  variant: 'header' | 'footer';
+  /** header のみ（先頭 / ロゴ用アンカー） */
+  href?: string;
+}
+
+const { variant, href = '#' } = Astro.props;
+
+const label = '静寂の隠れ宿';
+---
+
+{
+  variant === 'header' ? (
+    <Link
+      class='z--header_logoLink'
+      href={href}
+      td='none'
+      fw='bold'
+      ff='accent'
+      c='white'
+      lts='l'
+      fz={['2xl', null, '3xl']}
+      lh='s'
+      whs='nowrap'
+    >
+      {label}
+    </Link>
+  ) : (
+    <Heading level='2' m='0' fz={['2xl', null, '3xl']} fw='500' lts='l' lh='l' ff='accent'>
+      {label}
+    </Heading>
+  )
+}

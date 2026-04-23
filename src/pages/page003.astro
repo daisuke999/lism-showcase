@@ -20,7 +20,7 @@ export const title = 'page003：静寂の隠れ宿 LP Design';
   <link rel='preconnect' href='https://fonts.googleapis.com' slot='head' />
   <link rel='preconnect' href='https://fonts.gstatic.com' crossorigin slot='head' />
   <link
-    href='https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@200..900&display=swap'
+    href='https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@200..900&family=Yuji+Syuku&display=swap'
     rel='stylesheet'
     slot='head'
   />
@@ -49,8 +49,44 @@ export const title = 'page003：静寂の隠れ宿 LP Design';
   .z--page003 {
     font-family: 'Noto Serif JP', 'Yu Mincho', YuMincho, 'Hiragino Mincho ProN', 'Hiragino Mincho Pro', serif;
     font-optical-sizing: auto;
+    /* Lism の `ff:base`（既定はゴシック系）— page003 では日本語明朝に統一 */
+    --ff--base: 'Noto Serif JP', 'Yu Mincho', YuMincho, 'Hiragino Mincho ProN', 'Hiragino Mincho Pro', serif;
+    /* ロゴ（`ff:accent`）用: Google Fonts / Yuji Syuku（Lism タイポ `--ff--accent`） */
+    --ff--accent: 'Yuji Syuku', 'Noto Serif JP', 'Yu Mincho', YuMincho, 'Hiragino Mincho ProN', 'Hiragino Mincho Pro', serif;
     /* Experience ほか和紙調のベージュ背景（セマンティック `--base` を上書き） */
     --base: hsl(38 32% 92%);
+    /* #reservation の named view timeline を兄弟の FAB から参照可能に */
+    timeline-scope: --p003-reservation;
+  }
+  /* Reservation がビューポートに入る進行に合わせて FAB を非表示 */
+  #reservation {
+    view-timeline-name: --p003-reservation;
+    view-timeline-axis: block;
+  }
+  @keyframes p003_reservationFab_hide {
+    from {
+      opacity: 1;
+      pointer-events: auto;
+      visibility: visible;
+    }
+    to {
+      opacity: 0;
+      pointer-events: none;
+      visibility: hidden;
+    }
+  }
+  .z--reservationFab {
+    animation: p003_reservationFab_hide linear both;
+    animation-timeline: --p003-reservation;
+    animation-range: entry 0% entry 30%;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .z--reservationFab {
+      animation: none;
+      opacity: 1;
+      visibility: visible;
+      pointer-events: auto;
+    }
   }
 </style>
 

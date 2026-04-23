@@ -1,18 +1,6 @@
 ---
-import {
-  Lism,
-  Stack,
-  Container,
-  Flex,
-  Link,
-  BoxLink,
-  Icon,
-  Inline,
-  ListItem,
-  Text,
-  Heading,
-  Cluster,
-} from 'lism-css/astro';
+import { Lism, Stack, Container, Flex, Link, BoxLink, Icon, Inline, ListItem, Text, Cluster } from 'lism-css/astro';
+import Logo from '@/components/page003/Logo.astro';
 
 /** ヘッダーと同一のナビ（アンカー） */
 const navItems = [
@@ -33,11 +21,11 @@ const snsLinks = [
 ---
 
 <Lism as='footer' id='footer' class='z--p003-footer' bgc='black' c='white' py={['50', null, '60']}>
-  <Container isWrapper='l' hasGutter>
+  <Container isContainer isWrapper='l' hasGutter>
     <Stack g={['40', null, '50']} ai='stretch' w='100%'>
       <!-- キャッチコピーをロゴの左隣に。下揃え（flex-end） -->
       <Flex fxd='row' ai='end' jc='start' fxw='wrap' g={['15', null, '40']} w='100%'>
-        <Heading level='2' m='0' fz={['xl', null, '2xl']} fw='500' lts='l' lh='l'> 静寂の隠れ宿 </Heading>
+        <Logo variant='footer' />
         <Text as='p' m='0' fz={['s', null, 'm']} lh='l' lts='s' o='p' max-sz='m'>
           都会の喧騒から離れ、心安らぐ自然の中で、至福のひとときを。
         </Text>
@@ -70,8 +58,8 @@ const snsLinks = [
                   ai='center'
                   fz='m'
                   td='none'
-                  py={['15', null, '12']}
-                  px={['5', null, '8']}
+                  py={['15', null, '0']}
+                  px={['5', null, '10']}
                   c='inherit'
                   hov='-o'
                 >
@@ -88,10 +76,25 @@ const snsLinks = [
           }
         </Flex>
 
-        <Cluster class='z--p003-footer_sns' g='20' jc={['center', null, 'end']} ai='end' fxw='wrap' w={['100%', null, 'auto']}>
+        <Cluster
+          g='20'
+          jc={['center', null, 'end']}
+          ai='end'
+          fxw='wrap'
+          w={['100%', null, 'auto']}
+        >
           {
             snsLinks.map(({ href, icon, label }) => (
-              <Link href={href} td='none' c='inherit' hov='-o' aria-label={label}>
+              <Link
+                href={href}
+                td='none'
+                c='inherit'
+                o='pp'
+                hov='-o'
+                hasTransition
+                aria-label={label}
+                exProps={{ style: { '--hov-o': 1 } }}
+              >
                 <Icon icon={icon} fz='xl' />
               </Link>
             ))
@@ -141,20 +144,5 @@ const snsLinks = [
       align-items: center;
       text-align: center;
     }
-  }
-
-  /*
-   * SNS アイコンの明るさ（0=透明 … 1=そのまま）。
-   * 数値だけ変えれば全体のトーンを調整できます。
-   */
-  .z--p003-footer_sns {
-    --p003-footer-sns-opacity: 0.55;
-  }
-  .z--p003-footer_sns :where(a) {
-    opacity: var(--p003-footer-sns-opacity);
-    transition: opacity 0.2s ease;
-  }
-  .z--p003-footer_sns :where(a:is(:hover, :focus-visible)) {
-    opacity: 1;
   }
 </style>

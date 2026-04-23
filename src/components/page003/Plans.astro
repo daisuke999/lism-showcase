@@ -27,7 +27,7 @@ const plans = [
   {
     title: '夕朝食・露天風呂付きゆったりプラン',
     description:
-      '季節の会席と朝の御膳、そして湯冷めしない露天風呂までひと続きの時間。お部屋でゆっくりとお食事をご堪能いただき、湯浴みの合間には庭園を眺めながらのんびりとお過ごしください。',
+      '季節の会席と朝の御膳、そして湯冷めしない露天風呂までひと続きの時間。お部屋でゆっくりとお食事をご堪能いただき、湯浴みの合間には庭園を眺めながらのんびりとお過ごしください。お飲み物の追加オーダーやアレルギー対応も可能ですので、ご予約時にお申し付けください。',
     stats: [
       { label: 'ご予約可能人数', value: '1〜2名様' },
       { label: '料金', value: '29,800円〜' },
@@ -59,7 +59,7 @@ const plans = [
   {
     title: '一泊朝食のみ・湯めぐり楽々プラン',
     description:
-      '夕食は外で自由に、朝は当宿の炊きたてご飯と汁物で。近隣の外湯めぐりや散策を楽しみたい方に、身軽な滞在スタイルをご提案します。',
+      '夕食は外で自由に、朝は当宿の炊きたてご飯と汁物で。近隣の外湯めぐりや散策を楽しみたい方に、身軽な滞在スタイルをご提案します。チェックアウト後の荷物預かりも承りますので、観光の前後にご活用ください。',
     stats: [
       { label: 'ご予約可能人数', value: '1〜3名様' },
       { label: '料金', value: '18,500円〜' },
@@ -95,7 +95,7 @@ const plans = [
   <Container isWrapper='l' hasGutter>
     <Stack g='50' ai='stretch' w='100%'>
       <Stack g='10' ai='center' ta='center'>
-        <Text as='p' m='0' fz='s' tt='upper' lts='l' ff='accent' o='pp'>Plan</Text>
+        <Text as='p' m='0' fz='m' lts='l' ff='base' o='pp'> Plan </Text>
         <Heading level='2' m='0' fz={['2xl', null, '3xl']} fw='500' lts='l'> 宿泊プラン </Heading>
       </Stack>
 
@@ -103,16 +103,7 @@ const plans = [
         {
           plans.map((plan) => (
             <Flex fxd={['column', 'column', 'row-reverse']} ai='stretch' g={['30', '30', '50']} w='100%'>
-              <Frame
-                as='figure'
-                class='z--p003-plans_media'
-                m='0'
-                ar='16/10'
-                ov='hidden'
-                bdrs='10'
-                w='100%'
-                min-w='0'
-              >
+              <Frame as='figure' class='z--p003-plans_media' m='0' ar='16/10' ov='hidden' bdrs='10' w='100%' min-w='0'>
                 <img
                   src={plan.image.src}
                   alt={plan.image.alt}
@@ -123,29 +114,39 @@ const plans = [
                 />
               </Frame>
 
-              <Lism fx='1' min-w='0'>
+              <Flex fxd='column' fx='1' min-w='0' min-h='0' w='100%' ai='stretch' jc='space-between'>
                 <Stack g='30' ai='stretch'>
-                  <Heading level='3' m='0' fz={['l', null, 'xl']} fw='500' lts='l' lh='l'>
+                  <Heading level='3' m='0' fz={['l', null, 'xl']} fw='500' lts='l'>
                     {plan.title}
                   </Heading>
-                  <Text as='p' m='0' fz='s' lh='l' lts='s' o='p'>
+                  <Text as='p' m='0' fz='s' lts='s' o='p'>
                     {plan.description}
                   </Text>
+                </Stack>
 
-                  <Stack bd bdrs='10' bdc='white:40%' ov='hidden' w='100%' m='0' p='0'>
-                    <Grid gtc='repeat(3, minmax(0, 1fr))' ai='stretch' w='100%'>
-                      {plan.stats.map((stat, i) => (
-                        <Stack g='10' p='15' ai='center' ta='center' bd-x-e={i < 2 ? '-' : undefined} bdc='white:35%'>
-                          <Text as='p' m='0' fz='xs' lts='s' o='pp'>
-                            {stat.label}
-                          </Text>
-                          <Text as='p' m='0' fz='l' fw='500' lts='l'>
-                            {stat.value}
-                          </Text>
-                        </Stack>
-                      ))}
-                    </Grid>
-                  </Stack>
+                <Stack g='30' ai='stretch' w='100%' fxsh='0'>
+                  <Grid
+                    gtc='repeat(3, minmax(0, 1fr))'
+                    util='cells'
+                    bd
+                    bdc='white:35%'
+                    bdrs='20'
+                    ov='hidden'
+                    w='100%'
+                    m='0'
+                    ai='stretch'
+                  >
+                    {plan.stats.map((stat) => (
+                      <Stack g='10' p='15' ai='center' ta='center'>
+                        <Text as='p' m='0' fz='xs' lts='s' o='pp'>
+                          {stat.label}
+                        </Text>
+                        <Text as='p' m='0' fz='m' fw='500' lts='l'>
+                          {stat.value}
+                        </Text>
+                      </Stack>
+                    ))}
+                  </Grid>
 
                   <Lism isContainer w='100%' min-w='0'>
                     <Button
@@ -155,7 +156,7 @@ const plans = [
                       w='100%'
                       fxd={['column', 'row', 'row']}
                       jc='center'
-                      ai='center'
+                      ai='flex-end'
                       g='10'
                       bgc='white'
                       c='black'
@@ -174,7 +175,7 @@ const plans = [
                     </Button>
                   </Lism>
                 </Stack>
-              </Lism>
+              </Flex>
             </Flex>
           ))
         }

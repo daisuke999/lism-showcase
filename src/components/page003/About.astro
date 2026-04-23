@@ -1,5 +1,9 @@
 ---
-import { Stack, Lism, Text, Heading, Grid, Frame } from 'lism-css/astro';
+/**
+ * 左右の高さ: Grid の `ai` stretch + 右列 `Flex` 内 `fx:1` の img（`min-h:0`）。
+ * 旧実装: `syncAboutRightMaxHeight` + `--p003-about-right-max-h`（復元は git 履歴参照）
+ */
+import { Stack, Lism, Text, Heading, Grid, Frame, Flex } from 'lism-css/astro';
 
 const imgLeft = {
   src: 'https://cdn.lism-css.com/img/japan/u-qQGCFQFlkT.jpg',
@@ -15,35 +19,29 @@ const imgRight = {
 };
 
 const bodyCopy =
-  '百余年の歴史を刻む、風格ある佇まい。古き良き日本の情緒を残しつつ、現代の快適さを融合させた空間で皆様をお迎えいたします。手入れの行き届いた日本庭園を眺め、静寂に包まれて味わう名湯は、格別な癒やし。受け継がれてきたおもてなしの心で、特別な旅を鮮やかに彩ります。';
+  '百余年の歴史を刻む、風格ある佇まい。古き良き日本の情緒を残しつつ、現代の快適さを融合させた空間で皆様をお迎えいたします。手入れの行き届いた日本庭園を眺め、静寂に包まれて味わう名湯は、格別な癒やし。受け継がれてきたおもてなしの心で、特別な旅を鮮やかに彩ります。四季折々の風情が移ろく庭先では、新緑の香り、深緑の日陰、紅葉の燃えるような美しさ、静かな雪化粧の趣まで、日々違う表情を呈します。佇まい、器、会席、湯、そして言葉少ななもてなし。それらすべてに至るまで、余韻深く、お客さまの記憶に残る一時を大切に紡ぎたい。都会を離れ、ここ静寂の隠れ宿で、心ほどけゆく至福のひとときをどうぞお味わいください。';
 ---
 
-<Lism
-  as='section'
-  id='about'
-  class='z--p003-about'
-  isContainer
-  py-s='50'
-  py-e='60'
-  bgc='black'
-  c='white'
->
+<Lism as='section' id='about' class='z--p003-about' isContainer py-s='60' py-e='60' bgc='black' c='white'>
   <Grid
     class='z--p003-about_grid'
-    gtc={['1fr', '1fr', 'minmax(0, calc(50vw - 96px)) minmax(0, 1fr)']}
+    gtc={['1fr', '1fr', 'minmax(0, 1fr) minmax(0, 50%)']}
     cg='0'
     rg={['30', '30', '0']}
-    ai='start'
+    ai={['start', 'start', 'stretch']}
   >
-    <Stack class='z--p003-about_col z--p003-about_col--left' g={['30', '30', '40']} px-e={['0', '0', '40']}>
+    <Stack
+      class='z--p003-about_col z--p003-about_col--left'
+      g={['40', '40', '50']}
+      px-e={['0', '0', '50']}
+      h={['auto', 'auto', '100%']}
+      min-h={['0', '0', '0']}
+      min-w='0'
+    >
       <Stack class='z--p003-about_stack' g='0' ai='start'>
-        <Text as='p' fz='s' m='0' mb='10' lts='w' tt='upper' ff='base' c='white' o='pp'>
-          About us
-        </Text>
-        <Heading level='2' fz={['2xl', null, '4xl']} fw='500' m='0' mb='50' lts='l'>
-          当宿について
-        </Heading>
-        <Text as='p' m='0' fz='m' lh='l' lts='s' c='white' o='p'>
+        <Text as='p' fz={['l', null, 'xl']} m='0' mb='10' lts='l' ff='base' c='white' o='pp'> About us </Text>
+        <Heading level='2' fz={['2xl', null, '4xl']} fw='500' m='0' mb='50' lts='l'> 当宿について </Heading>
+        <Text class='z--p003-about_body' as='p' m='0' fz='m' lh='l' lts='s' c='white' o='p'>
           {bodyCopy}
         </Text>
       </Stack>
@@ -58,40 +56,29 @@ const bodyCopy =
         />
       </Frame>
     </Stack>
-    <Lism as='figure' class='z--p003-about_figureRight' m='0'>
+    <Flex
+      as='figure'
+      class='z--p003-about_figureRight'
+      m='0'
+      fxd='column'
+      h={['auto', 'auto', '100%']}
+      min-h={['0', '0', '0']}
+      pb={['0', '0', '50']}
+      ov='hidden'
+    >
       <Lism
         as='img'
         class='z--p003-about_mediaRightImg'
         src={imgRight.src}
         alt={imgRight.alt}
+        fx={['0', '0', '1']}
+        min-h={['0', '0', '0']}
+        w='100%'
         exProps={{ width: imgRight.width, height: imgRight.height, loading: 'lazy', decoding: 'async' }}
       />
-    </Lism>
+    </Flex>
   </Grid>
 </Lism>
-
-<script>
-  const syncAboutRightMaxHeight = () => {
-    const root = document.getElementById('about');
-    const left = root?.querySelector('.z--p003-about_col--left') as HTMLElement | null | undefined;
-    const figureRight = root?.querySelector('.z--p003-about_figureRight') as HTMLElement | null | undefined;
-    if (!root || !left || !figureRight) return;
-    const mq = window.matchMedia('(min-width: 800px)');
-    if (!mq.matches) {
-      figureRight.style.removeProperty('--p003-about-right-max-h');
-      return;
-    }
-    figureRight.style.setProperty('--p003-about-right-max-h', `${left.offsetHeight}px`);
-  };
-
-  syncAboutRightMaxHeight();
-  window.addEventListener('resize', syncAboutRightMaxHeight);
-  document.addEventListener('astro:page-load', syncAboutRightMaxHeight);
-  const aboutLeftEl = document.getElementById('about')?.querySelector('.z--p003-about_col--left');
-  if (aboutLeftEl && typeof ResizeObserver !== 'undefined') {
-    new ResizeObserver(syncAboutRightMaxHeight).observe(aboutLeftEl);
-  }
-</script>
 
 <style>
   /*
@@ -110,7 +97,6 @@ const bodyCopy =
   }
   .z--p003-about_mediaRightImg {
     display: block;
-    inline-size: 100%;
     object-fit: cover;
   }
   @media (min-width: 800px) {
@@ -125,35 +111,21 @@ const bodyCopy =
       width: min(100%, var(--sz--l));
       min-width: 0;
     }
-    /* 左メディア: xl 左に寄せつつ、グリッドセル幅を超えない */
+    .z--p003-about_body {
+      padding-inline-start: var(--s50);
+    }
     .z--p003-about_figureLeft {
       align-self: start;
       margin-block-start: auto;
+      padding-block-start: var(--s30);
       margin-inline-start: calc(var(--p003-about-xl-inset) - var(--p003-about-l-inset));
       box-sizing: border-box;
       min-inline-size: 0;
       max-inline-size: 100%;
       inline-size: min(20rem, 100%);
     }
-    /* 右メディア: 左カラムの実高を上限（--p003-about-right-max-h は script で付与） */
-    .z--p003-about_figureRight {
-      align-self: start;
-      box-sizing: border-box;
-      block-size: var(--p003-about-right-max-h, auto);
-      max-block-size: var(--p003-about-right-max-h, min(70vh, 48rem));
-      overflow: hidden;
-      line-height: 0;
-    }
-    .z--p003-about_mediaRightImg {
-      block-size: 100%;
-      max-block-size: 100%;
-      inline-size: 100%;
-      object-fit: cover;
-    }
   }
-  /* Lism の md は 800px 未満（prop-responsive.md） */
   @media (max-width: 799px) {
-    /* グリッドのガターはトークン外の --gutter-size のためメディアクエリで維持 */
     .z--p003-about_grid {
       padding-inline: var(--gutter-size);
       box-sizing: border-box;

@@ -1,6 +1,7 @@
 ---
 import { Lism, Stack, Container, Grid, Flex, Link, BoxLink, Icon, Center, Inline, ListItem } from 'lism-css/astro';
 import { Modal } from '@lism-css/ui/astro';
+import Logo from '@/components/page003/Logo.astro';
 
 const navItems = [
   { href: '#about', ja: '当宿について', en: 'About' },
@@ -15,18 +16,7 @@ const navItems = [
   <Container class='z--header_bar' isWrapper='xl' mx='auto' hasGutter h='100%'>
     <Grid class='z--header_inner' gtc='minmax(0,auto) 1fr' ai='center' h='100%' g='20'>
       <Stack class='z--header_logo'>
-        <Link
-          class='z--header_logoLink'
-          href='#'
-          td='none'
-          fw='bold'
-          lts='l'
-          fz={['xl', null, '2xl']}
-          lh='s'
-          whs='nowrap'
-        >
-          静寂の隠れ宿
-        </Link>
+        <Logo variant='header' href='#' />
       </Stack>
       <Flex class='z--header_actions' jc='fe' g='20' ai='c'>
         <Flex
@@ -37,7 +27,7 @@ const navItems = [
           m='0'
           p='0'
           fxw='nowrap'
-          g={['15', null, '20']}
+          g={['15', null, '30']}
         >
           {
             navItems.map(({ href, ja, en }) => (
@@ -66,8 +56,8 @@ const navItems = [
           }
         </Flex>
         <Modal.OpenBtn modalId='p003-menu' d={['block', null, 'none']}>
-          <Center class='z--menuOpenBtn' p='10' bd bdrs='10'>
-            <Icon class='z--subMenu_buttonIcon' icon='menu' c='white' />
+          <Center p='6' ai='c' jc='c'>
+            <Icon icon='menu' c='white' fz='2xl' aria-hidden='true' />
           </Center>
         </Modal.OpenBtn>
       </Flex>
@@ -78,27 +68,31 @@ const navItems = [
   <Modal.Inner layout='stack' pos='relative' w='100%' p='30' bdrs='20' bxsh='50'>
     <Modal.CloseBtn modalId='p003-menu' autofocus pos='absolute' t='0' r='0' z='1' fz='xl' p='10' m='15' />
     <Modal.Body layout='stack' g='30' py='40'>
-      <Stack class='z--header_menuNav u--divide' p='0' ov='clip'>
+      <Stack as='ul' class='z--header_menuNav' g='0' m='0' p='0' ov='clip'>
         {
           navItems.map(({ href, ja, en }) => (
-            <BoxLink href={href} layout='grid' gtc='1fr auto' ai='c' fz='l' td='none' py='15' px='5'>
-              <Stack g='4'>
-                <Inline>{ja}</Inline>
-                <Inline as='span' class='z--header_menuNav_en' fz='s' m='0' o='pp'>
-                  {en}
-                </Inline>
-              </Stack>
-              <Icon icon='caret-right' fz='s' o='pp' />
-            </BoxLink>
+            <ListItem>
+              <BoxLink href={href} layout='grid' gtc='1fr auto' ai='c' fz='l' td='none' py='15' px='5' w='100%'>
+                <Stack g='4'>
+                  <Inline>{ja}</Inline>
+                  <Inline as='span' class='z--header_menuNav_en' fz='s' m='0' o='pp'>
+                    {en}
+                  </Inline>
+                </Stack>
+                <Icon icon='caret-right' fz='s' o='pp' />
+              </BoxLink>
+            </ListItem>
           ))
         }
-        <BoxLink href='#contact' layout='grid' gtc='1fr auto' ai='c' fz='l' td='none' py='15' px='5'>
-          <Stack g='4'>
-            <Inline>ご予約はこちら</Inline>
-            <Inline as='span' class='z--header_menuNav_en' fz='s' m='0' o='pp'> Reservation </Inline>
-          </Stack>
-          <Icon icon='caret-right' fz='s' o='pp' />
-        </BoxLink>
+        <ListItem>
+          <BoxLink href='#reservation' layout='grid' gtc='1fr auto' ai='c' fz='l' td='none' py='15' px='5' w='100%'>
+            <Stack g='4'>
+              <Inline>ご予約はこちら</Inline>
+              <Inline as='span' class='z--header_menuNav_en' fz='s' m='0' o='pp'> Reservation </Inline>
+            </Stack>
+            <Icon icon='caret-right' fz='s' o='pp' />
+          </BoxLink>
+        </ListItem>
       </Stack>
     </Modal.Body>
   </Modal.Inner>
@@ -122,10 +116,35 @@ const navItems = [
   .z--header :where(a) {
     color: inherit;
   }
-  .z--header_logoLink {
+  /**
+   * モーダル内ナビ: Footer と同様に `li:not(:last-child)` + `border-block-end: dashed`（`u--divide` は未使用）
+   * フッターは黒地へ `color-mix(…, var(--white) 38%, …)`。モーダルは `.c--modal_inner` の `var(--base)` 地のため `var(--text)` を使用
+   * @see Footer.astro / tokens.md --text / `color-mix`
+   */
+  .z--header_menuNav {
+    list-style: none;
+  }
+  .z--header_menuNav > :global(li) {
+    list-style: none;
+  }
+  .z--header_menuNav > :global(li:not(:last-child)) {
+    border-block-end: 1px dashed color-mix(in srgb, var(--text) 38%, transparent);
+  }
+  /* md 以上: has--gutter の左右に s20 を上乗せ（Lism: `--gutter-size` 既定は `--s30`） */
+  @media (min-width: 800px) {
+    .z--header_bar {
+      padding-inline: calc(var(--gutter-size) + var(--s20));
+    }
+  }
+  /**
+   * ロゴは Logo.astro 内で描画されるため、Astro スコープ外。:global で子コンポーネントの a に一致させる。
+   * @see https://docs.astro.build/en/guides/styling/#global-styles
+   */
+  :global(.z--header_logoLink) {
     transform-origin: left center;
     animation: z--header_logo_p003 linear both;
     animation-timeline: scroll(root);
+    /* 継承: 先祖 `.z--header` の `--z--header-animation-range` */
     animation-range: var(--z--header-animation-range);
   }
   /**
@@ -145,8 +164,12 @@ const navItems = [
     }
   }
   @keyframes z--header_logo_p003 {
+    from {
+      transform: scale(1);
+    }
     to {
-      transform: scale(0.9);
+      /* 3xl 時も以前（2xl×0.9 相当）のスクロール後サイズ感に近づける */
+      transform: scale(0.75);
     }
   }
   .z--headerNav_en {
@@ -162,17 +185,6 @@ const navItems = [
       max-height: 0;
       margin: 0;
       padding: 0;
-    }
-  }
-  .z--menuOpenBtn {
-    border-color: rgba(255, 255, 255, 0.45);
-    animation: z--menuOpenBtn_p003 linear both;
-    animation-timeline: scroll(root);
-    animation-range: var(--z--header-animation-range);
-  }
-  @keyframes z--menuOpenBtn_p003 {
-    to {
-      border-color: rgba(255, 255, 255, 0.38);
     }
   }
 </style>

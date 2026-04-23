@@ -17,7 +17,7 @@ import { Button } from '@lism-css/ui/astro';
   px='20'
   bdrs='99'
   bd
-  bdc='white'
+  bdc='white:35%'
   bgc='black'
   c='white'
   bxsh='20'
@@ -27,8 +27,8 @@ import { Button } from '@lism-css/ui/astro';
   lts='s'
   ta='center'
   style={{
-    right: 'max(var(--s20), env(safe-area-inset-right))',
-    bottom: 'max(var(--s20), env(safe-area-inset-bottom))',
+    right: 'max(var(--s30), env(safe-area-inset-right))',
+    bottom: 'max(var(--s30), env(safe-area-inset-bottom))',
   }}
 >
   <Inline as='span' m='0' fz='s' fw='500' lts='s'>
@@ -44,10 +44,10 @@ import { Button } from '@lism-css/ui/astro';
   .z--reservationFab.c--button {
     --bgc: var(--black);
     --c: var(--white);
-    --bdc: var(--white);
+    min-width: 12rem;
   }
   .z--reservationFab:focus-visible {
-    outline: 2px solid var(--white);
+    outline: 2px solid color-mix(in srgb, var(--white) 50%, transparent);
     outline-offset: 3px;
   }
 </style>

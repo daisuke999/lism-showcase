@@ -59,23 +59,20 @@ const intro =
   <!-- Plan セクションよりわずかに明るいチャコール: 黒ベースの上に薄い白膜（Layer + bgc トークン） -->
   <Layer aria-hidden='true' bgc='white:6%' />
   <Container isWrapper='l' hasGutter pos='relative' z='1'>
-    <Stack g={['40', null, '50']} ai='stretch' w='100%'>
+    <Stack g={['30', null, '40']} ai='stretch' w='100%'>
       <!-- jc=start / 狭い gap で見出しブロックのすぐ右にリード文（max-sz で折返し幅を制限） -->
       <Flex
         fxd={['column', null, 'row']}
-        g={['20', null, '30']}
+        g={['20', null, '50']}
         ai={['start', null, 'end']}
         jc='start'
         w='100%'
         fxw='wrap'
       >
-        <Stack g='10' ai='start' min-w='0' fxsh='0'>
-          <Text as='p' m='0' fz='s' tt='upper' lts='l' ff='accent' o='pp'>Facilities</Text>
-          <Flex g='15' ai='end' jc='start' w='100%' class='z--p003-facilities_headingRow'>
-            <Heading level='2' m='0' fz={['xl', null, '2xl']} fw='500' lts='l'> 館内設備 </Heading>
-            <Lism as='span' aria-hidden='true' class='z--p003-facilities_rule' w='1px' bgc='white:35%' />
-          </Flex>
-        </Stack>
+        <Flex fxd='column' g='10' ai='start' min-w='0' fxsh='0' p-e={['0', null, '40']}>
+          <Text as='p' m='0' fz='s' lts='l' ff='base' o='pp'> Facilities </Text>
+          <Heading level='2' m='0' fz={['xl', null, '2xl']} fw='500' lts='l'> 館内設備 </Heading>
+        </Flex>
         <Text as='p' m='0' fz='s' lh='l' lts='s' o='p' max-sz='s' min-w='0' fx='1'>
           {intro}
         </Text>
@@ -84,14 +81,14 @@ const intro =
       <Grid gtc={['1fr', null, 'repeat(2, minmax(0, 1fr))']} g={['20', null, '30']} ai='stretch'>
         {
           facilities.map((item) => (
-            <Lism bd bdrs='10' bdc='white:35%' ov='hidden' w='100%' p={['20', null, '30']}>
+            <Lism bd bdrs='20' bdc='white:35%' ov='hidden' w='100%' p={['20', null, '30']}>
               <Flex g={['20', null, '30']} ai='center' w='100%' min-w='0'>
                 <Icon icon={item.icon} size='48px' c='white' />
                 <Stack g='10' ai='stretch' min-w='0' fx='1'>
-                  <Heading level='3' m='0' fz={['m', null, 'l']} fw='500' lts='l' lh='l'>
+                  <Heading level='3' m='0' fz={['m', null, 'l']} fw='500' lts='l'>
                     {item.title}
                   </Heading>
-                  <Text as='p' m='0' fz='s' lh='l' lts='s' o='p'>
+                  <Text as='p' m='0' fz='s' lts='s' o='p'>
                     {item.description}
                   </Text>
                 </Stack>
@@ -103,21 +100,3 @@ const intro =
     </Stack>
   </Container>
 </Lism>
-
-<style>
-  /*
-   * 縦線: 見出し「館内設備」の右側・下辺に揃える（親 Flex は ai:end）。
-   * md 未満（Lism のコンテナ幅 800px 未満）では非表示 — prop-responsive と同じ @container。
-   */
-  .z--p003-facilities_rule {
-    display: none;
-    flex-shrink: 0;
-    align-self: flex-end;
-    block-size: 2.75em;
-  }
-  @container (min-width: 800px) {
-    .z--p003-facilities_rule {
-      display: block;
-    }
-  }
-</style>

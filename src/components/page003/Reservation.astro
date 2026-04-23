@@ -66,39 +66,94 @@ const reservationSites: readonly SiteCard[] = [
   <Layer bgc='black:50%' exProps={{ 'aria-hidden': 'true' }} />
 
   <Container isWrapper='l' hasGutter pos='relative' z='1' max-sz='full'>
-    <Grid gtc={['1fr', null, 'minmax(0, 1.05fr) repeat(2, minmax(0, 1fr))']} g={['40', null, '50']} ai='stretch'>
-      <Stack g='20' ai='start' min-w='0'>
-        <Text as='p' m='0' fz='s' tt='upper' lts='l' ff='accent' o='pp'>
-          Reservation
-        </Text>
-        <Heading level='2' m='0' fz={['2xl', null, '3xl']} fw='500' lts='l'>
-          ご予約はこちら
-        </Heading>
+    <Grid
+      isContainer
+      gtc={['1fr', null, 'minmax(0, 1.05fr) repeat(2, minmax(0, 1fr))']}
+      g={['40', null, '50']}
+      ai='stretch'
+    >
+      <Stack g='30' ai='start' min-w='0'>
+        <Stack g='10' ai='start'>
+          <Text as='p' m='0' fz='m' lts='l' ff='base' o='pp'> Reservation </Text>
+          <Heading level='2' m='0' fz={['2xl', null, '3xl']} fw='500' lts='l'> ご予約はこちら </Heading>
+        </Stack>
         <Text as='p' m='0' fz='s' lh='l' lts='s' o='p' max-sz='m'>
           お好みの予約サイトからご予約いただけます。予約完了後は各サイトから確認メールが届きます。キャンセルや変更はご利用のサイトの案内に従ってお手続きください。
         </Text>
       </Stack>
 
-      {
-        reservationSites.map((site) => (
-          <Lism bgc='white' c='text' bdrs='10' ov='hidden' min-w='0' class='z--p003-reservation_card'>
-            <Frame as='figure' m='0' ar='16/10' ov='hidden' bdrs='0'>
-              <img src={site.image.src} alt={site.image.alt} width={site.image.width} height={site.image.height} loading='lazy' decoding='async' />
-            </Frame>
-            <Stack g='15' p='20' ai='stretch'>
-              <Heading level='3' m='0' fz='l' fw='600' lts='l' lh='l'>
-                {site.title}
-              </Heading>
-              <Text as='p' m='0' fz='s' lh='l' c='text-2' lts='s'>
-                {site.body}
-              </Text>
-              <Button href={site.href} w='100%' bdrs='10' py='15' px='20' fz='s' fw='500' lts='s' ta='center'>
-                サイトに移動する
-              </Button>
-            </Stack>
-          </Lism>
-        ))
-      }
+      <Grid
+        w='100%'
+        min-w='0'
+        gtc={['1fr', null, 'repeat(2, minmax(0, 1fr))']}
+        gtr={[null, null, 'auto 1fr auto']}
+        cg={['30', null, '40']}
+        rg={['40', null, '0']}
+        gc={['1/-1', null, '2/-1']}
+      >
+        {
+          reservationSites.map((site, i) => (
+            <Grid
+              pos='relative'
+              bgc='white'
+              c='text'
+              bdrs='20'
+              ov='hidden'
+              min-w='0'
+              w='100%'
+              gtr={['auto 1fr auto', null, 'subgrid']}
+              gr={[null, null, '1/4']}
+              gc={i === 0 ? ['1/-1', null, '1/2'] : ['1/-1', null, '2/3']}
+              set='var:bdrsInner'
+            >
+              <Frame as='figure' m='0' ar='16/10' ov='hidden' bdrs='0'>
+                <img
+                  src={site.image.src}
+                  alt={site.image.alt}
+                  width={site.image.width}
+                  height={site.image.height}
+                  loading='lazy'
+                  decoding='async'
+                />
+              </Frame>
+              <Stack
+                g='15'
+                ai='stretch'
+                min-h='0'
+                fx='1'
+                w='100%'
+                m='0'
+                px-s={['20', null, '30']}
+                px-e={['20', null, '30']}
+                py-s={['20', null, '30']}
+                py-e='0'
+                ov='auto'
+              >
+                <Heading level='3' m='0' fz='l' fw='600' lts='l' lh='l'>
+                  {site.title}
+                </Heading>
+                <Text as='p' m='0' fz='s' c='text-2' lts='s' o='p'>
+                  {site.body}
+                </Text>
+              </Stack>
+              <Lism
+                w='100%'
+                m='0'
+                px-s={['20', null, '30']}
+                px-e={['20', null, '30']}
+                py-e={['20', null, '30']}
+                py-s='15'
+              >
+                <Lism w='100%' m='0'>
+                  <Button href={site.href} w='100%' bdrs='inner' py='15' px='20' fz='s' fw='500' lts='s' ta='center'>
+                    サイトに移動する
+                  </Button>
+                </Lism>
+              </Lism>
+            </Grid>
+          ))
+        }
+      </Grid>
     </Grid>
   </Container>
 </Lism>
