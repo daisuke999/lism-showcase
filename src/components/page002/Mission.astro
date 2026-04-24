@@ -1,43 +1,171 @@
 ---
-import {
-  Stack,
-  Container,
-  Icon,
-  Cluster,
-  Text,
-  Inline,
-  WithSide,
-  Box,
-  Frame,
-  Media,
-  Heading,
-} from 'lism-css/astro';
+import { Lism, Stack, Flex, Frame, Heading, Text } from 'lism-css/astro';
+
+const missionImage = {
+  src: 'https://cdn.lism-css.com/img/room/u-MojU9rQhZn.jpg',
+  alt: '明るいリビング空間。ソファ、ラグ、大きな窓、観葉植物が映える室内',
+  width: 1920,
+  height: 1280,
+} as const;
+
+const body =
+  '移ろう季節の最も美しい一瞬を閉じ込めた、絶景の宿。自然との調和をテーマにした空間は、まるで風景画の一部になったような錯覚を覚えます。光と風、木洩れ陽の揺らぎが、滞在の時間をそっと彩り、日々の喧騒を手放した旅人の心に静かな余白を取り戻すでしょう。窓辺の一杯、湯上がりの一休み。そこに差し込む穏やかな時間の流れを、ぜひそのまま心に持ち帰っていただきたいと願っています。';
 ---
 
-<Box pos='relative' py='50' my-s='60'>
-  <Box class='z--mission_bg' pos='absolute' i='0' w='100%' h='100%' bgc='base-2' />
-  <Container class='z--mission_inner' isWrapper='l' pos='relative' jc='c' ai='c' g='30' hasGutter>
-    <WithSide sideW='12rem' mainW='20rem' g='20'>
-      <Stack jc='c' g='40'>
-        <Stack>
-          <Heading level='2' fz='5xl' lts='l'>Mission</Heading>
-          <Text fz='xl' fw='bold' lts='l'> 私たちのミッション</Text>
+<Lism
+  as='section'
+  id='mission'
+  isContainer
+  class='z--p002-mission'
+  pos='relative'
+  py='50'
+  my-s='60'
+  ov='hidden'
+>
+  <Lism class='z--p002-mission_bg' exProps={{ 'aria-hidden': 'true' }} />
+  <Flex
+    fxd={['column', null, 'row']}
+    ai={['start', null, 'stretch']}
+    g={['40', null, '50']}
+    pos='relative'
+    z='1'
+    w='100%'
+  >
+    <Flex
+      class='z--p002-mission_text'
+      fxd='column'
+      ai='start'
+      min-w='0'
+      w='100%'
+    >
+      <Stack g='30' ai='start'>
+        <Stack g='10' ai='start'>
+          <Heading level='2' m='0' fz='5xl' fw='bold' lts='l' c='text'>
+            Mission
+          </Heading>
+          <Text as='p' m='0' fz='xl' fw='bold' lts='l' c='text'>
+            私たちの使命
+          </Text>
         </Stack>
-        <p>
-          Lorem ipsum dolor sit amet. Consectetur adipiscing elit, sed do eiusmod tempor Incididunt ut. Labore et dolore
-          magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut.
-        </p>
+        <Text as='p' m='0' fz='m' lh='l' lts='s' c='text-2'>
+          {body}
+        </Text>
       </Stack>
-      <Frame>
-        <Media
-          src='https://placehold.co/1000x1000/e2e8f0/0f172a/png?text=Mission'
-          alt='Mission'
-          width={1000}
-          height={1000}
+    </Flex>
+    <!-- Frame 本体に padding すると l--frame のトークンと競合しやすいため、拡縮用ラッパーに右ガターを乗せる -->
+    <Lism class='z--p002-mission_figureShell' min-w='0' w='100%'>
+      <Frame
+        as='figure'
+        class='z--p002-mission_figure'
+        m='0'
+        w='100%'
+        min-w='0'
+        jslf='start'
+        ar='3/2'
+        ov='hidden'
+        pos='relative'
+      >
+        <img
+          src={missionImage.src}
+          width={missionImage.width}
+          height={missionImage.height}
+          alt={missionImage.alt}
+          loading='lazy'
+          decoding='async'
+          class='z--p002-mission_img'
         />
       </Frame>
-    </WithSide>
-  </Container>
-</Box>
+    </Lism>
+  </Flex>
+</Lism>
 
-<style></style>
+<style>
+  @layer lism-component {
+    /* l 左: ビュー基準。右端（xl 相当）: 子孫で 100cqi＝#mission 幅 main 内でも正しい */
+    .z--p002-mission {
+      --_mission-l-pad: max(
+        var(--gutter-size, var(--s30)),
+        calc((100vw - min(100vw, var(--sz--l, 1280px))) / 2)
+      );
+    }
+    .z--p002-mission_bg {
+      position: absolute;
+      inset-block: 0;
+      z-index: 0;
+      right: 0;
+      background-color: var(--base-2, #ececec);
+      pointer-events: none;
+    }
+    @container (min-width: 800px) {
+      .z--p002-mission_bg {
+        left: calc(var(--_mission-l-pad) + 10rem);
+      }
+    }
+    @container not (min-width: 800px) {
+      .z--p002-mission_bg {
+        left: 10rem;
+      }
+    }
+    .z--p002-mission_text {
+      position: relative;
+      z-index: 1;
+      box-sizing: border-box;
+      max-width: 100%;
+      padding-inline-start: var(--_mission-l-pad);
+    }
+    @container (min-width: 800px) {
+      .z--p002-mission_text {
+        flex: 1 1 0;
+        min-width: 0;
+        padding-inline-end: var(--s20);
+        /* 行内で交差軸に伸長（min-h:auto 由来の上寄せに縛られない）→ 主軸方向の center が効く */
+        align-self: stretch;
+        justify-content: center;
+      }
+    }
+    .z--p002-mission_figure {
+      box-sizing: border-box;
+    }
+    .z--p002-mission_figureShell {
+      position: relative;
+      z-index: 1;
+      box-sizing: border-box;
+    }
+    @container (min-width: 800px) {
+      .z--p002-mission_figureShell {
+        flex: 1 1 0;
+        padding-inline-end: max(
+          1.25rem,
+          var(--gutter-size, var(--s30)),
+          calc((100cqi - min(100cqi, var(--sz--xl, 90rem))) / 2)
+        );
+      }
+    }
+    @container not (min-width: 800px) {
+      .z--p002-mission_text {
+        justify-content: flex-start;
+        padding-inline-end: max(
+          1.25rem,
+          var(--gutter-size, var(--s30)),
+          calc((100cqi - min(100cqi, var(--sz--xl, 90rem))) / 2)
+        );
+      }
+      .z--p002-mission_figureShell {
+        padding-inline-start: var(--_mission-l-pad);
+        padding-inline-end: max(
+          1.25rem,
+          var(--gutter-size, var(--s30)),
+          calc((100cqi - min(100cqi, var(--sz--xl, 90rem))) / 2)
+        );
+      }
+    }
+    .z--p002-mission_img {
+      position: absolute;
+      inset: 0;
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+</style>

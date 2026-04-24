@@ -67,14 +67,10 @@ const faqImage = {
 
 <Lism as='section' id='faq' bgc='base' c='text' py='60'>
   <Container isWrapper='l' hasGutter>
-    <Grid class='z--p003-faq_layout' w='100%' g={['30', null, '50']} ai='stretch'>
+    <Grid class='z--p003-faq_layout' w='100%' g='50' ai='stretch'>
       <Stack class='z--p003-faq_head' g='10' ai='center' ta='center'>
-        <Text as='p' m='0' fz='m' lts='l' ff='base' c='text-2' o='pp'>
-          FAQ
-        </Text>
-        <Heading level='2' m='0' fz={['2xl', null, '3xl']} fw='500' lts='l'>
-          よくあるご質問
-        </Heading>
+        <Text as='p' m='0' fz='m' lts='l' ff='base' c='text-2' o='pp'> FAQ </Text>
+        <Heading level='2' m='0' fz={['2xl', null, '3xl']} fw='500' lts='l'> よくあるご質問 </Heading>
       </Stack>
 
       <Frame
@@ -101,9 +97,21 @@ const faqImage = {
         <Accordion.Root g='0' p='0' ov='visible'>
           {
             faqItems.map((item) => (
-              <Accordion.Item bgc='transparent' bdrs='0' bxsh='0' ov='visible' {...(item.defaultOpen ? { 'data-opened': '' } : {})}>
+              <Accordion.Item
+                bgc='transparent'
+                bdrs='0'
+                bxsh='0'
+                ov='visible'
+                {...(item.defaultOpen ? { 'data-opened': '' } : {})}
+              >
                 <Accordion.Heading p='0'>
-                  <Accordion.Button fw='500' fz={['s', null, 'm']} ta='start' py='20' isOpen={item.defaultOpen === true}>
+                  <Accordion.Button
+                    fw='500'
+                    fz={['s', null, 'm']}
+                    ta='start'
+                    py='20'
+                    isOpen={item.defaultOpen === true}
+                  >
                     {item.question}
                   </Accordion.Button>
                 </Accordion.Heading>

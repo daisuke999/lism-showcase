@@ -114,7 +114,7 @@ const plans = [
                 />
               </Frame>
 
-              <Flex fxd='column' fx='1' min-w='0' min-h='0' w='100%' ai='stretch' jc='space-between'>
+              <Flex g='30' fxd='column' fx='1' min-w='0' min-h='0' w='100%' ai='stretch' jc='space-between'>
                 <Stack g='30' ai='stretch'>
                   <Heading level='3' m='0' fz={['l', null, 'xl']} fw='500' lts='l'>
                     {plan.title}
@@ -156,7 +156,7 @@ const plans = [
                       w='100%'
                       fxd={['column', 'row', 'row']}
                       jc='center'
-                      ai='flex-end'
+                      ai={['center', 'center', 'flex-end']}
                       g='10'
                       bgc='white'
                       c='black'
@@ -188,14 +188,14 @@ const plans = [
   /*
    * Lism の md は viewport の @media ではなく @container (min-width: 800px)（prop-responsive.md）。
    * また -max-w:100%（max-width）と max-inline-size の併用や、flex 子の % 解決で上限が効かないことがあるため、
-   * コンテナクエリ内で max-width + cqi を使い、fxd の row 切替と同じ基準で min(36rem, コンテナの半分) に揃える。
+   * コンテナクエリ内で max-width + cqi を使い、fxd の row 切替と同じ基準で min(32rem, 40cqi) に揃える（40cqi はクエリコンテナ行内幅の 40% 相当の上限）。
    */
   .z--p003-plans_media {
     max-width: 100%;
   }
   @container (min-width: 800px) {
     .z--p003-plans_media {
-      max-width: min(36rem, 50cqi);
+      max-width: min(32rem, 40cqi);
     }
   }
 

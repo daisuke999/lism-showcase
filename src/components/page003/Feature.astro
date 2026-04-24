@@ -16,22 +16,22 @@ const body =
   '四季の移ろいが最も美しい瞬間を切り取る当宿は、まるで一幅の絵画のように自然と調和いたします。名湯と旬の味わいを、大切な方々とご一緒にお楽しみください。桜の頃は窓越しに淡い色の雪の様子を、夏は深い緑と風鈴の音を、秋は燃えるような紅葉と澄んだ空を、冬は静かな雪化粧と湯けむりを、それぞれ五感で味わえます。';
 ---
 
-<Lism as='section' id='experience' class='z--p003-experience' bgc='base' c='text' py='60'>
+<Lism as='section' id='feature' class='z--p003-feature' bgc='base' c='text' py='60'>
   <Container isWrapper='l' hasGutter isContainer pos='relative'>
     <Grid
-      class='z--p003-experience_grid'
+      class='z--p003-feature_grid'
       gtc={['1fr', '1fr', 'minmax(0, 1.05fr) minmax(0, 1fr)']}
       rg={['30', '30', '0']}
       cg={['0', '0', '50']}
       ai={['stretch', 'stretch', 'stretch']}
     >
-      <Lism as='figure' class='z--p003-experience_figure' m='0' ov='hidden' bdrs='10'>
+      <Lism as='figure' class='z--p003-feature_figure' m='0' ov='hidden' bdrs='10'>
         <img src={img.src} alt={img.alt} width={img.width} height={img.height} loading='lazy' decoding='async' />
       </Lism>
-      <Stack class='z--p003-experience_textCol' pos='relative' g='0' ai='stretch' min-w='0' h='100%'>
-        <Lism as='span' class='z--p003-experience_watermark' exProps={{ 'aria-hidden': 'true' }}> Experience </Lism>
+      <Stack class='z--p003-feature_textCol' pos='relative' g='0' ai='stretch' min-w='0' h='100%'>
+        <Lism as='span' class='z--p003-feature_watermark' exProps={{ 'aria-hidden': 'true' }}> Experience </Lism>
         <Flex
-          class='z--p003-experience_copyRow'
+          class='z--p003-feature_copyRow'
           fxd={['column', 'column', 'row']}
           g={['50', '50', '40']}
           ai='stretch'
@@ -40,17 +40,17 @@ const body =
           min-h='0'
           w='100%'
         >
-          <Heading level='2' class='z--p003-experience_title' m='0' fz={['2xl', null, '3xl']} fw='600' lts='l'>
-            <Box class='z--p003-experience_titleInner' lts='l'>
-              <Inline class='z--p003-experience_titleLine1'>特別な旅と</Inline>
-              <Inline class='z--p003-experience_titleLine2'>静寂の体験</Inline>
+          <Heading level='2' class='z--p003-feature_title' m='0' fz={['2xl', null, '3xl']} fw='600' lts='l'>
+            <Box class='z--p003-feature_titleInner' lts='l'>
+              <Inline class='z--p003-feature_titleLine1'>特別な旅と</Inline>
+              <Inline class='z--p003-feature_titleLine2'>静寂の体験</Inline>
             </Box>
           </Heading>
-          <Stack class='z--p003-experience_bodyStack' g='30' ai='start' min-w='0'>
-            <Text as='p' class='z--p003-experience_lead' m='0' fz={['l', null, 'xl']} fw='600' lts='l' c='text'>
+          <Stack class='z--p003-feature_bodyStack' g='30' ai='start' min-w='0'>
+            <Text as='p' class='z--p003-feature_lead' m='0' fz={['l', null, 'xl']} fw='600' lts='l' c='text'>
               {lead}
             </Text>
-            <Text as='p' class='z--p003-experience_body' m='0' fz='m' lh='l' lts='s' c='text' max-w='100%'>
+            <Text as='p' class='z--p003-feature_body' m='0' fz='m' lh='l' lts='s' c='text' max-w='100%'>
               {body}
             </Text>
           </Stack>
@@ -62,112 +62,113 @@ const body =
 
 <style>
   /* 左端プル: コンテナ幅 l + gutter と整合 */
-  .z--p003-experience {
-    --p003-exp-pull: max(var(--gutter-size, 0px), calc((100vw - min(100vw, var(--sz--l))) / 2));
-    --p003-exp-figure-max-h: 540px;
+  .z--p003-feature {
+    --p003-feature-pull: max(var(--gutter-size, 0px), calc((100vw - min(100vw, var(--sz--l))) / 2));
+    --p003-feature-figure-max-h: 540px;
     position: relative;
   }
-  @media (max-width: 799px) {
-    .z--p003-experience_textCol {
+  /* isContainer 祖先幅: Lism md と同じ (min-width: 800px) / not で補集合（max-width:799 との境目ギャップを避ける） */
+  @container not (min-width: 800px) {
+    .z--p003-feature_textCol {
       order: 1;
     }
-    .z--p003-experience_figure {
+    .z--p003-feature_figure {
       order: 2;
       margin-inline: 0;
       inline-size: 100%;
       max-inline-size: none;
       aspect-ratio: 16 / 10;
-      max-block-size: var(--p003-exp-figure-max-h);
+      max-block-size: var(--p003-feature-figure-max-h);
     }
-    .z--p003-experience_bodyStack {
+    .z--p003-feature_bodyStack {
       align-self: stretch;
       margin-inline-start: 0;
       max-inline-size: 100%;
     }
-    .z--p003-experience_lead,
-    .z--p003-experience_body {
+    .z--p003-feature_lead,
+    .z--p003-feature_body {
       text-align: start;
       text-wrap: pretty;
     }
-    .z--p003-experience_title {
+    .z--p003-feature_title {
       align-self: end;
     }
   }
-  .z--p003-experience_figure {
+  .z--p003-feature_figure {
     position: relative;
     box-sizing: border-box;
     align-self: stretch;
-    max-block-size: var(--p003-exp-figure-max-h);
+    max-block-size: var(--p003-feature-figure-max-h);
   }
-  .z--p003-experience_figure > img {
+  .z--p003-feature_figure > img {
     display: block;
     width: 100%;
     height: 100%;
     object-fit: cover;
   }
-  @media (min-width: 800px) {
-    .z--p003-experience_figure {
-      margin-inline-start: calc(-1 * var(--p003-exp-pull));
-      width: calc(100% + var(--p003-exp-pull));
+  @container (min-width: 800px) {
+    .z--p003-feature_figure {
+      margin-inline-start: calc(-1 * var(--p003-feature-pull));
+      width: calc(100% + var(--p003-feature-pull));
       max-width: none;
       border-radius: 0 var(--bdrs--10) var(--bdrs--10) 0;
-      min-height: min(22rem, 52vw, var(--p003-exp-figure-max-h));
+      min-height: min(22rem, 52vw, var(--p003-feature-figure-max-h));
     }
-    .z--p003-experience_figure > img {
-      min-height: min(22rem, 52vw, var(--p003-exp-figure-max-h));
+    .z--p003-feature_figure > img {
+      min-height: min(22rem, 52vw, var(--p003-feature-figure-max-h));
     }
   }
-  .z--p003-experience_textCol {
+  .z--p003-feature_textCol {
     min-height: 0;
     overflow-x: visible;
   }
   /* 2列時: 見出しは上・本文は下（上端・下端揃え） */
-  @media (min-width: 800px) {
-    .z--p003-experience_copyRow {
+  @container (min-width: 800px) {
+    .z--p003-feature_copyRow {
       display: grid;
       grid-template-columns: 1fr auto;
       grid-template-rows: 1fr auto;
       min-height: min(22rem, 52vw);
     }
-    .z--p003-experience_title {
+    .z--p003-feature_title {
       grid-column: 2;
       grid-row: 1 / -1;
       align-self: start;
       justify-self: end;
     }
-    .z--p003-experience_bodyStack {
+    .z--p003-feature_bodyStack {
       grid-column: 1;
       grid-row: 2;
       align-self: end;
       max-inline-size: min(100%, 26rem);
     }
-    .z--p003-experience_lead,
-    .z--p003-experience_body {
+    .z--p003-feature_lead,
+    .z--p003-feature_body {
       text-align: start;
     }
   }
-  .z--p003-experience_title {
+  .z--p003-feature_title {
     flex-shrink: 0;
     line-height: 1.65;
   }
   /* 縦書き2列: 横書きの flex 列＋子に writing-mode: vertical-rl */
-  .z--p003-experience_titleInner {
+  .z--p003-feature_titleInner {
     display: flex;
     flex-direction: row-reverse;
     align-items: flex-start;
     gap: 0.65em;
   }
-  .z--p003-experience_titleLine1,
-  .z--p003-experience_titleLine2 {
+  .z--p003-feature_titleLine1,
+  .z--p003-feature_titleLine2 {
     display: block;
     writing-mode: vertical-rl;
     text-orientation: mixed;
   }
-  .z--p003-experience_titleLine2 {
+  .z--p003-feature_titleLine2 {
     transform: translateY(1em);
   }
-  /* 共有。左右位置は Lism md(800px) / 狭い方で切り分け（後勝ち衝突を避ける） */
-  .z--p003-experience_watermark {
+  /* 共有。左右位置は Lism md（@container 800px）に同期 */
+  .z--p003-feature_watermark {
     position: absolute;
     z-index: 0;
     margin: 0;
@@ -185,16 +186,16 @@ const body =
     direction: ltr;
     unicode-bidi: isolate;
   }
-  @media (min-width: 800px) {
-    .z--p003-experience_watermark {
+  @container (min-width: 800px) {
+    .z--p003-feature_watermark {
       inset-inline-start: 0;
       inset-inline-end: auto;
       transform-origin: left center;
       font-size: clamp(2.75rem, 11cqi, 7.5rem);
     }
   }
-  @media (max-width: 799px) {
-    .z--p003-experience_watermark {
+  @container not (min-width: 800px) {
+    .z--p003-feature_watermark {
       inset-inline-start: auto;
       inset-inline-end: 0;
       transform-origin: right center;

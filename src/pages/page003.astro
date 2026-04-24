@@ -4,10 +4,10 @@ import { Container, Wrapper } from 'lism-css/astro';
 import Header from '@/components/page003/Header.astro';
 import MV from '@/components/page003/MV.astro';
 import About from '@/components/page003/About.astro';
-import Experience from '@/components/page003/Experience.astro';
-import Seasons from '@/components/page003/Seasons.astro';
+import Feature from '@/components/page003/Feature.astro';
+import Feature2 from '@/components/page003/Feature2.astro';
 import Plans from '@/components/page003/Plans.astro';
-import Facilities from '@/components/page003/Facilities.astro';
+import Information from '@/components/page003/Information.astro';
 import FAQ from '@/components/page003/FAQ.astro';
 import Footer from '@/components/page003/Footer.astro';
 import Reservation from '@/components/page003/Reservation.astro';
@@ -31,10 +31,10 @@ export const title = 'page003：静寂の隠れ宿 LP Design';
     <Container as='main' class='z--main' pos='relative' z='0'>
       <MV />
       <About />
-      <Experience />
-      <Seasons />
+      <Feature />
+      <Feature2 />
       <Plans />
-      <Facilities />
+      <Information />
       <FAQ />
       <Reservation />
     </Container>
@@ -53,7 +53,7 @@ export const title = 'page003：静寂の隠れ宿 LP Design';
     --ff--base: 'Noto Serif JP', 'Yu Mincho', YuMincho, 'Hiragino Mincho ProN', 'Hiragino Mincho Pro', serif;
     /* ロゴ（`ff:accent`）用: Google Fonts / Yuji Syuku（Lism タイポ `--ff--accent`） */
     --ff--accent: 'Yuji Syuku', 'Noto Serif JP', 'Yu Mincho', YuMincho, 'Hiragino Mincho ProN', 'Hiragino Mincho Pro', serif;
-    /* Experience ほか和紙調のベージュ背景（セマンティック `--base` を上書き） */
+    /* Feature ほか和紙調のベージュ背景（セマンティック `--base` を上書き） */
     --base: hsl(38 32% 92%);
     /* #reservation の named view timeline を兄弟の FAB から参照可能に */
     timeline-scope: --p003-reservation;
