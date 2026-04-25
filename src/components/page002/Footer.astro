@@ -1,14 +1,58 @@
 ---
-import { Container, Flex, Link, Text } from 'lism-css/astro';
+import { Stack, Container, Box, BoxLink, Icon, Cluster, Text, Flex, Link, ListItem } from 'lism-css/astro';
 ---
 
-<Container as='footer' isWrapper='xl' hasGutter bgc='base-2' py='40'>
-  <Flex jc='between' ai='center' g='20' fxw='wrap'>
-    <Link href='#' fz='2xl' fw='bold' lts='l' c='text' td='none' hov='-o'>
-      LISM Life
-    </Link>
-    <Text as='p' fz='s' fw='normal' m='0' c='text' lh='l'>
-      © 2026 Lism CSS
-    </Text>
-  </Flex>
-</Container>
+<Box as='footer' class='z--footer' bgc='base-2' w='100%'>
+  <Container class='z--footer_container' isWrapper='xl' py='40' hasGutter>
+    <Stack jc='c' ai='c' g='30'>
+      <Stack class='z--header_logo'>
+        <Link class='z--header_logoLink' href='#' fz='2xl' fw='bold' lts='l' c='text' td='none'>
+          LISM Life
+        </Link>
+      </Stack>
+      <Flex class='z--footerNav z--headerNav' as='ul' jc='c' ai='c' fxw='wrap' g='30' fz='s' lts='l' m='0' p='0'>
+        <ListItem>
+          <Link class='z--headerNav_link' href='#about' d='block' c='text' td='none' py='10' hasTransition hov='-o'>
+            私たちについて
+          </Link>
+        </ListItem>
+        <ListItem>
+          <Link class='z--headerNav_link' href='#feature' c='text' td='none' py='10' hasTransition hov='-o'>
+            サービス
+          </Link>
+        </ListItem>
+        <ListItem>
+          <Link class='z--headerNav_link' href='#works' c='text' td='none' py='10' hasTransition hov='-o'>
+            お客様の声
+          </Link>
+        </ListItem>
+        <ListItem>
+          <Link class='z--headerNav_link' href='#news' c='text' td='none' py='10' hasTransition hov='-o'>
+            会社概要
+          </Link>
+        </ListItem>
+      </Flex>
+      <Cluster g='20'>
+        <BoxLink href='#' hov='-o'>
+          <Icon icon='logo-x' fz='xl' c='text-2' />
+        </BoxLink>
+        <BoxLink href='#' hov='-o'>
+          <Icon icon='logo-instagram' fz='xl' c='text-2' />
+        </BoxLink>
+        <BoxLink href='#' hov='-o'>
+          <Icon icon='logo-youtube' fz='xl' c='text-2' />
+        </BoxLink>
+        <BoxLink href='#' hov='-o'>
+          <Icon icon='logo-line' fz='xl' c='text-2' />
+        </BoxLink>
+      </Cluster>
+      <Text as='p' fz='s' c='text-2' m='0'>© 2026 LISM Life.</Text>
+    </Stack>
+  </Container>
+</Box>
+
+<style>
+  .z--footerNav {
+    list-style: none;
+  }
+</style>

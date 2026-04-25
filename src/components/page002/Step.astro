@@ -1,5 +1,5 @@
 ---
-import { Stack, Grid, Flex, Frame, Media, Heading, Text, Box, Container, Icon } from 'lism-css/astro';
+import { Stack, Grid, Frame, Media, Heading, Text, Box, Container, Icon, Flex } from 'lism-css/astro';
 
 const stepImage = {
   src: 'https://cdn.lism-css.com/img/room/a-0ojkYuqTrl.jpg',
@@ -8,10 +8,22 @@ const stepImage = {
   height: 1080,
 };
 
-const stepCards: { title: string; body: string }[] = [
+type StepCard = {
+  title: string;
+  body: string;
+  image?: { src: string; alt: string; width: number; height: number };
+};
+
+const stepCards: StepCard[] = [
   {
     title: 'どなたにも合う、快適なプラン',
     body: 'ご人数やご予算に合わせて選べる宿泊プランをご用意しています。シンプルな素泊まりから、地元食材を活かした料理付きまで、旅のスタイルに合わせてお選びください。',
+    image: {
+      src: 'https://cdn.lism-css.com/img/working/a_6SNi6XvWBT.jpg',
+      alt: 'オフィスで打ち合わせをするビジネスパーソンたち',
+      width: 1920,
+      height: 1280,
+    },
   },
   {
     title: 'お部屋付きの露天風呂で、贅沢な湯時間',
@@ -20,6 +32,12 @@ const stepCards: { title: string; body: string }[] = [
   {
     title: 'アクセス良好で、観光の拠点にも最適',
     body: '駅やICからのアクセスがしやすく、周辺の観光スポットへもスムーズに移動できます。チェックイン前後の荷物預かりなど、お気軽にフロントへお声がけください。',
+    image: {
+      src: 'https://cdn.lism-css.com/img/room/a-Kt7MCU3Mad.jpg',
+      alt: '明るいリビングをイメージしたインテリア写真',
+      width: 1200,
+      height: 900,
+    },
   },
   {
     title: 'こだわりの朝食で、一日の始まりを彩る',
@@ -32,21 +50,51 @@ const stepCards: { title: string; body: string }[] = [
 ];
 ---
 
-<Box as='section' class='c--step' ov-x='clip'>
+<Box as='section' class='z--page002-step' ov-x='clip'>
   <Container isWrapper='l' hasGutter py='50'>
-    <Grid class='c--stepGrid' gtc={['1fr', null, 'minmax(0, 1fr) minmax(0, 1fr)']} g={['30', null, '40']} ai='stretch'>
-      <Stack class='c--stepMain' g='30' jc='start'>
-        <Stack g='10' ai='c' class='c--stepHead'>
-          <Heading level='2' fz='3xl' lts='l' m='0' ta='center'>Step</Heading>
+    <Grid gtc={['1fr', null, 'minmax(0, 1fr) minmax(0, 1fr)']} g={['30', null, '40']} ai='stretch'>
+      <Stack class='z--page002-step_main' g='30' jc='start'>
+        <Stack g='10' ai='c' class='z--page002-step_head'>
+          <Heading level='2' fz='4xl' lts='l' m='0' ta='center'>Step</Heading>
           <Text as='p' fz='m' fw='bold' lts='l' m='0' c='text-2' ta='center'>ご利用の流れ</Text>
         </Stack>
 
-        <Stack g='0'>
+        <Stack g='15' ai='stretch' w='100%'>
           {
-            stepCards.flatMap((card, i) => {
-              const cardEl = (
-                <Box class='c--stepCard' p='30' bgc='base' bd bdc='divider' bdrs='20'>
-                  <Stack g='10'>
+            stepCards.map((card, i) => (
+              <>
+                {
+                  i > 0 && (
+                    <Flex class='z--page002-step_caret' jc='center' ai='center' w='100%' fxsh='0'>
+                      <Icon icon='caret-down-fill' fz='xl' />
+                    </Flex>
+                  )
+                }
+                <Stack
+                  class='z--page002-step_card'
+                  g='15'
+                  p='30'
+                  bgc='base'
+                  bd
+                  bdc='divider'
+                  bdrs='10'
+                  ov='hidden'
+                  min-w='0'
+                >
+                  {
+                    card.image && (
+                      <Frame class='z--page002-step_cardFrame' ar='3/2' ov='hidden' bdrs='0'>
+                        <Media
+                          src={card.image.src}
+                          alt={card.image.alt}
+                          width={card.image.width}
+                          height={card.image.height}
+                          exProps={{ loading: 'lazy', decoding: 'async' }}
+                        />
+                      </Frame>
+                    )
+                  }
+                  <Stack g='10' class='z--page002-step_cardBody'>
                     <Heading level='3' fz='l' m='0'>
                       {card.title}
                     </Heading>
@@ -54,23 +102,16 @@ const stepCards: { title: string; body: string }[] = [
                       {card.body}
                     </Text>
                   </Stack>
-                </Box>
-              );
-              if (i === 0) return [cardEl];
-              return [
-                <Flex class='c--stepBetween' jc='c' py='12' aria-hidden='true'>
-                  <Icon icon='caret-down-fill' fz='2xl' c='text-2' />
-                </Flex>,
-                cardEl,
-              ];
-            })
+                </Stack>
+              </>
+            ))
           }
         </Stack>
       </Stack>
 
-      <Box class='c--stepRail'>
-        <Box class='c--stepSticky'>
-          <Frame class='c--stepFrame' ov='hidden'>
+      <Box class='z--page002-step_rail'>
+        <Box class='z--page002-step_sticky'>
+          <Frame class='z--page002-step_frame' ov='hidden' bdrs='0'>
             <Media
               src={stepImage.src}
               alt={stepImage.alt}
@@ -86,52 +127,62 @@ const stepCards: { title: string; body: string }[] = [
 </Box>
 
 <style>
-  @layer lism-modules {
-    .c--stepRail {
+  @layer lism-component {
+    /* テキスト色を 35%（残りは base）でミックス — 薄すぎる base-2 より本文に近い階調 */
+    .z--page002-step_caret .a--icon {
+      color: color-mix(in oklch, var(--text) 35%, var(--base));
+      opacity: 1;
+    }
+
+    .z--page002-step_main {
       min-width: 0;
+    }
+
+    .z--page002-step_rail {
+      min-width: 0;
+      /* グリッド行の高さを子の % 計算に渡す */
       align-self: stretch;
     }
 
-    .c--stepSticky {
+    .z--page002-step_sticky {
       position: relative;
     }
 
-    .c--stepFrame {
+    .z--page002-step_frame {
       aspect-ratio: 4 / 3;
-      border-radius: var(--bdrs--20);
     }
 
+    /**
+     * md 以上: グリッドの視覚順を rail | main にし、sticky・左張り出しを有効化。
+     * md 未満: DOM 順のまま（main → rail）で 1 列・テキスト上・画像下（Feature と同型）。
+     */
     @container (min-width: 800px) {
-      /**
-       * 2列時は同一行に固定（grid-column のみだと配置が次行に落ちることがある）
-       * DOM は「テキスト → 画像」のまま、order で視覚順のみ左に画像（狭い幅は order 未指定でテキスト上・画像下）
-       */
-      .c--stepGrid > .c--stepMain,
-      .c--stepGrid > .c--stepRail {
-        grid-row: 1;
-      }
-
-      .c--stepRail {
-        order: -1;
+      .z--page002-step_rail {
+        order: 1;
+        margin-inline-start: calc(
+          -1 * (max(0px, (100vw - min(100vw, var(--sz--l))) / 2) + var(--gutter-size, 0px))
+        );
         width: calc(100% + max(0px, (100vw - min(100vw, var(--sz--l))) / 2) + var(--gutter-size, 0px));
-        margin-inline-start: calc(-1 * (max(0px, (100vw - min(100vw, var(--sz--l))) / 2) + var(--gutter-size, 0px)));
         max-width: none;
         height: 100%;
       }
 
-      .c--stepSticky {
+      .z--page002-step_main {
+        order: 2;
+      }
+
+      .z--page002-step_sticky {
         position: sticky;
-        top: 0;
+        top: var(--z--header-height--thin, 64px);
         align-self: start;
-        height: min(100dvh, 100%);
+        height: min(calc(100dvh - var(--z--header-height--thin, 64px)), 100%);
         min-height: 0;
       }
 
-      .c--stepFrame {
+      .z--page002-step_frame {
         aspect-ratio: auto;
         height: 100%;
         min-height: 0;
-        border-radius: 0 var(--bdrs--20) var(--bdrs--20) 0;
       }
     }
   }

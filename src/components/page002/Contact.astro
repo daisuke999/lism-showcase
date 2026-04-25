@@ -18,6 +18,8 @@ type ContactField =
       placeholder: string;
       inputMode?: 'email' | 'text';
       autoComplete?: string;
+      /** 検証エラー時の補助テキスト（例示用。本番は状態に応じて出し分け） */
+      errorMessage?: string;
     }
   | {
       id: string;
@@ -26,6 +28,7 @@ type ContactField =
       type: 'textarea';
       placeholder: string;
       rows: number;
+      errorMessage?: string;
     };
 
 const contactFields: ContactField[] = [
@@ -45,6 +48,7 @@ const contactFields: ContactField[] = [
     placeholder: 'example@lism.com',
     inputMode: 'email',
     autoComplete: 'email',
+    errorMessage: '正しいメールアドレス形式で入力してください。',
   },
   {
     id: 'page002-contact-subject',
@@ -77,33 +81,33 @@ const contactFields: ContactField[] = [
       exProps={{ width: bgImage.width, height: bgImage.height, loading: 'lazy', decoding: 'async' }}
     />
   </Frame>
-  <!-- Feature.astro と同様の重ね構造。完全白黒ではなく filter + HSL オーバーレイでうっすら色を残す -->
+  <!-- 背景写真の上に半透明の黒レイヤーでコントラストを確保 -->
   <Layer
     pos='absolute'
     exProps={{
       style: {
         inset: 0,
         pointerEvents: 'none',
-        backgroundImage:
-          'linear-gradient(180deg, hsl(215 26% 96% / 0.72) 0%, hsl(215 22% 22% / 0.48) 100%)',
+        background: 'hsl(0 0% 0% / 0.52)',
       },
     }}
   />
   <Container class='c--contactInner' isWrapper='l' hasGutter py='60' pos='relative'>
     <Stack g='40' ai='c'>
-      <Stack g='12' ai='c' max-w='36rem' w='100%'>
-        <Heading level='2' fz='3xl' lts='l' m='0' ta='center' c='white'>Contact</Heading>
+      <Stack g='10' ai='c' max-w='36rem' w='100%'>
+        <Heading level='2' fz='4xl' lts='l' m='0' ta='center' c='white'>Contact</Heading>
         <Text as='p' fz='m' fw='bold' lts='l' m='0' c='white' ta='center'>お問い合わせ</Text>
-        <Text as='p' fz='s' m='0' c='white' ta='center' lh='l'>
-          初めての方もどうぞお気軽にお問い合わせください。
-        </Text>
       </Stack>
 
+      <Text as='p' fz='s' m='0' c='white' ta='center' lh='l' max-w='36rem' w='100%'>
+        初めての方もどうぞお気軽にお問い合わせください。
+      </Text>
+
       <Box as='form' class='c--contactForm' max-w='36rem' w='100%' method='post' action='#'>
-        <Stack g='24'>
+        <Stack g='20'>
           {
             contactFields.map((field) => (
-              <Stack g='8' ai='stretch'>
+              <Stack g='10' ai='stretch'>
                 <Lism as='label' for={field.id} fz='s' fw='bold' m='0' c='white'>
                   {field.label}
                 </Lism>
@@ -114,6 +118,8 @@ const contactFields: ContactField[] = [
                     name={field.name}
                     rows={field.rows}
                     placeholder={field.placeholder}
+                    aria-invalid={field.errorMessage ? 'true' : undefined}
+                    aria-describedby={field.errorMessage ? `${field.id}-error` : undefined}
                   />
                 ) : (
                   <input
@@ -124,8 +130,26 @@ const contactFields: ContactField[] = [
                     placeholder={field.placeholder}
                     inputmode={field.inputMode}
                     autocomplete={field.autoComplete}
+                    aria-invalid={field.errorMessage ? 'true' : undefined}
+                    aria-describedby={field.errorMessage ? `${field.id}-error` : undefined}
                   />
                 )}
+                {
+                  field.errorMessage && (
+                    <Text
+                      class='c--contactError'
+                      id={`${field.id}-error`}
+                      as='p'
+                      fz='xs'
+                      m='0'
+                      mt='5'
+                      c='accent'
+                      role='alert'
+                    >
+                      {field.errorMessage}
+                    </Text>
+                  )
+                }
               </Stack>
             ))
           }
@@ -163,12 +187,12 @@ const contactFields: ContactField[] = [
       padding: var(--s15) var(--s20);
       font: inherit;
       font-size: var(--fz--s);
-      line-height: calc(1em + var(--hl) * 2);
+      line-height: calc(1em + var(--hl--base) * 2);
       color: var(--text);
       background-color: var(--base);
       border: 1px solid var(--divider);
       border-radius: var(--bdrs--20);
-      box-shadow: var(--sh--5);
+      box-shadow: var(--bxsh--10);
     }
 
     .c--contactInput::placeholder {
@@ -186,6 +210,7 @@ const contactFields: ContactField[] = [
       resize: vertical;
     }
 
+    /* ヘッダー @lism-css/ui Button（.c--button）と同じセマンティック: bg=--text, 字=--base */
     .c--contactSubmit {
       box-sizing: border-box;
       width: 100%;
@@ -198,10 +223,10 @@ const contactFields: ContactField[] = [
       letter-spacing: var(--lts--l);
       color: var(--base);
       cursor: pointer;
-      background-color: hsl(220 10% 20%);
-      border: none;
+      background-color: var(--text);
+      border: 1px solid var(--text);
       border-radius: var(--bdrs--99);
-      box-shadow: var(--sh--10);
+      box-shadow: var(--bxsh--20);
     }
 
     .c--contactSubmit:hover {

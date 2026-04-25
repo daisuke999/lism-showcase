@@ -54,17 +54,17 @@ const subFeatures: {
 ];
 ---
 
-<Box as='section' class='c--service' bgc='base-2' py='50'>
+<Box as='section' class='z--page002-service' bgc='base-2' py='50'>
   <Container isWrapper='l' hasGutter>
     <Stack g='50'>
       <Stack g='10' ai='c'>
-        <Heading level='2' fz='3xl' lts='l' m='0' ta='center'>Service</Heading>
+        <Heading level='2' fz='4xl' lts='l' m='0' ta='center'>Service</Heading>
         <Text as='p' fz='m' fw='bold' lts='l' m='0' c='text-2' ta='center'>様々な要望に対応</Text>
       </Stack>
 
       <!-- md 未満: 1列（画像上・テキスト下）。md 以上: 2列（画像左・テキスト右） -->
       <Grid gtc={['1fr', null, 'minmax(0, 1fr) minmax(0, 1fr)']} g={['30', null, '40']} ai='center'>
-        <Frame ar='4/3' bdrs='20' ov='hidden'>
+        <Frame ar='3/2' ov='hidden'>
           <Media
             src={heroImage.src}
             alt={heroImage.alt}
@@ -88,14 +88,14 @@ const subFeatures: {
         </Stack>
       </Grid>
 
-      <Stack g='30'>
+      <Stack g='40'>
         <Heading level='3' fz='xl' lts='l' m='0' ta='center'>更なる特徴</Heading>
         <!-- md 未満: 1列。md 以上: 3列 -->
-        <Grid gtc={['1fr', null, 'repeat(3, minmax(0, 1fr))']} g={['30', null, '30']} ai='start'>
+        <Grid gtc={['1fr', null, 'repeat(3, minmax(0, 1fr))']} g={['30', null, '40']} ai='start'>
           {
             subFeatures.map((item) => (
-              <Stack g='20' class='c--serviceCard'>
-                <Frame ar='3/2' bdrs='20' ov='hidden'>
+              <Flex class='z--page002-service_card' fxd={['row-reverse', null, 'column']} ai='stretch' g='30' min-w='0'>
+                <Frame class='z--page002-service_cardFigure' ar='3/2' ov='hidden'>
                   <Media
                     src={item.image.src}
                     alt={item.image.alt}
@@ -104,24 +104,26 @@ const subFeatures: {
                     exProps={{ loading: 'lazy', decoding: 'async' }}
                   />
                 </Frame>
-                <Flex ai='stretch' g='15'>
-                  <Box as='span' class='c--serviceNum' fz='4xl' fw='bold' ff='accent' c='text'>
-                    {item.index}
-                  </Box>
-                  <Box class='c--serviceRule' w='1px' bgc='divider' fxsh='0' />
-                  <Stack g='5' class='c--serviceCardTitles'>
-                    <Heading level='4' fz='m' m='0'>
-                      {item.titleJa}
-                    </Heading>
-                    <Text as='p' fz='s' m='0' c='text-2'>
-                      {item.titleEn}
-                    </Text>
-                  </Stack>
-                </Flex>
-                <Text as='p' fz='s' m='0' c='text-2'>
-                  {item.body}
-                </Text>
-              </Stack>
+                <Stack g='20' min-w='0' fx='1' jc='start'>
+                  <Flex ai='c' g='20' util='trimAll'>
+                    <Box as='span' class='z--page002-service_num' fz='4xl' fw='bold' ff='accent' c='text' whs='nowrap'>
+                      {item.index}
+                    </Box>
+                    <Box class='z--page002-service_rule' w='1px' bgc='text' fxsh='0' />
+                    <Stack g='0' class='z--page002-service_cardTitles' util='trimAll'>
+                      <Heading level='4' fz='m' m='0'>
+                        {item.titleJa}
+                      </Heading>
+                      <Text as='p' fz='xs' lh='s' m='0' c='text-2' o='p'>
+                        {item.titleEn}
+                      </Text>
+                    </Stack>
+                  </Flex>
+                  <Text as='p' fz='s' m='0' c='text-2'>
+                    {item.body}
+                  </Text>
+                </Stack>
+              </Flex>
             ))
           }
         </Grid>
@@ -131,14 +133,46 @@ const subFeatures: {
 </Box>
 
 <style>
-  @layer lism-modules {
-    /* 番号と縦罫線の見た目をモックに寄せる */
-    .c--serviceRule {
-      min-height: 3.5em;
-      align-self: center;
+  @layer lism-component {
+    /* md 未満: カード内は画像 | テキスト Stack。md 以上: 縦積み（先祖 is--container の 800px 基準） */
+    .z--page002-service_card {
+      min-width: 0;
     }
 
-    .c--serviceNum {
+    .z--page002-service_cardFigure {
+      min-width: 0;
+    }
+
+    /* sm 以下（max-width: 480px）：画像非表示。Lism の sm ブレークポイント 480px に合わせる */
+    @container (max-width: 480px) {
+      .z--page002-service_cardFigure {
+        display: none;
+      }
+    }
+
+    @container not (min-width: 800px) {
+      /* テキスト列の高さに合わせて画像を縦いっぱい（`ar` を上書きして flex stretch を効かせる） */
+      .z--page002-service_cardFigure {
+        flex: 0 0 38%;
+        max-width: 12rem;
+        align-self: stretch;
+        aspect-ratio: auto;
+        min-height: 0;
+      }
+    }
+
+    @container (min-width: 800px) {
+      .z--page002-service_cardFigure {
+        width: 100%;
+        align-self: stretch;
+      }
+    }
+
+    .z--page002-service_rule {
+      align-self: stretch;
+    }
+
+    .z--page002-service_num {
       line-height: 1;
     }
   }

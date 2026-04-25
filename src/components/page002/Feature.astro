@@ -1,7 +1,7 @@
 ---
 import { Stack, Grid, Flex, Frame, Media, Heading, Text, Box, Container, Icon } from 'lism-css/astro';
 
-const pointImage = {
+const featureImage = {
   src: 'https://cdn.lism-css.com/img/room/u-jh2GpjGKEp.jpg',
   alt: '明るいリビングにイエローのアームチェアとフロアランプが置かれたインテリア',
   width: 1600,
@@ -9,7 +9,7 @@ const pointImage = {
 };
 
 /** Lism プリセットアイコン名（ https://lism-css.com/docs/primitives/a--icon/ ） */
-type PointCardIcon =
+type FeatureCardIcon =
   | 'home'
   | 'heart'
   | 'calendar'
@@ -26,7 +26,7 @@ type PointCardIcon =
   | 'arrow-right';
 
 /** カードごとの表示内容（タイトル・本文・アイコンを独立して管理） */
-const pointCards: { title: string; body: string; icon: PointCardIcon }[] = [
+const featureCards: { title: string; body: string; icon: FeatureCardIcon }[] = [
   {
     icon: 'home',
     title: 'どなたにも合う、快適なプラン',
@@ -55,22 +55,22 @@ const pointCards: { title: string; body: string; icon: PointCardIcon }[] = [
 ];
 ---
 
-<Box as='section' class='c--point' ov-x='clip'>
+<Box as='section' class='z--page002-feature' ov-x='clip'>
   <Container isWrapper='l' hasGutter py='50'>
     <Grid gtc={['1fr', null, 'minmax(0, 1fr) minmax(0, 1fr)']} g={['30', null, '40']} ai='stretch'>
-      <Stack class='c--pointMain' g='30' jc='start'>
-        <Stack g='10' ai='c' class='c--pointHead'>
-          <Heading level='2' fz='3xl' lts='l' m='0' ta='center'> Point </Heading>
+      <Stack class='z--page002-feature_main' g='30' jc='start'>
+        <Stack g='10' ai='c' class='z--page002-feature_head'>
+          <Heading level='2' fz='4xl' lts='l' m='0' ta='center'> Point </Heading>
           <Text as='p' fz='m' fw='bold' lts='l' m='0' c='text-2' ta='center'>沢山の魅力があります</Text>
         </Stack>
 
-        <Stack g='20'>
+        <Stack g='30'>
           {
-            pointCards.map((card) => (
-              <Box class='c--pointCard' p='30' bgc='base' bd bdc='divider' bdrs='20'>
-                <Flex ai='start' g='20' class='c--pointCardInner'>
+            featureCards.map((card) => (
+              <Stack class='z--page002-feature_card' p='30' bgc='base' bd bdc='divider' bdrs='10'>
+                <Flex ai='start' g='20' class='z--page002-feature_cardInner'>
                   <Icon icon={card.icon} size='40px' c='text-2' />
-                  <Stack g='10' class='c--pointCardBody'>
+                  <Stack g='10' class='z--page002-feature_cardBody'>
                     <Heading level='3' fz='l' m='0'>
                       {card.title}
                     </Heading>
@@ -79,20 +79,20 @@ const pointCards: { title: string; body: string; icon: PointCardIcon }[] = [
                     </Text>
                   </Stack>
                 </Flex>
-              </Box>
+              </Stack>
             ))
           }
         </Stack>
       </Stack>
 
-      <Box class='c--pointRail'>
-        <Box class='c--pointSticky'>
-          <Frame class='c--pointFrame' ov='hidden' bdrs={['20', null, '0']}>
+      <Box class='z--page002-feature_rail'>
+        <Box class='z--page002-feature_sticky'>
+          <Frame class='z--page002-feature_frame' ov='hidden' bdrs='0'>
             <Media
-              src={pointImage.src}
-              alt={pointImage.alt}
-              width={pointImage.width}
-              height={pointImage.height}
+              src={featureImage.src}
+              alt={featureImage.alt}
+              width={featureImage.width}
+              height={featureImage.height}
               exProps={{ loading: 'lazy', decoding: 'async' }}
             />
           </Frame>
@@ -103,35 +103,36 @@ const pointCards: { title: string; body: string; icon: PointCardIcon }[] = [
 </Box>
 
 <style>
-  @layer lism-modules {
-    .c--pointRail {
+  @layer lism-component {
+    .z--page002-feature_rail {
       min-width: 0;
       /* グリッド行の高さ（＝左カラムの内容高さ）を子の % 計算に渡す */
       align-self: stretch;
     }
 
-    .c--pointSticky {
+    .z--page002-feature_sticky {
       position: relative;
     }
 
-    .c--pointFrame {
+    .z--page002-feature_frame {
       aspect-ratio: 4 / 3;
     }
 
     @container (min-width: 800px) {
       /**
-       * 画面上端で固定。高さは「ビューポート全高」と「左テキスト列の高さ」の小さい方
+       * ヘッダー下端で固定。高さは「ビューポート」と「左テキスト列の高さ」の小さい方
        * （グリッド行高＝左カラムのため、100% は左側コンテンツの高さに一致）
        */
-      .c--pointSticky {
+      .z--page002-feature_sticky {
         position: sticky;
-        top: 0;
+        /* page002 :root のヘッダー（スクロール後の高さ＝下端基準） */
+        top: var(--z--header-height--thin, 64px);
         align-self: start;
-        height: min(100dvh, 100%);
+        height: min(calc(100dvh - var(--z--header-height--thin, 64px)), 100%);
         min-height: 0;
       }
 
-      .c--pointFrame {
+      .z--page002-feature_frame {
         aspect-ratio: auto;
         height: 100%;
         min-height: 0;
@@ -141,7 +142,7 @@ const pointCards: { title: string; body: string; icon: PointCardIcon }[] = [
        * 画像列だけ右端をビューポート端まで伸ばす（左端は2カラム境界のまま）
        * 中央寄せの `size=l` コンテナ外側〜画面右端の余白 + 右ガターを吸収
        */
-      .c--pointRail {
+      .z--page002-feature_rail {
         width: calc(100% + max(0px, (100vw - min(100vw, var(--sz--l))) / 2) + var(--gutter-size, 0px));
         max-width: none;
         height: 100%;

@@ -1,38 +1,132 @@
 ---
-import { Box, Frame, Stack, Container, Layer, Icon, Text, Inline, Lism, Wrapper } from 'lism-css/astro';
+import { Box, Frame, Container, Heading, Lism, Inline } from 'lism-css/astro';
 
 const mvImage = {
   src: 'https://cdn.lism-css.com/img/room/a-Rrr1UZO5Ji.jpg',
-  alt: 'Simple LP Design',
+  alt: '赤いソファと観葉植物のあるモダンなリビング',
   width: 1920,
   height: 1080,
-};
+} as const;
 ---
 
-<Container class='z--mv' pos='relative'>
-  <Wrapper class='z--mv_content' contentSize='l' pos='relative' hasGutter>
-    <Stack class='z--mv_copy' ai='c' jc='c' g='10' pos='relative' w='100%' h='100%' c='white' hasGutter>
-      <Text as='p' fz='7rem' fw='bold' ta='center' lts='l' m='0'>Simple<br />LP Design</Text>
-    </Stack>
-    <Frame class='z--mv_frame' ar='16/9' h='100%' my-s='-3rem'>
-      <Lism
-        as='img'
-        class='z--mv_media'
-        src={mvImage.src}
-        alt={mvImage.alt}
-        w='100%'
-        h='100%'
-        exProps={{ width: mvImage.width, height: mvImage.height, loading: 'eager' }}
-      />
-    </Frame>
-  </Wrapper>
-</Container>
+<Box as='section' class='z--mv' id='top' pos='relative' ov='hidden' aria-label='メインビジュアル'>
+  <Heading level='1' class='z--mv_title' m='0' ta='center' c='white' fw='bold' lts='l'>
+    Simple<br />
+    <Inline as='span' whs='nowrap'>LP Design</Inline>
+  </Heading>
+  <Box class='z--mv_imageRail'>
+    <Container class='z--mv_imageInner' isWrapper='l' hasGutter h='100%'>
+      <Frame class='z--mv_frame' ov='hidden' w='100%' h='100%'>
+        <Lism
+          as='img'
+          class='z--mv_media'
+          src={mvImage.src}
+          alt={mvImage.alt}
+          w='100%'
+          h='100%'
+          exProps={{
+            width: mvImage.width,
+            height: mvImage.height,
+            loading: 'eager',
+            decoding: 'async',
+            fetchpriority: 'high',
+          }}
+        />
+      </Frame>
+    </Container>
+  </Box>
+</Box>
 
 <style>
+  /*
+   * .z--mv 設計トークン（Lism の --gutter-size / --s* / セマンティックカラーと併用）
+   * 子へ継承する。h1 の font-size は inherit し、本ブロックの font-size と揃えて
+   * --z--mv-title-line2-center の em が画像位置計算と一致するようにしている。
+   *
+   * [見出し・画像レールの絶対配置]
+   *   --z--mv-title-offset-from-header … 固定ヘッダー下端 → 見出し（h1）上端 までの距離
+   *   --z--mv-title-line2-center … 見出し上端 → 2行目の縦方向おおよそ中央 までの距離（line-height:1.1 想定）
+   *       → .z--mv_imageRail の top は header高 + 上記2つの合算（画像上端が 2 行目中央付近になる）
+   *   --z--mv-image-bottom-offset … .z--mv_imageRail に渡す bottom（画像列の下端オフセット）
+   *   --z--mv-image-bottom-inset … md（800px）以上で --z--mv-image-bottom-offset に切り替える量（Lism スペース）
+   *       → md 未満の既定は has--gutter と同じ --gutter-size（:root の --gutter-size、通常 var(--s30)）
+   *
+   * [セクション全体の高さ・背景]
+   *   --z--mv-max-block-size … MV の高さ上限。実際の高さは min(100svh, 本値)。sm 幅以下は別途 100svh 固定
+   *   --z--mv-white-strip … セクション最下部の「白（--base）」帯の高さ。それより上の背景は --base-2
+   */
   .z--mv {
-    background: linear-gradient(to bottom, var(--base-2) 85%, transparent 85%);
+    --z--mv-title-offset-from-header: 1rem;
+    --z--mv-white-strip: 8rem;
+    --z--mv-max-block-size: 64rem;
+    --z--mv-title-line2-center: 1.75em;
+    --z--mv-image-bottom-inset: var(--s40);
+    --z--mv-image-bottom-offset: var(--gutter-size);
+    height: min(100svh, var(--z--mv-max-block-size));
+    min-height: min(100svh, var(--z--mv-max-block-size));
+    background: linear-gradient(
+      to bottom,
+      var(--base-2) 0,
+      var(--base-2) calc(100% - var(--z--mv-white-strip)),
+      var(--base) calc(100% - var(--z--mv-white-strip)),
+      var(--base) 100%
+    );
+    /* h1 は font-size:inherit。clamp の em 基準を画像レールの top 計算と共有する */
+    font-size: clamp(2.75rem, 1.5rem + 9vw, 7rem);
   }
-  .z--mv_content {
-    padding-block-start: calc(var(--z--header-height) + var(--s30));
+
+  /* Lism sm = min-width 480px。幅 480px 以下では --z--mv-max-block-size を使わず高さを必ず 100svh（フルブリード時はビューポート幅≒コンテナ幅） */
+  @media (max-width: 480px) {
+    .z--mv {
+      height: 100svh;
+      min-height: 100svh;
+    }
+  }
+
+  /* Lism md = 800px。md 以上: 画像下端オフセットを --z--mv-image-bottom-inset に */
+  @media (min-width: 800px) {
+    .z--mv {
+      --z--mv-image-bottom-offset: var(--z--mv-image-bottom-inset);
+    }
+  }
+
+  .z--mv_imageRail {
+    position: absolute;
+    inset-inline: 0;
+    top: calc(var(--z--header-height) + var(--z--mv-title-offset-from-header) + var(--z--mv-title-line2-center));
+    bottom: var(--z--mv-image-bottom-offset);
+    z-index: 0;
+  }
+
+  .z--mv_imageInner {
+    margin-inline: auto;
+    height: 100%;
+  }
+
+  .z--mv_frame {
+    display: block;
+  }
+
+  .z--mv_media {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+  }
+
+  /* top = ヘッダー下端 + --z--mv-title-offset-from-header。画像上端は本要素の 2 行目中央に合わせてレール側で加算 */
+  .z--mv_title {
+    position: absolute;
+    left: 50%;
+    translate: -50% 0;
+    top: calc(var(--z--header-height) + var(--z--mv-title-offset-from-header));
+    z-index: 1;
+    line-height: 1.1;
+    pointer-events: none;
+    max-width: 100%;
+    padding-inline: var(--s10);
+    box-sizing: border-box;
+    font-size: inherit;
   }
 </style>

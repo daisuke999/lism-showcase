@@ -4,9 +4,9 @@ import { Container, Wrapper } from 'lism-css/astro';
 import Header from '@/components/page002/Header.astro';
 import MV from '@/components/page002/MV.astro';
 import Mission from '@/components/page002/Mission.astro';
-import MissionSub from '@/components/page002/MissionSub.astro';
+import Mission2 from '@/components/page002/Mission2.astro';
 import Footer from '@/components/page002/Footer.astro';
-import Point from '@/components/page002/Point.astro';
+import Feature from '@/components/page002/Feature.astro';
 import Service from '@/components/page002/Service.astro';
 import Step from '@/components/page002/Step.astro';
 import Voice from '@/components/page002/Voice.astro';
@@ -21,11 +21,11 @@ export const title = 'page002：Simple Natural LP Design';
     <!-- Header -->
     <Header />
     <!-- Main Content -->
-    <Container as='main' class='z--main'>
+    <Container as='main' class='z--main' pos='relative' z='0'>
       <MV />
       <Mission />
-      <MissionSub />
-      <Point />
+      <Mission2 />
+      <Feature />
       <Service />
       <Step />
       <Voice />

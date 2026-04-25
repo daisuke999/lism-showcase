@@ -1,15 +1,13 @@
 ---
-import { Stack, Flex, Heading, Text, Box, Container, Link } from 'lism-css/astro';
+import { Stack, Flex, Heading, Text, Box, Container, AutoColumns } from 'lism-css/astro';
 import { Avatar } from '@lism-css/ui/astro';
 
 /**
  * アバター画像（Lism 公式ドキュメントの Avatar 例と同じ CDN パス）
  * @see https://lism-css.com/docs/ui/avatar/
- * 注: `https://cdn.lism-css.com/images/avatar/` は Basic 認証のため未認証では取得できません。公開されている `img/avatar` を使用しています。
  */
 const avatarBase = 'https://cdn.lism-css.com/img/avatar';
 
-/** カードごとの表示内容（アバター・見出し・本文・属性ラベルを独立して管理） */
 type VoiceCard = {
   avatar: { src: string; alt: string };
   title: string;
@@ -43,138 +41,170 @@ const voiceCards: VoiceCard[] = [
     attribution: '50代のお客様',
   },
   {
-    /* CDN 上に a-05 が無いため a-02 を流用 */
+    avatar: { src: `${avatarBase}/a-02.jpg`, alt: '記念日にご宿泊のお客様のポートレート' },
+    title: '記念日にぴったりでした',
+    body: 'サプライズの相談から当日の演出まで、安心してお任せできました。料理の説明も分かりやすく、ワインとのペアリングも楽しめました。',
+    attribution: '60代のお客様',
+  },
+  {
     avatar: { src: `${avatarBase}/a-02.jpg`, alt: '記念日にご宿泊のお客様のポートレート' },
     title: '記念日にぴったりでした',
     body: 'サプライズの相談から当日の演出まで、安心してお任せできました。料理の説明も分かりやすく、ワインとのペアリングも楽しめました。',
     attribution: '60代のお客様',
   },
 ];
-
-const cardAnchorPrefix = 'page002-voice';
 ---
 
-<Box as='section' class='c--voice' bgc='base'>
-  <Container isWrapper='l' hasGutter py='50'>
+<Box as='section' class='z--page002-voice' bgc='base'>
+  <Container isWrapper='l' hasGutter py='50' isContainer>
     <Stack g='30'>
       <Stack g='10' ai='c'>
-        <Heading level='2' fz='3xl' lts='l' m='0' ta='center'>Voice</Heading>
+        <Heading level='2' fz='4xl' lts='l' m='0' ta='center'>Voice</Heading>
         <Text as='p' fz='m' fw='bold' lts='l' m='0' c='text-2' ta='center'>お客様の声です</Text>
       </Stack>
 
-      <Stack g='24'>
-        <!-- リール: Grid の gac パーセントは幅が不定だと列が潰れるため、Flex + 固定ベース幅で横スクロール（Lism Reel 例の考え方） -->
-        <Box class='c--voiceReelOuter'>
-          <Flex
-            class='c--voiceReel u--snap'
-            ov='auto'
-            g='20'
-            fxd='row'
-            fxw='nowrap'
-            ai='stretch'
-            w='100%'
-            min-w='0'
-            tabindex='0'
-            exProps={{
-              style: '--snapAlign: start; scroll-behavior: smooth;',
-            }}
-          >
-            {
-              voiceCards.map((card, i) => (
-                <Box
-                  id={`${cardAnchorPrefix}-${i + 1}`}
-                  class='c--voiceSlide'
-                  p='30'
-                  bgc='base'
-                  bd
-                  bdc='divider'
-                  bdrs='20'
-                  fxsh='0'
-                >
-                  <Stack g='20' ai='c'>
-                    <Avatar src={card.avatar.src} alt={card.avatar.alt} size='5.5rem' mx='auto' />
-                    <Heading level='3' fz='l' fw='bold' m='0' ta='center'>
-                      {card.title}
-                    </Heading>
-                    <Text as='p' fz='s' m='0' c='text' lh='l' ta='center'>
-                      {card.body}
-                    </Text>
-                    <Text as='p' fz='xs' m='0' c='text-2' ta='end' w='100%'>
-                      {card.attribution}
-                    </Text>
-                  </Stack>
-                </Box>
-              ))
-            }
-          </Flex>
-        </Box>
-
-        <Flex as='nav' aria-label='お客様の声のカードへ' g='15' jc='center' ai='c' lh='1'>
+      {
+        /**
+         * md 未満: Flex + hasSnap（公式 Reel の Flex 例と同型。Grid の gaf:column は縦積みになりやすい）
+         * md 以上: AutoColumns（最小幅 24rem、折り返し）
+         * @see https://lism-css.com/docs/ui/examples/reel/
+         * @see https://lism-css.com/docs/primitives/l--autoColumns/
+         */
+      }
+      <Box class='z--page002-voice_layout' min-w='0' w='100%'>
+        <Flex
+          class='z--page002-voice_reel'
+          hasSnap
+          ov='auto'
+          g='20'
+          fxd='row'
+          fxw='nowrap'
+          ai='stretch'
+          w='100%'
+          min-w='0'
+          tabindex={0}
+        >
           {
-            voiceCards.map((_, i) => (
-              <Link
-                href={`#${cardAnchorPrefix}-${i + 1}`}
-                class='c--voiceDot'
-                aria-label={`お客様の声 ${i + 1} 枚目へ`}
-                td='none'
-                bgc='base-2'
-                w='1rem'
-                h='1rem'
-                bdrs='full'
-                p='0'
-                hov='-o'
-              />
+            voiceCards.map((card) => (
+              <Box
+                class='z--page002-voice_card z--page002-voice_slide'
+                p='30'
+                bgc='base'
+                bd
+                bdc='divider'
+                bdrs='20'
+                fxsh='0'
+                min-w='0'
+                min-h='0'
+                d='flex'
+                fxd='column'
+                aslf='stretch'
+              >
+                <Stack g='20' ai='stretch' fx='1' min-h='0' jc='start'>
+                  <Avatar src={card.avatar.src} alt={card.avatar.alt} size='5.5rem' mx='auto' />
+                  <Heading level='3' fz='l' fw='bold' m='0' ta='center'>
+                    {card.title}
+                  </Heading>
+                  <Text as='p' fz='s' m='0' c='text' lh='l' ta='left'>
+                    {card.body}
+                  </Text>
+                  <Text
+                    class='z--page002-voice_attribution'
+                    as='p'
+                    fz='xs'
+                    m='0'
+                    c='text-2'
+                    o='p'
+                    ta='end'
+                    w='100%'
+                    mt='auto'
+                  >
+                    {card.attribution}
+                  </Text>
+                </Stack>
+              </Box>
             ))
           }
         </Flex>
-      </Stack>
+
+        <AutoColumns class='z--page002-voice_auto' cols='24rem' g='30' w='100%' min-w='0'>
+          {
+            voiceCards.map((card) => (
+              <Box
+                class='z--page002-voice_card'
+                p='30'
+                bgc='base'
+                bd
+                bdc='divider'
+                bdrs='20'
+                min-w='0'
+                d='flex'
+                fxd='column'
+                h='100%'
+              >
+                <Stack g='20' ai='stretch' fx='1' min-h='0' jc='start'>
+                  <Avatar src={card.avatar.src} alt={card.avatar.alt} size='5.5rem' mx='auto' />
+                  <Heading level='3' fz='l' fw='bold' m='0' ta='center'>
+                    {card.title}
+                  </Heading>
+                  <Text as='p' fz='s' m='0' c='text' lh='l' ta='left'>
+                    {card.body}
+                  </Text>
+                  <Text
+                    class='z--page002-voice_attribution'
+                    as='p'
+                    fz='xs'
+                    m='0'
+                    c='text-2'
+                    o='p'
+                    ta='end'
+                    w='100%'
+                    mt='auto'
+                  >
+                    {card.attribution}
+                  </Text>
+                </Stack>
+              </Box>
+            ))
+          }
+        </AutoColumns>
+      </Box>
     </Stack>
   </Container>
 </Box>
 
 <style>
-  @layer lism-modules {
+  @layer lism-component {
     /**
-     * リール帯をビューポート幅にしつつ、先頭カードは size=l + gutter のコンテンツ左に揃える。
-     * - `50% - 50vw` は親がほぼ100vwだと 0 になり先頭が画面端に寄るため使わない。
-     * - コンテンツ左までの距離 L = max(gutter, (100vw - min(100vw, --sz--l)) / 2)（gutter を二重に足さない）
+     * 横リール: 中央スナップ（has--snap の子へ --snapAlign が効く）
+     * @see https://lism-css.com/ui/examples/reel/
      */
-    .c--voice {
-      --voice-edge-pad: max(var(--gutter-size, 0px), calc((100vw - min(100vw, var(--sz--l, 1280px))) / 2));
+    .z--page002-voice_reel {
+      --snapType: x mandatory;
+      --snapAlign: center;
+      align-items: stretch;
     }
 
-    .c--voiceReelOuter {
-      box-sizing: border-box;
-      width: 100vw;
-      margin-inline-start: calc(-1 * var(--voice-edge-pad));
+    /* 行内で最も高いカードに合わせてスライドの高さを揃える（h:100% は未定義高さで stretch を阻害しやすい） */
+    .z--page002-voice_slide {
+      flex: 0 0 min(24rem, 85%);
+      align-self: stretch;
+      height: auto;
     }
 
-    /**
-     * scroll-padding: レイアウトの padding と別に、scroll-snap の基準枠を内側へずらす。
-     * 無いと snap がスクロールポートの物理左に吸い付き、先頭カードが画面端へ寄る（Lism Reel 例の scroll-padding と同趣旨）。
-     * @see https://lism-css.com/ui/examples/reel
-     */
-    .c--voiceReel {
-      box-sizing: border-box;
-      width: 100%;
-      min-width: 0;
-      padding-inline: var(--voice-edge-pad);
-      scroll-padding-inline: var(--voice-edge-pad);
+    .z--page002-voice_auto {
+      display: none;
     }
 
-    .c--voiceSlide {
-      flex: 0 0 min(22rem, 82%);
-      min-width: 0;
-    }
+    @container (min-width: 800px) {
+      .z--page002-voice_reel {
+        display: none !important;
+        overflow: visible;
+      }
 
-    .c--voiceDot {
-      display: block;
-      flex-shrink: 0;
-    }
-
-    .c--voiceDot:focus-visible {
-      outline: 2px solid var(--c--text, currentColor);
-      outline-offset: 3px;
+      .z--page002-voice_auto {
+        display: grid;
+      }
     }
   }
 </style>
