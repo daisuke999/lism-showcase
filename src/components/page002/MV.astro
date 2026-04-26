@@ -10,7 +10,7 @@ const mvImage = {
 ---
 
 <Box as='section' class='z--mv' id='top' pos='relative' ov='hidden' aria-label='メインビジュアル'>
-  <Heading level='1' class='z--mv_title' m='0' ta='center' c='white' fw='bold' lts='l'>
+  <Heading level='1' class='z--mv_title' m='0' ta='center' c='white' fw='bold' lts='l' ff='accent'>
     Simple<br />
     <Inline as='span' whs='nowrap'>LP Design</Inline>
   </Heading>
@@ -48,7 +48,7 @@ const mvImage = {
    *   --z--mv-title-line2-center … 見出し上端 → 2行目の縦方向おおよそ中央 までの距離（line-height:1.1 想定）
    *       → .z--mv_imageRail の top は header高 + 上記2つの合算（画像上端が 2 行目中央付近になる）
    *   --z--mv-image-bottom-offset … .z--mv_imageRail に渡す bottom（画像列の下端オフセット）
-   *   --z--mv-image-bottom-inset … md（800px）以上で --z--mv-image-bottom-offset に切り替える量（Lism スペース）
+   *   --z--mv-image-bottom-inset … md（800px）以上で --z--mv-image-bottom-offset に切り替える量（= --gutter-size）
    *       → md 未満の既定は has--gutter と同じ --gutter-size（:root の --gutter-size、通常 var(--s30)）
    *
    * [セクション全体の高さ・背景]
@@ -60,7 +60,8 @@ const mvImage = {
     --z--mv-white-strip: 8rem;
     --z--mv-max-block-size: 64rem;
     --z--mv-title-line2-center: 1.75em;
-    --z--mv-image-bottom-inset: var(--s40);
+    /* md 以上: 画像レール下の余白＝gutter（has--gutter の --gutter-size） */
+    --z--mv-image-bottom-inset: var(--gutter-size);
     --z--mv-image-bottom-offset: var(--gutter-size);
     height: min(100svh, var(--z--mv-max-block-size));
     min-height: min(100svh, var(--z--mv-max-block-size));
@@ -72,7 +73,7 @@ const mvImage = {
       var(--base) 100%
     );
     /* h1 は font-size:inherit。clamp の em 基準を画像レールの top 計算と共有する */
-    font-size: clamp(2.75rem, 1.5rem + 9vw, 7rem);
+    font-size: clamp(2.75rem, 1.5rem + 9vw, 6rem);
   }
 
   /* Lism sm = min-width 480px。幅 480px 以下では --z--mv-max-block-size を使わず高さを必ず 100svh（フルブリード時はビューポート幅≒コンテナ幅） */

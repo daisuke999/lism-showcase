@@ -3,11 +3,9 @@ import { Stack, Flex, Heading, Text, Box, Container, AutoColumns } from 'lism-cs
 import { Avatar } from '@lism-css/ui/astro';
 
 /**
- * アバター画像（Lism 公式ドキュメントの Avatar 例と同じ CDN パス）
+ * アバター: 本番・CMS ではカードごとに URL がばらばらになり得るため、`avatarBase` は使わず `src` にフル URL を直書きする
  * @see https://lism-css.com/docs/ui/avatar/
  */
-const avatarBase = 'https://cdn.lism-css.com/img/avatar';
-
 type VoiceCard = {
   avatar: { src: string; alt: string };
   title: string;
@@ -17,49 +15,49 @@ type VoiceCard = {
 
 const voiceCards: VoiceCard[] = [
   {
-    avatar: { src: `${avatarBase}/a-01.jpg`, alt: '笑顔の女性のポートレート' },
-    title: '素晴らしいです！',
-    body: '静けさの贅沢と、誰にも邪魔されないプライベートな時間を味わえました。お部屋付きの露天風呂も最高で、心からリフレッシュできました。また必ず伺いたいです。',
-    attribution: '20代のお客様',
+    avatar: { src: 'https://cdn.lism-css.com/img/avatar/a_DpTwx1lZU3.jpg', alt: '相談者のポートレート（1）' },
+    title: '一人暮らしの部屋で迷子でした',
+    body: '「落ち着く」は何かを言葉にするのに時間がかかりました。家具の大きさと導線の相談で、本当に買う量が決まり、開けたときの圧迫感がかなり減りました。雑多な要望に辛抱強く乗っていただき、感謝しています。',
+    attribution: '20代・ワンルーム相談',
   },
   {
-    avatar: { src: `${avatarBase}/a-02.jpg`, alt: '穏やかな表情の男性のポートレート' },
-    title: '心から満足しています',
-    body: 'フロントの対応が丁寧で、細かなリクエストにも快く応じていただけました。お食事のボリュームと味のバランスが絶妙で、旅のハイライトになりました。',
-    attribution: '30代のお客様',
+    avatar: { src: 'https://cdn.lism-css.com/img/avatar/a_Bp5H4TO2tS.jpg', alt: '相談者のポートレート（2）' },
+    title: '家族の物が一気所に流れ着く家でした',
+    body: '子どもが小さく、動線と収納の相談が中心でした。既製のユニットと手元の物の掛け合わせで、予算内で我慢せず使える動きになりました。途中で好みの変化も出ましたが、一緒に再調整してもらい安心でした。',
+    attribution: '30代・戸建て相談',
   },
   {
-    avatar: { src: `${avatarBase}/a-03.jpg`, alt: '柔らかい印象の女性のポートレート' },
-    title: 'また家族で来たいです',
-    body: '子ども連れでも過ごしやすい動線と、落ち着いた雰囲気が両立していました。夕方の散策路から望む景色も忘れられず、写真に収めきれない美しさでした。',
-    attribution: '40代のお客様',
+    avatar: { src: 'https://cdn.lism-css.com/img/avatar/a_To1qVvQb79.jpg', alt: '相談者のポートレート（3）' },
+    title: '角部屋の形に合う家具探し',
+    body: '賃貸の角部屋で、定番サイズの家具が合わない場面が多く困っていました。寸法感とメーカーの違いを比較しながら、落ち着いた色面でまとめてもらいました。日当たりの印象も変えずに、すっきり見えています。',
+    attribution: '40代・賃貸相談',
   },
   {
-    avatar: { src: `${avatarBase}/a-04.jpg`, alt: '爽やかな笑みの女性のポートレート' },
-    title: '非日常を味わえました',
-    body: '内装の質感やアメニティの選び方にこだわりを感じます。朝の光が差し込むラウンジでのひとときは、本を読むのにも最適でした。',
-    attribution: '50代のお客様',
+    avatar: { src: 'https://cdn.lism-css.com/img/avatar/a_TjjtOsU0kg.jpg', alt: '相談者のポートレート（4）' },
+    title: 'リモート用の作業机まわりを整えたい',
+    body: '在宅中心になり、本棚とデスク、照明のバランスが課題でした。小さな部屋のまま、仕切り方と照度感を相談し、作業中の集中と夕方以降の落ち着きの両方を意識した提案でした。買い足しの順序も一緒に考え助かりました。',
+    attribution: '50代・在宅併用',
   },
   {
-    avatar: { src: `${avatarBase}/a-02.jpg`, alt: '記念日にご宿泊のお客様のポートレート' },
-    title: '記念日にぴったりでした',
-    body: 'サプライズの相談から当日の演出まで、安心してお任せできました。料理の説明も分かりやすく、ワインとのペアリングも楽しめました。',
-    attribution: '60代のお客様',
+    avatar: { src: 'https://cdn.lism-css.com/img/avatar/a_syw7vEz0mS.jpg', alt: '相談者のポートレート（5）' },
+    title: '母の家の改め方を相談',
+    body: '足腰を考え、座椅子から椅子への入れ替えと、廊下の明るさの話を一緒に整理しました。派手に変えすぎず、慣れ親しんだ家財も活かしつつ、毎日の足取りを軽くする方向性で合意して進められました。',
+    attribution: '60代・家族代理の相談',
   },
   {
-    avatar: { src: `${avatarBase}/a-02.jpg`, alt: '記念日にご宿泊のお客様のポートレート' },
-    title: '記念日にぴったりでした',
-    body: 'サプライズの相談から当日の演出まで、安心してお任せできました。料理の説明も分かりやすく、ワインとのペアリングも楽しめました。',
-    attribution: '60代のお客様',
+    avatar: { src: 'https://cdn.lism-css.com/img/avatar/a_w7f7eeA81h.jpg', alt: '相談者のポートレート（6）' },
+    title: '小さな相談のつもりでした',
+    body: '最初は「このテーブルで合うか」程度の相談でしたが、他の部屋のバランスまで見てもらい、我が家向けの配色の軸を決めてもらいました。一気に全部は揃えず、段階的に揃えていく方針が腹落ちしました。',
+    attribution: '20代・初めての家具相談',
   },
 ];
 ---
 
-<Box as='section' class='z--page002-voice' bgc='base'>
+<Box as='section' id='voice' class='z--page002-voice' bgc='base'>
   <Container isWrapper='l' hasGutter py='50' isContainer>
     <Stack g='30'>
       <Stack g='10' ai='c'>
-        <Heading level='2' fz='4xl' lts='l' m='0' ta='center'>Voice</Heading>
+        <Heading level='2' fz='4xl' lts='l' m='0' ta='center' ff='accent'>Voice</Heading>
         <Text as='p' fz='m' fw='bold' lts='l' m='0' c='text-2' ta='center'>お客様の声です</Text>
       </Stack>
 

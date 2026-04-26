@@ -2,10 +2,10 @@
 import { Stack, Grid, Flex, Frame, Media, Heading, Text, Box, Container } from 'lism-css/astro';
 
 const heroImage = {
-  src: 'https://cdn.lism-css.com/img/room/a-Rrr1UZO5Ji.jpg',
-  alt: '明るいホームオフィスのワークスペース',
+  src: 'https://cdn.lism-css.com/img/room/a-6wASe0C2nM.jpg',
+  alt: '花の額、木机とパソコン。本棚付き日当たりの良い在宅デスク',
   width: 1920,
-  height: 1080,
+  height: 1280,
 };
 
 const subFeatures: {
@@ -17,49 +17,49 @@ const subFeatures: {
 }[] = [
   {
     index: '01',
-    titleJa: '様々な要望に対応',
-    titleEn: 'Respond to various requests',
-    body: 'ご利用シーンや人数、ご予算に応じて柔軟にプランをご提案します。ご相談からお見積りまで、お気軽にお問い合わせください。',
+    titleJa: '要望の幅に合わせる',
+    titleEn: 'Scope that fits you',
+    body: '部屋づくりのご相談内容は多様です。相談だけ、家具の買い足し、間取りに合わせた一式の手配といった違いに対応し、打ち合わせからおおまかな費用感の整理までお気軽にどうぞ。',
     image: {
-      src: 'https://cdn.lism-css.com/img/room/u-jh2GpjGKEp.jpg',
-      alt: 'リビングのインテリア',
-      width: 1600,
-      height: 1067,
+      src: 'https://cdn.lism-css.com/img/room/u-M1jaFJaeKW.jpg',
+      alt: '白ソファ、黄色系額9枚、カラークッション、フロア灯。明るいリビング',
+      width: 1920,
+      height: 1282,
     },
   },
   {
     index: '02',
-    titleJa: '伝統と革新が溶け合う空間',
-    titleEn: 'Tradition meets innovation',
-    body: '落ち着きのある佇まいの中に、快適さを支える設備を備えました。長く愛されるデザインと、日々の使いやすさを両立しています。',
+    titleJa: '好みと暮らしやすさの両立',
+    titleEn: 'Comfort and your taste',
+    body: '見た目の好みと、毎日の導線や片づけやすさを同時に考えます。流行に流されすぎない素材感や、長く手放しにくい造りの家具もご提案の対象です。',
     image: {
-      src: 'https://cdn.lism-css.com/img/u-WFUSqJTxVc.jpg',
-      alt: '書斎コーナー',
+      src: 'https://cdn.lism-css.com/img/room/u-muaD49UlYx.jpg',
+      alt: '木ベッド、白木のナイトと卓上灯。グレー壁の寝室',
       width: 1920,
-      height: 1080,
+      height: 1280,
     },
   },
   {
     index: '03',
-    titleJa: '何もしない贅沢な時間',
-    titleEn: 'Luxurious time of doing nothing',
-    body: '日常から離れ、ゆったりと過ごせる環境づくりにこだわりました。読書や音楽を楽しむなど、ご自身のペースでお過ごしください。',
+    titleJa: 'ほっと戻れる、自分の部屋へ',
+    titleEn: 'A room to come back to',
+    body: '仕事帰りや家事の合間に、落ち着いて過ごしたい。そうした声を大切に、照明や配置の工夫、リラックスできるコーナーづくりもご一緒に考えます。',
     image: {
-      src: 'https://cdn.lism-css.com/img/room/a-Rrr1UZO5Ji.jpg',
-      alt: '明るい室内とデスク',
+      src: 'https://cdn.lism-css.com/img/room/u-8HzizEUdqH.jpg',
+      alt: '木天井と間接灯、L字ソファ、大理石風ローテーブル、本棚。広めのリビング',
       width: 1920,
-      height: 1080,
+      height: 1283,
     },
   },
 ];
 ---
 
-<Box as='section' class='z--page002-service' bgc='base-2' py='50'>
+<Box as='section' id='service' class='z--page002-service' bgc='base-2' py='50'>
   <Container isWrapper='l' hasGutter>
     <Stack g='50'>
       <Stack g='10' ai='c'>
-        <Heading level='2' fz='4xl' lts='l' m='0' ta='center'>Service</Heading>
-        <Text as='p' fz='m' fw='bold' lts='l' m='0' c='text-2' ta='center'>様々な要望に対応</Text>
+        <Heading level='2' fz='4xl' lts='l' m='0' ta='center' ff='accent'>Service</Heading>
+        <Text as='p' fz='m' fw='bold' lts='l' m='0' c='text-2' ta='center'>相談内容に合わせたご案内</Text>
       </Stack>
 
       <!-- md 未満: 1列（画像上・テキスト下）。md 以上: 2列（画像左・テキスト右） -->
@@ -75,15 +75,15 @@ const subFeatures: {
         </Frame>
         <Stack g='20' jc='c'>
           <Heading level='3' fz='2xl' lts='l' m='0'>
-            あなたの希望に合わせて
+            予算や目的に合わせ、
             <br />
-            最適なプランを計画
+            柔軟に対応します
           </Heading>
           <Text as='p' m='0' c='text-2'>
-            お客様一人ひとりのライフスタイルやご希望を丁寧にお伺いし、最適なご提案をまとめます。ご相談はオンラインでも対応可能です。
+            暮らし方や優先して整えたい場所、購入や配置までお願いしたい範囲などを伺い、無理のない形でご提案にまとめます。来店、オンライン、お電話のいずれからでも打ち合わせを受け付けています。
           </Text>
           <Text as='p' m='0' c='text-2'>
-            伝統的な温かみと、暮らしやすさを支える最新の設備を両立した空間で、何もしない贅沢な時間をお過ごしいただけます。
+            小さな悩み相談から、家具の買い付けに伴う作業のお願いまで、目的に合わせて一つずつ。賃貸・戸建てを問わず、住まいの性質に合う選び方を一緒に考えます。
           </Text>
         </Stack>
       </Grid>
@@ -91,7 +91,7 @@ const subFeatures: {
       <Stack g='40'>
         <Heading level='3' fz='xl' lts='l' m='0' ta='center'>更なる特徴</Heading>
         <!-- md 未満: 1列。md 以上: 3列 -->
-        <Grid gtc={['1fr', null, 'repeat(3, minmax(0, 1fr))']} g={['30', null, '40']} ai='start'>
+        <Grid gtc={['1fr', null, 'repeat(3, minmax(0, 1fr))']} g='40' ai='start'>
           {
             subFeatures.map((item) => (
               <Flex class='z--page002-service_card' fxd={['row-reverse', null, 'column']} ai='stretch' g='30' min-w='0'>
@@ -106,7 +106,7 @@ const subFeatures: {
                 </Frame>
                 <Stack g='20' min-w='0' fx='1' jc='start'>
                   <Flex ai='c' g='20' util='trimAll'>
-                    <Box as='span' class='z--page002-service_num' fz='4xl' fw='bold' ff='accent' c='text' whs='nowrap'>
+                    <Box as='span' class='z--page002-service_num' fz='3xl' fw='bold' ff='accent' c='text' whs='nowrap'>
                       {item.index}
                     </Box>
                     <Box class='z--page002-service_rule' w='1px' bgc='text' fxsh='0' />
@@ -114,7 +114,7 @@ const subFeatures: {
                       <Heading level='4' fz='m' m='0'>
                         {item.titleJa}
                       </Heading>
-                      <Text as='p' fz='xs' lh='s' m='0' c='text-2' o='p'>
+                      <Text as='p' fz='xs' lh='s' m='0' c='text-2' o='p' ff='accent'>
                         {item.titleEn}
                       </Text>
                     </Stack>

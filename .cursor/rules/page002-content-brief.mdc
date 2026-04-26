@@ -1,0 +1,14 @@
+---
+description: page002 LP のコピー方針 — CONTENT_BRIEF.md を参照
+globs:
+  - "**/components/page002/**"
+  - "**/pages/page002.astro"
+alwaysApply: false
+---
+
+# page002 コピー・ダミー文章
+
+- `src/components/page002/CONTENT_BRIEF.md` を、page002 配下の**文言執筆・ダミー文生成・言い回しの調整**のたびに**必ず目安として読む**。
+- そのブリーフの**トーン＆マナー・禁止表現・固有名**に沿う。ブリーフ未記載部分は、既存の page002 文言とヘッダー/フッターのトーンに合わせ、矛盾しないようにする。
+- ダミー文は、後から差し替えやすいよう**セマンティック**に意味を持たせる（同じ文の使い回しを避け、他セクションと内容が衝突しないこと）。
+- 技術: Lism CSS の方針はプロジェクト既存のルール（`.agents/skills/lism-css-guide` 等）に従い、**本ルールは文章面のみ**を扱う。

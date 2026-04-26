@@ -3,25 +3,16 @@ import { Lism, Stack, Flex, Frame, Heading, Text } from 'lism-css/astro';
 
 const missionImage = {
   src: 'https://cdn.lism-css.com/img/room/u-MojU9rQhZn.jpg',
-  alt: '明るいリビング空間。ソファ、ラグ、大きな窓、観葉植物が映える室内',
+  alt: '日差しの入るリビング。ソファ、ラグ、大きな窓と観葉植物のある室内',
   width: 1920,
   height: 1280,
 } as const;
 
 const body =
-  '移ろう季節の最も美しい一瞬を閉じ込めた、絶景の宿。自然との調和をテーマにした空間は、まるで風景画の一部になったような錯覚を覚えます。光と風、木洩れ陽の揺らぎが、滞在の時間をそっと彩り、日々の喧騒を手放した旅人の心に静かな余白を取り戻すでしょう。窓辺の一杯、湯上がりの一休み。そこに差し込む穏やかな時間の流れを、ぜひそのまま心に持ち帰っていただきたいと願っています。';
+  '暮らしの形は、家族構成も予算も理想もそれぞれ違います。LISM Lifeは、賃貸でも戸建てでも、日々の暮らし方や悩みを丁寧にお伺いし、家具の選び方からコーディネート、必要に応じた配置やお手伝いまでを一貫して支えます。雑誌の切り抜きがなくても、イメージのかけらから具体的な部屋づくりへと一緒に形にします。小さな相談と本格的な部屋作り、どちらも「自分らしい住みよさ」へつながる一歩になればと考えています。';
 ---
 
-<Lism
-  as='section'
-  id='mission'
-  isContainer
-  class='z--p002-mission'
-  pos='relative'
-  py='50'
-  my-s='60'
-  ov='hidden'
->
+<Lism as='section' id='mission' isContainer class='z--p002-mission' pos='relative' py='50' my-s='60' ov='hidden'>
   <Lism class='z--p002-mission_bg' exProps={{ 'aria-hidden': 'true' }} />
   <Flex
     fxd={['column', null, 'row']}
@@ -31,21 +22,11 @@ const body =
     z='1'
     w='100%'
   >
-    <Flex
-      class='z--p002-mission_text'
-      fxd='column'
-      ai='start'
-      min-w='0'
-      w='100%'
-    >
+    <Flex class='z--p002-mission_text' fxd='column' ai='start' min-w='0' w='100%'>
       <Stack g='30' ai='start'>
         <Stack g='10' ai='start'>
-          <Heading level='2' m='0' fz='5xl' fw='bold' lts='l' c='text'>
-            Mission
-          </Heading>
-          <Text as='p' m='0' fz='xl' fw='bold' lts='l' c='text'>
-            私たちの使命
-          </Text>
+          <Heading level='2' m='0' fz='5xl' fw='bold' lts='l' c='text' ff='accent'> Mission </Heading>
+          <Text as='p' m='0' fz='xl' fw='bold' lts='l' c='text'> 私たちが目指すもの </Text>
         </Stack>
         <Text as='p' m='0' fz='m' lh='l' lts='s' c='text-2'>
           {body}
@@ -83,10 +64,7 @@ const body =
   @layer lism-component {
     /* l 左: ビュー基準。右端（xl 相当）: 子孫で 100cqi＝#mission 幅 main 内でも正しい */
     .z--p002-mission {
-      --_mission-l-pad: max(
-        var(--gutter-size, var(--s30)),
-        calc((100vw - min(100vw, var(--sz--l, 1280px))) / 2)
-      );
+      --_mission-l-pad: max(var(--gutter-size, var(--s30)), calc((100vw - min(100vw, var(--sz--l, 1280px))) / 2));
     }
     .z--p002-mission_bg {
       position: absolute;

@@ -17,7 +17,14 @@ export const title = 'page002：Simple Natural LP Design';
 ---
 
 <DemoLayout title={title}>
-  <Wrapper contentSize='full'>
+  <link rel='preconnect' href='https://fonts.googleapis.com' slot='head' />
+  <link rel='preconnect' href='https://fonts.gstatic.com' crossorigin slot='head' />
+  <link
+    href='https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap'
+    rel='stylesheet'
+    slot='head'
+  />
+  <Wrapper class='z--page002' contentSize='full'>
     <!-- Header -->
     <Header />
     <!-- Main Content -->
@@ -37,50 +44,21 @@ export const title = 'page002：Simple Natural LP Design';
   </Wrapper>
 </DemoLayout>
 
+<style is:global>
+  /**
+   * `ff:accent`（`--ff--accent`）: セリフに寄らないよう、Montserrat 以外は日本語ゴシック＋汎用 sans へ
+   * @see https://fonts.google.com/specimen/Montserrat
+   */
+  .z--page002 {
+    --ff--accent: 'Montserrat', 'Hiragino Sans', 'Hiragino Kaku Gothic ProN', 'Hiragino Kaku Gothic Pro', 'Yu Gothic',
+      'YuGothic', 'Noto Sans JP', 'BIZ UDGothic', ui-sans-serif, system-ui, sans-serif;
+  }
+</style>
+
 <style>
-  /* Root */
   :root {
     --z--header-height: 112px;
     --z--header-height--thin: 64px;
-    --u--fadeIn--animation-range: entry 0% contain 20%;
-    /* color token */
     --base-2: #ececec;
-  }
-  /* Fadein */
-  .u--fadeIn {
-    view-timeline: --u--fadeIn y;
-    animation: u--fadeIn linear both;
-    animation-timeline: --u--fadeIn;
-    animation-range: var(--u--fadeIn--animation-range);
-  }
-  @keyframes u--fadeIn {
-    from {
-      opacity: 0;
-      transform: translateY(32px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-  /* Background Parallax */
-  .u--bgParallax {
-    view-timeline: --u--bgParallax y;
-  }
-  .u--bgParallax .a--media {
-    position: absolute;
-    top: -20%;
-    height: 140%;
-    animation: u--bgParallax_media linear both;
-    animation-timeline: --u--bgParallax;
-    animation-range: entry 0% cover 100%;
-  }
-  @keyframes u--bgParallax_media {
-    from {
-      transform: translateY(-10%);
-    }
-    to {
-      transform: translateY(10%);
-    }
   }
 </style>

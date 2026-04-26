@@ -1,0 +1,12 @@
+---
+description: ページ・コンポーネント作業時は Lism CSS ガイド（SKILL.md）を用いる
+globs:
+  - "**/components/**"
+  - "**/pages/**"
+alwaysApply: false
+---
+
+# Lism CSS ガイドの利用
+
+- `src` 内の `components` / `pages` の実装（新規・編集、レイアウト・UI・トークン・レスポンシブ）を扱うときは、**必ず** `.agents/skills/lism-css-guide/SKILL.md` を**最初に**読み、その指示と詳細リファレンス（同フォルダの `*.md`）に従う。
+- 方針: Lism のプリミティブ・Property Class・トークンを優先し、独自 CSS は必要最小限。ブレークポイント（`md` 等）や `is--container` の前提は同ガイドのとおりに。

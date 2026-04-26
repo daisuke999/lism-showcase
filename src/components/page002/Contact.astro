@@ -55,7 +55,7 @@ const contactFields: ContactField[] = [
     name: 'subject',
     label: '件名',
     type: 'text',
-    placeholder: 'ご宿泊について',
+    placeholder: '部屋作りのご相談',
     autoComplete: 'off',
   },
   {
@@ -69,7 +69,7 @@ const contactFields: ContactField[] = [
 ];
 ---
 
-<Box as='section' class='c--contact' pos='relative' ov='hidden'>
+<Box as='section' id='contact' class='c--contact' pos='relative' ov='hidden'>
   <Frame isLayer class='c--contactMediaWrap'>
     <Lism
       as='img'
@@ -95,7 +95,7 @@ const contactFields: ContactField[] = [
   <Container class='c--contactInner' isWrapper='l' hasGutter py='60' pos='relative'>
     <Stack g='40' ai='c'>
       <Stack g='10' ai='c' max-w='36rem' w='100%'>
-        <Heading level='2' fz='4xl' lts='l' m='0' ta='center' c='white'>Contact</Heading>
+        <Heading level='2' fz='4xl' lts='l' m='0' ta='center' c='white' ff='accent'>Contact</Heading>
         <Text as='p' fz='m' fw='bold' lts='l' m='0' c='white' ta='center'>お問い合わせ</Text>
       </Stack>
 
@@ -134,26 +134,30 @@ const contactFields: ContactField[] = [
                     aria-describedby={field.errorMessage ? `${field.id}-error` : undefined}
                   />
                 )}
-                {
-                  field.errorMessage && (
-                    <Text
-                      class='c--contactError'
-                      id={`${field.id}-error`}
-                      as='p'
-                      fz='xs'
-                      m='0'
-                      mt='5'
-                      c='accent'
-                      role='alert'
-                    >
-                      {field.errorMessage}
-                    </Text>
-                  )
-                }
+                {/*
+                  【テンプレート用】フィールド下のエラー文サンプル（`contactFields` の `errorMessage` と対）
+                  本番でクライアント等のバリデーション表示を有効にする場合は、下の <Text> ブロックのコメントを外してください。
+                  id は `page002-contact-email-error` のように `${field.id}-error` となり、上記 input/textarea の aria-describedby と対応します。
+
+                {field.errorMessage && (
+                  <Text
+                    class='c--contactError'
+                    id={`${field.id}-error`}
+                    as='p'
+                    fz='xs'
+                    m='0'
+                    mt='5'
+                    c='red'
+                    role='alert'
+                  >
+                    {field.errorMessage}
+                  </Text>
+                )}
+                */}
               </Stack>
             ))
           }
-          <button type='submit' class='c--contactSubmit'>お問い合わせ</button>
+          <button type='submit' class='c--contactSubmit'>この内容で送信する</button>
         </Stack>
       </Box>
     </Stack>
@@ -197,7 +201,7 @@ const contactFields: ContactField[] = [
 
     .c--contactInput::placeholder {
       color: var(--text-2);
-      opacity: 0.85;
+      opacity: var(--o--pp);
     }
 
     .c--contactInput:focus-visible {
