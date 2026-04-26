@@ -1,28 +1,30 @@
 ---
-import { Stack, Container, BoxLink, Icon, Cluster, Text, Inline } from 'lism-css/astro';
+import { Stack, Container, BoxLink, Icon, Cluster, Text, Inline, Link } from 'lism-css/astro';
+
+const footerSnsLinks = [
+  { href: '#', icon: 'logo-x' as const, label: 'X' },
+  { href: '#', icon: 'logo-instagram' as const, label: 'Instagram' },
+  { href: '#', icon: 'logo-youtube' as const, label: 'YouTube' },
+  { href: '#', icon: 'logo-line' as const, label: 'LINE' },
+] as const;
 ---
 
 <Container as='footer' isWrapper='m' py='40' hasGutter>
   <Stack jc='c' ai='c' g='30'>
-    <Stack class='z--header_logo'>
+    <Stack class='z--p001-header_logo'>
       <Text as='p' fz='xl' fw='400' lts='l' m='0'>
         <Inline fw='200'>The</Inline>Minimal
       </Text>
     </Stack>
     <Cluster g='20'>
-      <BoxLink href='#' hov='-o'>
-        <Icon icon='logo-x' fz='l' c='text-2' />
-      </BoxLink>
-      <BoxLink href='#' hov='-o'>
-        <Icon icon='logo-instagram' fz='l' c='text-2' />
-      </BoxLink>
-      <BoxLink href='#' hov='-o'>
-        <Icon icon='logo-youtube' fz='l' c='text-2' />
-      </BoxLink>
-      <BoxLink href='#' hov='-o'>
-        <Icon icon='logo-line' fz='l' c='text-2' />
-      </BoxLink>
+      {
+        footerSnsLinks.map(({ href, icon, label }) => (
+          <Link href={href} td='none' c='text-2' hov='-o' hasTransition aria-label={label}>
+            <Icon icon={icon} fz='l' />
+          </Link>
+        ))
+      }
     </Cluster>
-    <Text as='p' fz='s' c='text-2' m='0'>© 2026 The Minimal.</Text>
+    <Text as='p' fz='s' c='text-2' m='0'>© 2026 Lism CSS.</Text>
   </Stack>
 </Container>

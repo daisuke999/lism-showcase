@@ -99,7 +99,7 @@ const plans = [
         <Heading level='2' m='0' fz={['2xl', null, '3xl']} fw='500' lts='l'> 宿泊プラン </Heading>
       </Stack>
 
-      <Stack g={['50', '50', '60']} w='100%' ai='stretch'>
+      <Stack g='50' w='100%' ai='stretch'>
         {
           plans.map((plan) => (
             <Flex fxd={['column', 'column', 'row-reverse']} ai='stretch' g={['30', '30', '50']} w='100%'>
@@ -185,24 +185,26 @@ const plans = [
 </Lism>
 
 <style>
-  /*
+  @layer lism-custom {
+    /*
    * Lism の md は viewport の @media ではなく @container (min-width: 800px)（prop-responsive.md）。
    * また -max-w:100%（max-width）と max-inline-size の併用や、flex 子の % 解決で上限が効かないことがあるため、
    * コンテナクエリ内で max-width + cqi を使い、fxd の row 切替と同じ基準で min(32rem, 40cqi) に揃える（40cqi はクエリコンテナ行内幅の 40% 相当の上限）。
    */
-  .z--p003-plans_media {
-    max-width: 100%;
-  }
-  @container (min-width: 800px) {
     .z--p003-plans_media {
-      max-width: min(32rem, 40cqi);
+      max-width: 100%;
     }
-  }
+    @container (min-width: 800px) {
+      .z--p003-plans_media {
+        max-width: min(32rem, 40cqi);
+      }
+    }
 
-  /* UI Button のデフォルト（--text 地）を上書きし、デザインどおり白ピル＋黒字に */
-  .z--p003-plans_reserve.c--button {
-    --bgc: var(--white);
-    --c: var(--black);
-    --bdc: var(--white);
+    /* UI Button のデフォルト（--text 地）を上書きし、デザインどおり白ピル＋黒字に */
+    .z--p003-plans_reserve.c--button {
+      --bgc: var(--white);
+      --c: var(--black);
+      --bdc: var(--white);
+    }
   }
 </style>

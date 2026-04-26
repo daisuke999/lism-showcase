@@ -2,31 +2,58 @@
 import { Frame, Stack, Container, Grid, Layer, Box, Text, Heading, Lism } from 'lism-css/astro';
 import HGroup from '@/components/page001/HGroup.astro';
 
-const hero = {
+const featureHero = {
   src: 'https://cdn.lism-css.com/img/random-2510?r=service',
-  alt: '',
+  alt: 'Beautiful Landscape',
   width: 960,
   height: 640,
 };
 
-const cardMedia = (r: string) => ({
-  src: `https://cdn.lism-css.com/img/random-2510?r=${r}`,
+const defaultCardImageMeta = {
   alt: 'Beautiful Landscape',
   width: 960,
   height: 540,
-});
+} as const;
+
+/** 2列（md+）: 奇数カード [画像|テキスト]、偶数 [テキスト|画像]（gta+ga。参考: l--grid） */
+type FeatureCard = {
+  src: string;
+  title: string;
+  body: string;
+};
+
+const featureCards: FeatureCard[] = [
+  {
+    src: 'https://cdn.lism-css.com/img/random-2510?r=service1',
+    title: 'レイアウト設計サポート',
+    body: 'ワイヤーフレーム作成がしやすい、レイアウトファーストなプリミティブ（Stack や Flex、Grid など）を、ドキュメントに沿った組み方で扱います。骨組みを先に揃え、画面幅の切り替えに耐えるマークアップを意識した設計です。',
+  },
+  {
+    src: 'https://cdn.lism-css.com/img/random-2510?r=service2',
+    title: 'デザイントークン整備',
+    body: 'ハーモニックモジュラースケールに基づくタイポやスペースなど、柔軟でレスポンシブに切り替えやすいCSS変数の設計が前提です。単一プロパティに相当する Property Class でも、同じ考え方を短い表記に落とし込めます。',
+  },
+  {
+    src: 'https://cdn.lism-css.com/img/random-2510?r=service3',
+    title: 'AI連携ワークフロー',
+    body: 'AIコーディング向けの Skills や、@lism-css/mcp（MCPサーバー）がエコシステムに含まれ、公式ドキュメントの参照と組み合わせやすい導線として案内されています。設計上の用語は「概要」や各章で揃いやすいよう整理されています。',
+  },
+  {
+    src: 'https://cdn.lism-css.com/img/random-2510?r=service4',
+    title: 'UIキット／テンプレート導入',
+    body: '公式のエコシステム表では、@lism-css/ui にアコーディオンやタブ、ボタン等のUIコンポーネント、lism-cli に UI をプロジェクトへコピーしてカスタマイズする CLI が並んでいます。React やAstro 向けの専用コンポーネント利用も、同じ概要で「より快適に」と紹介されている導入です。',
+  },
+];
 ---
 
-<Box id='feature' class='z--feature' pos='relative'>
+<Box id='feature' class='z--p001-feature' pos='relative'>
   <Frame isLayer>
     <Lism
       as='img'
-      class='z--feature_media'
-      src={hero.src}
-      alt={hero.alt}
-      w='100%'
-      h='100%'
-      exProps={{ width: hero.width, height: hero.height, loading: 'lazy', decoding: 'async' }}
+      class='z--p001-feature_media'
+      src={featureHero.src}
+      alt={featureHero.alt}
+      exProps={{ width: featureHero.width, height: featureHero.height, loading: 'lazy', decoding: 'async' }}
     />
   </Frame>
   <Layer style={{ filter: 'grayscale(1)', backgroundColor: 'hsl(224 4% 99% / 0.85)' }} />
@@ -34,154 +61,97 @@ const cardMedia = (r: string) => ({
     <Stack g='40'>
       <HGroup text='Feature' subText='Lism CSSの特徴' />
       <Stack g='40'>
-        <Grid class='z--feature_item' gtc={['auto', null, '2fr 3fr']} cg='30'>
-          <Frame ar='16/9' pos='relative' bdrs='20'>
-            <Lism
-              as='img'
-              class='z--feature_itemMedia'
-              src={cardMedia('service1').src}
-              alt={cardMedia('service1').alt}
-              w='100%'
-              h='100%'
-              exProps={{
-                width: cardMedia('service1').width,
-                height: cardMedia('service1').height,
-                loading: 'lazy',
-                decoding: 'async',
-              }}
-            />
-          </Frame>
-          <Stack class='z--feature_itemContent' g='15' max-w='36rem' py='20'>
-            <Heading level='3' fz='l' m='0'>レイアウト設計サポート</Heading>
-            <Text as='p' m='0' o='p'>
-              Stack／Flex／Gridなどのレイアウトプリミティブを選定し、ワイヤーからコンポーネント単位まで一貫した組み方へ落とし込みます。
-              コンテナを意識した切り替え方針も含め、再現性の高いマークアップ指針を整備します。
-            </Text>
-          </Stack>
-        </Grid>
-        <Grid class='z--feature_item' gtc={['auto', null, '3fr 2fr']} cg='30'>
-          <Frame ar='16/9' pos='relative' bdrs='20' gr={['auto', null, '1']} gc={['auto', null, '2']}>
-            <Lism
-              as='img'
-              class='z--feature_itemMedia'
-              src={cardMedia('service2').src}
-              alt={cardMedia('service2').alt}
-              w='100%'
-              h='100%'
-              exProps={{
-                width: cardMedia('service2').width,
-                height: cardMedia('service2').height,
-                loading: 'lazy',
-                decoding: 'async',
-              }}
-            />
-          </Frame>
-          <Stack class='z--feature_itemContent' g='15' max-w='36rem' py='20'>
-            <Heading level='3' fz='l' m='0'>デザイントークン整備</Heading>
-            <Text as='p' m='0' o='p'>
-              カラー・タイポグラフィ・余白・角丸・影を段階的なCSS変数へ整理し、Figmaのトークンと実装の差分を最小化します。
-              Property Classの運用ルールまで含め、チームで迷わない表記に揃えます。
-            </Text>
-          </Stack>
-        </Grid>
-        <Grid class='z--feature_item' gtc={['auto', null, '2fr 3fr']} cg='30'>
-          <Frame ar='16/9' pos='relative' bdrs='20'>
-            <Lism
-              as='img'
-              class='z--feature_itemMedia'
-              src={cardMedia('service3').src}
-              alt={cardMedia('service3').alt}
-              w='100%'
-              h='100%'
-              exProps={{
-                width: cardMedia('service3').width,
-                height: cardMedia('service3').height,
-                loading: 'lazy',
-                decoding: 'async',
-              }}
-            />
-          </Frame>
-          <Stack class='z--feature_itemContent' g='15' max-w='36rem' py='20'>
-            <Heading level='3' fz='l' m='0'>AI連携ワークフロー</Heading>
-            <Text as='p' m='0' o='p'>
-              SkillsとMCPサーバーを活用し、エディタ上で仕様を参照しながら実装が進む体制を設計します。
-              生成コードのレビュー観点（レイヤー規則・ユーティリティの粒度）もテンプレ化してお渡しします。
-            </Text>
-          </Stack>
-        </Grid>
-        <Grid class='z--feature_item' gtc={['auto', null, '3fr 2fr']} cg='30'>
-          <Frame ar='16/9' pos='relative' bdrs='20' gr={['auto', null, '1']} gc={['auto', null, '2']}>
-            <Lism
-              as='img'
-              class='z--feature_itemMedia'
-              src={cardMedia('service4').src}
-              alt={cardMedia('service4').alt}
-              w='100%'
-              h='100%'
-              exProps={{
-                width: cardMedia('service4').width,
-                height: cardMedia('service4').height,
-                loading: 'lazy',
-                decoding: 'async',
-              }}
-            />
-          </Frame>
-          <Stack class='z--feature_itemContent' g='15' max-w='36rem' py='20'>
-            <Heading level='3' fz='l' m='0'>UIキット／テンプレート導入</Heading>
-            <Text as='p' m='0' o='p'>
-              AccordionやModalなどのUIコンポーネント、ランディングやブログ向けテンプレートを選定し、既存デザインへ段階的に移植します。
-              Astro／React双方の要件に合わせ、運用しやすいディレクトリ構成まで含めて支援します。
-            </Text>
-          </Stack>
-        </Grid>
+        {
+          featureCards.map((card, i) => {
+            const isReversed = i % 2 === 1;
+            /** 狭い: 2行1列 / md+: 1行2列。エリア名 img・text の並びで左右を決め、DOM 順は固定（ga で対応） */
+            const gta: [string, null, string] = [`'img' 'text'`, null, isReversed ? `'text img'` : `'img text'`];
+            return (
+              <Grid
+                class='z--p001-feature_item'
+                gtc={['auto', null, isReversed ? '3fr 2fr' : '2fr 3fr']}
+                gta={gta}
+                g='30'
+                ai='start'
+              >
+                <Frame ar='16/9' pos='relative' bdrs='20' ga='img'>
+                  <Lism
+                    as='img'
+                    class='z--p001-feature_itemMedia'
+                    src={card.src}
+                    alt={defaultCardImageMeta.alt}
+                    exProps={{
+                      width: defaultCardImageMeta.width,
+                      height: defaultCardImageMeta.height,
+                      loading: 'lazy',
+                      decoding: 'async',
+                    }}
+                  />
+                </Frame>
+                <Stack class='z--p001-feature_itemContent' g='15' max-w='36rem' py='20' ga='text'>
+                  <Heading level='3' fz='l' m='0'>
+                    {card.title}
+                  </Heading>
+                  <Text as='p' m='0' o='p'>
+                    {card.body}
+                  </Text>
+                </Stack>
+              </Grid>
+            );
+          })
+        }
       </Stack>
     </Stack>
   </Container>
 </Box>
 
 <style>
-  .z--feature {
-    view-timeline: --z-feature y;
-  }
-  .z--feature .z--feature_media {
-    position: absolute;
-    top: -20%;
-    height: 140%;
-    animation: z--feature_media linear both;
-    animation-timeline: --z-feature;
-    animation-range: entry 0% cover 100%;
-  }
-  @keyframes z--feature_media {
-    from {
-      transform: translateY(-10%);
+  @layer lism-custom {
+    .z--p001-feature {
+      view-timeline: --z-feature y;
     }
-    to {
-      transform: translateY(10%);
+    .z--p001-feature .z--p001-feature_media {
+      width: 100%;
+      position: absolute;
+      top: -20%;
+      height: 140%;
+      animation: z--p001-feature_media linear both;
+      animation-timeline: --z-feature;
+      animation-range: entry 0% cover 100%;
     }
-  }
-  .z--feature .z--feature_item {
-    view-timeline: --z-feature_item y;
-    animation: u--fadeIn linear both;
-    animation-timeline: --z-feature_item;
-    animation-range: var(--u--fadeIn--animation-range);
-  }
-  .z--feature .z--feature_itemMedia {
-    position: absolute;
-    top: -20%;
-    height: 140%;
-    animation: z--feature_itemMedia linear both;
-    animation-timeline: --z-feature_item;
-    animation-range: entry 0% cover 100%;
-  }
-  @keyframes z--feature_itemMedia {
-    from {
-      transform: translateY(-10%);
+    @keyframes z--p001-feature_media {
+      from {
+        transform: translateY(-10%);
+      }
+      to {
+        transform: translateY(10%);
+      }
     }
-    to {
-      transform: translateY(10%);
+    .z--p001-feature .z--p001-feature_item {
+      view-timeline: --z-feature_item y;
+      animation: u--fadeIn linear both;
+      animation-timeline: --z-feature_item;
+      animation-range: var(--u--fadeIn--animation-range);
     }
-  }
-  .z--feature .z--feature_item:nth-child(even) .z--feature_itemContent {
-    justify-self: end;
+    .z--p001-feature .z--p001-feature_itemMedia {
+      width: 100%;
+      position: absolute;
+      top: -20%;
+      height: 140%;
+      animation: z--p001-feature_itemMedia linear both;
+      animation-timeline: --z-feature_item;
+      animation-range: entry 0% cover 100%;
+    }
+    @keyframes z--p001-feature_itemMedia {
+      from {
+        transform: translateY(-10%);
+      }
+      to {
+        transform: translateY(10%);
+      }
+    }
+    .z--p001-feature .z--p001-feature_item:nth-child(even) .z--p001-feature_itemContent {
+      justify-self: end;
+    }
   }
 </style>

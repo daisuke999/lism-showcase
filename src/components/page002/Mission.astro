@@ -8,7 +8,7 @@ const missionImage = {
   height: 1280,
 } as const;
 
-const body =
+const missionBody =
   '暮らしの形は、家族構成も予算も理想もそれぞれ違います。LISM Lifeは、賃貸でも戸建てでも、日々の暮らし方や悩みを丁寧にお伺いし、家具の選び方からコーディネート、必要に応じた配置やお手伝いまでを一貫して支えます。雑誌の切り抜きがなくても、イメージのかけらから具体的な部屋づくりへと一緒に形にします。小さな相談と本格的な部屋作り、どちらも「自分らしい住みよさ」へつながる一歩になればと考えています。';
 ---
 
@@ -23,13 +23,13 @@ const body =
     w='100%'
   >
     <Flex class='z--p002-mission_text' fxd='column' ai='start' min-w='0' w='100%'>
-      <Stack g='30' ai='start'>
+      <Stack g='40' ai='start'>
         <Stack g='10' ai='start'>
           <Heading level='2' m='0' fz='5xl' fw='bold' lts='l' c='text' ff='accent'> Mission </Heading>
           <Text as='p' m='0' fz='xl' fw='bold' lts='l' c='text'> 私たちが目指すもの </Text>
         </Stack>
         <Text as='p' m='0' fz='m' lh='l' lts='s' c='text-2'>
-          {body}
+          {missionBody}
         </Text>
       </Stack>
     </Flex>
@@ -61,7 +61,7 @@ const body =
 </Lism>
 
 <style>
-  @layer lism-component {
+  @layer lism-custom {
     /* l 左: ビュー基準。右端（xl 相当）: 子孫で 100cqi＝#mission 幅 main 内でも正しい */
     .z--p002-mission {
       --_mission-l-pad: max(var(--gutter-size, var(--s30)), calc((100vw - min(100vw, var(--sz--l, 1280px))) / 2));

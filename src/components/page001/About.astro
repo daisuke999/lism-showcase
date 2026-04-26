@@ -2,12 +2,26 @@
 import { Frame, Stack, Container, Box, Flow, Layer, Text, Lism } from 'lism-css/astro';
 import HGroup from '@/components/page001/HGroup.astro';
 
-const img = (r: string) => ({
-  src: `https://cdn.lism-css.com/img/random-2510?r=${r}`,
-  alt: 'Beautiful Landscape',
-  width: 800,
-  height: 600,
-});
+const aboutPhotos = [
+  {
+    src: 'https://cdn.lism-css.com/img/random-2510?r=1',
+    alt: 'Beautiful Landscape',
+    width: 800,
+    height: 600,
+  },
+  {
+    src: 'https://cdn.lism-css.com/img/random-2510?r=2',
+    alt: 'Beautiful Landscape',
+    width: 800,
+    height: 600,
+  },
+  {
+    src: 'https://cdn.lism-css.com/img/random-2510?r=3',
+    alt: 'Beautiful Landscape',
+    width: 800,
+    height: 600,
+  },
+] as const;
 
 /** Feature セクションと同じオーバーレイ（filter + hsl、背後の写真に程よく色が残る） */
 const aboutPhotoOverlay = {
@@ -16,117 +30,96 @@ const aboutPhotoOverlay = {
 };
 ---
 
-<Container id='about' class='z--about' isWrapper='s' pos='relative' py='70' hasGutter>
+<Container id='about' class='z--p001-about' isWrapper='s' pos='relative' py='70' hasGutter>
   <Stack ai='c' jc='c' g='40' pos='relative'>
     <HGroup text='About' subText='Lism CSSとは' />
-    <Box class='z--about_visuals' pos='absolute' w='100%' h='100%' z='0'>
-      <Frame class='z--about_frame' ar='4/3' pos='absolute' w='20rem' bgc='base-2' bdrs='20'>
-        <Lism
-          as='img'
-          class='z--about_media'
-          src={img('1').src}
-          alt={img('1').alt}
-          w='100%'
-          h='100%'
-          exProps={{ width: img('1').width, height: img('1').height, loading: 'lazy', decoding: 'async' }}
-        />
-        <Layer style={aboutPhotoOverlay} />
-      </Frame>
-      <Frame class='z--about_frame' ar='4/3' pos='absolute' w='16rem' bgc='base-2' bdrs='20'>
-        <Lism
-          as='img'
-          class='z--about_media'
-          src={img('2').src}
-          alt={img('2').alt}
-          w='100%'
-          h='100%'
-          exProps={{ width: img('2').width, height: img('2').height, loading: 'lazy', decoding: 'async' }}
-        />
-        <Layer style={aboutPhotoOverlay} />
-      </Frame>
-      <Frame class='z--about_frame' ar='4/3' pos='absolute' w='16rem' bgc='base-2' bdrs='20'>
-        <Lism
-          as='img'
-          class='z--about_media'
-          src={img('3').src}
-          alt={img('3').alt}
-          w='100%'
-          h='100%'
-          exProps={{ width: img('3').width, height: img('3').height, loading: 'lazy', decoding: 'async' }}
-        />
-        <Layer style={aboutPhotoOverlay} />
-      </Frame>
+    <Box class='z--p001-about_visuals' pos='absolute' w='100%' h='100%' z='0'>
+      {
+        aboutPhotos.map((photo, i) => (
+          <Frame class='z--p001-about_frame' ar='4/3' pos='absolute' w={i === 0 ? '20rem' : '16rem'} bgc='base-2' bdrs='20'>
+            <Lism
+              as='img'
+              class='z--p001-about_media'
+              src={photo.src}
+              alt={photo.alt}
+              w='100%'
+              h='100%'
+              exProps={{ width: photo.width, height: photo.height, loading: 'lazy', decoding: 'async' }}
+            />
+            <Layer style={aboutPhotoOverlay} />
+          </Frame>
+        ))
+      }
     </Box>
-    <Flow class='z--about_body u--fadeIn' flow='s' pos='relative' z='1'>
+    <Flow class='z--p001-about_body u--fadeIn' flow='s' pos='relative' z='1'>
       <Text as='p' max-sz='full' mx='auto'>
-        Lism CSSは、AIと人の両方が迷いにくい命名規則とレイヤー設計を軸にしたCSS設計フレームワークです。
-        ファイルを一つ読み込むだけで導入でき、ビルド工程に縛られない軽量さが魅力です。
+        Lism CSSは、Webサイトの骨組みをテンポ良く美しく作るための、軽量なCSS設計フレームワークです。設計理論に沿った一つのCSSが本体で、特別なビルド工程は必須ではありません。
       </Text>
       <Text as='p' max-sz='full' mx='auto'>
-        StackやFlex、Gridといったレイアウトプリミティブを組み合わせるだけで、ページの骨格を素早く組み立てられます。
-        余白・タイポグラフィはハーモニックスケールに沿って整え、自然なリズムを保ちやすい設計になっています。
+        心地よいリズムのタイポグラフィ、ワイヤーフレーム向けのレイアウトファーストなプリミティブ、CSS変数を活かしたレスポンシブにも向くユーティリティ設計を揃えています。
+        Every Layout やTailwindのような考え方から着想を得た上で、独自のCSS設計にまとまっています。
       </Text>
       <Text as='p' max-sz='full' mx='auto'>
-        カラーや角丸、影などのデザイントークンはCSS変数で一元管理され、Property Class（例:
-        -p:20）で意図を短く表現できます。
-        @layerによるレイヤー構造で詳細度の衝突を抑え、チーム開発でも拡張しやすい土台を用意しています。
+        ベーススタイリングや@layer階層、トークン、命名規則まで、サイト全体のCSS設計を一貫して扱える点が「Why Lism CSS?」の骨子です。CSSを一つ読み込むだけで、素のHTMLからでも導入を始められます。
       </Text>
       <Text as='p' max-sz='full' mx='auto'>
-        公式にはSkillsやMCPサーバー、UIコンポーネント、テンプレートなどのエコシステムも用意され、ドキュメントとあわせて学習コストを下げられます。
-        本ページはその世界観を体験できるデモとして、代表的なセクション構成をまとめています。
+        コアのlism-cssのほか、@lism-css/ui、lism-cli、@lism-css/mcp等を、すべて無料・オープンソース（MIT）のパッケージ群として提供しています。
+        本ページは、公式ドキュメントで述べられている性質を体験できるショーケースに近い、代表的なセクションの並びをまとめたものです。
       </Text>
     </Flow>
   </Stack>
 </Container>
 
 <style>
-  .z--about {
+  @layer lism-custom {
+
+  .z--p001-about {
     isolation: isolate;
-    view-timeline: --z--about-timeline y;
-    --z--about_range-start: 25%;
-    --z--about_range-end: 20%;
+    view-timeline: --z--p001-about-timeline y;
+    --z--p001-about_range-start: 25%;
+    --z--p001-about_range-end: 20%;
   }
-  .z--about .z--hgroup {
+  .z--p001-about .z--p001-hgroup {
     position: relative;
     z-index: 1;
   }
-  .z--about .z--about_visuals {
+  .z--p001-about .z--p001-about_visuals {
     pointer-events: none;
   }
-  .z--about .z--about_frame {
-    animation: z--about_frame linear both;
-    animation-timeline: --z--about-timeline;
+  .z--p001-about .z--p001-about_frame {
+    animation: z--p001-about_frame linear both;
+    animation-timeline: --z--p001-about-timeline;
   }
-  .z--about .z--about_frame:nth-child(1) {
+  .z--p001-about .z--p001-about_frame:nth-child(1) {
     top: -2rem;
     right: 90%;
     animation-range: entry 0% cover 30%;
   }
-  .z--about .z--about_frame:nth-child(2) {
+  .z--p001-about .z--p001-about_frame:nth-child(2) {
     top: 6rem;
     left: 90%;
     animation-range: entry 20% cover 40%;
   }
-  .z--about .z--about_frame:nth-child(3) {
+  .z--p001-about .z--p001-about_frame:nth-child(3) {
     bottom: -6rem;
     right: 80%;
     animation-range: entry 40% cover 50%;
   }
   @container (min-width: 800px) {
-    .z--about .z--about_frame:nth-child(1) {
+    .z--p001-about .z--p001-about_frame:nth-child(1) {
       top: -2rem;
       right: calc(100% + 4rem);
     }
-    .z--about .z--about_frame:nth-child(2) {
+    .z--p001-about .z--p001-about_frame:nth-child(2) {
       top: 6rem;
       left: calc(100% + 4rem);
     }
-    .z--about .z--about_frame:nth-child(3) {
+    .z--p001-about .z--p001-about_frame:nth-child(3) {
       bottom: -6rem;
       right: calc(100% - 4rem);
     }
   }
-  @keyframes z--about_frame {
+  @keyframes z--p001-about_frame {
     from {
       opacity: 0;
       filter: blur(16px);
@@ -138,17 +131,19 @@ const aboutPhotoOverlay = {
       transform: scale(1);
     }
   }
-  .z--about .z--about_media {
-    animation: z--about_media linear both;
-    animation-timeline: --z--about-timeline;
+  .z--p001-about .z--p001-about_media {
+    animation: z--p001-about_media linear both;
+    animation-timeline: --z--p001-about-timeline;
     animation-range: entry cover;
   }
-  @keyframes z--about_media {
+  @keyframes z--p001-about_media {
     from {
       transform: scale(1.2);
     }
     to {
       transform: scale(1);
     }
+  }
+
   }
 </style>

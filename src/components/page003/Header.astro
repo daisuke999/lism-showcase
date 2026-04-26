@@ -3,7 +3,7 @@ import { Lism, Stack, Container, Grid, Flex, Link, BoxLink, Icon, Center, Inline
 import { Modal } from '@lism-css/ui/astro';
 import Logo from '@/components/page003/Logo.astro';
 
-const navItems = [
+const headerNavItems = [
   { href: '#about', ja: '当宿について', en: 'About' },
   { href: '#feature', ja: '宿の特徴', en: 'Feature' },
   { href: '#plans', ja: '宿泊プラン', en: 'Plan' },
@@ -12,15 +12,15 @@ const navItems = [
 ] as const;
 ---
 
-<Lism as='header' class='z--header' pos='fixed' i='0' w='100%' z='1' hasTransition>
-  <Container class='z--header_bar' isWrapper='xl' mx='auto' hasGutter h='100%'>
-    <Grid class='z--header_inner' gtc='minmax(0,auto) 1fr' ai='center' h='100%' g='20'>
-      <Stack class='z--header_logo'>
+<Lism as='header' class='z--p003-header' pos='fixed' i='0' w='100%' z='1' hasTransition>
+  <Container class='z--p003-header_bar' isWrapper='xl' mx='auto' hasGutter h='100%'>
+    <Grid class='z--p003-header_inner' gtc='minmax(0,auto) 1fr' ai='center' h='100%' g='20'>
+      <Stack class='z--p003-header_logo'>
         <Logo variant='header' href='#' />
       </Stack>
-      <Flex class='z--header_actions' jc='fe' g='20' ai='c'>
+      <Flex class='z--p003-header_actions' jc='fe' g='20' ai='c'>
         <Flex
-          class='z--headerNav'
+          class='z--p003-headerNav'
           as='ul'
           d={['none', null, 'inline-flex']}
           ai='c'
@@ -30,24 +30,24 @@ const navItems = [
           g={['15', null, '30']}
         >
           {
-            navItems.map(({ href, ja, en }) => (
+            headerNavItems.map(({ href, ja, en }) => (
               <ListItem>
                 <Link
-                  class='z--headerNav_link'
+                  class='z--p003-headerNav_link'
                   href={href}
                   d='grid'
                   jc='c'
                   ji='c'
                   td='none'
-                  py='8'
-                  px='4'
+                  py='10'
+                  px='5'
                   hasTransition
                   hov='-o'
                   ta='c'
-                  g='4'
+                  g='5'
                 >
                   <Inline>{ja}</Inline>
-                  <Inline as='span' class='z--headerNav_en' fz='2xs' fw='normal' lts='l' lh='xs' m='0' ta='c' d='block'>
+                  <Inline as='span' class='z--p003-headerNav_en' fz='2xs' fw='normal' lts='l' lh='xs' m='0' ta='c' d='block'>
                     {en}
                   </Inline>
                 </Link>
@@ -56,7 +56,7 @@ const navItems = [
           }
         </Flex>
         <Modal.OpenBtn modalId='p003-menu' d={['block', null, 'none']}>
-          <Center p='6' ai='c' jc='c'>
+          <Center p='5' ai='c' jc='c'>
             <Icon icon='menu' c='white' fz='2xl' aria-hidden='true' />
           </Center>
         </Modal.OpenBtn>
@@ -68,14 +68,14 @@ const navItems = [
   <Modal.Inner layout='stack' pos='relative' w='100%' p='30' bdrs='20' bxsh='50'>
     <Modal.CloseBtn modalId='p003-menu' autofocus pos='absolute' t='0' r='0' z='1' fz='xl' p='10' m='15' />
     <Modal.Body layout='stack' g='30' py='40'>
-      <Stack as='ul' class='z--header_menuNav' g='0' m='0' p='0' ov='clip'>
+      <Stack as='ul' class='z--p003-header_menuNav' g='0' m='0' p='0' ov='clip'>
         {
-          navItems.map(({ href, ja, en }) => (
+          headerNavItems.map(({ href, ja, en }) => (
             <ListItem>
               <BoxLink href={href} layout='grid' gtc='1fr auto' ai='c' fz='l' td='none' py='15' px='5' w='100%'>
-                <Stack g='4'>
+                <Stack g='5'>
                   <Inline>{ja}</Inline>
-                  <Inline as='span' class='z--header_menuNav_en' fz='s' m='0' o='pp'>
+                  <Inline as='span' class='z--p003-header_menuNav_en' fz='s' m='0' o='pp'>
                     {en}
                   </Inline>
                 </Stack>
@@ -86,9 +86,9 @@ const navItems = [
         }
         <ListItem>
           <BoxLink href='#reservation' layout='grid' gtc='1fr auto' ai='c' fz='l' td='none' py='15' px='5' w='100%'>
-            <Stack g='4'>
+            <Stack g='5'>
               <Inline>ご予約はこちら</Inline>
-              <Inline as='span' class='z--header_menuNav_en' fz='s' m='0' o='pp'> Reservation </Inline>
+              <Inline as='span' class='z--p003-header_menuNav_en' fz='s' m='0' o='pp'> Reservation </Inline>
             </Stack>
             <Icon icon='caret-right' fz='s' o='pp' />
           </BoxLink>
@@ -99,7 +99,8 @@ const navItems = [
 </Modal.Root>
 
 <style>
-  .z--header {
+  @layer lism-custom {
+  .z--p003-header {
     height: var(--z--header-height);
     color: var(--white);
     background-color: transparent;
@@ -113,7 +114,7 @@ const navItems = [
     animation-timeline: scroll(root);
     animation-range: var(--z--header-animation-range);
   }
-  .z--header :where(a) {
+  .z--p003-header :where(a) {
     color: inherit;
   }
   /**
@@ -121,18 +122,18 @@ const navItems = [
    * フッターは黒地へ `color-mix(…, var(--white) 38%, …)`。モーダルは `.c--modal_inner` の `var(--base)` 地のため `var(--text)` を使用
    * @see Footer.astro / tokens.md --text / `color-mix`
    */
-  .z--header_menuNav {
+  .z--p003-header_menuNav {
     list-style: none;
   }
-  .z--header_menuNav > :global(li) {
+  .z--p003-header_menuNav > :global(li) {
     list-style: none;
   }
-  .z--header_menuNav > :global(li:not(:last-child)) {
+  .z--p003-header_menuNav > :global(li:not(:last-child)) {
     border-block-end: 1px dashed color-mix(in srgb, var(--text) 38%, transparent);
   }
   /* md 以上: has--gutter の左右に s20 を上乗せ（Lism: `--gutter-size` 既定は `--s30`） */
   @media (min-width: 800px) {
-    .z--header_bar {
+    .z--p003-header_bar {
       padding-inline: calc(var(--gutter-size) + var(--s20));
     }
   }
@@ -140,11 +141,11 @@ const navItems = [
    * ロゴは Logo.astro 内で描画されるため、Astro スコープ外。:global で子コンポーネントの a に一致させる。
    * @see https://docs.astro.build/en/guides/styling/#global-styles
    */
-  :global(.z--header_logoLink) {
+  :global(.z--p003-header_logoLink) {
     transform-origin: left center;
-    animation: z--header_logo_p003 linear both;
+    animation: z--p003-header_logo_p003 linear both;
     animation-timeline: scroll(root);
-    /* 継承: 先祖 `.z--header` の `--z--header-animation-range` */
+    /* 継承: 先祖 `.z--p003-header` の `--z--header-animation-range` */
     animation-range: var(--z--header-animation-range);
   }
   /**
@@ -163,7 +164,7 @@ const navItems = [
         inset 0 -1px 0 hsl(0 0% 100% / 0.07);
     }
   }
-  @keyframes z--header_logo_p003 {
+  @keyframes z--p003-header_logo_p003 {
     from {
       transform: scale(1);
     }
@@ -172,19 +173,20 @@ const navItems = [
       transform: scale(0.75);
     }
   }
-  .z--headerNav_en {
+  .z--p003-headerNav_en {
     max-height: 2.5em;
     overflow: hidden;
-    animation: z--headerNav_en_p003 linear both;
+    animation: z--p003-headerNav_en_p003 linear both;
     animation-timeline: scroll(root);
     animation-range: var(--z--header-animation-range);
   }
-  @keyframes z--headerNav_en_p003 {
+  @keyframes z--p003-headerNav_en_p003 {
     to {
       opacity: 0;
       max-height: 0;
       margin: 0;
       padding: 0;
     }
+  }
   }
 </style>

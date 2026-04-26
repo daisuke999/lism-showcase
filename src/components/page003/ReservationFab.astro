@@ -4,15 +4,15 @@ import { Button } from '@lism-css/ui/astro';
 ---
 
 <Button
-  class='z--reservationFab'
+  class='z--p003-reservationFab'
   href='#reservation'
   pos='fixed'
-  z='60'
+  z='99'
   layout='flex'
   fxd='column'
   ai='center'
   jc='center'
-  g='4'
+  g='5'
   py='10'
   px='20'
   bdrs='99'
@@ -40,14 +40,16 @@ import { Button } from '@lism-css/ui/astro';
 </Button>
 
 <style>
+  @layer lism-custom {
   /* ピル型 FAB: UI Button のセマンティック色を上書き */
-  .z--reservationFab.c--button {
+  .z--p003-reservationFab.c--button {
     --bgc: var(--black);
     --c: var(--white);
     min-width: 12rem;
   }
-  .z--reservationFab:focus-visible {
+  .z--p003-reservationFab:focus-visible {
     outline: 2px solid color-mix(in srgb, var(--white) 50%, transparent);
     outline-offset: 3px;
+  }
   }
 </style>

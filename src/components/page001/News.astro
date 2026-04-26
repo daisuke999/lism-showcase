@@ -2,7 +2,7 @@
 import { Stack, Container, BoxLink, Frame, Layer, Box, Text, Inline, Lism } from "lism-css/astro";
 import HGroup from "@/components/page001/HGroup.astro";
 
-const bg = {
+const newsBg = {
   src: "https://cdn.lism-css.com/img/random-2510?r=news",
   alt: "",
   width: 960,
@@ -12,43 +12,43 @@ const bg = {
 const newsRows = [
   {
     date: "2026.03.18",
-    title: "Lism UI：TabsとDrawerの挙動を更新",
+    title: "エコシステム紹介：@lism-css/uiの位置づけ",
     summary:
-      "キーボード操作とフォーカス管理を中心に改善し、Astro／React双方で同じAPI感に近づけました。既存プロジェクトは移行ガイドのチェックリストを参照してください。",
+      "公式のエコシステム表では、@lism-css/ui にアコーディオン・タブ等のUIコンポーネント集が掲げられており、React・Astro向けに快適、という点も同じ章で補足されています。",
     long: true,
   },
   {
     date: "2026.02.04",
-    title: "MCPサーバー：ドキュメント検索の応答を高速化",
-    summary: "キャッシュ方針を見直し、よく参照されるページ（レイアウトプリミティブ／Customize）の取得を最適化しました。",
+    title: "エコシステム紹介：@lism-css/mcp",
+    summary:
+      "同表では@lism-css/mcpをAIコーディング向けMCPサーバーとして案内しており、Skillsやエディタ支援の導線は公式のはじめに・MCP等の文脈を参照する形が前提です。",
     long: false,
   },
   {
     date: "2026.01.22",
-    title: "テンプレート集にブログ詳細レイアウトを追加",
+    title: "概要：ゼロビルドと拡張の導入",
     summary:
-      "目次・引用・コードブロックのスタイルをテンプレート化し、コピー後にトークンへ寄せる手順もページ内に記載しています。",
+      "ゼロビルドでCSSを1つ読み込むだけ、という説明のあと、npmのlism-cssや@lism-css/ui、lism-cli、SCSS上書きやlism.config.js などの話が、概要で順に紹介されています。",
     long: true,
   },
   {
     date: "2025.12.10",
-    title: "Skills：実装ガイドの構成を整理",
-    summary: "Layer規則とユーティリティの優先順位を冒頭に集約し、エージェントが参照しやすい見出し階層へ再編しました。",
+    title: "「Why Lism CSS?」の要点のおさらい",
+    summary:
+      "命名規則・デザイントークン・層（@layer）やユーティリティなど、サイト全体のCSS設計をまとめて扱う、という主張は、公式の「Why Lism CSS?」等で繰り返し述べられています。",
     long: false,
   },
 ];
 ---
 
-<Box id="news" class="z--news" pos="relative">
+<Box id="news" class="z--p001-news" pos="relative">
   <Frame isLayer>
     <Lism
       as="img"
-      class="z--news_media"
-      src={bg.src}
-      alt={bg.alt}
-      w="100%"
-      h="100%"
-      exProps={{ width: bg.width, height: bg.height, loading: "lazy", decoding: "async" }}
+      class="z--p001-news_media"
+      src={newsBg.src}
+      alt={newsBg.alt}
+      exProps={{ width: newsBg.width, height: newsBg.height, loading: "lazy", decoding: "async" }}
     />
   </Frame>
   <Layer style={{ filter: "grayscale(1)", backgroundColor: "hsl(224 4% 8% / 0.85)" }} />
@@ -58,7 +58,7 @@ const newsRows = [
       <Stack g="20" c="white">
         {
           newsRows.map((row) => (
-            <BoxLink class="z--news_item" href="#" layout="grid" gtc={["auto", "auto 1fr"]} g="20 40" py="15" set="var:hov">
+            <BoxLink class="z--p001-news_item" href="#" layout="grid" gtc={["auto", "auto 1fr"]} g="20 40" py="15" set="var:hov">
               <Inline as="span">{row.date}</Inline>
               <Stack g="10">
                 <Text as="p" hov="in:underline" td="none" m="0">
@@ -66,7 +66,7 @@ const newsRows = [
                 </Text>
                 <Text as="p" fz="s" o="pp" m="0">
                   {row.summary}
-                  {row.long ? " 互換性に関する注意点はChangelogの該当バージョンにもまとめています。" : ""}
+                  {row.long ? " あわせて Changelog も参照してください。" : ""}
                 </Text>
               </Stack>
             </BoxLink>
@@ -78,18 +78,21 @@ const newsRows = [
 </Box>
 
 <style>
-  .z--news {
+  @layer lism-custom {
+
+  .z--p001-news {
     view-timeline: --z-news y;
   }
-  .z--news .z--news_media {
+  .z--p001-news .z--p001-news_media {
+    width: 100%;
     position: absolute;
     top: -20%;
     height: 140%;
-    animation: z--news_media linear both;
+    animation: z--p001-news_media linear both;
     animation-timeline: --z-news;
     animation-range: entry 0% cover 100%;
   }
-  @keyframes z--news_media {
+  @keyframes z--p001-news_media {
     from {
       transform: translateY(-10%);
     }
@@ -97,9 +100,9 @@ const newsRows = [
       transform: translateY(10%);
     }
   }
-  .z--news .z--news_item {
+  .z--p001-news .z--p001-news_item {
     view-timeline: --z-news_item y;
-    animation: z--news_item linear both;
+    animation: z--p001-news_item linear both;
     animation-timeline: --z-news_item;
     animation-range: var(--u--fadeIn--animation-range);
   }
@@ -108,7 +111,7 @@ const newsRows = [
       text-decoration: var(--_isHov, underline);
     }
   }
-  @keyframes z--news_item {
+  @keyframes z--p001-news_item {
     from {
       opacity: 0;
       transform: translateX(-16px);
@@ -117,5 +120,7 @@ const newsRows = [
       opacity: 1;
       transform: translateX(0);
     }
+  }
+
   }
 </style>

@@ -3,7 +3,7 @@ import { Lism, Stack, Container, Flex, Link, BoxLink, Icon, Inline, ListItem, Te
 import Logo from '@/components/page003/Logo.astro';
 
 /** ヘッダーと同一のナビ（アンカー） */
-const navItems = [
+const footerNavItems = [
   { href: '#about', ja: '当宿について', en: 'About' },
   { href: '#feature', ja: '宿の特徴', en: 'Feature' },
   { href: '#plans', ja: '宿泊プラン', en: 'Plan' },
@@ -11,7 +11,7 @@ const navItems = [
   { href: '#faq', ja: 'よくあるご質問', en: 'Faq' },
 ] as const;
 
-const snsLinks = [
+const footerSnsLinks = [
   { href: '#', icon: 'logo-x' as const, label: 'X' },
   { href: '#', icon: 'logo-instagram' as const, label: 'Instagram' },
   { href: '#', icon: 'logo-youtube' as const, label: 'YouTube' },
@@ -47,7 +47,7 @@ const snsLinks = [
           min-w='0'
         >
           {
-            navItems.map(({ href, ja, en }) => (
+            footerNavItems.map(({ href, ja, en }) => (
               <ListItem>
                 <BoxLink
                   class='z--p003-footer_navLink'
@@ -63,7 +63,7 @@ const snsLinks = [
                   c='inherit'
                   hov='-o'
                 >
-                  <Stack class='z--p003-footer_navStack' g='4' ai='start' ta='start'>
+                  <Stack class='z--p003-footer_navStack' g='5'>
                     <Inline>{ja}</Inline>
                     <Inline as='span' class='z--p003-footer_navEn' fz='s' m='0' o='pp'>
                       {en}
@@ -78,7 +78,7 @@ const snsLinks = [
 
         <Cluster g='20' jc={['center', null, 'end']} ai='end' fxw='wrap' w={['100%', null, 'auto']}>
           {
-            snsLinks.map(({ href, icon, label }) => (
+            footerSnsLinks.map(({ href, icon, label }) => (
               <Link
                 href={href}
                 td='none'
@@ -102,41 +102,51 @@ const snsLinks = [
 </Lism>
 
 <style>
-  .z--p003-footer :where(a) {
-    color: inherit;
-  }
-  .z--p003-footer_nav :global(li) {
-    list-style: none;
-  }
+  @layer lism-custom {
+    .z--p003-footer :where(a) {
+      color: inherit;
+    }
+    .z--p003-footer_nav :global(li) {
+      list-style: none;
+    }
 
-  /* md 未満: 縦並びの項目間に区切り（最後の行の下には付けない） */
-  .z--p003-footer_nav > :global(li:not(:last-child)) {
-    border-block-end: 1px dashed color-mix(in srgb, var(--white) 38%, transparent);
-  }
-
-  /* md 以上: 縦の区切りをやめ、項目の「間」だけ左に縦線（先頭左・末尾右には付けない） */
-  @container (min-width: 800px) {
+    /* md 未満: 縦並びの項目間に区切り（最後の行の下には付けない） */
     .z--p003-footer_nav > :global(li:not(:last-child)) {
-      border-block-end: none;
+      border-block-end: 1px dashed color-mix(in srgb, var(--white) 38%, transparent);
     }
-    .z--p003-footer_nav > :global(li + li) {
-      border-inline-start: 1px dashed color-mix(in srgb, var(--white) 38%, transparent);
-      padding-inline-start: var(--s20);
-      margin-inline-start: var(--s20);
-    }
-  }
 
-  /* md 以上: caret は非表示 */
-  .z--p003-footer_navCaret {
-    display: block;
-  }
-  @container (min-width: 800px) {
-    .z--p003-footer_navCaret {
-      display: none;
+    /* md 以上: 縦の区切りをやめ、項目の「間」だけ左に縦線（先頭左・末尾右には付けない） */
+    @container (min-width: 800px) {
+      .z--p003-footer_nav > :global(li:not(:last-child)) {
+        border-block-end: none;
+      }
+      .z--p003-footer_nav > :global(li + li) {
+        border-inline-start: 1px dashed color-mix(in srgb, var(--white) 38%, transparent);
+        padding-inline-start: var(--s20);
+        margin-inline-start: var(--s20);
+      }
     }
+
+    /* md 未満: 左寄せ。`ta` プロパティのインラインが CSS より優先するため、指定はここに集約 */
     .z--p003-footer_navStack {
-      align-items: center;
-      text-align: center;
+      text-align: start;
+      align-items: flex-start;
+    }
+    @container (min-width: 800px) {
+      .z--p003-footer_navStack {
+        text-align: center;
+        align-items: center;
+      }
+    }
+
+    /* md 以上: caret は非表示 */
+    .z--p003-footer_navCaret {
+      display: block;
+    }
+    @container (min-width: 800px) {
+      .z--p003-footer_navCaret {
+        display: none;
+      }
     }
   }
 </style>

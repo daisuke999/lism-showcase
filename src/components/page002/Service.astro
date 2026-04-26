@@ -8,7 +8,7 @@ const heroImage = {
   height: 1280,
 };
 
-const subFeatures: {
+const serviceSubCards: {
   index: string;
   titleJa: string;
   titleEn: string;
@@ -54,48 +54,50 @@ const subFeatures: {
 ];
 ---
 
-<Box as='section' id='service' class='z--page002-service' bgc='base-2' py='50'>
+<Box as='section' id='service' class='z--p002-service' bgc='base-2' py='50'>
   <Container isWrapper='l' hasGutter>
     <Stack g='50'>
-      <Stack g='10' ai='c'>
-        <Heading level='2' fz='4xl' lts='l' m='0' ta='center' ff='accent'>Service</Heading>
-        <Text as='p' fz='m' fw='bold' lts='l' m='0' c='text-2' ta='center'>相談内容に合わせたご案内</Text>
+      <Stack g='40'>
+        <Stack g='10' ai='c'>
+          <Heading level='2' fz='4xl' lts='l' m='0' ta='center' ff='accent'>Service</Heading>
+          <Text as='p' fz='m' fw='bold' lts='l' m='0' c='text' o='p' ta='center'>ご要望に合わせたサービス</Text>
+        </Stack>
+
+        <!-- md 未満: 1列（画像上・テキスト下）。md 以上: 2列（画像左・テキスト右） -->
+        <Grid gtc={['1fr', null, 'minmax(0, 1fr) minmax(0, 1fr)']} g={['30', null, '40']} ai='center'>
+          <Frame ar='3/2' ov='hidden'>
+            <Media
+              src={heroImage.src}
+              alt={heroImage.alt}
+              width={heroImage.width}
+              height={heroImage.height}
+              exProps={{ loading: 'lazy', decoding: 'async' }}
+            />
+          </Frame>
+          <Stack g='20' jc='c'>
+            <Heading level='3' fz='2xl' lts='l' m='0'>
+              予算や目的に合わせ、
+              <br />
+              柔軟に対応します
+            </Heading>
+            <Text as='p' m='0' c='text-2'>
+              暮らし方や優先して整えたい場所、購入や配置までお願いしたい範囲などを伺い、無理のない形でご提案にまとめます。来店、オンライン、お電話のいずれからでも打ち合わせを受け付けています。
+            </Text>
+            <Text as='p' m='0' c='text-2'>
+              小さな悩み相談から、家具の買い付けに伴う作業のお願いまで、目的に合わせて一つずつ。賃貸・戸建てを問わず、住まいの性質に合う選び方を一緒に考えます。
+            </Text>
+          </Stack>
+        </Grid>
       </Stack>
 
-      <!-- md 未満: 1列（画像上・テキスト下）。md 以上: 2列（画像左・テキスト右） -->
-      <Grid gtc={['1fr', null, 'minmax(0, 1fr) minmax(0, 1fr)']} g={['30', null, '40']} ai='center'>
-        <Frame ar='3/2' ov='hidden'>
-          <Media
-            src={heroImage.src}
-            alt={heroImage.alt}
-            width={heroImage.width}
-            height={heroImage.height}
-            exProps={{ loading: 'lazy', decoding: 'async' }}
-          />
-        </Frame>
-        <Stack g='20' jc='c'>
-          <Heading level='3' fz='2xl' lts='l' m='0'>
-            予算や目的に合わせ、
-            <br />
-            柔軟に対応します
-          </Heading>
-          <Text as='p' m='0' c='text-2'>
-            暮らし方や優先して整えたい場所、購入や配置までお願いしたい範囲などを伺い、無理のない形でご提案にまとめます。来店、オンライン、お電話のいずれからでも打ち合わせを受け付けています。
-          </Text>
-          <Text as='p' m='0' c='text-2'>
-            小さな悩み相談から、家具の買い付けに伴う作業のお願いまで、目的に合わせて一つずつ。賃貸・戸建てを問わず、住まいの性質に合う選び方を一緒に考えます。
-          </Text>
-        </Stack>
-      </Grid>
-
       <Stack g='40'>
-        <Heading level='3' fz='xl' lts='l' m='0' ta='center'>更なる特徴</Heading>
+        <Heading level='3' fz='xl' lts='l' m='0' ta='center'>更なる特徴です</Heading>
         <!-- md 未満: 1列。md 以上: 3列 -->
         <Grid gtc={['1fr', null, 'repeat(3, minmax(0, 1fr))']} g='40' ai='start'>
           {
-            subFeatures.map((item) => (
-              <Flex class='z--page002-service_card' fxd={['row-reverse', null, 'column']} ai='stretch' g='30' min-w='0'>
-                <Frame class='z--page002-service_cardFigure' ar='3/2' ov='hidden'>
+            serviceSubCards.map((item) => (
+              <Flex class='z--p002-service_card' fxd={['row-reverse', null, 'column']} ai='stretch' g='30' min-w='0'>
+                <Frame class='z--p002-service_cardFigure' ar='3/2' ov='hidden'>
                   <Media
                     src={item.image.src}
                     alt={item.image.alt}
@@ -106,11 +108,11 @@ const subFeatures: {
                 </Frame>
                 <Stack g='20' min-w='0' fx='1' jc='start'>
                   <Flex ai='c' g='20' util='trimAll'>
-                    <Box as='span' class='z--page002-service_num' fz='3xl' fw='bold' ff='accent' c='text' whs='nowrap'>
+                    <Box as='span' class='z--p002-service_num' fz='3xl' fw='bold' ff='accent' c='text' whs='nowrap'>
                       {item.index}
                     </Box>
-                    <Box class='z--page002-service_rule' w='1px' bgc='text' fxsh='0' />
-                    <Stack g='0' class='z--page002-service_cardTitles' util='trimAll'>
+                    <Box class='z--p002-service_rule' w='1px' bgc='text' fxsh='0' />
+                    <Stack g='0' class='z--p002-service_cardTitles' util='trimAll'>
                       <Heading level='4' fz='m' m='0'>
                         {item.titleJa}
                       </Heading>
@@ -133,26 +135,26 @@ const subFeatures: {
 </Box>
 
 <style>
-  @layer lism-component {
+  @layer lism-custom {
     /* md 未満: カード内は画像 | テキスト Stack。md 以上: 縦積み（先祖 is--container の 800px 基準） */
-    .z--page002-service_card {
+    .z--p002-service_card {
       min-width: 0;
     }
 
-    .z--page002-service_cardFigure {
+    .z--p002-service_cardFigure {
       min-width: 0;
     }
 
     /* sm 以下（max-width: 480px）：画像非表示。Lism の sm ブレークポイント 480px に合わせる */
     @container (max-width: 480px) {
-      .z--page002-service_cardFigure {
+      .z--p002-service_cardFigure {
         display: none;
       }
     }
 
     @container not (min-width: 800px) {
       /* テキスト列の高さに合わせて画像を縦いっぱい（`ar` を上書きして flex stretch を効かせる） */
-      .z--page002-service_cardFigure {
+      .z--p002-service_cardFigure {
         flex: 0 0 38%;
         max-width: 12rem;
         align-self: stretch;
@@ -162,17 +164,17 @@ const subFeatures: {
     }
 
     @container (min-width: 800px) {
-      .z--page002-service_cardFigure {
+      .z--p002-service_cardFigure {
         width: 100%;
         align-self: stretch;
       }
     }
 
-    .z--page002-service_rule {
+    .z--p002-service_rule {
       align-self: stretch;
     }
 
-    .z--page002-service_num {
+    .z--p002-service_num {
       line-height: 1;
     }
   }

@@ -10,9 +10,9 @@ const mission2TextMaxSz: 's' | undefined = 's';
 
 <Wrapper as='section' id='message' contentSize='xl' py='50' hasGutter>
   <Container>
-    <Stack g='40' class='c--p002-mission2'>
+    <Stack g='40' class='z--p002-mission2'>
       <Grid gta={[`'.' 'side'`, null, `'side .'`]} gtc={[null, null, '24rem 1fr']} ai='c' g='40' w='100%'>
-        <Stack g='20' w='100%' class='c--p002-mission2-row1' max-sz={mission2TextMaxSz}>
+        <Stack g='30' w='100%' class='z--p002-mission2-row1' max-sz={mission2TextMaxSz}>
           <Heading level='3' fz='xl' lts='l'>暮らしに合わせたコーディネート</Heading>
           <Text>
             生活リズムや家族構成、日々の悩みまで丁寧にヒアリングし、あなたに合う心地よさを軸に考えをまとめます。家具の取り合わせに加え、収納の工夫や小さなレイアウトの提案も含め、長く手を放せる部屋づくりを一緒に進めます。
@@ -28,7 +28,7 @@ const mission2TextMaxSz: 's' | undefined = 's';
         </Frame>
       </Grid>
       <Grid gta={[`'.' 'side'`, null, `'. side'`]} gtc={[null, null, '1fr 24rem']} ai='c' g='40' w='100%'>
-        <Stack class='c--p002-mission2-row2' w='100%' max-sz={mission2TextMaxSz} ai={[null, null, 'end']} g='20'>
+        <Stack class='z--p002-mission2-row2' w='100%' max-sz={mission2TextMaxSz} ai={[null, null, 'end']} g='30'>
           <Heading level='3' fz='xl' lts='l'>想いを、部屋の形に</Heading>
           <Text>
             コーディネートの方針づくりから家具の手配、必要に応じた立ち上げ作業のお手伝いまで、一つの流れとして対応します。完成イメージの写真がなくても、色や好きな雰囲気、暮らしの不満点から一緒に言葉にし、納得のいくまで整えます。
@@ -48,28 +48,28 @@ const mission2TextMaxSz: 's' | undefined = 's';
 </Wrapper>
 
 <style>
-  @layer lism-component {
+  @layer lism-custom {
     /**
      * md 以上: 外側を xl 左（Wrapper）〜 l 右で切る。両グリッドを max-sz:l + mx で寄せるのをやめ、
      * 左は xl コンテンツ左端、右は l コンテンツ右端（viewport 基準の同一中心線トークン差の半分）に揃える。
      */
     @container (min-width: 800px) {
-      .c--p002-mission2 {
+      .z--p002-mission2 {
         box-sizing: border-box;
         padding-inline-end: max(0px, calc((min(100vw, var(--sz--xl, 90rem)) - min(100vw, var(--sz--l, 1280px))) / 2));
       }
     }
 
     /* `max-sz` 付き列をグリッドセル内で左／右に寄せる（2 列時。md 未満は 1 列のため事実上フル幅） */
-    .c--p002-mission2-row1 {
+    .z--p002-mission2-row1 {
       justify-self: start;
     }
-    .c--p002-mission2-row2 {
+    .z--p002-mission2-row2 {
       text-align: start;
       justify-self: start;
     }
     @container (min-width: 800px) {
-      .c--p002-mission2-row2 {
+      .z--p002-mission2-row2 {
         text-align: end;
         justify-self: end;
       }

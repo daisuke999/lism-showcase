@@ -24,11 +24,11 @@ export const title = 'page003：静寂の隠れ宿 LP Design';
     rel='stylesheet'
     slot='head'
   />
-  <Wrapper class='z--page003' contentSize='full'>
+  <Wrapper class='z--p003-root' contentSize='full'>
     <!-- Header -->
     <Header />
     <!-- Main Content -->
-    <Container as='main' class='z--main' pos='relative' z='0'>
+    <Container as='main' class='z--p003-main' pos='relative' z='0'>
       <MV />
       <About />
       <Feature />
@@ -45,8 +45,9 @@ export const title = 'page003：静寂の隠れ宿 LP Design';
 </DemoLayout>
 
 <style is:global>
+  @layer lism-custom {
   /* page003: 明朝ベース（Google Fonts / Noto Serif JP） */
-  .z--page003 {
+  .z--p003-root {
     font-family: 'Noto Serif JP', 'Yu Mincho', YuMincho, 'Hiragino Mincho ProN', 'Hiragino Mincho Pro', serif;
     font-optical-sizing: auto;
     /* Lism の `ff:base`（既定はゴシック系）— page003 では日本語明朝に統一 */
@@ -75,22 +76,26 @@ export const title = 'page003：静寂の隠れ宿 LP Design';
       visibility: hidden;
     }
   }
-  .z--reservationFab {
+  .z--p003-reservationFab {
     animation: p003_reservationFab_hide linear both;
     animation-timeline: --p003-reservation;
     animation-range: entry 0% entry 30%;
   }
   @media (prefers-reduced-motion: reduce) {
-    .z--reservationFab {
+    .z--p003-reservationFab {
       animation: none;
       opacity: 1;
       visibility: visible;
       pointer-events: auto;
     }
   }
+
+  }
 </style>
 
 <style>
+  @layer lism-custom {
+
   /* Root */
   :root {
     --z--header-height: 100px;
@@ -133,5 +138,7 @@ export const title = 'page003：静寂の隠れ宿 LP Design';
     to {
       transform: translateY(10%);
     }
+  }
+
   }
 </style>

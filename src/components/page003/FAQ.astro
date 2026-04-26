@@ -130,6 +130,8 @@ const faqImage = {
 </Lism>
 
 <style>
+  @layer lism-custom {
+
   /*
    * 見出し＋（画像｜質問）をひとつの Grid で管理。
    * md 以上: 画像列と質問列を repeat(2, 1fr) で 1:1。
@@ -162,5 +164,7 @@ const faqImage = {
   }
   .z--p003-faq_acc :global(.c--accordion_item:last-of-type) {
     border-block-end: none;
+  }
+
   }
 </style>

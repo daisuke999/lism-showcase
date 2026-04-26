@@ -5,20 +5,20 @@
  */
 import { Stack, Lism, Text, Heading, Grid, Frame, Flex } from 'lism-css/astro';
 
-const imgLeft = {
+const aboutImgLeft = {
   src: 'https://cdn.lism-css.com/img/japan/u-qQGCFQFlkT.jpg',
   alt: '池を泳ぐ鯉',
   width: 1920,
   height: 1280,
 };
-const imgRight = {
+const aboutImgRight = {
   src: 'https://cdn.lism-css.com/img/japan/u-lCzkkcbJUb.jpg',
   alt: '座敷から望む秋の庭園',
   width: 1600,
   height: 1200,
 };
 
-const bodyCopy =
+const aboutBodyCopy =
   '百余年の歴史を刻む、風格ある佇まい。古き良き日本の情緒を残しつつ、現代の快適さを融合させた空間で皆様をお迎えいたします。手入れの行き届いた日本庭園を眺め、静寂に包まれて味わう名湯は、格別な癒やし。受け継がれてきたおもてなしの心で、特別な旅を鮮やかに彩ります。四季折々の風情が移ろく庭先では、新緑の香り、深緑の日陰、紅葉の燃えるような美しさ、静かな雪化粧の趣まで、日々違う表情を呈します。佇まい、器、会席、湯、そして言葉少ななもてなし。それらすべてに至るまで、余韻深く、お客さまの記憶に残る一時を大切に紡ぎたい。都会を離れ、ここ静寂の隠れ宿で、心ほどけゆく至福のひとときをどうぞお味わいください。';
 ---
 
@@ -42,15 +42,15 @@ const bodyCopy =
         <Text as='p' fz={['l', null, 'xl']} m='0' mb='10' lts='l' ff='base' c='white' o='pp'> About us </Text>
         <Heading level='2' fz={['2xl', null, '4xl']} fw='500' m='0' mb='50' lts='l'> 当宿について </Heading>
         <Text class='z--p003-about_body' as='p' m='0' fz='m' lh='l' lts='s' c='white' o='p'>
-          {bodyCopy}
+          {aboutBodyCopy}
         </Text>
       </Stack>
-      <Frame as='figure' class='z--p003-about_figureLeft' m='0' ar={['16/10', '16/10', '4/3']} ov='hidden'>
+      <Frame as='figure' class='z--p003-about_figureLeft' ar={['16/10', '16/10', '4/3']} ov='hidden'>
         <img
-          src={imgLeft.src}
-          alt={imgLeft.alt}
-          width={imgLeft.width}
-          height={imgLeft.height}
+          src={aboutImgLeft.src}
+          alt={aboutImgLeft.alt}
+          width={aboutImgLeft.width}
+          height={aboutImgLeft.height}
           loading='lazy'
           decoding='async'
         />
@@ -59,7 +59,6 @@ const bodyCopy =
     <Flex
       as='figure'
       class='z--p003-about_figureRight'
-      m='0'
       fxd='column'
       h={['auto', 'auto', '100%']}
       min-h={['0', '0', '0']}
@@ -69,18 +68,20 @@ const bodyCopy =
       <Lism
         as='img'
         class='z--p003-about_mediaRightImg'
-        src={imgRight.src}
-        alt={imgRight.alt}
+        src={aboutImgRight.src}
+        alt={aboutImgRight.alt}
         fx={['0', '0', '1']}
         min-h={['0', '0', '0']}
         w='100%'
-        exProps={{ width: imgRight.width, height: imgRight.height, loading: 'lazy', decoding: 'async' }}
+        exProps={{ width: aboutImgRight.width, height: aboutImgRight.height, loading: 'lazy', decoding: 'async' }}
       />
     </Flex>
   </Grid>
 </Lism>
 
 <style>
+  @layer lism-custom {
+
   /*
    * ビューポート全幅: 親の max-width に依存しないよう、自身を 100vw で中央に置く。
    */
@@ -98,6 +99,10 @@ const bodyCopy =
   .z--p003-about_mediaRightImg {
     display: block;
     object-fit: cover;
+  }
+  .z--p003-about_figureLeft,
+  .z--p003-about_figureRight {
+    margin: 0;
   }
   @media (min-width: 800px) {
     .z--p003-about_col--left {
@@ -138,5 +143,7 @@ const bodyCopy =
       aspect-ratio: 4 / 3;
       block-size: auto;
     }
+  }
+
   }
 </style>

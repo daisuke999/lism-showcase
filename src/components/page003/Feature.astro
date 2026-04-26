@@ -4,15 +4,15 @@
  */
 import { Container, Grid, Stack, Flex, Lism, Text, Heading, Inline, Box } from 'lism-css/astro';
 
-const img = {
+const featureImg = {
   src: 'https://cdn.lism-css.com/img/japan/u-L4YLmcBryx.jpg',
   alt: '千本鳥居が続く参道',
   width: 1920,
   height: 1280,
 };
 
-const lead = '春の桜、秋の紅葉。';
-const body =
+const featureLead = '春の桜、秋の紅葉。';
+const featureBody =
   '四季の移ろいが最も美しい瞬間を切り取る当宿は、まるで一幅の絵画のように自然と調和いたします。名湯と旬の味わいを、大切な方々とご一緒にお楽しみください。桜の頃は窓越しに淡い色の雪の様子を、夏は深い緑と風鈴の音を、秋は燃えるような紅葉と澄んだ空を、冬は静かな雪化粧と湯けむりを、それぞれ五感で味わえます。';
 ---
 
@@ -25,8 +25,8 @@ const body =
       cg={['0', '0', '50']}
       ai={['stretch', 'stretch', 'stretch']}
     >
-      <Lism as='figure' class='z--p003-feature_figure' m='0' ov='hidden' bdrs='10'>
-        <img src={img.src} alt={img.alt} width={img.width} height={img.height} loading='lazy' decoding='async' />
+      <Lism as='figure' class='z--p003-feature_figure' ov='hidden' bdrs='10'>
+        <img src={featureImg.src} alt={featureImg.alt} width={featureImg.width} height={featureImg.height} loading='lazy' decoding='async' />
       </Lism>
       <Stack class='z--p003-feature_textCol' pos='relative' g='0' ai='stretch' min-w='0' h='100%'>
         <Lism as='span' class='z--p003-feature_watermark' exProps={{ 'aria-hidden': 'true' }}> Experience </Lism>
@@ -48,10 +48,10 @@ const body =
           </Heading>
           <Stack class='z--p003-feature_bodyStack' g='30' ai='start' min-w='0'>
             <Text as='p' class='z--p003-feature_lead' m='0' fz={['l', null, 'xl']} fw='600' lts='l' c='text'>
-              {lead}
+              {featureLead}
             </Text>
             <Text as='p' class='z--p003-feature_body' m='0' fz='m' lh='l' lts='s' c='text' max-w='100%'>
-              {body}
+              {featureBody}
             </Text>
           </Stack>
         </Flex>
@@ -61,6 +61,8 @@ const body =
 </Lism>
 
 <style>
+  @layer lism-custom {
+
   /* 左端プル: コンテナ幅 l + gutter と整合 */
   .z--p003-feature {
     --p003-feature-pull: max(var(--gutter-size, 0px), calc((100vw - min(100vw, var(--sz--l))) / 2));
@@ -95,6 +97,7 @@ const body =
     }
   }
   .z--p003-feature_figure {
+    margin: 0;
     position: relative;
     box-sizing: border-box;
     align-self: stretch;
@@ -201,5 +204,7 @@ const body =
       transform-origin: right center;
       font-size: clamp(3.15rem, 14cqi, 6.5rem);
     }
+  }
+
   }
 </style>

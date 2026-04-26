@@ -21,7 +21,7 @@ export const title = 'page001：Minimalistic LP Design';
     <!-- Header -->
     <Header />
     <!-- Main Content -->
-    <Container as='main' class='z--main'>
+    <Container as='main' class='z--p001-main'>
       <MV />
       <About />
       <Feature />
@@ -38,10 +38,11 @@ export const title = 'page001：Minimalistic LP Design';
 </DemoLayout>
 
 <style>
+  @layer lism-custom {
   /* Root */
   :root {
-    --z--header-height: 112px;
-    --z--header-height--thin: 64px;
+    --z--p001-header-height: 112px;
+    --z--p001-header-height--thin: 64px;
     --u--fadeIn--animation-range: entry 0% contain 20%;
   }
   /* Fadein */
@@ -80,5 +81,6 @@ export const title = 'page001：Minimalistic LP Design';
     to {
       transform: translateY(10%);
     }
+  }
   }
 </style>

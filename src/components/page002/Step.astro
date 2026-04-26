@@ -50,28 +50,26 @@ const stepCards: StepCard[] = [
 ];
 ---
 
-<Box as='section' id='step' class='z--page002-step' ov-x='clip'>
+<Box as='section' id='step' class='z--p002-step' ov-x='clip'>
   <Container isWrapper='l' hasGutter py='50'>
     <Grid gtc={['1fr', null, 'minmax(0, 1fr) minmax(0, 1fr)']} g={['30', null, '40']} ai='stretch'>
-      <Stack class='z--page002-step_main' g='30' jc='start'>
-        <Stack g='10' ai='c' class='z--page002-step_head'>
+      <Stack class='z--p002-step_main' g='40' jc='start'>
+        <Stack g='10' ai='c' class='z--p002-step_head'>
           <Heading level='2' fz='4xl' lts='l' m='0' ta='center' ff='accent'>Step</Heading>
-          <Text as='p' fz='m' fw='bold' lts='l' m='0' c='text-2' ta='center'>ご依頼の流れ</Text>
+          <Text as='p' fz='m' fw='bold' lts='l' m='0' c='text' o='p' ta='center'>ご依頼から納品までの流れ</Text>
         </Stack>
 
         <Stack g='15' ai='stretch' w='100%'>
           {
             stepCards.map((card, i) => (
               <>
-                {
-                  i > 0 && (
-                    <Flex class='z--page002-step_caret' jc='center' ai='center' w='100%' fxsh='0'>
-                      <Icon icon='caret-down-fill' fz='xl' />
-                    </Flex>
-                  )
-                }
+                {i > 0 && (
+                  <Flex class='z--p002-step_caret' jc='center' ai='center' w='100%' fxsh='0'>
+                    <Icon icon='caret-down-fill' fz='xl' />
+                  </Flex>
+                )}
                 <Stack
-                  class='z--page002-step_card'
+                  class='z--p002-step_card'
                   g='15'
                   p='30'
                   bgc='base'
@@ -81,20 +79,18 @@ const stepCards: StepCard[] = [
                   ov='hidden'
                   min-w='0'
                 >
-                  {
-                    card.image && (
-                      <Frame class='z--page002-step_cardFrame' ar='3/2' ov='hidden' bdrs='0'>
-                        <Media
-                          src={card.image.src}
-                          alt={card.image.alt}
-                          width={card.image.width}
-                          height={card.image.height}
-                          exProps={{ loading: 'lazy', decoding: 'async' }}
-                        />
-                      </Frame>
-                    )
-                  }
-                  <Stack g='10' class='z--page002-step_cardBody'>
+                  {card.image && (
+                    <Frame class='z--p002-step_cardFrame' ar='3/2' ov='hidden' bdrs='0'>
+                      <Media
+                        src={card.image.src}
+                        alt={card.image.alt}
+                        width={card.image.width}
+                        height={card.image.height}
+                        exProps={{ loading: 'lazy', decoding: 'async' }}
+                      />
+                    </Frame>
+                  )}
+                  <Stack g='10' class='z--p002-step_cardBody'>
                     <Heading level='3' fz='l' m='0'>
                       {card.title}
                     </Heading>
@@ -109,9 +105,9 @@ const stepCards: StepCard[] = [
         </Stack>
       </Stack>
 
-      <Box class='z--page002-step_rail'>
-        <Box class='z--page002-step_sticky'>
-          <Frame class='z--page002-step_frame' ov='hidden' bdrs='0'>
+      <Box class='z--p002-step_rail'>
+        <Box class='z--p002-step_sticky'>
+          <Frame class='z--p002-step_frame' ov='hidden' bdrs='0'>
             <Media
               src={stepImage.src}
               alt={stepImage.alt}
@@ -127,28 +123,28 @@ const stepCards: StepCard[] = [
 </Box>
 
 <style>
-  @layer lism-component {
+  @layer lism-custom {
     /* テキスト色を 35%（残りは base）でミックス — 薄すぎる base-2 より本文に近い階調 */
-    .z--page002-step_caret .a--icon {
+    .z--p002-step_caret .a--icon {
       color: color-mix(in oklch, var(--text) 35%, var(--base));
       opacity: 1;
     }
 
-    .z--page002-step_main {
+    .z--p002-step_main {
       min-width: 0;
     }
 
-    .z--page002-step_rail {
+    .z--p002-step_rail {
       min-width: 0;
       /* グリッド行の高さを子の % 計算に渡す */
       align-self: stretch;
     }
 
-    .z--page002-step_sticky {
+    .z--p002-step_sticky {
       position: relative;
     }
 
-    .z--page002-step_frame {
+    .z--p002-step_frame {
       aspect-ratio: 4 / 3;
     }
 
@@ -157,29 +153,27 @@ const stepCards: StepCard[] = [
      * md 未満: DOM 順のまま（main → rail）で 1 列・テキスト上・画像下（Feature と同型）。
      */
     @container (min-width: 800px) {
-      .z--page002-step_rail {
+      .z--p002-step_rail {
         order: 1;
-        margin-inline-start: calc(
-          -1 * (max(0px, (100vw - min(100vw, var(--sz--l))) / 2) + var(--gutter-size, 0px))
-        );
+        margin-inline-start: calc(-1 * (max(0px, (100vw - min(100vw, var(--sz--l))) / 2) + var(--gutter-size, 0px)));
         width: calc(100% + max(0px, (100vw - min(100vw, var(--sz--l))) / 2) + var(--gutter-size, 0px));
         max-width: none;
         height: 100%;
       }
 
-      .z--page002-step_main {
+      .z--p002-step_main {
         order: 2;
       }
 
-      .z--page002-step_sticky {
+      .z--p002-step_sticky {
         position: sticky;
-        top: var(--z--header-height--thin, 64px);
+        top: var(--z--p002-header-height--thin, 64px);
         align-self: start;
-        height: min(calc(100dvh - var(--z--header-height--thin, 64px)), 100%);
+        height: min(calc(100dvh - var(--z--p002-header-height--thin, 64px)), 100%);
         min-height: 0;
       }
 
-      .z--page002-step_frame {
+      .z--p002-step_frame {
         aspect-ratio: auto;
         height: 100%;
         min-height: 0;

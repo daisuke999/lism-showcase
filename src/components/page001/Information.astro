@@ -1,44 +1,58 @@
 ---
 import { Container, Stack, Grid, Frame } from 'lism-css/astro';
 import HGroup from '@/components/page001/HGroup.astro';
+
+const informationRows: { term: string; description: string }[] = [
+  {
+    term: '運営名',
+    description: 'Lism CSS プロジェクト（デモ掲載用の架空組織）',
+  },
+  {
+    term: '所在地',
+    description: '東京都千代田区丸の内1-1-1（地図はGoogleマップ埋め込みの表示サンプル）',
+  },
+  {
+    term: '公開情報',
+    description:
+      'コアのlism-css、@lism-css/ui、lism-cli、@lism-css/mcp など、公式のエコシステム表のとおりのパッケージ群。告知や情報の一次ソースは、公式ドキュメントと各GitHub等を参照してください',
+  },
+  {
+    term: '連絡窓口',
+    description:
+      'OSS として各リポジトリに案内のある窓口に従ってください。本欄の住所・組織名はショーケース用の仮想表記です',
+  },
+  {
+    term: '事業内容',
+    description:
+      'ドキュメントに書かれている通り、CSS設計の理論に沿った一つのスタイルシート、レイアウト用コンポーネント、@lism-css/ui、lism-cli、@lism-css/mcp 等の配布。すべて無料でオープンソース（MIT）です',
+  },
+];
+
+const mapEmbed = {
+  src: 'https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d7654.831243350634!2d139.76655044358094!3d35.68079012010135!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sja!2sjp!4v1769675880883!5m2!1sja!2sjp',
+  width: 1200,
+  height: 600,
+} as const;
 ---
 
-<Container id='information' class='z--information' isWrapper='m' py='60' hasGutter>
+<Container id='information' class='z--p001-information' isWrapper='m' py='60' hasGutter>
   <Stack jc='c' g='40' w='100%'>
     <HGroup text='Information' subText='お知らせ' />
-    <Grid as='dl' class='z--information_dl u--divide' gtc='auto 1fr' cg='40' p='0' ov='clip'>
-      <Grid gtc='subgrid' gc='1/-1' p='30'>
-        <dt>運営名</dt>
-        <dd>Lism CSS プロジェクト（デモ掲載用の架空組織）</dd>
-      </Grid>
-      <Grid gtc='subgrid' gc='1/-1' p='30'>
-        <dt>所在地</dt>
-        <dd>東京都千代田区丸の内1-1-1（地図はGoogleマップ埋め込みの表示サンプル）</dd>
-      </Grid>
-      <Grid gtc='subgrid' gc='1/-1' p='30'>
-        <dt>公開情報</dt>
-        <dd>
-          ドキュメント・UI・テンプレート・Skills／MCPなど、エコシステム全体の更新は公式サイトおよびリポジトリで告知
-        </dd>
-      </Grid>
-      <Grid gtc='subgrid' gc='1/-1' p='30'>
-        <dt>連絡窓口</dt>
-        <dd>
-          お問い合わせはGitHubのIssue等、各リポジトリに記載のチャネルをご利用ください（本ページはショーケースです）
-        </dd>
-      </Grid>
-      <Grid gtc='subgrid' gc='1/-1' p='30'>
-        <dt>事業内容</dt>
-        <dd>
-          CSS設計フレームワークのドキュメント整備、UIコンポーネント提供、テンプレート配布、AI向けSkills／MCPのメンテナンス
-        </dd>
-      </Grid>
+    <Grid as='dl' class='z--p001-information_dl u--divide' gtc='auto 1fr' cg='40' p='0' ov='clip'>
+      {
+        informationRows.map((row) => (
+          <Grid gtc='subgrid' gc='1/-1' p='30'>
+            <dt>{row.term}</dt>
+            <dd>{row.description}</dd>
+          </Grid>
+        ))
+      }
     </Grid>
-    <Frame class='z--information_map' ar={['1/1', '5/2']}>
+    <Frame class='z--p001-information_map' ar={['1/1', '5/2']}>
       <iframe
-        src='https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d7654.831243350634!2d139.76655044358094!3d35.68079012010135!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sja!2sjp!4v1769675880883!5m2!1sja!2sjp'
-        width='1200'
-        height='600'
+        src={mapEmbed.src}
+        width={mapEmbed.width}
+        height={mapEmbed.height}
         style='border:0;'
         allowfullscreen=''
         loading='lazy'
@@ -48,15 +62,19 @@ import HGroup from '@/components/page001/HGroup.astro';
 </Container>
 
 <style>
+  @layer lism-custom {
+
   /* ページ全体の .u--fadeIn は同名 view-timeline が衝突するため、本セクションは view() で独立させる */
-  .z--information .z--information_dl {
+  .z--p001-information .z--p001-information_dl {
     animation: u--fadeIn linear both;
     animation-timeline: view(block);
     animation-range: var(--u--fadeIn--animation-range);
   }
-  .z--information .z--information_map {
+  .z--p001-information .z--p001-information_map {
     animation: u--fadeIn linear both;
     animation-timeline: view(block);
     animation-range: var(--u--fadeIn--animation-range);
+  }
+
   }
 </style>

@@ -1,18 +1,34 @@
 ---
-import { Stack, Container, Box, BoxLink, Icon, Cluster, Text, Flex, Link, ListItem } from 'lism-css/astro';
+import { Stack, Container, Box, Icon, Cluster, Text, Flex, Link, ListItem } from 'lism-css/astro';
+
+/** ヘッダー主ナビと同一5件 */
+const footerPrimaryNavItems = [
+  { href: '#mission', ja: 'ミッション', en: 'Mission' },
+  { href: '#feature', ja: '特長', en: 'Feature' },
+  { href: '#service', ja: 'サービス', en: 'Service' },
+  { href: '#step', ja: 'ご依頼の流れ', en: 'Step' },
+  { href: '#voice', ja: 'お客様の声', en: 'Voice' },
+] as const;
+
+const footerSnsLinks = [
+  { href: '#', icon: 'logo-x' as const, label: 'X' },
+  { href: '#', icon: 'logo-instagram' as const, label: 'Instagram' },
+  { href: '#', icon: 'logo-youtube' as const, label: 'YouTube' },
+  { href: '#', icon: 'logo-line' as const, label: 'LINE' },
+] as const;
 ---
 
-<Box as='footer' class='z--footer' bgc='base-2' w='100%'>
-  <Container class='z--footer_container' isContainer isWrapper='xl' py='40' hasGutter>
+<Box as='footer' class='z--p002-footer' bgc='base-2' w='100%'>
+  <Container class='z--p002-footer_container' isContainer isWrapper='xl' py='40' hasGutter>
     <Stack jc='c' ai='c' g='30'>
-      <Stack class='z--header_logo'>
-        <Link class='z--header_logoLink' href='#top' fz='2xl' fw='bold' lts='l' c='text' td='none' ff='accent'>
+      <Stack class='z--p002-header_logo'>
+        <Link class='z--p002-header_logoLink' href='#top' fz='2xl' fw='bold' lts='l' c='text' td='none' ff='accent'>
           LISM Life
         </Link>
       </Stack>
       <Flex
         as='ul'
-        class='z--footerNav z--headerNav'
+        class='z--p002-footerNav z--p002-headerNav'
         fxd={['column', 'column', 'row']}
         ai={['stretch', 'stretch', 'c']}
         jc={['start', 'start', 'c']}
@@ -25,123 +41,64 @@ import { Stack, Container, Box, BoxLink, Icon, Cluster, Text, Flex, Link, ListIt
         m='0'
         p='0'
       >
-        <ListItem>
-          <Link
-            class='z--headerNav_link'
-            href='#mission'
-            d='block'
-            c='text'
-            td='none'
-            w={['100%', '100%', 'auto']}
-            py={['15', '15', '10']}
-            hasTransition
-            hov='-o'
-          >
-            ミッション
-          </Link>
-        </ListItem>
-        <ListItem>
-          <Link
-            class='z--headerNav_link'
-            href='#feature'
-            d='block'
-            c='text'
-            td='none'
-            w={['100%', '100%', 'auto']}
-            py={['15', '15', '10']}
-            hasTransition
-            hov='-o'
-          >
-            特長
-          </Link>
-        </ListItem>
-        <ListItem>
-          <Link
-            class='z--headerNav_link'
-            href='#service'
-            d='block'
-            c='text'
-            td='none'
-            w={['100%', '100%', 'auto']}
-            py={['15', '15', '10']}
-            hasTransition
-            hov='-o'
-          >
-            サービス
-          </Link>
-        </ListItem>
-        <ListItem>
-          <Link
-            class='z--headerNav_link'
-            href='#step'
-            d='block'
-            c='text'
-            td='none'
-            w={['100%', '100%', 'auto']}
-            py={['15', '15', '10']}
-            hasTransition
-            hov='-o'
-          >
-            ご依頼の流れ
-          </Link>
-        </ListItem>
-        <ListItem>
-          <Link
-            class='z--headerNav_link'
-            href='#voice'
-            d='block'
-            c='text'
-            td='none'
-            w={['100%', '100%', 'auto']}
-            py={['15', '15', '10']}
-            hasTransition
-            hov='-o'
-          >
-            お客様の声
-          </Link>
-        </ListItem>
+        {
+          footerPrimaryNavItems.map(({ href, ja }) => (
+            <ListItem>
+              <Link
+                class='z--p002-headerNav_link'
+                href={href}
+                d='block'
+                c='text'
+                td='none'
+                w={['100%', '100%', 'auto']}
+                py={['15', '15', '10']}
+                hasTransition
+                hov='-o'
+              >
+                {ja}
+              </Link>
+            </ListItem>
+          ))
+        }
       </Flex>
       <Cluster g='20'>
-        <BoxLink href='#' hov='-o'>
-          <Icon icon='logo-x' fz='xl' c='text-2' />
-        </BoxLink>
-        <BoxLink href='#' hov='-o'>
-          <Icon icon='logo-instagram' fz='xl' c='text-2' />
-        </BoxLink>
-        <BoxLink href='#' hov='-o'>
-          <Icon icon='logo-youtube' fz='xl' c='text-2' />
-        </BoxLink>
-        <BoxLink href='#' hov='-o'>
-          <Icon icon='logo-line' fz='xl' c='text-2' />
-        </BoxLink>
+        {
+          footerSnsLinks.map(({ href, icon, label }) => (
+            <Link href={href} td='none' c='text-2' hov='-o' hasTransition aria-label={label}>
+              <Icon icon={icon} fz='xl' />
+            </Link>
+          ))
+        }
       </Cluster>
-      <Text as='p' fz='s' c='text-2' m='0'>© 2026 LISM Life.</Text>
+      <Text as='p' fz='s' c='text-2' m='0'>© 2026 Lism CSS.</Text>
     </Stack>
   </Container>
 </Box>
 
 <style>
-  .z--footerNav {
-    list-style: none;
-  }
-
-  .z--footerNav :global(.z--headerNav_link) {
-    text-align: center;
-  }
-  @container (min-width: 800px) {
-    .z--footerNav :global(.z--headerNav_link) {
-      text-align: start;
+  @layer lism-custom {
+    .z--p002-footerNav {
+      list-style: none;
     }
-  }
 
-  /* md 未満: 縦並びの項目間に区切り（最後の行の下には付けない） */
-  .z--footerNav > :global(li:not(:last-child)) {
-    border-block-end: 1px solid var(--divider);
-  }
+    .z--p002-footerNav :global(.z--p002-headerNav_link) {
+      text-align: center;
+    }
+    @container (min-width: 800px) {
+      .z--p002-footerNav :global(.z--p002-headerNav_link) {
+        text-align: start;
+      }
+    }
 
-  @container (min-width: 800px) {
-    .z--footerNav > :global(li:not(:last-child)) {
-      border-block-end: none;
+    /* md 未満: 縦並びの項目間に区切り（最後の行の下には付けない） */
+    .z--p002-footerNav > :global(li:not(:last-child)) {
+      border-block-end: 1px solid var(--divider);
+    }
+
+    @container (min-width: 800px) {
+      .z--p002-footerNav > :global(li:not(:last-child)) {
+        border-block-end: none;
+      }
     }
   }
 </style>

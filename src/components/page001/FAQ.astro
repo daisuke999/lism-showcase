@@ -8,37 +8,37 @@ const faqItems: { question: string; answer: string }[] = [
   {
     question: "Lism CSSとは何ですか？",
     answer:
-      "AIと人の両方が読み解きやすい命名と、レイアウトプリミティブ・デザイントークン・ユーティリティを一体で扱うCSS設計フレームワークです。軽量でビルド不要な導入も可能です。",
+      "Webサイトの骨組みをテンポ良く美しく作るための、軽量なCSS設計フレームワークです。タイポグラフィ、レイアウト向けのプリミティブ、CSS変数を活かしたユーティリティを一体で扱います。一つのCSSを読み込むだけ、という導入も可能です。",
   },
   {
     question: "他のCSSフレームワークとの違いは？",
     answer:
-      "ハーモニックスケールに沿った余白・タイポ、Property Classの短い表記、@layerによるレイヤー設計が中心です。公式サイトの「概要」で思想と用語の全体像を確認できます。",
+      "Every Layout やTailwind、Chakra UIやMUIなどからインスピレーションを得た、独自のCSS設計です。公式の「Inspirations」に述べるとおり、レイアウトプリミティブやハーモニックモジュラースケーリング、プロパティ単位のユーティリティ方針が整理されています。",
   },
   {
     question: "ReactやAstroでも使えますか？",
     answer:
-      "はい。lism-css/react や lism-css/astro からコンポーネントをインポートして利用できます。UIパッケージ（Accordion など）も同じ流れで組み込めます。",
+      "はい。lism-css パッケージに、React やAstro 向けの専用コンポーネントが含まれ、概要ページの訴求どおり扱いやすい導入が案内されています。@lism-css/ui のアコーディオン等も併用できます。",
   },
   {
     question: "商用プロジェクトで利用できますか？",
     answer:
-      "パッケージのライセンスに従ってご利用ください。既存のデザインルールやアクセシビリティ方針とあわせ、トークン設計と運用ルールだけ先にすり合わせるのが安全です。",
+      "表記どおり、パッケージ群はすべて無料でオープンソース（MIT）で開発されています。利用条件の詳細は各リポジトリのライセンス表記に従ってください。",
   },
   {
     question: "カスタマイズや独自スタイルはどこに書けばよいですか？",
     answer:
-      "Lismにない演出やページ固有の調整は、プロジェクトの@layer方針に沿ってモジュールクラスやページローカルのstyleへ寄せるのがおすすめです。詳細はCustomizeの項目を参照してください。",
+      "SCSS 設定の上書きや lism.config.js の導入で、より柔軟にカスタマイズできる、と公式の「概要」で述べられています。自前のスタイル方針の詳細は、Customize など当該ドキュメントの章に従うのが確実です。",
   },
   {
     question: "不具合や要望はどこに報告すればよいですか？",
     answer:
-      "GitHubのIssueなど、リポジトリに記載の連絡手段へお願いします。再現手順・環境・期待する表示を添えると、再現と優先付けがしやすくなります。",
+      "各OSSリポジトリ（GitHub 等）の案内に従い、Issue 等に報告する形が一般的です。本ページのデモはショーケース用のため、宛先の取り違いにご注意ください。",
   },
 ];
 ---
 
-<Container id="faq" class="z--faq" isWrapper="m" py="60" hasGutter>
+<Container id="faq" class="z--p001-faq" isWrapper="m" py="60" hasGutter>
   <Stack g="40">
     <HGroup text="FAQ" subText="よくある質問" />
     <Accordion.Root class="u--divide" p="0" ov="clip">
@@ -59,7 +59,9 @@ const faqItems: { question: string; answer: string }[] = [
 </Container>
 
 <style>
-  .z--faq .c--accordion {
+  @layer lism-custom {
+
+  .z--p001-faq .c--accordion {
     view-timeline: --z-faq_accordion y;
     animation: u--fadeIn linear both;
     animation-timeline: --z-faq_accordion;
@@ -69,5 +71,7 @@ const faqItems: { question: string; answer: string }[] = [
     .-hov\:in\:underline {
       text-decoration: var(--_isHov, underline);
     }
+  }
+
   }
 </style>

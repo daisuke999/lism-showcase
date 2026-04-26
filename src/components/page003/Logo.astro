@@ -9,13 +9,13 @@ export interface Props {
 
 const { variant, href = '#' } = Astro.props;
 
-const label = '静寂の隠れ宿';
+const logoLabel = '静寂の隠れ宿';
 ---
 
 {
   variant === 'header' ? (
     <Link
-      class='z--header_logoLink'
+      class='z--p003-header_logoLink'
       href={href}
       td='none'
       fw='bold'
@@ -26,11 +26,11 @@ const label = '静寂の隠れ宿';
       lh='s'
       whs='nowrap'
     >
-      {label}
+      {logoLabel}
     </Link>
   ) : (
     <Heading level='2' m='0' fz={['2xl', null, '3xl']} fw='500' lts='l' lh='l' ff='accent'>
-      {label}
+      {logoLabel}
     </Heading>
   )
 }

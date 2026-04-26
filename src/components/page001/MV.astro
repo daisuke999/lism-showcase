@@ -9,11 +9,11 @@ const mvImage = {
 };
 ---
 
-<Container class='z--mv' pos='relative'>
-  <Frame class='z--mv_frame' pos='relative' h='100%'>
+<Container class='z--p001-mv' pos='relative'>
+  <Frame class='z--p001-mv_frame' pos='relative' h='100%'>
     <Lism
       as='img'
-      class='z--mv_media'
+      class='z--p001-mv_media'
       src={mvImage.src}
       alt={mvImage.alt}
       w='100%'
@@ -27,7 +27,7 @@ const mvImage = {
       }}
     />
     <Stack
-      class='z--mv_content'
+      class='z--p001-mv_content'
       ai='c'
       jc='c'
       g='10'
@@ -43,23 +43,25 @@ const mvImage = {
       <Text as='p' fz='l' fw='200' ta='center' lts='l' m='0'>Lorem ipsum dolor sit amet.</Text>
     </Stack>
   </Frame>
-  <BoxLink href='#about' class='z--mv_scrollDown' layout='stack' ai='center' g='5' pos='absolute' c='white'>
-    <Inline as='span' class='z--mv_scrollDownText' fz='xs' fs='italic' lts='l'>SCROLL DOWN</Inline>
-    <Icon class='z--mv_scrollDownIcon' icon='caret-down' fz='m' />
+  <BoxLink href='#about' class='z--p001-mv_scrollDown' layout='stack' ai='center' g='5' pos='absolute' c='white'>
+    <Inline as='span' class='z--p001-mv_scrollDownText' fz='xs' fs='italic' lts='l'>SCROLL DOWN</Inline>
+    <Icon class='z--p001-mv_scrollDownIcon' icon='caret-down' fz='m' />
   </BoxLink>
 </Container>
 
 <style>
-  .z--mv {
-    --z--mv_animation-range: 0px 100svh;
+  @layer lism-custom {
+
+  .z--p001-mv {
+    --z--p001-mv_animation-range: 0px 100svh;
     height: 100svh;
   }
-  .z--mv .z--mv_frame {
-    animation: z--mv_frame linear both;
+  .z--p001-mv .z--p001-mv_frame {
+    animation: z--p001-mv_frame linear both;
     animation-timeline: scroll(root);
-    animation-range: var(--z--mv_animation-range);
+    animation-range: var(--z--p001-mv_animation-range);
   }
-  @keyframes z--mv_frame {
+  @keyframes z--p001-mv_frame {
     from {
       filter: blur(0px);
       opacity: 1;
@@ -70,12 +72,12 @@ const mvImage = {
       transform: scale(1.05);
     }
   }
-  .z--mv .z--mv_media {
-    animation: z--mv_media linear both;
+  .z--p001-mv .z--p001-mv_media {
+    animation: z--p001-mv_media linear both;
     animation-timeline: scroll(root);
-    animation-range: var(--z--mv_animation-range);
+    animation-range: var(--z--p001-mv_animation-range);
   }
-  @keyframes z--mv_media {
+  @keyframes z--p001-mv_media {
     from {
       transform: translateY(0);
     }
@@ -83,14 +85,14 @@ const mvImage = {
       transform: translateY(15%);
     }
   }
-  .z--mv_content {
-    top: calc(var(--z--header-height) / 2 * -1);
-    height: calc(100% + var(--z--header-height) / 2);
-    animation: z--mv_content linear both;
+  .z--p001-mv_content {
+    top: calc(var(--z--p001-header-height) / 2 * -1);
+    height: calc(100% + var(--z--p001-header-height) / 2);
+    animation: z--p001-mv_content linear both;
     animation-timeline: scroll(root);
-    animation-range: var(--z--mv_animation-range);
+    animation-range: var(--z--p001-mv_animation-range);
   }
-  @keyframes z--mv_content {
+  @keyframes z--p001-mv_content {
     from {
       transform: scale(1);
     }
@@ -98,15 +100,15 @@ const mvImage = {
       transform: scale(1.2);
     }
   }
-  .z--mv_scrollDown {
+  .z--p001-mv_scrollDown {
     bottom: 2rem;
     left: 50%;
     transform: translateX(-50%);
-    animation: z--mv_scrollDown linear both;
+    animation: z--p001-mv_scrollDown linear both;
     animation-timeline: scroll(root);
-    animation-range: var(--z--mv_animation-range);
+    animation-range: var(--z--p001-mv_animation-range);
   }
-  @keyframes z--mv_scrollDown {
+  @keyframes z--p001-mv_scrollDown {
     from {
       opacity: 1;
     }
@@ -116,10 +118,10 @@ const mvImage = {
       filter: blur(8px);
     }
   }
-  .z--mv_scrollDownIcon {
-    animation: z--mv_scrollDownIcon 2.4s infinite;
+  .z--p001-mv_scrollDownIcon {
+    animation: z--p001-mv_scrollDownIcon 2.4s infinite;
   }
-  @keyframes z--mv_scrollDownIcon {
+  @keyframes z--p001-mv_scrollDownIcon {
     0% {
       transform: translateY(0);
       opacity: 0;
@@ -131,5 +133,7 @@ const mvImage = {
       transform: translateY(8px);
       opacity: 0;
     }
+  }
+
   }
 </style>
