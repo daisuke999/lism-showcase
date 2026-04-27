@@ -13,7 +13,7 @@ import Footer from '@/components/page003/Footer.astro';
 import Reservation from '@/components/page003/Reservation.astro';
 import ReservationFab from '@/components/page003/ReservationFab.astro';
 
-export const title = 'page003：静寂の隠れ宿 LP Design';
+export const title = 'page003：Japanese Ryokan LP Design';
 ---
 
 <DemoLayout title={title}>
@@ -46,99 +46,97 @@ export const title = 'page003：静寂の隠れ宿 LP Design';
 
 <style is:global>
   @layer lism-custom {
-  /* page003: 明朝ベース（Google Fonts / Noto Serif JP） */
-  .z--p003-root {
-    font-family: 'Noto Serif JP', 'Yu Mincho', YuMincho, 'Hiragino Mincho ProN', 'Hiragino Mincho Pro', serif;
-    font-optical-sizing: auto;
-    /* Lism の `ff:base`（既定はゴシック系）— page003 では日本語明朝に統一 */
-    --ff--base: 'Noto Serif JP', 'Yu Mincho', YuMincho, 'Hiragino Mincho ProN', 'Hiragino Mincho Pro', serif;
-    /* ロゴ（`ff:accent`）用: Google Fonts / Yuji Syuku（Lism タイポ `--ff--accent`） */
-    --ff--accent: 'Yuji Syuku', 'Noto Serif JP', 'Yu Mincho', YuMincho, 'Hiragino Mincho ProN', 'Hiragino Mincho Pro', serif;
-    /* Feature ほか和紙調のベージュ背景（セマンティック `--base` を上書き） */
-    --base: hsl(38 32% 92%);
-    /* #reservation の named view timeline を兄弟の FAB から参照可能に */
-    timeline-scope: --p003-reservation;
-  }
-  /* Reservation がビューポートに入る進行に合わせて FAB を非表示 */
-  #reservation {
-    view-timeline-name: --p003-reservation;
-    view-timeline-axis: block;
-  }
-  @keyframes p003_reservationFab_hide {
-    from {
-      opacity: 1;
-      pointer-events: auto;
-      visibility: visible;
+    /* page003: 明朝ベース（Google Fonts / Noto Serif JP） */
+    .z--p003-root {
+      font-family: 'Noto Serif JP', 'Yu Mincho', YuMincho, 'Hiragino Mincho ProN', 'Hiragino Mincho Pro', serif;
+      font-optical-sizing: auto;
+      /* Lism の `ff:base`（既定はゴシック系）— page003 では日本語明朝に統一 */
+      --ff--base: 'Noto Serif JP', 'Yu Mincho', YuMincho, 'Hiragino Mincho ProN', 'Hiragino Mincho Pro', serif;
+      /* ロゴ（`ff:accent`）用: Google Fonts / Yuji Syuku（Lism タイポ `--ff--accent`） */
+      --ff--accent:
+        'Yuji Syuku', 'Noto Serif JP', 'Yu Mincho', YuMincho, 'Hiragino Mincho ProN', 'Hiragino Mincho Pro', serif;
+      /* Feature ほか和紙調のベージュ背景（セマンティック `--base` を上書き） */
+      --base: hsl(38 32% 92%);
+      /* #reservation の named view timeline を兄弟の FAB から参照可能に */
+      timeline-scope: --p003-reservation;
     }
-    to {
-      opacity: 0;
-      pointer-events: none;
-      visibility: hidden;
+    /* Reservation がビューポートに入る進行に合わせて FAB を非表示 */
+    #reservation {
+      view-timeline-name: --p003-reservation;
+      view-timeline-axis: block;
     }
-  }
-  .z--p003-reservationFab {
-    animation: p003_reservationFab_hide linear both;
-    animation-timeline: --p003-reservation;
-    animation-range: entry 0% entry 30%;
-  }
-  @media (prefers-reduced-motion: reduce) {
+    @keyframes p003_reservationFab_hide {
+      from {
+        opacity: 1;
+        pointer-events: auto;
+        visibility: visible;
+      }
+      to {
+        opacity: 0;
+        pointer-events: none;
+        visibility: hidden;
+      }
+    }
     .z--p003-reservationFab {
-      animation: none;
-      opacity: 1;
-      visibility: visible;
-      pointer-events: auto;
+      animation: p003_reservationFab_hide linear both;
+      animation-timeline: --p003-reservation;
+      animation-range: entry 0% entry 30%;
     }
-  }
-
+    @media (prefers-reduced-motion: reduce) {
+      .z--p003-reservationFab {
+        animation: none;
+        opacity: 1;
+        visibility: visible;
+        pointer-events: auto;
+      }
+    }
   }
 </style>
 
 <style>
   @layer lism-custom {
-
-  /* Root */
-  :root {
-    --z--header-height: 100px;
-    --z--header-height--thin: 56px;
-    --u--fadeIn--animation-range: entry 0% contain 20%;
-  }
-  /* Fadein */
-  .u--fadeIn {
-    view-timeline: --u--fadeIn y;
-    animation: u--fadeIn linear both;
-    animation-timeline: --u--fadeIn;
-    animation-range: var(--u--fadeIn--animation-range);
-  }
-  @keyframes u--fadeIn {
-    from {
-      opacity: 0;
-      transform: translateY(32px);
+    /* Root */
+    :root {
+      --z--header-height: 100px;
+      --z--header-height--thin: 56px;
+      --u--fadeIn--animation-range: entry 0% contain 20%;
     }
-    to {
-      opacity: 1;
-      transform: translateY(0);
+    /* Fadein */
+    .u--fadeIn {
+      view-timeline: --u--fadeIn y;
+      animation: u--fadeIn linear both;
+      animation-timeline: --u--fadeIn;
+      animation-range: var(--u--fadeIn--animation-range);
     }
-  }
-  /* Background Parallax */
-  .u--bgParallax {
-    view-timeline: --u--bgParallax y;
-  }
-  .u--bgParallax .a--media {
-    position: absolute;
-    top: -20%;
-    height: 140%;
-    animation: u--bgParallax_media linear both;
-    animation-timeline: --u--bgParallax;
-    animation-range: entry 0% cover 100%;
-  }
-  @keyframes u--bgParallax_media {
-    from {
-      transform: translateY(-10%);
+    @keyframes u--fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(32px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
-    to {
-      transform: translateY(10%);
+    /* Background Parallax */
+    .u--bgParallax {
+      view-timeline: --u--bgParallax y;
     }
-  }
-
+    .u--bgParallax .a--media {
+      position: absolute;
+      top: -20%;
+      height: 140%;
+      animation: u--bgParallax_media linear both;
+      animation-timeline: --u--bgParallax;
+      animation-range: entry 0% cover 100%;
+    }
+    @keyframes u--bgParallax_media {
+      from {
+        transform: translateY(-10%);
+      }
+      to {
+        transform: translateY(10%);
+      }
+    }
   }
 </style>

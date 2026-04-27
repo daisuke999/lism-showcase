@@ -46,23 +46,24 @@ export const title = 'page002：Simple Natural LP Design';
 
 <style is:global>
   @layer lism-custom {
-  /**
+    /**
    * `ff:accent`（`--ff--accent`）: セリフに寄らないよう、Montserrat 以外は日本語ゴシック＋汎用 sans へ
    * @see https://fonts.google.com/specimen/Montserrat
    */
-  .z--p002-root {
-    --ff--accent: 'Montserrat', 'Hiragino Sans', 'Hiragino Kaku Gothic ProN', 'Hiragino Kaku Gothic Pro', 'Yu Gothic',
-      'YuGothic', 'Noto Sans JP', 'BIZ UDGothic', ui-sans-serif, system-ui, sans-serif;
-  }
+    .z--p002-root {
+      --ff--accent:
+        'Montserrat', 'Hiragino Sans', 'Hiragino Kaku Gothic ProN', 'Hiragino Kaku Gothic Pro', 'Yu Gothic', 'YuGothic',
+        'Noto Sans JP', 'BIZ UDGothic', ui-sans-serif, system-ui, sans-serif;
+    }
   }
 </style>
 
 <style>
   @layer lism-custom {
-  :root {
-    --z--p002-header-height: 112px;
-    --z--p002-header-height--thin: 64px;
-    --base-2: #ececec;
-  }
+    :root {
+      --z--p002-header-height: 112px;
+      --z--p002-header-height--thin: 64px;
+      --base-2: #ececec;
+    }
   }
 </style>

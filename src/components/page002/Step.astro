@@ -65,7 +65,7 @@ const stepCards: StepCard[] = [
               <>
                 {i > 0 && (
                   <Flex class='z--p002-step_caret' jc='center' ai='center' w='100%' fxsh='0'>
-                    <Icon icon='caret-down-fill' fz='xl' />
+                    <Icon icon='caret-down-fill' fz='2xl' />
                   </Flex>
                 )}
                 <Stack
@@ -124,9 +124,9 @@ const stepCards: StepCard[] = [
 
 <style>
   @layer lism-custom {
-    /* テキスト色を 35%（残りは base）でミックス — 薄すぎる base-2 より本文に近い階調 */
+    /* テキスト色を 15%（残りは base）でミックス — 薄すぎる base-2 より本文に近い階調 */
     .z--p002-step_caret .a--icon {
-      color: color-mix(in oklch, var(--text) 35%, var(--base));
+      color: color-mix(in oklch, var(--text) 15%, var(--base));
       opacity: 1;
     }
 

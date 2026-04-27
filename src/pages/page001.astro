@@ -13,7 +13,7 @@ import Information from '@/components/page001/Information.astro';
 import Contact from '@/components/page001/Contact.astro';
 import Footer from '@/components/page001/Footer.astro';
 
-export const title = 'page001：Minimalistic LP Design';
+export const title = 'page001：Minimal LP Design';
 ---
 
 <DemoLayout title={title}>
@@ -39,48 +39,48 @@ export const title = 'page001：Minimalistic LP Design';
 
 <style>
   @layer lism-custom {
-  /* Root */
-  :root {
-    --z--p001-header-height: 112px;
-    --z--p001-header-height--thin: 64px;
-    --u--fadeIn--animation-range: entry 0% contain 20%;
-  }
-  /* Fadein */
-  .u--fadeIn {
-    view-timeline: --u--fadeIn y;
-    animation: u--fadeIn linear both;
-    animation-timeline: --u--fadeIn;
-    animation-range: var(--u--fadeIn--animation-range);
-  }
-  @keyframes u--fadeIn {
-    from {
-      opacity: 0;
-      transform: translateY(32px);
+    /* Root */
+    :root {
+      --z--p001-header-height: 112px;
+      --z--p001-header-height--thin: 64px;
+      --u--fadeIn--animation-range: entry 0% contain 20%;
     }
-    to {
-      opacity: 1;
-      transform: translateY(0);
+    /* Fadein */
+    .u--fadeIn {
+      view-timeline: --u--fadeIn y;
+      animation: u--fadeIn linear both;
+      animation-timeline: --u--fadeIn;
+      animation-range: var(--u--fadeIn--animation-range);
     }
-  }
-  /* Background Parallax */
-  .u--bgParallax {
-    view-timeline: --u--bgParallax y;
-  }
-  .u--bgParallax .a--media {
-    position: absolute;
-    top: -20%;
-    height: 140%;
-    animation: u--bgParallax_media linear both;
-    animation-timeline: --u--bgParallax;
-    animation-range: entry 0% cover 100%;
-  }
-  @keyframes u--bgParallax_media {
-    from {
-      transform: translateY(-10%);
+    @keyframes u--fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(32px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
-    to {
-      transform: translateY(10%);
+    /* Background Parallax */
+    .u--bgParallax {
+      view-timeline: --u--bgParallax y;
     }
-  }
+    .u--bgParallax .a--media {
+      position: absolute;
+      top: -20%;
+      height: 140%;
+      animation: u--bgParallax_media linear both;
+      animation-timeline: --u--bgParallax;
+      animation-range: entry 0% cover 100%;
+    }
+    @keyframes u--bgParallax_media {
+      from {
+        transform: translateY(-10%);
+      }
+      to {
+        transform: translateY(10%);
+      }
+    }
   }
 </style>
