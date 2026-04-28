@@ -81,7 +81,7 @@ const newsRows = [
   @layer lism-custom {
 
   .z--p001-news {
-    view-timeline: --z-news y;
+    view-timeline: --z--p001-news y;
   }
   .z--p001-news .z--p001-news_media {
     width: 100%;
@@ -89,7 +89,7 @@ const newsRows = [
     top: -20%;
     height: 140%;
     animation: z--p001-news_media linear both;
-    animation-timeline: --z-news;
+    animation-timeline: --z--p001-news;
     animation-range: entry 0% cover 100%;
   }
   @keyframes z--p001-news_media {
@@ -101,9 +101,9 @@ const newsRows = [
     }
   }
   .z--p001-news .z--p001-news_item {
-    view-timeline: --z-news_item y;
+    view-timeline: --z--p001-news_item y;
     animation: z--p001-news_item linear both;
-    animation-timeline: --z-news_item;
+    animation-timeline: --z--p001-news_item;
     animation-range: var(--u--fadeIn--animation-range);
   }
   @media (any-hover: hover) {

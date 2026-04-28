@@ -1,55 +1,69 @@
 ---
-import "lism-css/main.css";
-import { Link, Stack, Text } from "lism-css/astro";
+import 'lism-css/main.css';
+import { Link, Stack, Text } from 'lism-css/astro';
 
 function slugToLabel(slug: string): string {
   return slug
-    .split("-")
+    .split('-')
     .filter(Boolean)
     .map((w) => w.charAt(0).toUpperCase() + w.slice(1))
-    .join(" ");
+    .join(' ');
 }
 
 type PageModule = { title?: string };
 
-const modules = import.meta.glob<PageModule>("./*.astro", { eager: true });
+const modules = import.meta.glob<PageModule>('./*.astro', { eager: true });
+const mergedModules = import.meta.glob<PageModule>('./merged/*.astro', { eager: true });
 
 type PageLink = { href: string; label: string };
 
-const pageLinks: PageLink[] = [];
+function collectPageLinks(source: Record<string, PageModule>, hrefPrefix: string): PageLink[] {
+  const pageLinks: PageLink[] = [];
+  for (const path of Object.keys(source).sort()) {
+    const fileName = path.split('/').pop() ?? path;
+    if (fileName.startsWith('_')) continue;
 
-for (const path of Object.keys(modules).sort()) {
-  if (path === "./index.astro") continue;
+    const slug = fileName.replace(/\.astro$/i, '');
+    if (!slug || slug.includes('[') || slug.includes(']')) continue;
 
-  const fileName = path.split("/").pop() ?? path;
-  if (fileName.startsWith("_")) continue;
+    const mod = source[path]!;
+    const href = hrefPrefix ? `${hrefPrefix}/${slug}` : `/${slug}`;
+    const label = typeof mod.title === 'string' && mod.title.trim().length > 0 ? mod.title.trim() : slugToLabel(slug);
 
-  const slug = fileName.replace(/\.astro$/i, "");
-  if (!slug || slug.includes("[") || slug.includes("]")) continue;
-
-  const mod = modules[path]!;
-  const href = `/${slug}`;
-  const label =
-    typeof mod.title === "string" && mod.title.trim().length > 0
-      ? mod.title.trim()
-      : slugToLabel(slug);
-
-  pageLinks.push({ href, label });
+    pageLinks.push({ href, label });
+  }
+  return pageLinks;
 }
+
+const pageLinks = collectPageLinks(
+  Object.fromEntries(Object.entries(modules).filter(([p]) => p !== './index.astro')) as Record<string, PageModule>,
+  '',
+);
+
+const mergedPageLinks = collectPageLinks(mergedModules as Record<string, PageModule>, '/merged');
 ---
 
-<html lang="ja">
+<html lang='ja'>
   <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width" />
+    <meta charset='utf-8' />
+    <meta name='viewport' content='width=device-width' />
     <title>Lism Showcase</title>
   </head>
   <body>
-    <Stack p="40" g="15">
+    <Stack p='40' g='20'>
       <h1>Lism Showcase</h1>
+      <Text m='0' fz='l' fw='600'> マージ前（開発用） </Text>
       {
         pageLinks.map(({ href, label }) => (
-          <Text m="0">
+          <Text m='0'>
+            <Link href={href}>{label}</Link>
+          </Text>
+        ))
+      }
+      <Text m='0' mt='30' fz='l' fw='600'> マージ後（テンプレ1ファイル） </Text>
+      {
+        mergedPageLinks.map(({ href, label }) => (
+          <Text m='0'>
             <Link href={href}>{label}</Link>
           </Text>
         ))

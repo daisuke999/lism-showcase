@@ -70,7 +70,7 @@ const headerOthersNavItems = [
           bxsh='30'
           bdrs='20'
         >
-          <Stack class='z--p001-subMenu u--divide' p='0' ov='clip'>
+          <Stack class='z--p001-header_subMenu u--divide' p='0' ov='clip'>
             {
               headerOthersNavItems.map(({ href, en }) => (
                 <BoxLink href={href} layout='grid' gtc='1fr auto' ai='c' td='none' py='15' px='10' hasTransition hov='-o'>
@@ -83,7 +83,7 @@ const headerOthersNavItems = [
       </Flex>
       <Modal.OpenBtn modalId='menu' d={['block', null, 'none']}>
         <Center p='10' bd bdc='divider' bdrs='10'>
-          <Icon class='z--p001-subMenu_buttonIcon' icon='menu' c='white' />
+          <Icon class='z--p001-header_subMenu_buttonIcon' icon='menu' c='white' />
         </Center>
       </Modal.OpenBtn>
     </Flex>
@@ -206,12 +206,12 @@ const headerOthersNavItems = [
     transform: translateY(0);
   }
   /* Sub menu */
-  .z--p001-subMenu_buttonIcon {
-    animation: z--p001-subMenu_buttonIcon linear both;
+  .z--p001-header_subMenu_buttonIcon {
+    animation: z--p001-header_subMenu_buttonIcon linear both;
     animation-timeline: scroll(root);
     animation-range: var(--z--p001-header-animation-range);
   }
-  @keyframes z--p001-subMenu_buttonIcon {
+  @keyframes z--p001-header_subMenu_buttonIcon {
     to {
       color: var(--text-2);
     }

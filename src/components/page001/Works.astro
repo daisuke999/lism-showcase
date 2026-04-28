@@ -14,7 +14,7 @@ import {
 } from 'lism-css/astro';
 import HGroup from '@/components/page001/HGroup.astro';
 
-const defaultWorkImage = {
+const worksDefaultImage = {
   alt: 'Beautiful Landscape',
   width: 960,
   height: 540,
@@ -69,14 +69,14 @@ const worksItems = [
                 as='img'
                 class='z--p001-works_media'
                 src={item.src}
-                alt={defaultWorkImage.alt}
+                alt={worksDefaultImage.alt}
                 w='100%'
                 h='auto'
                 hasTransition
                 hov='in:zoom'
                 exProps={{
-                  width: defaultWorkImage.width,
-                  height: defaultWorkImage.height,
+                  width: worksDefaultImage.width,
+                  height: worksDefaultImage.height,
                   loading: 'lazy',
                   decoding: 'async',
                 }}
@@ -115,9 +115,9 @@ const worksItems = [
   @layer lism-custom {
 
   .z--p001-works .z--p001-works_item {
-    view-timeline: --z-works_item y;
+    view-timeline: --z--p001-works_item y;
     animation: z--p001-works_item linear both;
-    animation-timeline: --z-works_item;
+    animation-timeline: --z--p001-works_item;
     animation-range: var(--u--fadeIn--animation-range);
   }
   @keyframes z--p001-works_item {
@@ -133,11 +133,11 @@ const worksItems = [
     }
   }
   .z--p001-works .z--p001-works_frame {
-    view-timeline: --z-works_frame y;
+    view-timeline: --z--p001-works_frame y;
   }
   .z--p001-works .z--p001-works_media {
     animation: z--p001-works_media linear both;
-    animation-timeline: --z-works_frame;
+    animation-timeline: --z--p001-works_frame;
     animation-range: var(--u--fadeIn--animation-range);
   }
   @keyframes z--p001-works_media {

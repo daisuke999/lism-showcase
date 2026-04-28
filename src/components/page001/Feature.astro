@@ -9,7 +9,7 @@ const featureHero = {
   height: 640,
 };
 
-const defaultCardImageMeta = {
+const featureDefaultCardImageMeta = {
   alt: 'Beautiful Landscape',
   width: 960,
   height: 540,
@@ -79,10 +79,10 @@ const featureCards: FeatureCard[] = [
                     as='img'
                     class='z--p001-feature_itemMedia'
                     src={card.src}
-                    alt={defaultCardImageMeta.alt}
+                    alt={featureDefaultCardImageMeta.alt}
                     exProps={{
-                      width: defaultCardImageMeta.width,
-                      height: defaultCardImageMeta.height,
+                      width: featureDefaultCardImageMeta.width,
+                      height: featureDefaultCardImageMeta.height,
                       loading: 'lazy',
                       decoding: 'async',
                     }}
@@ -108,7 +108,7 @@ const featureCards: FeatureCard[] = [
 <style>
   @layer lism-custom {
     .z--p001-feature {
-      view-timeline: --z-feature y;
+      view-timeline: --z--p001-feature y;
     }
     .z--p001-feature .z--p001-feature_media {
       width: 100%;
@@ -116,7 +116,7 @@ const featureCards: FeatureCard[] = [
       top: -20%;
       height: 140%;
       animation: z--p001-feature_media linear both;
-      animation-timeline: --z-feature;
+      animation-timeline: --z--p001-feature;
       animation-range: entry 0% cover 100%;
     }
     @keyframes z--p001-feature_media {
@@ -128,9 +128,9 @@ const featureCards: FeatureCard[] = [
       }
     }
     .z--p001-feature .z--p001-feature_item {
-      view-timeline: --z-feature_item y;
+      view-timeline: --z--p001-feature_item y;
       animation: u--fadeIn linear both;
-      animation-timeline: --z-feature_item;
+      animation-timeline: --z--p001-feature_item;
       animation-range: var(--u--fadeIn--animation-range);
     }
     .z--p001-feature .z--p001-feature_itemMedia {
@@ -139,7 +139,7 @@ const featureCards: FeatureCard[] = [
       top: -20%;
       height: 140%;
       animation: z--p001-feature_itemMedia linear both;
-      animation-timeline: --z-feature_item;
+      animation-timeline: --z--p001-feature_item;
       animation-range: entry 0% cover 100%;
     }
     @keyframes z--p001-feature_itemMedia {

@@ -28,7 +28,7 @@ const informationRows: { term: string; description: string }[] = [
   },
 ];
 
-const mapEmbed = {
+const informationMapEmbed = {
   src: 'https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d7654.831243350634!2d139.76655044358094!3d35.68079012010135!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sja!2sjp!4v1769675880883!5m2!1sja!2sjp',
   width: 1200,
   height: 600,
@@ -50,9 +50,9 @@ const mapEmbed = {
     </Grid>
     <Frame class='z--p001-information_map' ar={['1/1', '5/2']}>
       <iframe
-        src={mapEmbed.src}
-        width={mapEmbed.width}
-        height={mapEmbed.height}
+        src={informationMapEmbed.src}
+        width={informationMapEmbed.width}
+        height={informationMapEmbed.height}
         style='border:0;'
         allowfullscreen=''
         loading='lazy'

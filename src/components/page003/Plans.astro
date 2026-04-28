@@ -127,7 +127,6 @@ const plans = [
                 <Stack g='30' ai='stretch' w='100%' fxsh='0'>
                   <Grid
                     gtc='repeat(3, minmax(0, 1fr))'
-                    util='cells'
                     bd
                     bdc='white:35%'
                     bdrs='20'
@@ -136,8 +135,15 @@ const plans = [
                     m='0'
                     ai='stretch'
                   >
-                    {plan.stats.map((stat) => (
-                      <Stack g='10' p='15' ai='center' ta='center'>
+                    {plan.stats.map((stat, index) => (
+                      <Stack
+                        g='10'
+                        p='15'
+                        ai='center'
+                        ta='center'
+                        bdc='white:35%'
+                        class:list={[{ '-bd-x-s': index > 0 }]}
+                      >
                         <Text as='p' m='0' fz='xs' lts='s' o='pp'>
                           {stat.label}
                         </Text>

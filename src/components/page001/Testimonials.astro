@@ -2,13 +2,13 @@
 import { Frame, Stack, Container, Grid, Flex, AutoColumns, Text, Inline, Lism } from 'lism-css/astro';
 import HGroup from '@/components/page001/HGroup.astro';
 
-const defaultAvatar = {
+const testimonialsDefaultAvatar = {
   width: 256,
   height: 256,
   alt: '',
 } as const;
 
-const avatars = [
+const testimonialsAvatars = [
   {
     title: 'レビュー観点が揃い、差分が小さくなった',
     meta: '東京都 / 30代 / フロントエンドエンジニア',
@@ -53,19 +53,19 @@ const avatars = [
     <HGroup text='Testimonials' subText='お客様の声' />
     <AutoColumns cols='20rem' g='40'>
       {
-        avatars.map((item) => (
+        testimonialsAvatars.map((item) => (
           <Grid class='z--p001-testimonials_item' gtr='subgrid' gr='span 3' g='30'>
             <Grid gtc='auto 1fr' ai='center' g='20'>
               <Frame as='figure' ar='1/1' w='3.5rem' bdrs='99'>
                 <Lism
                   as='img'
                   src={item.src}
-                  alt={defaultAvatar.alt}
+                  alt={testimonialsDefaultAvatar.alt}
                   w='100%'
                   h='100%'
                   exProps={{
-                    width: defaultAvatar.width,
-                    height: defaultAvatar.height,
+                    width: testimonialsDefaultAvatar.width,
+                    height: testimonialsDefaultAvatar.height,
                     loading: 'lazy',
                     decoding: 'async',
                   }}
@@ -95,9 +95,9 @@ const avatars = [
 <style>
   @layer lism-custom {
     .z--p001-testimonials .z--p001-testimonials_item {
-      view-timeline: --z-testimonials_item y;
+      view-timeline: --z--p001-testimonials_item y;
       animation: u--fadeIn linear both;
-      animation-timeline: --z-testimonials_item;
+      animation-timeline: --z--p001-testimonials_item;
       animation-range: var(--u--fadeIn--animation-range);
     }
   }

@@ -21,14 +21,14 @@ const { text, subText, variant } = Astro.props;
   @layer lism-custom {
 
   .z--p001-hgroup {
-    view-timeline: --z-hgroup y;
+    view-timeline: --z--p001-hgroup y;
   }
   .z--p001-hgroup.z--p001-hgroup--light {
     color: var(--white);
   }
   .z--p001-hgroup .z--p001-hgroup_heading {
     animation: z--p001-hgroup_heading linear both;
-    animation-timeline: --z-hgroup;
+    animation-timeline: --z--p001-hgroup;
     animation-range: var(--u--fadeIn--animation-range);
   }
   @keyframes z--p001-hgroup_heading {
@@ -48,7 +48,7 @@ const { text, subText, variant } = Astro.props;
   .z--p001-hgroup .z--p001-hgroup_subHeading {
     position: relative;
     animation: z--p001-hgroup_heading linear both;
-    animation-timeline: --z-hgroup;
+    animation-timeline: --z--p001-hgroup;
     animation-range: var(--u--fadeIn--animation-range);
   }
   .z--p001-hgroup .z--p001-hgroup_subHeading:before,
@@ -60,7 +60,7 @@ const { text, subText, variant } = Astro.props;
     background-color: var(--text);
     transform-origin: center right;
     animation: z--p001-hgroup_subHeading_beforeAfter linear both;
-    animation-timeline: --z-hgroup;
+    animation-timeline: --z--p001-hgroup;
     animation-range: contain 25% contain 45%;
   }
   .z--p001-hgroup .z--p001-hgroup_subHeading:after {
