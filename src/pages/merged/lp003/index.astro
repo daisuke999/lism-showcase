@@ -23,7 +23,7 @@ import {
 } from 'lism-css/astro';
 import { Accordion, Button, Modal } from '@lism-css/ui/astro';
 
-export const title = 'page003：Japanese Ryokan LP Design';
+export const title = 'LP003: Japanese Ryokan LP';
 
 const logoLabel = '静寂の隠れ宿';
 
@@ -498,7 +498,7 @@ const reservationSites: readonly SiteCard[] = [
       alt={mvImage.alt}
       w='100%'
       h='100%'
-      exProps={{ width: mvImage.width, height: mvImage.height, loading: 'eager', fetchpriority: 'high' }}
+      exProps={{ width: mvImage.width, height: mvImage.height, loading: 'eager', decoding: 'async', fetchpriority: 'high' }}
     />
   </Frame>
   <Layer bgc='black:30%' exProps={{ 'aria-hidden': 'true' }} />
@@ -1100,11 +1100,11 @@ const reservationSites: readonly SiteCard[] = [
 <style>
   @layer lism-custom {
 
-/* page003: 明朝ベース（Google Fonts / Noto Serif JP） */
+/* lp003: 明朝ベース（Google Fonts / Noto Serif JP） */
     .z--p003-root {
       font-family: 'Noto Serif JP', 'Yu Mincho', YuMincho, 'Hiragino Mincho ProN', 'Hiragino Mincho Pro', serif;
       font-optical-sizing: auto;
-      /* Lism の `ff:base`（既定はゴシック系）— page003 では日本語明朝に統一 */
+      /* Lism の `ff:base`（既定はゴシック系）— lp003 では日本語明朝に統一 */
       --ff--base: 'Noto Serif JP', 'Yu Mincho', YuMincho, 'Hiragino Mincho ProN', 'Hiragino Mincho Pro', serif;
       /* ロゴ（`ff:accent`）用: Google Fonts / Yuji Syuku（Lism タイポ `--ff--accent`） */
       --ff--accent:

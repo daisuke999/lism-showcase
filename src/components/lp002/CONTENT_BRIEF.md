@@ -1,6 +1,6 @@
-# page002 コンテンツブリーフ
+# lp002 コンテンツブリーフ
 
-page002（Simple Natural LP）の**文言トーン**と**ダミー文章**を揃えるためのメモ。細部は都度更新する想定。
+lp002（Simple Natural LP）の**文言トーン**と**ダミー文章**を揃えるためのメモ。細部は都度更新する想定。
 
 ## サンプルサイトの位置づけ
 
@@ -49,5 +49,5 @@ page002（Simple Natural LP）の**文言トーン**と**ダミー文章**を揃
 
 ## 参照
 
-- エントリ: `src/pages/page002.astro`
-- コンポーネント: `src/components/page002/`
+- エントリ: `src/pages/lp002.astro`
+- コンポーネント: `src/components/lp002/`

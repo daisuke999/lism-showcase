@@ -1,5 +1,5 @@
 /**
- * page001 用のエイリアス。中身は emit-merged-page.mjs へ委譲する。
+ * lp001（開発ページ lp001）向けエントリ。中身は emit-merged-page.mjs へ委譲する。
  * Usage: node scripts/emit-merged-page001.mjs
  */
 import { spawnSync } from 'child_process';

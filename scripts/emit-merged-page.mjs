@@ -1,5 +1,5 @@
 /**
- * マージ元を読み取りのみで src/pages/merged/pageXXX.astro を生成する。
+ * マージ元を読み取りのみで src/pages/merged/lpXXX/index.astro を生成する（同階に空の _style.css）。
  * Usage: node scripts/emit-merged-page.mjs <001|002|003|...>
  */
 import fs from 'fs';
@@ -10,9 +10,9 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const root = path.join(__dirname, '..');
 
 function parsePageImports(pageAstroSrc) {
-  /** page00x から import しているコンポーネント名（順序維持・重複除去） */
+  /** lp00x から import しているコンポーネント名（順序維持・重複除去） */
   const names = [];
-  const re = /import\s+\w+\s+from\s+['"]@\/components\/page\d+\/(\w+)\.astro['"]/g;
+  const re = /import\s+\w+\s+from\s+['"]@\/components\/lp\d+\/(\w+)\.astro['"]/g;
   let m;
   while ((m = re.exec(pageAstroSrc))) {
     if (!names.includes(m[1])) names.push(m[1]);
@@ -115,7 +115,7 @@ function mergeNamedSymbolImports(importLines, modulePath) {
   return [...names].sort();
 }
 
-/** page001 用 HGroup（クラス接頭辞 z--p001-hgroup） */
+/** lp001 用 HGroup（クラス接頭辞 z--p001-hgroup） */
 function inlineHGroup001(html) {
   let s = html.replace(
     /<HGroup\s+text=['"]([^'"]*)['"]\s+subText=['"]([^'"]*)['"](\s+variant=['"]light['"])?\s*\/>/g,
@@ -144,7 +144,7 @@ function inlineHGroup001(html) {
   return s;
 }
 
-/** page003: Logo を Header/Footer へインライン（logoLabel はマージ先 frontmatter で定義） */
+/** lp003: Logo を Header/Footer へインライン（logoLabel はマージ先 frontmatter で定義） */
 function inlineLogo003(html) {
   const headerLogo = `<Link
       class='z--p003-header_logoLink'
@@ -170,7 +170,7 @@ function inlineLogo003(html) {
 
 const PAGE_CONFIG = {
   '001': {
-    folder: 'page001',
+    folder: 'lp001',
     pfx: 'p001',
     compOrder: [
       'Header',
@@ -209,7 +209,7 @@ const PAGE_CONFIG = {
     logoConst: null,
   },
   '002': {
-    folder: 'page002',
+    folder: 'lp002',
     pfx: 'p002',
     compOrder: ['Header', 'MV', 'Mission', 'Mission2', 'Footer', 'Feature', 'Service', 'Step', 'Voice', 'FAQ', 'Contact'],
     extraCompScripts: [],
@@ -236,7 +236,7 @@ const PAGE_CONFIG = {
     logoConst: null,
   },
   '003': {
-    folder: 'page003',
+    folder: 'lp003',
     pfx: 'p003',
     compOrder: [
       'Header',
@@ -334,9 +334,10 @@ function run(pageId) {
   }
 
   const titleLine = pageScript.match(/export const title[^\n]+/);
+  const extraImports = cfg.extraFrontmatterImports ?? [];
   const mergedScript = `---
 ${importLines.join('\n')}
-
+${extraImports.length ? `${extraImports.join('\n')}\n` : ''}
 ${titleLine ? titleLine[0] : ''}
 
 ${constParts.join('\n\n')}
@@ -384,11 +385,15 @@ ${layerInners.filter(Boolean).join('\n\n')}
 `;
 
   const out = `${mergedScript.trimEnd()}\n\n${outTemplate}\n${mergedStyle}`;
-  const outDir = path.join(root, 'src/pages/merged');
+  /** マージ元フォルダ名（lp001）と同一のパスに出力する */
+  const outDir = path.join(root, 'src/pages/merged', pageFolder);
   fs.mkdirSync(outDir, { recursive: true });
-  const outPath = path.join(outDir, `${pageFolder}.astro`);
+  const outPath = path.join(outDir, 'index.astro');
   fs.writeFileSync(outPath, out, 'utf8');
+  const stylePath = path.join(outDir, '_style.css');
+  fs.writeFileSync(stylePath, '', 'utf8');
   console.log('Wrote', outPath, `(${(out.length / 1024).toFixed(1)} KB)`);
+  console.log('Wrote', stylePath, '(empty)');
 }
 
 const id = process.argv[2];

@@ -1,6 +1,6 @@
 ---
 import { Frame, Stack, Container, Grid, Layer, Box, Text, Heading, Lism } from 'lism-css/astro';
-import HGroup from '@/components/page001/HGroup.astro';
+import HGroup from '@/components/lp001/HGroup.astro';
 
 const featureHero = {
   src: 'https://cdn.lism-css.com/img/random-2510?r=service',
@@ -88,7 +88,13 @@ const featureCards: FeatureCard[] = [
                     }}
                   />
                 </Frame>
-                <Stack class='z--p001-feature_itemContent' g='15' max-w='36rem' py='20' ga='text'>
+                <Stack
+                  class='z--p001-feature_itemContent'
+                  g='15'
+                  max-w={['none', null, '36rem']}
+                  py='20'
+                  ga='text'
+                >
                   <Heading level='3' fz='l' m='0'>
                     {card.title}
                   </Heading>

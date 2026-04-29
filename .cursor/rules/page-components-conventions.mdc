@@ -1,14 +1,14 @@
 ---
-description: page00x 用 Astro ページ／コンポーネントの変数名・独自クラス・@layer のドラフト規約
+description: lp00x 用 Astro ページ／コンポーネントの変数名・独自クラス・@layer のドラフト規約
 globs:
   - "src/pages/**/*.astro"
   - "src/components/**/*.astro"
 alwaysApply: false
 ---
 
-# page ショーケース用（ドラフト）命名・スタイル規約
+# LP ショーケース用（ドラフト）命名・スタイル規約
 
-`page00x.astro` および `src/components/page00x/**` の**新規作成・編集**時に適用する**ドラフト規約**。Lism の使い方自体は **`.agents/skills/lism-css-guide/SKILL.md`** に従う（本ルールと併用）。
+`lp00x.astro` および `src/components/lp00x/**` の**新規作成・編集**時に適用する**ドラフト規約**。Lism の使い方自体は **`.agents/skills/lism-css-guide/SKILL.md`** に従う（本ルールと併用）。
 
 ## フロントマター内の変数名
 
@@ -18,12 +18,12 @@ alwaysApply: false
   - 例: `Contact.astro` → `contactBg`
   - 例: `FAQ.astro` → `faqItems`
 
-（ページ直下の `page00x.astro` 専用の定数は、そのページの文脈で衝突しない接頭辞・命名にする。詳細は運用で固める。）
+（ページ直下の **`lp00x.astro`** 専用の定数は、そのページの文脈で衝突しない接頭辞・命名にする。詳細は運用で固める。）
 
 ## `<style>` 内の独自クラス名
 
 - Lism の Property Class やプリミティブで足りない部分に、**独自クラス**でスタイルを足す場合の命名は、原則として次を**先頭に含める**。
-  - **`z--p{番号}-`**（例: `page001` なら **`z--p001-`**）＋ **コンポーネントファイル名（lower camel case）** に基づく区切り  
+  - **`z--p{番号}-`**（開発ページ **`lp001`** に対応するなら **`z--p001-`** のような番号）＋ **コンポーネントファイル名（lower camel case）** に基づく区切り  
   - 例: `z--p001-faq` / `.z--p001-feature_itemMedia`
 - 要素や modifier を `_` / `__` でつなぐ場合も、接頭辞 **`z--p{番号}-`** から始める。**同一ページ内では接頭辞・区切り規則を揃える**こと。
 - `view-timeline` 等で使う名前付きタイムライン変数は **`--z--p{番号}-…`**（例: `--z--p001-feature`）のように、ページ番号を含めて衝突しにくくする。

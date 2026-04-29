@@ -24,7 +24,7 @@ import {
 } from 'lism-css/astro';
 import { Accordion, Button, Modal } from '@lism-css/ui/astro';
 
-export const title = 'page001：Minimal LP Design';
+export const title = 'LP001: Minimal LP';
 
 
 /** メインナビ（デスクトップ・ドロワー先頭） */
@@ -589,7 +589,13 @@ const footerSnsLinks = [
                     }}
                   />
                 </Frame>
-                <Stack class='z--p001-feature_itemContent' g='15' max-w='36rem' py='20' ga='text'>
+                <Stack
+                  class='z--p001-feature_itemContent'
+                  g='15'
+                  max-w={['none', null, '36rem']}
+                  py='20'
+                  ga='text'
+                >
                   <Heading level='3' fz='l' m='0'>
                     {card.title}
                   </Heading>

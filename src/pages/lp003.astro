@@ -1,19 +1,19 @@
 ---
 import DemoLayout from '@/layouts/DemoLayout.astro';
 import { Container, Wrapper } from 'lism-css/astro';
-import Header from '@/components/page003/Header.astro';
-import MV from '@/components/page003/MV.astro';
-import About from '@/components/page003/About.astro';
-import Feature from '@/components/page003/Feature.astro';
-import Feature2 from '@/components/page003/Feature2.astro';
-import Plans from '@/components/page003/Plans.astro';
-import Information from '@/components/page003/Information.astro';
-import FAQ from '@/components/page003/FAQ.astro';
-import Footer from '@/components/page003/Footer.astro';
-import Reservation from '@/components/page003/Reservation.astro';
-import ReservationFab from '@/components/page003/ReservationFab.astro';
+import Header from '@/components/lp003/Header.astro';
+import MV from '@/components/lp003/MV.astro';
+import About from '@/components/lp003/About.astro';
+import Feature from '@/components/lp003/Feature.astro';
+import Feature2 from '@/components/lp003/Feature2.astro';
+import Plans from '@/components/lp003/Plans.astro';
+import Information from '@/components/lp003/Information.astro';
+import FAQ from '@/components/lp003/FAQ.astro';
+import Footer from '@/components/lp003/Footer.astro';
+import Reservation from '@/components/lp003/Reservation.astro';
+import ReservationFab from '@/components/lp003/ReservationFab.astro';
 
-export const title = 'page003：Japanese Ryokan LP Design';
+export const title = 'LP003: Japanese Ryokan LP';
 ---
 
 <DemoLayout title={title}>
@@ -46,11 +46,11 @@ export const title = 'page003：Japanese Ryokan LP Design';
 
 <style is:global>
   @layer lism-custom {
-    /* page003: 明朝ベース（Google Fonts / Noto Serif JP） */
+    /* lp003: 明朝ベース（Google Fonts / Noto Serif JP） */
     .z--p003-root {
       font-family: 'Noto Serif JP', 'Yu Mincho', YuMincho, 'Hiragino Mincho ProN', 'Hiragino Mincho Pro', serif;
       font-optical-sizing: auto;
-      /* Lism の `ff:base`（既定はゴシック系）— page003 では日本語明朝に統一 */
+      /* Lism の `ff:base`（既定はゴシック系）— lp003 では日本語明朝に統一 */
       --ff--base: 'Noto Serif JP', 'Yu Mincho', YuMincho, 'Hiragino Mincho ProN', 'Hiragino Mincho Pro', serif;
       /* ロゴ（`ff:accent`）用: Google Fonts / Yuji Syuku（Lism タイポ `--ff--accent`） */
       --ff--accent:

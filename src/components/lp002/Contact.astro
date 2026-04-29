@@ -33,7 +33,7 @@ type ContactField =
 
 const contactFields: ContactField[] = [
   {
-    id: 'page002-contact-name',
+    id: 'lp002-contact-name',
     name: 'name',
     label: '名前',
     type: 'text',
@@ -41,7 +41,7 @@ const contactFields: ContactField[] = [
     autoComplete: 'name',
   },
   {
-    id: 'page002-contact-email',
+    id: 'lp002-contact-email',
     name: 'email',
     label: 'メールアドレス',
     type: 'email',
@@ -51,7 +51,7 @@ const contactFields: ContactField[] = [
     errorMessage: '正しいメールアドレス形式で入力してください。',
   },
   {
-    id: 'page002-contact-subject',
+    id: 'lp002-contact-subject',
     name: 'subject',
     label: '件名',
     type: 'text',
@@ -59,7 +59,7 @@ const contactFields: ContactField[] = [
     autoComplete: 'off',
   },
   {
-    id: 'page002-contact-message',
+    id: 'lp002-contact-message',
     name: 'message',
     label: '問い合わせ内容',
     type: 'textarea',
@@ -137,7 +137,7 @@ const contactFields: ContactField[] = [
                 {/*
                   【テンプレート用】フィールド下のエラー文サンプル（`contactFields` の `errorMessage` と対）
                   本番でクライアント等のバリデーション表示を有効にする場合は、下の <Text> ブロックのコメントを外してください。
-                  id は `page002-contact-email-error` のように `${field.id}-error` となり、上記 input/textarea の aria-describedby と対応します。
+                  id は `lp002-contact-email-error` のように `${field.id}-error` となり、上記 input/textarea の aria-describedby と対応します。
 
                 {field.errorMessage && (
                   <Text

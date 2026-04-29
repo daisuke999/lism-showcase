@@ -26,7 +26,7 @@ const mvImage = {
       alt={mvImage.alt}
       w='100%'
       h='100%'
-      exProps={{ width: mvImage.width, height: mvImage.height, loading: 'eager', fetchpriority: 'high' }}
+      exProps={{ width: mvImage.width, height: mvImage.height, loading: 'eager', decoding: 'async', fetchpriority: 'high' }}
     />
   </Frame>
   <Layer bgc='black:30%' exProps={{ 'aria-hidden': 'true' }} />
