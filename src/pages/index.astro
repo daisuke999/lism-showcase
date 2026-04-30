@@ -2,31 +2,60 @@
 import 'lism-css/main.css';
 import { Link, Stack, Text } from 'lism-css/astro';
 
-import { title as titleDevLp001 } from './lp001.astro';
-import { title as titleDevLp002 } from './lp002.astro';
-import { title as titleDevLp003 } from './lp003.astro';
-import { title as titleSkillGenerateTest } from './skill-generate-test.astro';
-
-import { title as titleMergedLp001 } from './merged/lp001/index.astro';
-import { title as titleMergedLp002 } from './merged/lp002/index.astro';
-import { title as titleMergedLp003 } from './merged/lp003/index.astro';
-
+type PageModule = { title?: string };
 type PageLink = { href: string; label: string };
 
-/** マージ前：ラベルは各ページの `export const title` をそのまま表示する */
-const pageLinks: PageLink[] = [
-  { href: '/lp001', label: titleDevLp001 },
-  { href: '/lp002', label: titleDevLp002 },
-  { href: '/lp003', label: titleDevLp003 },
-  { href: '/skill-generate-test', label: titleSkillGenerateTest },
-];
+const devModules = import.meta.glob<PageModule>('./*.astro', { eager: true });
+const mergedModules = import.meta.glob<PageModule>('./merged/*/index.astro', { eager: true });
 
-/** マージ後：ラベルは各 `merged/lp00x/index.astro` の `export const title` をそのまま表示する */
-const mergedPageLinks: PageLink[] = [
-  { href: '/merged/lp001', label: titleMergedLp001 },
-  { href: '/merged/lp002', label: titleMergedLp002 },
-  { href: '/merged/lp003', label: titleMergedLp003 },
-];
+function slugToLabel(slug: string): string {
+  return slug
+    .split('-')
+    .filter(Boolean)
+    .map((w) => w.charAt(0).toUpperCase() + w.slice(1))
+    .join(' ');
+}
+
+function normalizeLabel(mod: PageModule | undefined, fallbackSlug: string): string {
+  if (typeof mod?.title === 'string' && mod.title.trim().length > 0) {
+    return mod.title.trim();
+  }
+  return slugToLabel(fallbackSlug);
+}
+
+function collectDevPageLinks(source: Record<string, PageModule>): PageLink[] {
+  const links: PageLink[] = [];
+  for (const filePath of Object.keys(source).sort()) {
+    if (filePath === './index.astro') continue;
+    const fileName = filePath.split('/').pop() ?? '';
+    if (!fileName || fileName.startsWith('_')) continue;
+    const slug = fileName.replace(/\.astro$/i, '');
+    if (!slug || slug.includes('[') || slug.includes(']')) continue;
+
+    links.push({
+      href: `/${slug}`,
+      label: normalizeLabel(source[filePath], slug),
+    });
+  }
+  return links;
+}
+
+function collectMergedPageLinks(source: Record<string, PageModule>): PageLink[] {
+  const links: PageLink[] = [];
+  for (const filePath of Object.keys(source).sort()) {
+    const m = filePath.match(/\/merged\/([^/]+)\/index\.astro$/);
+    if (!m) continue;
+    const slug = m[1];
+    links.push({
+      href: `/merged/${slug}`,
+      label: normalizeLabel(source[filePath], slug),
+    });
+  }
+  return links;
+}
+
+const pageLinks = collectDevPageLinks(devModules as Record<string, PageModule>);
+const mergedPageLinks = collectMergedPageLinks(mergedModules as Record<string, PageModule>);
 ---
 
 <html lang='ja'>

@@ -12,8 +12,8 @@ const missionBody =
   '暮らしの形は、家族構成も予算も理想もそれぞれ違います。LISM Lifeは、賃貸でも戸建てでも、日々の暮らし方や悩みを丁寧にお伺いし、家具の選び方からコーディネート、必要に応じた配置やお手伝いまでを一貫して支えます。雑誌の切り抜きがなくても、イメージのかけらから具体的な部屋づくりへと一緒に形にします。小さな相談と本格的な部屋作り、どちらも「自分らしい住みよさ」へつながる一歩になればと考えています。';
 ---
 
-<Lism as='section' id='mission' isContainer class='z--p002-mission' pos='relative' py='50' my-s='60' ov='hidden'>
-  <Lism class='z--p002-mission_bg' exProps={{ 'aria-hidden': 'true' }} />
+<Lism as='section' id='mission' isContainer class='z--lp002-mission' pos='relative' py='50' my-s='60' ov='hidden'>
+  <Lism class='z--lp002-mission_bg' exProps={{ 'aria-hidden': 'true' }} />
   <Flex
     fxd={['column', null, 'row']}
     ai={['start', null, 'stretch']}
@@ -22,7 +22,7 @@ const missionBody =
     z='1'
     w='100%'
   >
-    <Flex class='z--p002-mission_text' fxd='column' ai='start' min-w='0' w='100%'>
+    <Flex class='z--lp002-mission_text' fxd='column' ai='start' min-w='0' w='100%'>
       <Stack g='40' ai='start'>
         <Stack g='10' ai='start'>
           <Heading level='2' m='0' fz='5xl' fw='bold' lts='l' c='text' ff='accent'> Mission </Heading>
@@ -34,10 +34,10 @@ const missionBody =
       </Stack>
     </Flex>
     <!-- Frame 本体に padding すると l--frame のトークンと競合しやすいため、拡縮用ラッパーに右ガターを乗せる -->
-    <Lism class='z--p002-mission_figureShell' min-w='0' w='100%'>
+    <Lism class='z--lp002-mission_figureShell' min-w='0' w='100%'>
       <Frame
         as='figure'
-        class='z--p002-mission_figure'
+        class='z--lp002-mission_figure'
         m='0'
         w='100%'
         min-w='0'
@@ -53,7 +53,7 @@ const missionBody =
           alt={missionImage.alt}
           loading='lazy'
           decoding='async'
-          class='z--p002-mission_img'
+          class='z--lp002-mission_img'
         />
       </Frame>
     </Lism>
@@ -63,10 +63,10 @@ const missionBody =
 <style>
   @layer lism-custom {
     /* l 左: ビュー基準。右端（xl 相当）: 子孫で 100cqi＝#mission 幅 main 内でも正しい */
-    .z--p002-mission {
+    .z--lp002-mission {
       --_mission-l-pad: max(var(--gutter-size, var(--s30)), calc((100vw - min(100vw, var(--sz--l, 1280px))) / 2));
     }
-    .z--p002-mission_bg {
+    .z--lp002-mission_bg {
       position: absolute;
       inset-block: 0;
       z-index: 0;
@@ -75,16 +75,16 @@ const missionBody =
       pointer-events: none;
     }
     @container (min-width: 800px) {
-      .z--p002-mission_bg {
+      .z--lp002-mission_bg {
         left: calc(var(--_mission-l-pad) + 10rem);
       }
     }
     @container not (min-width: 800px) {
-      .z--p002-mission_bg {
+      .z--lp002-mission_bg {
         left: 10rem;
       }
     }
-    .z--p002-mission_text {
+    .z--lp002-mission_text {
       position: relative;
       z-index: 1;
       box-sizing: border-box;
@@ -92,7 +92,7 @@ const missionBody =
       padding-inline-start: var(--_mission-l-pad);
     }
     @container (min-width: 800px) {
-      .z--p002-mission_text {
+      .z--lp002-mission_text {
         flex: 1 1 0;
         min-width: 0;
         padding-inline-end: var(--s20);
@@ -101,16 +101,16 @@ const missionBody =
         justify-content: center;
       }
     }
-    .z--p002-mission_figure {
+    .z--lp002-mission_figure {
       box-sizing: border-box;
     }
-    .z--p002-mission_figureShell {
+    .z--lp002-mission_figureShell {
       position: relative;
       z-index: 1;
       box-sizing: border-box;
     }
     @container (min-width: 800px) {
-      .z--p002-mission_figureShell {
+      .z--lp002-mission_figureShell {
         flex: 1 1 0;
         padding-inline-end: max(
           1.25rem,
@@ -120,7 +120,7 @@ const missionBody =
       }
     }
     @container not (min-width: 800px) {
-      .z--p002-mission_text {
+      .z--lp002-mission_text {
         justify-content: flex-start;
         padding-inline-end: max(
           1.25rem,
@@ -128,7 +128,7 @@ const missionBody =
           calc((100cqi - min(100cqi, var(--sz--xl, 90rem))) / 2)
         );
       }
-      .z--p002-mission_figureShell {
+      .z--lp002-mission_figureShell {
         padding-inline-start: var(--_mission-l-pad);
         padding-inline-end: max(
           1.25rem,
@@ -137,7 +137,7 @@ const missionBody =
         );
       }
     }
-    .z--p002-mission_img {
+    .z--lp002-mission_img {
       position: absolute;
       inset: 0;
       display: block;

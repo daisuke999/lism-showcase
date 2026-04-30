@@ -53,7 +53,7 @@ const voiceCards: VoiceCard[] = [
 ];
 ---
 
-<Box as='section' id='voice' class='z--p002-voice' bgc='base'>
+<Box as='section' id='voice' class='z--lp002-voice' bgc='base'>
   <Container isWrapper='l' hasGutter py='50' isContainer>
     <Stack g='40'>
       <Stack g='10' ai='c'>
@@ -69,9 +69,9 @@ const voiceCards: VoiceCard[] = [
          * @see https://lism-css.com/docs/primitives/l--autoColumns/
          */
       }
-      <Box class='z--p002-voice_layout' min-w='0' w='100%'>
+      <Box class='z--lp002-voice_layout' min-w='0' w='100%'>
         <Flex
-          class='z--p002-voice_reel'
+          class='z--lp002-voice_reel'
           hasSnap
           ov='auto'
           g='20'
@@ -85,7 +85,7 @@ const voiceCards: VoiceCard[] = [
           {
             voiceCards.map((card) => (
               <Box
-                class='z--p002-voice_card z--p002-voice_slide'
+                class='z--lp002-voice_card z--lp002-voice_slide'
                 p='30'
                 bgc='base'
                 bd
@@ -107,7 +107,7 @@ const voiceCards: VoiceCard[] = [
                     {card.body}
                   </Text>
                   <Text
-                    class='z--p002-voice_attribution'
+                    class='z--lp002-voice_attribution'
                     as='p'
                     fz='xs'
                     m='0'
@@ -125,11 +125,11 @@ const voiceCards: VoiceCard[] = [
           }
         </Flex>
 
-        <AutoColumns class='z--p002-voice_auto' cols='24rem' g='30' w='100%' min-w='0'>
+        <AutoColumns class='z--lp002-voice_auto' cols='24rem' g='30' w='100%' min-w='0'>
           {
             voiceCards.map((card) => (
               <Box
-                class='z--p002-voice_card'
+                class='z--lp002-voice_card'
                 p='30'
                 bgc='base'
                 bd
@@ -149,7 +149,7 @@ const voiceCards: VoiceCard[] = [
                     {card.body}
                   </Text>
                   <Text
-                    class='z--p002-voice_attribution'
+                    class='z--lp002-voice_attribution'
                     as='p'
                     fz='xs'
                     m='0'
@@ -177,30 +177,30 @@ const voiceCards: VoiceCard[] = [
      * 横リール: 中央スナップ（has--snap の子へ --snapAlign が効く）
      * @see https://lism-css.com/ui/examples/reel/
      */
-    .z--p002-voice_reel {
+    .z--lp002-voice_reel {
       --snapType: x mandatory;
       --snapAlign: center;
       align-items: stretch;
     }
 
     /* 行内で最も高いカードに合わせてスライドの高さを揃える（h:100% は未定義高さで stretch を阻害しやすい） */
-    .z--p002-voice_slide {
+    .z--lp002-voice_slide {
       flex: 0 0 min(24rem, 85%);
       align-self: stretch;
       height: auto;
     }
 
-    .z--p002-voice_auto {
+    .z--lp002-voice_auto {
       display: none;
     }
 
     @container (min-width: 800px) {
-      .z--p002-voice_reel {
+      .z--lp002-voice_reel {
         display: none !important;
         overflow: visible;
       }
 
-      .z--p002-voice_auto {
+      .z--lp002-voice_auto {
         display: grid;
       }
     }

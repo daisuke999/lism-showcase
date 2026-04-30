@@ -10,9 +10,9 @@ interface Props {
 const { text, subText, variant } = Astro.props;
 ---
 
-<Stack class:list={['z--p001-hgroup', { 'z--p001-hgroup--light': variant === 'light' }]} as='hgroup' ai='c' g='5'>
-  <Heading level='2' class='z--p001-hgroup_heading' fz='3xl' fw='400' lts='l' m='0'>{text}</Heading>
-  <Heading level='3' class='z--p001-hgroup_subHeading' d='inline-flex' ai='c' g='20' fz='s' fw='normal' lts='l' m='0'>
+<Stack class:list={['z--lp001-hgroup', { 'z--lp001-hgroup--light': variant === 'light' }]} as='hgroup' ai='c' g='5'>
+  <Heading level='2' class='z--lp001-hgroup_heading' fz='3xl' fw='400' lts='l' m='0'>{text}</Heading>
+  <Heading level='3' class='z--lp001-hgroup_subHeading' d='inline-flex' ai='c' g='20' fz='s' fw='normal' lts='l' m='0'>
     {subText}
   </Heading>
 </Stack>
@@ -20,18 +20,18 @@ const { text, subText, variant } = Astro.props;
 <style>
   @layer lism-custom {
 
-  .z--p001-hgroup {
-    view-timeline: --z--p001-hgroup y;
+  .z--lp001-hgroup {
+    view-timeline: --z--lp001-hgroup y;
   }
-  .z--p001-hgroup.z--p001-hgroup--light {
+  .z--lp001-hgroup.z--lp001-hgroup--light {
     color: var(--white);
   }
-  .z--p001-hgroup .z--p001-hgroup_heading {
-    animation: z--p001-hgroup_heading linear both;
-    animation-timeline: --z--p001-hgroup;
+  .z--lp001-hgroup .z--lp001-hgroup_heading {
+    animation: z--lp001-hgroup_heading linear both;
+    animation-timeline: --z--lp001-hgroup;
     animation-range: var(--u--fadeIn--animation-range);
   }
-  @keyframes z--p001-hgroup_heading {
+  @keyframes z--lp001-hgroup_heading {
     from {
       opacity: 0;
       letter-spacing: 0.1em;
@@ -45,32 +45,32 @@ const { text, subText, variant } = Astro.props;
       transform: translateY(0);
     }
   }
-  .z--p001-hgroup .z--p001-hgroup_subHeading {
+  .z--lp001-hgroup .z--lp001-hgroup_subHeading {
     position: relative;
-    animation: z--p001-hgroup_heading linear both;
-    animation-timeline: --z--p001-hgroup;
+    animation: z--lp001-hgroup_heading linear both;
+    animation-timeline: --z--lp001-hgroup;
     animation-range: var(--u--fadeIn--animation-range);
   }
-  .z--p001-hgroup .z--p001-hgroup_subHeading:before,
-  .z--p001-hgroup .z--p001-hgroup_subHeading:after {
+  .z--lp001-hgroup .z--lp001-hgroup_subHeading:before,
+  .z--lp001-hgroup .z--lp001-hgroup_subHeading:after {
     display: block;
     content: '';
     width: 12px;
     height: 1px;
     background-color: var(--text);
     transform-origin: center right;
-    animation: z--p001-hgroup_subHeading_beforeAfter linear both;
-    animation-timeline: --z--p001-hgroup;
+    animation: z--lp001-hgroup_subHeading_beforeAfter linear both;
+    animation-timeline: --z--lp001-hgroup;
     animation-range: contain 25% contain 45%;
   }
-  .z--p001-hgroup .z--p001-hgroup_subHeading:after {
+  .z--lp001-hgroup .z--lp001-hgroup_subHeading:after {
     transform-origin: center left;
   }
-  .z--p001-hgroup.z--p001-hgroup--light .z--p001-hgroup_subHeading:before,
-  .z--p001-hgroup.z--p001-hgroup--light .z--p001-hgroup_subHeading:after {
+  .z--lp001-hgroup.z--lp001-hgroup--light .z--lp001-hgroup_subHeading:before,
+  .z--lp001-hgroup.z--lp001-hgroup--light .z--lp001-hgroup_subHeading:after {
     background-color: var(--white);
   }
-  @keyframes z--p001-hgroup_subHeading_beforeAfter {
+  @keyframes z--lp001-hgroup_subHeading_beforeAfter {
     from {
       transform: scaleX(0);
     }

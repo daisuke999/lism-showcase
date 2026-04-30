@@ -38,7 +38,7 @@ const faqItems: { question: string; answer: string }[] = [
 ];
 ---
 
-<Container id="faq" class="z--p001-faq" isWrapper="m" py="60" hasGutter>
+<Container id="faq" class="z--lp001-faq" isWrapper="m" py="60" hasGutter>
   <Stack g="40">
     <HGroup text="FAQ" subText="よくある質問" />
     <Accordion.Root class="u--divide" p="0" ov="clip">
@@ -61,10 +61,10 @@ const faqItems: { question: string; answer: string }[] = [
 <style>
   @layer lism-custom {
 
-  .z--p001-faq .c--accordion {
-    view-timeline: --z--p001-faq_accordion y;
+  .z--lp001-faq .c--accordion {
+    view-timeline: --z--lp001-faq_accordion y;
     animation: u--fadeIn linear both;
-    animation-timeline: --z--p001-faq_accordion;
+    animation-timeline: --z--lp001-faq_accordion;
     animation-range: var(--u--fadeIn--animation-range);
   }
   @media (any-hover: hover) {

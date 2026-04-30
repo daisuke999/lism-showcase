@@ -18,17 +18,17 @@ const footerSnsLinks = [
 ] as const;
 ---
 
-<Box as='footer' class='z--p002-footer' bgc='base-2' w='100%'>
-  <Container class='z--p002-footer_container' isContainer isWrapper='xl' py='40' hasGutter>
+<Box as='footer' class='z--lp002-footer' bgc='base-2' w='100%'>
+  <Container class='z--lp002-footer_container' isContainer isWrapper='xl' py='40' hasGutter>
     <Stack jc='c' ai='c' g='30'>
-      <Stack class='z--p002-header_logo'>
-        <Link class='z--p002-header_logoLink' href='#top' fz='2xl' fw='bold' lts='l' c='text' td='none' ff='accent'>
+      <Stack class='z--lp002-header_logo'>
+        <Link class='z--lp002-header_logoLink' href='#top' fz='2xl' fw='bold' lts='l' c='text' td='none' ff='accent'>
           LISM Life
         </Link>
       </Stack>
       <Flex
         as='ul'
-        class='z--p002-footerNav z--p002-headerNav'
+        class='z--lp002-footerNav z--lp002-headerNav'
         fxd={['column', 'column', 'row']}
         ai={['stretch', 'stretch', 'c']}
         jc={['start', 'start', 'c']}
@@ -45,7 +45,7 @@ const footerSnsLinks = [
           footerPrimaryNavItems.map(({ href, ja }) => (
             <ListItem>
               <Link
-                class='z--p002-headerNav_link'
+                class='z--lp002-headerNav_link'
                 href={href}
                 d='block'
                 c='text'
@@ -77,26 +77,26 @@ const footerSnsLinks = [
 
 <style>
   @layer lism-custom {
-    .z--p002-footerNav {
+    .z--lp002-footerNav {
       list-style: none;
     }
 
-    .z--p002-footerNav :global(.z--p002-headerNav_link) {
+    .z--lp002-footerNav :global(.z--lp002-headerNav_link) {
       text-align: center;
     }
     @container (min-width: 800px) {
-      .z--p002-footerNav :global(.z--p002-headerNav_link) {
+      .z--lp002-footerNav :global(.z--lp002-headerNav_link) {
         text-align: start;
       }
     }
 
     /* md 未満: 縦並びの項目間に区切り（最後の行の下には付けない） */
-    .z--p002-footerNav > :global(li:not(:last-child)) {
+    .z--lp002-footerNav > :global(li:not(:last-child)) {
       border-block-end: 1px solid var(--divider);
     }
 
     @container (min-width: 800px) {
-      .z--p002-footerNav > :global(li:not(:last-child)) {
+      .z--lp002-footerNav > :global(li:not(:last-child)) {
         border-block-end: none;
       }
     }

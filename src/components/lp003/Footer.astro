@@ -20,7 +20,7 @@ const footerSnsLinks = [
 ];
 ---
 
-<Lism as='footer' id='footer' class='z--p003-footer' bgc='black' c='white' py={['50', null, '60']}>
+<Lism as='footer' id='footer' class='z--lp003-footer' bgc='black' c='white' py={['50', null, '60']}>
   <Container isContainer isWrapper='xl' hasGutter>
     <Stack g={['40', null, '50']} ai='stretch' w='100%'>
       <!-- キャッチコピーをロゴの左隣に。下揃え（flex-end） -->
@@ -35,7 +35,7 @@ const footerSnsLinks = [
       <Flex fxd={['column', null, 'row']} ai='end' jc='between' g={['30', null, '40']} w='100%'>
         <Flex
           as='ul'
-          class='z--p003-footer_nav'
+          class='z--lp003-footer_nav'
           fxd={['column', null, 'row']}
           ai='stretch'
           m='0'
@@ -50,7 +50,7 @@ const footerSnsLinks = [
             footerNavItems.map(({ href, ja, en }) => (
               <ListItem>
                 <BoxLink
-                  class='z--p003-footer_navLink'
+                  class='z--lp003-footer_navLink'
                   href={href}
                   layout='grid'
                   gtc={['1fr auto', null, '1fr']}
@@ -63,13 +63,13 @@ const footerSnsLinks = [
                   c='inherit'
                   hov='-o'
                 >
-                  <Stack class='z--p003-footer_navStack' g='5'>
+                  <Stack class='z--lp003-footer_navStack' g='5'>
                     <Inline>{ja}</Inline>
-                    <Inline as='span' class='z--p003-footer_navEn' fz='s' m='0' o='pp'>
+                    <Inline as='span' class='z--lp003-footer_navEn' fz='s' m='0' o='pp'>
                       {en}
                     </Inline>
                   </Stack>
-                  <Icon class='z--p003-footer_navCaret' icon='caret-right' fz='s' o='pp' />
+                  <Icon class='z--lp003-footer_navCaret' icon='caret-right' fz='s' o='pp' />
                 </BoxLink>
               </ListItem>
             ))
@@ -103,24 +103,24 @@ const footerSnsLinks = [
 
 <style>
   @layer lism-custom {
-    .z--p003-footer :where(a) {
+    .z--lp003-footer :where(a) {
       color: inherit;
     }
-    .z--p003-footer_nav :global(li) {
+    .z--lp003-footer_nav :global(li) {
       list-style: none;
     }
 
     /* md 未満: 縦並びの項目間に区切り（最後の行の下には付けない） */
-    .z--p003-footer_nav > :global(li:not(:last-child)) {
+    .z--lp003-footer_nav > :global(li:not(:last-child)) {
       border-block-end: 1px dashed color-mix(in srgb, var(--white) 38%, transparent);
     }
 
     /* md 以上: 縦の区切りをやめ、項目の「間」だけ左に縦線（先頭左・末尾右には付けない） */
     @container (min-width: 800px) {
-      .z--p003-footer_nav > :global(li:not(:last-child)) {
+      .z--lp003-footer_nav > :global(li:not(:last-child)) {
         border-block-end: none;
       }
-      .z--p003-footer_nav > :global(li + li) {
+      .z--lp003-footer_nav > :global(li + li) {
         border-inline-start: 1px dashed color-mix(in srgb, var(--white) 38%, transparent);
         padding-inline-start: var(--s20);
         margin-inline-start: var(--s20);
@@ -128,23 +128,23 @@ const footerSnsLinks = [
     }
 
     /* md 未満: 左寄せ。`ta` プロパティのインラインが CSS より優先するため、指定はここに集約 */
-    .z--p003-footer_navStack {
+    .z--lp003-footer_navStack {
       text-align: start;
       align-items: flex-start;
     }
     @container (min-width: 800px) {
-      .z--p003-footer_navStack {
+      .z--lp003-footer_navStack {
         text-align: center;
         align-items: center;
       }
     }
 
     /* md 以上: caret は非表示 */
-    .z--p003-footer_navCaret {
+    .z--lp003-footer_navCaret {
       display: block;
     }
     @container (min-width: 800px) {
-      .z--p003-footer_navCaret {
+      .z--lp003-footer_navCaret {
         display: none;
       }
     }

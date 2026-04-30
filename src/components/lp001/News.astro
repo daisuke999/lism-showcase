@@ -41,11 +41,11 @@ const newsRows = [
 ];
 ---
 
-<Box id="news" class="z--p001-news" pos="relative">
+<Box id="news" class="z--lp001-news" pos="relative">
   <Frame isLayer>
     <Lism
       as="img"
-      class="z--p001-news_media"
+      class="z--lp001-news_media"
       src={newsBg.src}
       alt={newsBg.alt}
       exProps={{ width: newsBg.width, height: newsBg.height, loading: "lazy", decoding: "async" }}
@@ -58,7 +58,7 @@ const newsRows = [
       <Stack g="20" c="white">
         {
           newsRows.map((row) => (
-            <BoxLink class="z--p001-news_item" href="#" layout="grid" gtc={["auto", "auto 1fr"]} g="20 40" py="15" set="var:hov">
+            <BoxLink class="z--lp001-news_item" href="#" layout="grid" gtc={["auto", "auto 1fr"]} g="20 40" py="15" set="var:hov">
               <Inline as="span">{row.date}</Inline>
               <Stack g="10">
                 <Text as="p" hov="in:underline" td="none" m="0">
@@ -80,19 +80,19 @@ const newsRows = [
 <style>
   @layer lism-custom {
 
-  .z--p001-news {
-    view-timeline: --z--p001-news y;
+  .z--lp001-news {
+    view-timeline: --z--lp001-news y;
   }
-  .z--p001-news .z--p001-news_media {
+  .z--lp001-news .z--lp001-news_media {
     width: 100%;
     position: absolute;
     top: -20%;
     height: 140%;
-    animation: z--p001-news_media linear both;
-    animation-timeline: --z--p001-news;
+    animation: z--lp001-news_media linear both;
+    animation-timeline: --z--lp001-news;
     animation-range: entry 0% cover 100%;
   }
-  @keyframes z--p001-news_media {
+  @keyframes z--lp001-news_media {
     from {
       transform: translateY(-10%);
     }
@@ -100,10 +100,10 @@ const newsRows = [
       transform: translateY(10%);
     }
   }
-  .z--p001-news .z--p001-news_item {
-    view-timeline: --z--p001-news_item y;
-    animation: z--p001-news_item linear both;
-    animation-timeline: --z--p001-news_item;
+  .z--lp001-news .z--lp001-news_item {
+    view-timeline: --z--lp001-news_item y;
+    animation: z--lp001-news_item linear both;
+    animation-timeline: --z--lp001-news_item;
     animation-range: var(--u--fadeIn--animation-range);
   }
   @media (any-hover: hover) {
@@ -111,7 +111,7 @@ const newsRows = [
       text-decoration: var(--_isHov, underline);
     }
   }
-  @keyframes z--p001-news_item {
+  @keyframes z--lp001-news_item {
     from {
       opacity: 0;
       transform: translateX(-16px);

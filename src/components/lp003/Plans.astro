@@ -103,7 +103,7 @@ const plans = [
         {
           plans.map((plan) => (
             <Flex fxd={['column', 'column', 'row-reverse']} ai='stretch' g={['30', '30', '50']} w='100%'>
-              <Frame as='figure' class='z--p003-plans_media' m='0' ar='16/10' ov='hidden' bdrs='10' w='100%' min-w='0'>
+              <Frame as='figure' class='z--lp003-plans_media' m='0' ar='16/10' ov='hidden' bdrs='10' w='100%' min-w='0'>
                 <img
                   src={plan.image.src}
                   alt={plan.image.alt}
@@ -156,7 +156,7 @@ const plans = [
 
                   <Lism isContainer w='100%' min-w='0'>
                     <Button
-                      class='z--p003-plans_reserve'
+                      class='z--lp003-plans_reserve'
                       href='#contact'
                       layout='flex'
                       w='100%'
@@ -197,17 +197,17 @@ const plans = [
    * また -max-w:100%（max-width）と max-inline-size の併用や、flex 子の % 解決で上限が効かないことがあるため、
    * コンテナクエリ内で max-width + cqi を使い、fxd の row 切替と同じ基準で min(32rem, 40cqi) に揃える（40cqi はクエリコンテナ行内幅の 40% 相当の上限）。
    */
-    .z--p003-plans_media {
+    .z--lp003-plans_media {
       max-width: 100%;
     }
     @container (min-width: 800px) {
-      .z--p003-plans_media {
+      .z--lp003-plans_media {
         max-width: min(32rem, 40cqi);
       }
     }
 
     /* UI Button のデフォルト（--text 地）を上書きし、デザインどおり白ピル＋黒字に */
-    .z--p003-plans_reserve.c--button {
+    .z--lp003-plans_reserve.c--button {
       --bgc: var(--white);
       --c: var(--black);
       --bdc: var(--white);

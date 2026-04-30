@@ -1,15 +1,104 @@
 ---
 import { Stack, Container, Frame, Layer, Lism } from 'lism-css/astro';
 
-const mvImage = {
-  src: 'https://cdn.lism-css.com/img/japan/u-Dczv0Klww4.jpg',
-  alt: '紅葉の庭園',
-  width: 1920,
-  height: 1080,
-};
+export interface Props {
+  /** 背景スライドに使う画像 URL（先頭から順に表示） */
+  mvImages?: string[];
+  /** 1枚あたりメイン表示時間（秒） */
+  mvDurationPerImage?: number;
+  /** クロスフェード時間（秒） */
+  mvFadeTime?: number;
+  /** MV コピー（1要素＝縦書きで 1 列に並ぶ 1 行） */
+  mvCopyLines?: string[];
+  /** 先頭行のアニメ開始までの待ち（秒） */
+  mvLineRevealStartDelay?: number;
+  /** 行と行の開始タイミングのずれ（秒）。n 行目は `startDelay + stagger * (n-1)` で開始 */
+  mvLineRevealStagger?: number;
+  /** 各行のフェード＋ブラー解除にかける時間（秒） */
+  mvLineRevealDuration?: number;
+  /** 初期状態のブラー（px） */
+  mvLineRevealBlurPx?: number;
+  /**
+   * 背景レイヤー Ken Burns の上限 scale（1 より大きい想定）。
+   * `mvHidden`→フェードイン→`mvHold` まで線形で 1→この値へ進み、切り替え途中も拡大し続ける。
+   */
+  mvBgImageScaleMax?: number;
+}
+
+const mvDefaultCopyLines = [
+  '都会の喧騒から離れ、',
+  '心安らぐ自然の中で',
+  '至福のひとときを。',
+];
+
+const {
+  mvImages: mvImagesProp,
+  mvDurationPerImage = 7,
+  mvFadeTime = 3,
+  mvCopyLines: mvCopyLinesProp,
+  mvLineRevealStartDelay = 0.55,
+  mvLineRevealStagger = 0.72,
+  mvLineRevealDuration = 1.55,
+  mvLineRevealBlurPx = 14,
+  mvBgImageScaleMax = 1.05,
+} = Astro.props;
+
+const mvResolvedCopyLines: readonly string[] =
+  mvCopyLinesProp && mvCopyLinesProp.length > 0
+    ? mvCopyLinesProp
+    : mvDefaultCopyLines;
+
+const mvResolvedImages: readonly string[] =
+  mvImagesProp && mvImagesProp.length > 0
+    ? mvImagesProp
+    : ['https://cdn.lism-css.com/img/japan/u-Dczv0Klww4.jpg', 'https://cdn.lism-css.com/img/japan/a_JNaB1eSLPA.jpg'];
+
+const mvBgCycleDuration = mvDurationPerImage * mvResolvedImages.length;
+const mvHoldPercent =
+  ((mvDurationPerImage - mvFadeTime) / mvBgCycleDuration) * 100;
+const mvFadeOutPercent =
+  (mvDurationPerImage / mvBgCycleDuration) * 100;
+const mvHiddenPercent =
+  ((mvBgCycleDuration - mvFadeTime) / mvBgCycleDuration) * 100;
+
+/** フェードイン終端（100%/0% 接続）までに進む scale。フェードイン区間でも拡大が継続する */
+const mvBgScaleGrowthSpan = 100 - mvHiddenPercent + mvHoldPercent;
+const mvBgScaleJoin =
+  mvBgScaleGrowthSpan > 0
+    ? 1 + ((100 - mvHiddenPercent) / mvBgScaleGrowthSpan) * (mvBgImageScaleMax - 1)
+    : mvBgImageScaleMax;
+const mvBgScaleJoinCss = mvBgScaleJoin.toFixed(6);
+const mvBgScaleMaxCss = Number(mvBgImageScaleMax).toFixed(6);
+
+/** 背景クロスフェード + scale（非表示→フェードイン→ホールド終端まで 1→mvBgImageScaleMax） */
+const mvLayeredKeyframesStyle = `@layer lism-custom {
+  @keyframes lp003-mv-bgFade {
+    0% {
+      opacity: 1;
+      transform: scale(${mvBgScaleJoinCss});
+    }
+    ${mvHoldPercent}% {
+      opacity: 1;
+      transform: scale(${mvBgScaleMaxCss});
+    }
+    ${mvFadeOutPercent}% {
+      opacity: 0;
+      transform: scale(${mvBgScaleMaxCss});
+    }
+    ${mvHiddenPercent}% {
+      opacity: 0;
+      transform: scale(1);
+    }
+    100% {
+      opacity: 1;
+      transform: scale(${mvBgScaleJoinCss});
+    }
+  }
+}`;
 ---
 
 <Container
+  class='z--lp003-mv'
   as='section'
   pos='relative'
   w='100%'
@@ -17,21 +106,36 @@ const mvImage = {
   p='0'
   max-w='none'
   ov='clip'
-  min-h='100svh'
+  style={{
+    minHeight: '100svh',
+    '--z--lp003-mv-bgCycleDuration': `${mvBgCycleDuration}s`,
+    '--z--lp003-mv-lineBlurMax': `${mvLineRevealBlurPx}px`,
+    '--z--lp003-mv-lineDuration': `${mvLineRevealDuration}s`,
+    '--z--lp003-mv-lineStartDelay': `${mvLineRevealStartDelay}s`,
+    '--z--lp003-mv-lineStagger': `${mvLineRevealStagger}s`,
+  }}
 >
-  <Frame isLayer>
-    <Lism
-      as='img'
-      src={mvImage.src}
-      alt={mvImage.alt}
-      w='100%'
-      h='100%'
-      exProps={{ width: mvImage.width, height: mvImage.height, loading: 'eager', decoding: 'async', fetchpriority: 'high' }}
-    />
+  <Frame isLayer class='z--lp003-mv_bg'>
+    {
+      mvResolvedImages.map((src, index) => {
+        const mvLayerDelay = index * mvDurationPerImage - mvBgCycleDuration;
+
+        return (
+          <div
+            class='z--lp003-mv_layer'
+            style={{
+              '--z--lp003-mv-layerBgImage': `url('${src}')`,
+              '--z--lp003-mv-layerDelay': `${mvLayerDelay}s`,
+            }}
+          />
+        );
+      })
+    }
   </Frame>
   <Layer bgc='black:30%' exProps={{ 'aria-hidden': 'true' }} />
   <Stack
     pos='relative'
+    z='1'
     ai='c'
     jc='c'
     g='0'
@@ -44,38 +148,109 @@ const mvImage = {
     c='white'
     style={{ paddingBlockStart: 'calc(var(--z--header-height) + var(--s30))' }}
   >
-    <Lism as='p' class='z--mv_copy' m='0'>
-      <span class='z--mv_line'>都会の喧騒から離れ、</span>
-      <span class='z--mv_line'>心安らぐ自然の中で</span>
-      <span class='z--mv_line'>至福のひとときを。</span>
+    <Lism as='p' class='z--lp003-mv_copy' m='0'>
+      {
+        mvResolvedCopyLines.map((line, i) => (
+          <span class='z--lp003-mv_line' style={{ '--z--lp003-mv-lineIndex': i }}>
+            {line}
+          </span>
+        ))
+      }
     </Lism>
   </Stack>
 </Container>
 
-<style>
+<style set:html={mvLayeredKeyframesStyle} />
+
+<!--
+  Astro のスコープ付き style は[data-astro-cid]が子コンポーネント(Container / Frame / Lism 等)の
+  ルートに付かないため、クラスが一致せずスタイルが効かない。また set:html の @keyframes と
+  スコープ側の animation 名のハッシュ化がずれると背景 opacity が 0 のままになる。
+  z--lp003-mv_* で衝突しにくいので本ブロックのみ is:global とする。
+-->
+<style is:global>
   @layer lism-custom {
+    .z--lp003-mv {
+      background-color: #000;
+    }
 
-  /* vertical-rl + 列方向 flex（Lism Props に無い組み合わせ） */
-  .z--mv_copy {
-    font-feature-settings: 'palt' 1;
-    font-size: clamp(1.1rem, 3.4vw, 1.75rem);
-    line-height: 1.85;
-    letter-spacing: 0.22em;
-    writing-mode: vertical-rl;
-    text-orientation: mixed;
-    display: flex;
-    flex-direction: column;
-    flex-wrap: nowrap;
-    align-items: stretch;
-    gap: clamp(1.4rem, 4vw, 3rem);
-  }
-  /* 一行目を一字分ほど上へ、三行目を一字分ほど下へ（縦書きブロックの見かけ上の位置調整） */
-  .z--mv_copy .z--mv_line:nth-child(1) {
-    transform: translateY(-1em);
-  }
-  .z--mv_copy .z--mv_line:nth-child(3) {
-    transform: translateY(1em);
-  }
+    .z--lp003-mv_bg {
+      inset: 0;
+    }
 
+    .z--lp003-mv_layer {
+      position: absolute;
+      inset: 0;
+      background-image: var(--z--lp003-mv-layerBgImage);
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      transform-origin: center center;
+      opacity: 0;
+      transform: scale(1);
+      animation: lp003-mv-bgFade var(--z--lp003-mv-bgCycleDuration) infinite;
+      animation-timing-function: linear;
+      animation-delay: var(--z--lp003-mv-layerDelay);
+    }
+
+    /* MVSimple と同一の縦書きブロック */
+    .z--lp003-mv_copy {
+      font-feature-settings: 'palt' 1;
+      font-size: clamp(1.1rem, 3.4vw, 1.75rem);
+      line-height: 1.85;
+      letter-spacing: 0.22em;
+      writing-mode: vertical-rl;
+      text-orientation: mixed;
+      display: flex;
+      flex-direction: column;
+      flex-wrap: nowrap;
+      align-items: stretch;
+      gap: clamp(1.4rem, 4vw, 3rem);
+    }
+    .z--lp003-mv_copy .z--lp003-mv_line:first-child {
+      transform: translateY(-1em);
+    }
+    .z--lp003-mv_copy .z--lp003-mv_line:last-child:not(:first-child) {
+      transform: translateY(1em);
+    }
+
+    /* コピー行: ブラー＋フェード（開始は --z--lp003-mv-lineIndex でスタガード） */
+    @keyframes lp003-mv-lineReveal {
+      from {
+        opacity: 0;
+        filter: blur(var(--z--lp003-mv-lineBlurMax, 12px));
+      }
+      to {
+        opacity: 1;
+        filter: blur(0);
+      }
+    }
+
+    .z--lp003-mv_copy .z--lp003-mv_line {
+      opacity: 0;
+      filter: blur(var(--z--lp003-mv-lineBlurMax, 12px));
+      animation: lp003-mv-lineReveal var(--z--lp003-mv-lineDuration, 1s) ease
+        forwards;
+      animation-delay: calc(
+        var(--z--lp003-mv-lineStartDelay, 0s) +
+          var(--z--lp003-mv-lineStagger, 0.2s) * var(--z--lp003-mv-lineIndex, 0)
+      );
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .z--lp003-mv_layer {
+        animation: none;
+        opacity: 0;
+        transform: none;
+      }
+      .z--lp003-mv_layer:first-child {
+        opacity: 1;
+      }
+      .z--lp003-mv_copy .z--lp003-mv_line {
+        animation: none;
+        opacity: 1;
+        filter: none;
+      }
+    }
   }
 </style>

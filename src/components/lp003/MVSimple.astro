@@ -1,0 +1,88 @@
+---
+import { Stack, Container, Frame, Layer, Lism } from 'lism-css/astro';
+
+const mvSimpleImage = {
+  src: 'https://cdn.lism-css.com/img/japan/u-Dczv0Klww4.jpg',
+  alt: '紅葉の庭園',
+  width: 1920,
+  height: 1080,
+};
+---
+
+<Container
+  as='section'
+  pos='relative'
+  w='100%'
+  m='0'
+  p='0'
+  max-w='none'
+  ov='clip'
+  min-h='100svh'
+>
+  <Frame isLayer>
+    <Lism
+      as='img'
+      src={mvSimpleImage.src}
+      alt={mvSimpleImage.alt}
+      w='100%'
+      h='100%'
+      exProps={{
+        width: mvSimpleImage.width,
+        height: mvSimpleImage.height,
+        loading: 'eager',
+        decoding: 'async',
+        fetchpriority: 'high',
+      }}
+    />
+  </Frame>
+  <Layer bgc='black:30%' exProps={{ 'aria-hidden': 'true' }} />
+  <Stack
+    pos='relative'
+    ai='c'
+    jc='c'
+    g='0'
+    w='100%'
+    m='0'
+    p='0'
+    px={['20', null, '40']}
+    py-e='40'
+    min-h='100svh'
+    c='white'
+    style={{ paddingBlockStart: 'calc(var(--z--header-height) + var(--s30))' }}
+  >
+    <Lism as='p' class='z--lp003-mvSimple_copy' m='0'>
+      <span class='z--lp003-mvSimple_line'>都会の喧騒から離れ、</span>
+      <span class='z--lp003-mvSimple_line'>心安らぐ自然の中で</span>
+      <span class='z--lp003-mvSimple_line'>至福のひとときを。</span>
+    </Lism>
+  </Stack>
+</Container>
+
+<!--
+  Container / Lism 等の子コンポーネントに親の scoped が付かないため is:global。
+  z--lp003-mvSimple_* で衝突しにくくしている。
+-->
+<style is:global>
+  @layer lism-custom {
+    /* vertical-rl + 列方向 flex（Lism Props に無い組み合わせ） */
+    .z--lp003-mvSimple_copy {
+      font-feature-settings: 'palt' 1;
+      font-size: clamp(1.1rem, 3.4vw, 1.75rem);
+      line-height: 1.85;
+      letter-spacing: 0.22em;
+      writing-mode: vertical-rl;
+      text-orientation: mixed;
+      display: flex;
+      flex-direction: column;
+      flex-wrap: nowrap;
+      align-items: stretch;
+      gap: clamp(1.4rem, 4vw, 3rem);
+    }
+    .z--lp003-mvSimple_copy .z--lp003-mvSimple_line:first-child {
+      transform: translateY(-1em);
+    }
+    .z--lp003-mvSimple_copy .z--lp003-mvSimple_line:last-child:not(:first-child) {
+      transform: translateY(1em);
+    }
+  }
+</style>

@@ -69,11 +69,11 @@ const contactFields: ContactField[] = [
 ];
 ---
 
-<Box as='section' id='contact' class='z--p002-contact' pos='relative' ov='hidden'>
-  <Frame isLayer class='z--p002-contact_mediaWrap'>
+<Box as='section' id='contact' class='z--lp002-contact' pos='relative' ov='hidden'>
+  <Frame isLayer class='z--lp002-contact_mediaWrap'>
     <Lism
       as='img'
-      class='z--p002-contact_media'
+      class='z--lp002-contact_media'
       src={bgImage.src}
       alt={bgImage.alt}
       w='100%'
@@ -92,7 +92,7 @@ const contactFields: ContactField[] = [
       },
     }}
   />
-  <Container class='z--p002-contact_inner' isWrapper='l' hasGutter py='60' pos='relative'>
+  <Container class='z--lp002-contact_inner' isWrapper='l' hasGutter py='60' pos='relative'>
     <Stack g='40' ai='c'>
       <Stack g='10' ai='c' max-w='36rem' w='100%'>
         <Heading level='2' fz='4xl' lts='l' m='0' ta='center' c='white' ff='accent'>Contact</Heading>
@@ -103,7 +103,7 @@ const contactFields: ContactField[] = [
         初めての方もどうぞお気軽にお問い合わせください。<br />このフォームはダミーです。
       </Text>
 
-      <Box as='form' class='z--p002-contact_form' max-w='36rem' w='100%' method='post' action='#'>
+      <Box as='form' class='z--lp002-contact_form' max-w='36rem' w='100%' method='post' action='#'>
         <Stack g='20'>
           {
             contactFields.map((field) => (
@@ -114,7 +114,7 @@ const contactFields: ContactField[] = [
                 {field.type === 'textarea' ? (
                   <textarea
                     id={field.id}
-                    class='z--p002-contact_input z--p002-contact_input--textarea'
+                    class='z--lp002-contact_input z--lp002-contact_input--textarea'
                     name={field.name}
                     rows={field.rows}
                     placeholder={field.placeholder}
@@ -124,7 +124,7 @@ const contactFields: ContactField[] = [
                 ) : (
                   <input
                     id={field.id}
-                    class='z--p002-contact_input'
+                    class='z--lp002-contact_input'
                     name={field.name}
                     type={field.type}
                     placeholder={field.placeholder}
@@ -141,7 +141,7 @@ const contactFields: ContactField[] = [
 
                 {field.errorMessage && (
                   <Text
-                    class='z--p002-contact_error'
+                    class='z--lp002-contact_error'
                     id={`${field.id}-error`}
                     as='p'
                     fz='xs'
@@ -157,7 +157,7 @@ const contactFields: ContactField[] = [
               </Stack>
             ))
           }
-          <button type='submit' class='z--p002-contact_submit'>この内容で送信 (dummy)</button>
+          <button type='submit' class='z--lp002-contact_submit'>この内容で送信 (dummy)</button>
         </Stack>
       </Box>
     </Stack>
@@ -166,16 +166,16 @@ const contactFields: ContactField[] = [
 
 <style>
   @layer lism-custom {
-    .z--p002-contact {
+    .z--lp002-contact {
       min-height: min(88vh, 52rem);
     }
 
-    .z--p002-contact_mediaWrap {
+    .z--lp002-contact_mediaWrap {
       position: absolute;
       inset: 0;
     }
 
-    .z--p002-contact_media {
+    .z--lp002-contact_media {
       display: block;
       object-fit: cover;
       width: 100%;
@@ -184,7 +184,7 @@ const contactFields: ContactField[] = [
       filter: grayscale(0.55) saturate(0.72) contrast(0.96) brightness(1.02);
     }
 
-    .z--p002-contact_input {
+    .z--lp002-contact_input {
       box-sizing: border-box;
       width: 100%;
       margin: 0;
@@ -199,23 +199,23 @@ const contactFields: ContactField[] = [
       box-shadow: var(--bxsh--10);
     }
 
-    .z--p002-contact_input::placeholder {
+    .z--lp002-contact_input::placeholder {
       color: var(--text-2);
       opacity: var(--o--pp);
     }
 
-    .z--p002-contact_input:focus-visible {
+    .z--lp002-contact_input:focus-visible {
       outline: 2px solid var(--brand);
       outline-offset: 2px;
     }
 
-    .z--p002-contact_input--textarea {
+    .z--lp002-contact_input--textarea {
       min-height: 10rem;
       resize: vertical;
     }
 
     /* ヘッダー @lism-css/ui Button（.c--button）と同じセマンティック: bg=--text, 字=--base */
-    .z--p002-contact_submit {
+    .z--lp002-contact_submit {
       box-sizing: border-box;
       width: 100%;
       margin: 0;
@@ -233,11 +233,11 @@ const contactFields: ContactField[] = [
       box-shadow: var(--bxsh--20);
     }
 
-    .z--p002-contact_submit:hover {
+    .z--lp002-contact_submit:hover {
       opacity: 0.92;
     }
 
-    .z--p002-contact_submit:focus-visible {
+    .z--lp002-contact_submit:focus-visible {
       outline: 2px solid var(--base);
       outline-offset: 3px;
     }

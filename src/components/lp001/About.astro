@@ -30,16 +30,16 @@ const aboutPhotoOverlay = {
 };
 ---
 
-<Container id='about' class='z--p001-about' isWrapper='s' pos='relative' py='70' hasGutter>
+<Container id='about' class='z--lp001-about' isWrapper='s' pos='relative' py='70' hasGutter>
   <Stack ai='c' jc='c' g='40' pos='relative'>
     <HGroup text='About' subText='Lism CSSとは' />
-    <Box class='z--p001-about_visuals' pos='absolute' w='100%' h='100%' z='0'>
+    <Box class='z--lp001-about_visuals' pos='absolute' w='100%' h='100%' z='0'>
       {
         aboutPhotos.map((photo, i) => (
-          <Frame class='z--p001-about_frame' ar='4/3' pos='absolute' w={i === 0 ? '20rem' : '16rem'} bgc='base-2' bdrs='20'>
+          <Frame class='z--lp001-about_frame' ar='4/3' pos='absolute' w={i === 0 ? '20rem' : '16rem'} bgc='base-2' bdrs='20'>
             <Lism
               as='img'
-              class='z--p001-about_media'
+              class='z--lp001-about_media'
               src={photo.src}
               alt={photo.alt}
               w='100%'
@@ -51,7 +51,7 @@ const aboutPhotoOverlay = {
         ))
       }
     </Box>
-    <Flow class='z--p001-about_body u--fadeIn' flow='s' pos='relative' z='1'>
+    <Flow class='z--lp001-about_body u--fadeIn' flow='s' pos='relative' z='1'>
       <Text as='p' max-sz='full' mx='auto'>
         Lism CSSは、Webサイトの骨組みをテンポ良く美しく作るための、軽量なCSS設計フレームワークです。設計理論に沿った一つのCSSが本体で、特別なビルド工程は必須ではありません。
       </Text>
@@ -73,53 +73,53 @@ const aboutPhotoOverlay = {
 <style>
   @layer lism-custom {
 
-  .z--p001-about {
+  .z--lp001-about {
     isolation: isolate;
-    view-timeline: --z--p001-about-timeline y;
-    --z--p001-about_range-start: 25%;
-    --z--p001-about_range-end: 20%;
+    view-timeline: --z--lp001-about-timeline y;
+    --z--lp001-about_range-start: 25%;
+    --z--lp001-about_range-end: 20%;
   }
-  .z--p001-about .z--p001-hgroup {
+  .z--lp001-about .z--lp001-hgroup {
     position: relative;
     z-index: 1;
   }
-  .z--p001-about .z--p001-about_visuals {
+  .z--lp001-about .z--lp001-about_visuals {
     pointer-events: none;
   }
-  .z--p001-about .z--p001-about_frame {
-    animation: z--p001-about_frame linear both;
-    animation-timeline: --z--p001-about-timeline;
+  .z--lp001-about .z--lp001-about_frame {
+    animation: z--lp001-about_frame linear both;
+    animation-timeline: --z--lp001-about-timeline;
   }
-  .z--p001-about .z--p001-about_frame:nth-child(1) {
+  .z--lp001-about .z--lp001-about_frame:nth-child(1) {
     top: -2rem;
     right: 90%;
     animation-range: entry 0% cover 30%;
   }
-  .z--p001-about .z--p001-about_frame:nth-child(2) {
+  .z--lp001-about .z--lp001-about_frame:nth-child(2) {
     top: 6rem;
     left: 90%;
     animation-range: entry 20% cover 40%;
   }
-  .z--p001-about .z--p001-about_frame:nth-child(3) {
+  .z--lp001-about .z--lp001-about_frame:nth-child(3) {
     bottom: -6rem;
     right: 80%;
     animation-range: entry 40% cover 50%;
   }
   @container (min-width: 800px) {
-    .z--p001-about .z--p001-about_frame:nth-child(1) {
+    .z--lp001-about .z--lp001-about_frame:nth-child(1) {
       top: -2rem;
       right: calc(100% + 4rem);
     }
-    .z--p001-about .z--p001-about_frame:nth-child(2) {
+    .z--lp001-about .z--lp001-about_frame:nth-child(2) {
       top: 6rem;
       left: calc(100% + 4rem);
     }
-    .z--p001-about .z--p001-about_frame:nth-child(3) {
+    .z--lp001-about .z--lp001-about_frame:nth-child(3) {
       bottom: -6rem;
       right: calc(100% - 4rem);
     }
   }
-  @keyframes z--p001-about_frame {
+  @keyframes z--lp001-about_frame {
     from {
       opacity: 0;
       filter: blur(16px);
@@ -131,12 +131,12 @@ const aboutPhotoOverlay = {
       transform: scale(1);
     }
   }
-  .z--p001-about .z--p001-about_media {
-    animation: z--p001-about_media linear both;
-    animation-timeline: --z--p001-about-timeline;
+  .z--lp001-about .z--lp001-about_media {
+    animation: z--lp001-about_media linear both;
+    animation-timeline: --z--lp001-about-timeline;
     animation-range: entry cover;
   }
-  @keyframes z--p001-about_media {
+  @keyframes z--lp001-about_media {
     from {
       transform: scale(1.2);
     }

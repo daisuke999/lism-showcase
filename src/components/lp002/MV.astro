@@ -9,17 +9,17 @@ const mvImage = {
 } as const;
 ---
 
-<Box as='section' class='z--p002-mv' id='top' pos='relative' ov='hidden' aria-label='メインビジュアル'>
-  <Heading level='1' class='z--p002-mv_title' m='0' ta='center' c='white' fw='bold' lts='l' ff='accent'>
+<Box as='section' class='z--lp002-mv' id='top' pos='relative' ov='hidden' aria-label='メインビジュアル'>
+  <Heading level='1' class='z--lp002-mv_title' m='0' ta='center' c='white' fw='bold' lts='l' ff='accent'>
     Simple<br />
     <Inline as='span' whs='nowrap'>LP Design</Inline>
   </Heading>
-  <Box class='z--p002-mv_imageRail'>
-    <Container class='z--p002-mv_imageInner' isWrapper='l' hasGutter h='100%'>
-      <Frame class='z--p002-mv_frame' ov='hidden' w='100%' h='100%'>
+  <Box class='z--lp002-mv_imageRail'>
+    <Container class='z--lp002-mv_imageInner' isWrapper='l' hasGutter h='100%'>
+      <Frame class='z--lp002-mv_frame' ov='hidden' w='100%' h='100%'>
         <Lism
           as='img'
-          class='z--p002-mv_media'
+          class='z--lp002-mv_media'
           src={mvImage.src}
           alt={mvImage.alt}
           w='100%'
@@ -40,78 +40,78 @@ const mvImage = {
 <style>
   @layer lism-custom {
     /*
-   * .z--p002-mv 設計トークン（Lism の --gutter-size / --s* / セマンティックカラーと併用）
+   * .z--lp002-mv 設計トークン（Lism の --gutter-size / --s* / セマンティックカラーと併用）
    * 子へ継承する。h1 の font-size は inherit し、本ブロックの font-size と揃えて
-   * --z--p002-mv-title-line2-center の em が画像位置計算と一致するようにしている。
+   * --z--lp002-mv-title-line2-center の em が画像位置計算と一致するようにしている。
    *
    * [見出し・画像レールの絶対配置]
-   *   --z--p002-mv-title-offset-from-header … 固定ヘッダー下端 → 見出し（h1）上端 までの距離
-   *   --z--p002-mv-title-line2-center … 見出し上端 → 2行目の縦方向おおよそ中央 までの距離（line-height:1.1 想定）
-   *       → .z--p002-mv_imageRail の top は header高 + 上記2つの合算（画像上端が 2 行目中央付近になる）
-   *   --z--p002-mv-image-bottom-offset … .z--p002-mv_imageRail に渡す bottom（画像列の下端オフセット）
-   *   --z--p002-mv-image-bottom-inset … md（800px）以上で --z--p002-mv-image-bottom-offset に切り替える量（= --gutter-size）
+   *   --z--lp002-mv-title-offset-from-header … 固定ヘッダー下端 → 見出し（h1）上端 までの距離
+   *   --z--lp002-mv-title-line2-center … 見出し上端 → 2行目の縦方向おおよそ中央 までの距離（line-height:1.1 想定）
+   *       → .z--lp002-mv_imageRail の top は header高 + 上記2つの合算（画像上端が 2 行目中央付近になる）
+   *   --z--lp002-mv-image-bottom-offset … .z--lp002-mv_imageRail に渡す bottom（画像列の下端オフセット）
+   *   --z--lp002-mv-image-bottom-inset … md（800px）以上で --z--lp002-mv-image-bottom-offset に切り替える量（= --gutter-size）
    *       → md 未満の既定は has--gutter と同じ --gutter-size（:root の --gutter-size、通常 var(--s30)）
    *
    * [セクション全体の高さ・背景]
-   *   --z--p002-mv-max-block-size … MV の高さ上限。実際の高さは min(100svh, 本値)。sm 幅以下は別途 100svh 固定
-   *   --z--p002-mv-white-strip … セクション最下部の「白（--base）」帯の高さ。それより上の背景は --base-2
+   *   --z--lp002-mv-max-block-size … MV の高さ上限。実際の高さは min(100svh, 本値)。sm 幅以下は別途 100svh 固定
+   *   --z--lp002-mv-white-strip … セクション最下部の「白（--base）」帯の高さ。それより上の背景は --base-2
    */
-    .z--p002-mv {
-      --z--p002-mv-title-offset-from-header: 1rem;
-      --z--p002-mv-white-strip: 10rem;
-      --z--p002-mv-max-block-size: 64rem;
-      --z--p002-mv-title-line2-center: 1.75em;
+    .z--lp002-mv {
+      --z--lp002-mv-title-offset-from-header: 1rem;
+      --z--lp002-mv-white-strip: 10rem;
+      --z--lp002-mv-max-block-size: 64rem;
+      --z--lp002-mv-title-line2-center: 1.75em;
       /* md 以上: 画像レール下の余白＝gutter（has--gutter の --gutter-size） */
-      --z--p002-mv-image-bottom-inset: var(--gutter-size);
-      --z--p002-mv-image-bottom-offset: var(--gutter-size);
-      height: min(100svh, var(--z--p002-mv-max-block-size));
-      min-height: min(100svh, var(--z--p002-mv-max-block-size));
+      --z--lp002-mv-image-bottom-inset: var(--gutter-size);
+      --z--lp002-mv-image-bottom-offset: var(--gutter-size);
+      height: min(100svh, var(--z--lp002-mv-max-block-size));
+      min-height: min(100svh, var(--z--lp002-mv-max-block-size));
       background: linear-gradient(
         to bottom,
         var(--base-2) 0,
-        var(--base-2) calc(100% - var(--z--p002-mv-white-strip)),
-        var(--base) calc(100% - var(--z--p002-mv-white-strip)),
+        var(--base-2) calc(100% - var(--z--lp002-mv-white-strip)),
+        var(--base) calc(100% - var(--z--lp002-mv-white-strip)),
         var(--base) 100%
       );
       /* h1 は font-size:inherit。clamp の em 基準を画像レールの top 計算と共有する */
       font-size: clamp(2.75rem, 1.5rem + 9vw, 6rem);
     }
 
-    /* Lism sm = min-width 480px。幅 480px 以下では --z--p002-mv-max-block-size を使わず高さを必ず 100svh（フルブリード時はビューポート幅≒コンテナ幅） */
+    /* Lism sm = min-width 480px。幅 480px 以下では --z--lp002-mv-max-block-size を使わず高さを必ず 100svh（フルブリード時はビューポート幅≒コンテナ幅） */
     @media (max-width: 480px) {
-      .z--p002-mv {
+      .z--lp002-mv {
         height: 100svh;
         min-height: 100svh;
       }
     }
 
-    /* Lism md = 800px。md 以上: 画像下端オフセットを --z--p002-mv-image-bottom-inset に */
+    /* Lism md = 800px。md 以上: 画像下端オフセットを --z--lp002-mv-image-bottom-inset に */
     @media (min-width: 800px) {
-      .z--p002-mv {
-        --z--p002-mv-image-bottom-offset: var(--z--p002-mv-image-bottom-inset);
+      .z--lp002-mv {
+        --z--lp002-mv-image-bottom-offset: var(--z--lp002-mv-image-bottom-inset);
       }
     }
 
-    .z--p002-mv_imageRail {
+    .z--lp002-mv_imageRail {
       position: absolute;
       inset-inline: 0;
       top: calc(
-        var(--z--p002-header-height) + var(--z--p002-mv-title-offset-from-header) + var(--z--p002-mv-title-line2-center)
+        var(--z--lp002-header-height) + var(--z--lp002-mv-title-offset-from-header) + var(--z--lp002-mv-title-line2-center)
       );
-      bottom: var(--z--p002-mv-image-bottom-offset);
+      bottom: var(--z--lp002-mv-image-bottom-offset);
       z-index: 0;
     }
 
-    .z--p002-mv_imageInner {
+    .z--lp002-mv_imageInner {
       margin-inline: auto;
       height: 100%;
     }
 
-    .z--p002-mv_frame {
+    .z--lp002-mv_frame {
       display: block;
     }
 
-    .z--p002-mv_media {
+    .z--lp002-mv_media {
       display: block;
       width: 100%;
       height: 100%;
@@ -119,12 +119,12 @@ const mvImage = {
       object-position: center;
     }
 
-    /* top = ヘッダー下端 + --z--p002-mv-title-offset-from-header。画像上端は本要素の 2 行目中央に合わせてレール側で加算 */
-    .z--p002-mv_title {
+    /* top = ヘッダー下端 + --z--lp002-mv-title-offset-from-header。画像上端は本要素の 2 行目中央に合わせてレール側で加算 */
+    .z--lp002-mv_title {
       position: absolute;
       left: 50%;
       translate: -50% 0;
-      top: calc(var(--z--p002-header-height) + var(--z--p002-mv-title-offset-from-header));
+      top: calc(var(--z--lp002-header-height) + var(--z--lp002-mv-title-offset-from-header));
       z-index: 1;
       line-height: 1.1;
       pointer-events: none;

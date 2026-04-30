@@ -24,11 +24,11 @@ export const title = 'LP003: Japanese Ryokan LP';
     rel='stylesheet'
     slot='head'
   />
-  <Wrapper class='z--p003-root' contentSize='full'>
+  <Wrapper class='z--lp003-root' contentSize='full'>
     <!-- Header -->
     <Header />
     <!-- Main Content -->
-    <Container as='main' class='z--p003-main' pos='relative' z='0'>
+    <Container as='main' class='z--lp003-main' pos='relative' z='0'>
       <MV />
       <About />
       <Feature />
@@ -47,7 +47,7 @@ export const title = 'LP003: Japanese Ryokan LP';
 <style is:global>
   @layer lism-custom {
     /* lp003: 明朝ベース（Google Fonts / Noto Serif JP） */
-    .z--p003-root {
+    .z--lp003-root {
       font-family: 'Noto Serif JP', 'Yu Mincho', YuMincho, 'Hiragino Mincho ProN', 'Hiragino Mincho Pro', serif;
       font-optical-sizing: auto;
       /* Lism の `ff:base`（既定はゴシック系）— lp003 では日本語明朝に統一 */
@@ -58,14 +58,14 @@ export const title = 'LP003: Japanese Ryokan LP';
       /* Feature ほか和紙調のベージュ背景（セマンティック `--base` を上書き） */
       --base: hsl(38 32% 92%);
       /* #reservation の named view timeline を兄弟の FAB から参照可能に */
-      timeline-scope: --p003-reservation;
+      timeline-scope: --z--lp003-reservation;
     }
     /* Reservation がビューポートに入る進行に合わせて FAB を非表示 */
     #reservation {
-      view-timeline-name: --p003-reservation;
+      view-timeline-name: --z--lp003-reservation;
       view-timeline-axis: block;
     }
-    @keyframes p003_reservationFab_hide {
+    @keyframes lp003_reservationFab_hide {
       from {
         opacity: 1;
         pointer-events: auto;
@@ -77,13 +77,13 @@ export const title = 'LP003: Japanese Ryokan LP';
         visibility: hidden;
       }
     }
-    .z--p003-reservationFab {
-      animation: p003_reservationFab_hide linear both;
-      animation-timeline: --p003-reservation;
+    .z--lp003-reservationFab {
+      animation: lp003_reservationFab_hide linear both;
+      animation-timeline: --z--lp003-reservation;
       animation-range: entry 0% entry 30%;
     }
     @media (prefers-reduced-motion: reduce) {
-      .z--p003-reservationFab {
+      .z--lp003-reservationFab {
         animation: none;
         opacity: 1;
         visibility: visible;

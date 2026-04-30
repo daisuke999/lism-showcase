@@ -54,7 +54,7 @@ const serviceSubCards: {
 ];
 ---
 
-<Box as='section' id='service' class='z--p002-service' bgc='base-2' py='50'>
+<Box as='section' id='service' class='z--lp002-service' bgc='base-2' py='50'>
   <Container isWrapper='l' hasGutter>
     <Stack g='50'>
       <Stack g='40'>
@@ -96,8 +96,8 @@ const serviceSubCards: {
         <Grid gtc={['1fr', null, 'repeat(3, minmax(0, 1fr))']} g='40' ai='start'>
           {
             serviceSubCards.map((item) => (
-              <Flex class='z--p002-service_card' fxd={['row-reverse', null, 'column']} ai='stretch' g='30' min-w='0'>
-                <Frame class='z--p002-service_cardFigure' ar='3/2' ov='hidden'>
+              <Flex class='z--lp002-service_card' fxd={['row-reverse', null, 'column']} ai='stretch' g='30' min-w='0'>
+                <Frame class='z--lp002-service_cardFigure' ar='3/2' ov='hidden'>
                   <Media
                     src={item.image.src}
                     alt={item.image.alt}
@@ -108,11 +108,11 @@ const serviceSubCards: {
                 </Frame>
                 <Stack g='20' min-w='0' fx='1' jc='start'>
                   <Flex ai='c' g='20' util='trimAll'>
-                    <Box as='span' class='z--p002-service_num' fz='3xl' fw='bold' ff='accent' c='text' whs='nowrap'>
+                    <Box as='span' class='z--lp002-service_num' fz='3xl' fw='bold' ff='accent' c='text' whs='nowrap'>
                       {item.index}
                     </Box>
-                    <Box class='z--p002-service_rule' w='1px' bgc='text' fxsh='0' />
-                    <Stack g='0' class='z--p002-service_cardTitles' util='trimAll'>
+                    <Box class='z--lp002-service_rule' w='1px' bgc='text' fxsh='0' />
+                    <Stack g='0' class='z--lp002-service_cardTitles' util='trimAll'>
                       <Heading level='4' fz='m' m='0'>
                         {item.titleJa}
                       </Heading>
@@ -137,24 +137,24 @@ const serviceSubCards: {
 <style>
   @layer lism-custom {
     /* md 未満: カード内は画像 | テキスト Stack。md 以上: 縦積み（先祖 is--container の 800px 基準） */
-    .z--p002-service_card {
+    .z--lp002-service_card {
       min-width: 0;
     }
 
-    .z--p002-service_cardFigure {
+    .z--lp002-service_cardFigure {
       min-width: 0;
     }
 
     /* sm 以下（max-width: 480px）：画像非表示。Lism の sm ブレークポイント 480px に合わせる */
     @container (max-width: 480px) {
-      .z--p002-service_cardFigure {
+      .z--lp002-service_cardFigure {
         display: none;
       }
     }
 
     @container not (min-width: 800px) {
       /* テキスト列の高さに合わせて画像を縦いっぱい（`ar` を上書きして flex stretch を効かせる） */
-      .z--p002-service_cardFigure {
+      .z--lp002-service_cardFigure {
         flex: 0 0 38%;
         max-width: 12rem;
         align-self: stretch;
@@ -164,17 +164,17 @@ const serviceSubCards: {
     }
 
     @container (min-width: 800px) {
-      .z--p002-service_cardFigure {
+      .z--lp002-service_cardFigure {
         width: 100%;
         align-self: stretch;
       }
     }
 
-    .z--p002-service_rule {
+    .z--lp002-service_rule {
       align-self: stretch;
     }
 
-    .z--p002-service_num {
+    .z--lp002-service_num {
       line-height: 1;
     }
   }

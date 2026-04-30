@@ -1,7 +1,7 @@
 ---
 /**
  * 左右の高さ: Grid の `ai` stretch + 右列 `Flex` 内 `fx:1` の img（`min-h:0`）。
- * 旧実装: `syncAboutRightMaxHeight` + `--p003-about-right-max-h`（復元は git 履歴参照）
+ * 旧実装: `syncAboutRightMaxHeight` + `--z--lp003-about-right-max-h`（復元は git 履歴参照）
  */
 import { Stack, Lism, Text, Heading, Grid, Frame, Flex } from 'lism-css/astro';
 
@@ -22,30 +22,30 @@ const aboutBodyCopy =
   '百余年の歴史を刻む、風格ある佇まい。古き良き日本の情緒を残しつつ、現代の快適さを融合させた空間で皆様をお迎えいたします。手入れの行き届いた日本庭園を眺め、静寂に包まれて味わう名湯は、格別な癒やし。受け継がれてきたおもてなしの心で、特別な旅を鮮やかに彩ります。四季折々の風情が移ろく庭先では、新緑の香り、深緑の日陰、紅葉の燃えるような美しさ、静かな雪化粧の趣まで、日々違う表情を呈します。佇まい、器、会席、湯、そして言葉少ななもてなし。それらすべてに至るまで、余韻深く、お客さまの記憶に残る一時を大切に紡ぎたい。都会を離れ、ここ静寂の隠れ宿で、心ほどけゆく至福のひとときをどうぞお味わいください。';
 ---
 
-<Lism as='section' id='about' class='z--p003-about' isContainer py-s='60' py-e='60' bgc='black' c='white'>
+<Lism as='section' id='about' class='z--lp003-about' isContainer py-s='60' py-e='60' bgc='black' c='white'>
   <Grid
-    class='z--p003-about_grid'
+    class='z--lp003-about_grid'
     gtc={['1fr', '1fr', 'minmax(0, 1fr) minmax(0, 50%)']}
     cg='0'
     rg={['30', '30', '0']}
     ai={['start', 'start', 'stretch']}
   >
     <Stack
-      class='z--p003-about_col z--p003-about_col--left'
+      class='z--lp003-about_col z--lp003-about_col--left'
       g={['40', '40', '50']}
       px-e={['0', '0', '50']}
       h={['auto', 'auto', '100%']}
       min-h={['0', '0', '0']}
       min-w='0'
     >
-      <Stack class='z--p003-about_stack' g='0' ai='start'>
+      <Stack class='z--lp003-about_stack' g='0' ai='start'>
         <Text as='p' fz={['l', null, 'xl']} m='0' mb='10' lts='l' ff='base' c='white' o='pp'> About us </Text>
         <Heading level='2' fz={['2xl', null, '4xl']} fw='500' m='0' mb='50' lts='l'> 当宿について </Heading>
-        <Text class='z--p003-about_body' as='p' m='0' fz='m' lh='l' lts='s' c='white' o='p'>
+        <Text class='z--lp003-about_body' as='p' m='0' fz='m' lh='l' lts='s' c='white' o='p'>
           {aboutBodyCopy}
         </Text>
       </Stack>
-      <Frame as='figure' class='z--p003-about_figureLeft' ar={['16/10', '16/10', '4/3']} ov='hidden'>
+      <Frame as='figure' class='z--lp003-about_figureLeft' ar={['16/10', '16/10', '4/3']} ov='hidden'>
         <img
           src={aboutImgLeft.src}
           alt={aboutImgLeft.alt}
@@ -58,7 +58,7 @@ const aboutBodyCopy =
     </Stack>
     <Flex
       as='figure'
-      class='z--p003-about_figureRight'
+      class='z--lp003-about_figureRight'
       fxd='column'
       h={['auto', 'auto', '100%']}
       min-h={['0', '0', '0']}
@@ -67,7 +67,7 @@ const aboutBodyCopy =
     >
       <Lism
         as='img'
-        class='z--p003-about_mediaRightImg'
+        class='z--lp003-about_mediaRightImg'
         src={aboutImgRight.src}
         alt={aboutImgRight.alt}
         fx={['0', '0', '1']}
@@ -85,9 +85,9 @@ const aboutBodyCopy =
   /*
    * ビューポート全幅: 親の max-width に依存しないよう、自身を 100vw で中央に置く。
    */
-  .z--p003-about {
-    --p003-about-l-inset: max(var(--gutter-size), calc((100vw - var(--sz--l)) / 2));
-    --p003-about-xl-inset: max(var(--gutter-size), calc((100vw - var(--sz--xl)) / 2));
+  .z--lp003-about {
+    --z--lp003-about-l-inset: max(var(--gutter-size), calc((100vw - var(--sz--l)) / 2));
+    --z--lp003-about-xl-inset: max(var(--gutter-size), calc((100vw - var(--sz--xl)) / 2));
     position: relative;
     left: 50%;
     transform: translateX(-50%);
@@ -96,34 +96,34 @@ const aboutBodyCopy =
     max-width: 100vw;
     overflow-x: clip;
   }
-  .z--p003-about_mediaRightImg {
+  .z--lp003-about_mediaRightImg {
     display: block;
     object-fit: cover;
   }
-  .z--p003-about_figureLeft,
-  .z--p003-about_figureRight {
+  .z--lp003-about_figureLeft,
+  .z--lp003-about_figureRight {
     margin: 0;
   }
   @media (min-width: 800px) {
-    .z--p003-about_col--left {
+    .z--lp003-about_col--left {
       box-sizing: border-box;
       min-width: 0;
       /* 見出し・本文: グローバルな size=l の左端（Lism の px-s はカスタム計算のため CSS のみ） */
-      padding-inline-start: var(--p003-about-l-inset);
+      padding-inline-start: var(--z--lp003-about-l-inset);
     }
-    .z--p003-about_stack {
+    .z--lp003-about_stack {
       align-self: start;
       width: min(100%, var(--sz--l));
       min-width: 0;
     }
-    .z--p003-about_body {
+    .z--lp003-about_body {
       padding-inline-start: var(--s50);
     }
-    .z--p003-about_figureLeft {
+    .z--lp003-about_figureLeft {
       align-self: start;
       margin-block-start: auto;
       padding-block-start: var(--s30);
-      margin-inline-start: calc(var(--p003-about-xl-inset) - var(--p003-about-l-inset));
+      margin-inline-start: calc(var(--z--lp003-about-xl-inset) - var(--z--lp003-about-l-inset));
       box-sizing: border-box;
       min-inline-size: 0;
       max-inline-size: 100%;
@@ -131,15 +131,15 @@ const aboutBodyCopy =
     }
   }
   @media (max-width: 799px) {
-    .z--p003-about_grid {
+    .z--lp003-about_grid {
       padding-inline: var(--gutter-size);
       box-sizing: border-box;
     }
-    .z--p003-about_figureLeft {
+    .z--lp003-about_figureLeft {
       inline-size: 100%;
       max-inline-size: none;
     }
-    .z--p003-about_mediaRightImg {
+    .z--lp003-about_mediaRightImg {
       aspect-ratio: 4 / 3;
       block-size: auto;
     }

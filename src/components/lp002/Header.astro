@@ -25,21 +25,21 @@ const headerMenuNavItems = [
 ] as const;
 ---
 
-<Box as='header' class='z--p002-header' pos='fixed' i='0' w='100%' z='1' hasTransition>
-  <Container class='z--p002-header_container' isWrapper='xl' hasGutter h='100%'>
-    <Grid class='z--p002-header_inner' gtc='10rem 1fr' ai='center' h='100%'>
-      <Stack class='z--p002-header_logo'>
-        <Link class='z--p002-header_logoLink' href='#top' fz='2xl' fw='bold' lts='l' c='text' td='none' ff='accent'>
+<Box as='header' class='z--lp002-header' pos='fixed' i='0' w='100%' z='1' hasTransition>
+  <Container class='z--lp002-header_container' isWrapper='xl' hasGutter h='100%'>
+    <Grid class='z--lp002-header_inner' gtc='10rem 1fr' ai='center' h='100%'>
+      <Stack class='z--lp002-header_logo'>
+        <Link class='z--lp002-header_logoLink' href='#top' fz='2xl' fw='bold' lts='l' c='text' td='none' ff='accent'>
           LISM Life
         </Link>
       </Stack>
       <Flex jc='fe' g='30'>
-        <Flex class='z--p002-headerNav' as='ul' d={['none', null, 'inline-flex']} ai='c' g='30' fz='s' lts='l'>
+        <Flex class='z--lp002-headerNav' as='ul' d={['none', null, 'inline-flex']} ai='c' g='30' fz='s' lts='l'>
           {
             headerPrimaryNavItems.map(({ href, ja }) => (
               <ListItem>
                 <Link
-                  class='z--p002-headerNav_link'
+                  class='z--lp002-headerNav_link'
                   href={href}
                   d='block'
                   c='text'
@@ -63,14 +63,14 @@ const headerMenuNavItems = [
           </Center>
         </Modal.OpenBtn>
       </Flex>
-      <Modal.Root id='menu' class='z--p002-header_menuModal' isContainer p='0'>
-        <Modal.Inner class='z--p002-header_menuInner' layout='stack' g='0' pos='relative' p='30' bxsh='50' offset='-100% 0'>
+      <Modal.Root id='menu' class='z--lp002-header_menuModal' isContainer p='0'>
+        <Modal.Inner class='z--lp002-header_menuInner' layout='stack' g='0' pos='relative' p='30' bxsh='50' offset='-100% 0'>
           <Modal.CloseBtn modalId='menu' autofocus pos='absolute' t='0' r='0' z='1' fz='xl' p='10' m='15' />
           <Modal.Body layout='stack' g='30' py='40' fx='1' min-h='0' ov-y='auto' w='100%'>
-            <Stack class='z--p002-header_menuNav u--divide' p='0' ov='clip'>
+            <Stack class='z--lp002-header_menuNav u--divide' p='0' ov='clip'>
               {
                 headerMenuNavItems.map(({ href, ja }) => (
-                  <BoxLink href={href} layout='grid' gtc='1fr auto' ai='c' fz='l' td='none' py='15' px='5'>
+                  <BoxLink href={href} layout='grid' gtc='1fr auto' ai='c' fz='m' td='none' py='15' px='5'>
                     <Inline>{ja}</Inline>
                     <Icon icon='caret-right' fz='s' o='pp' />
                   </BoxLink>
@@ -87,31 +87,31 @@ const headerMenuNavItems = [
 <style>
   @layer lism-custom {
 
-  .z--p002-header {
+  .z--lp002-header {
     /* ドロワー右の「抜き」幅。ここで --s50 を別トークンや px に差し替え可 */
-    --z--p002-header-menu-peek: var(--s50);
+    --z--lp002-header-menu-peek: var(--s50);
     box-sizing: border-box;
-    height: var(--z--p002-header-height);
+    height: var(--z--lp002-header-height);
     background-color: transparent;
     backdrop-filter: none;
     -webkit-backdrop-filter: none;
     border-block-end: 1px solid transparent;
     box-shadow: none;
     /* この量スクロールしてからヘッダー変化アニメーションを開始（終了は +160px スクロール地点） */
-    --z--p002-header-scroll-animation-start: 100px;
-    --z--p002-header-animation-range: var(--z--p002-header-scroll-animation-start)
-      calc(var(--z--p002-header-scroll-animation-start) + 160px);
-    animation: z--p002-header linear both;
+    --z--lp002-header-scroll-animation-start: 100px;
+    --z--lp002-header-animation-range: var(--z--lp002-header-scroll-animation-start)
+      calc(var(--z--lp002-header-scroll-animation-start) + 160px);
+    animation: z--lp002-header linear both;
     animation-timeline: scroll(root);
-    animation-range: var(--z--p002-header-animation-range);
+    animation-range: var(--z--lp002-header-animation-range);
   }
   /**
    * スクロール後: 白の半透明 + backdrop-filter（Lism 公式ドキュメントのヘッダーに近いガラス風）
    * @see https://lism-css.com/docs/overview/
    */
-  @keyframes z--p002-header {
+  @keyframes z--lp002-header {
     to {
-      height: var(--z--p002-header-height--thin);
+      height: var(--z--lp002-header-height--thin);
       background-color: color-mix(in srgb, var(--white) 68%, transparent);
       backdrop-filter: blur(12px) saturate(1.08);
       -webkit-backdrop-filter: blur(12px) saturate(1.08);
@@ -121,22 +121,22 @@ const headerMenuNavItems = [
   }
 
   /**
-   * モバイルメニュー: 左からスライド＋全高。右端は --z--p002-header-menu-peek 分空け、
+   * モバイルメニュー: 左からスライド＋全高。右端は --z--lp002-header-menu-peek 分空け、
    * そのエリア（dialog 本体のダイミング）クリックは setModal により閉じる
    * @see https://lism-css.com/ui/modal/ ドロワー例（offset） / 公式: dialog 全面 + ::backdrop 非使用
    */
-  :global(.z--p002-header_menuModal.c--modal) {
+  :global(.z--lp002-header_menuModal.c--modal) {
     min-height: 100svh;
   }
-  :global(.z--p002-header_menuModal.c--modal[open]) {
+  :global(.z--lp002-header_menuModal.c--modal[open]) {
     justify-content: flex-start;
     align-items: flex-start;
   }
   /**
    * width: Lism の l--stack / -w 等が後勝ちすると 100% 固定になり、peek を変えても右余白が動かない → !important で calc を優先
    */
-  :global(.z--p002-header_menuModal .c--modal_inner.z--p002-header_menuInner) {
-    width: calc(100% - var(--z--p002-header-menu-peek, var(--s50))) !important;
+  :global(.z--lp002-header_menuModal .c--modal_inner.z--lp002-header_menuInner) {
+    width: calc(100% - var(--z--lp002-header-menu-peek, var(--s50))) !important;
     min-height: 100svh;
     box-sizing: border-box;
   }

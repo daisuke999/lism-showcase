@@ -50,11 +50,11 @@ const stepCards: StepCard[] = [
 ];
 ---
 
-<Box as='section' id='step' class='z--p002-step' ov-x='clip'>
+<Box as='section' id='step' class='z--lp002-step' ov-x='clip'>
   <Container isWrapper='l' hasGutter py='50'>
     <Grid gtc={['1fr', null, 'minmax(0, 1fr) minmax(0, 1fr)']} g={['30', null, '40']} ai='stretch'>
-      <Stack class='z--p002-step_main' g='40' jc='start'>
-        <Stack g='10' ai='c' class='z--p002-step_head'>
+      <Stack class='z--lp002-step_main' g='40' jc='start'>
+        <Stack g='10' ai='c' class='z--lp002-step_head'>
           <Heading level='2' fz='4xl' lts='l' m='0' ta='center' ff='accent'>Step</Heading>
           <Text as='p' fz='m' fw='bold' lts='l' m='0' c='text' o='p' ta='center'>ご依頼から納品までの流れ</Text>
         </Stack>
@@ -64,12 +64,12 @@ const stepCards: StepCard[] = [
             stepCards.map((card, i) => (
               <>
                 {i > 0 && (
-                  <Flex class='z--p002-step_caret' jc='center' ai='center' w='100%' fxsh='0'>
+                  <Flex class='z--lp002-step_caret' jc='center' ai='center' w='100%' fxsh='0'>
                     <Icon icon='caret-down-fill' fz='2xl' />
                   </Flex>
                 )}
                 <Stack
-                  class='z--p002-step_card'
+                  class='z--lp002-step_card'
                   g='15'
                   p='30'
                   bgc='base'
@@ -80,7 +80,7 @@ const stepCards: StepCard[] = [
                   min-w='0'
                 >
                   {card.image && (
-                    <Frame class='z--p002-step_cardFrame' ar='3/2' ov='hidden' bdrs='0'>
+                    <Frame class='z--lp002-step_cardFrame' ar='3/2' ov='hidden' bdrs='0'>
                       <Media
                         src={card.image.src}
                         alt={card.image.alt}
@@ -90,7 +90,7 @@ const stepCards: StepCard[] = [
                       />
                     </Frame>
                   )}
-                  <Stack g='10' class='z--p002-step_cardBody'>
+                  <Stack g='10' class='z--lp002-step_cardBody'>
                     <Heading level='3' fz='l' m='0'>
                       {card.title}
                     </Heading>
@@ -105,9 +105,9 @@ const stepCards: StepCard[] = [
         </Stack>
       </Stack>
 
-      <Box class='z--p002-step_rail'>
-        <Box class='z--p002-step_sticky'>
-          <Frame class='z--p002-step_frame' ov='hidden' bdrs='0'>
+      <Box class='z--lp002-step_rail'>
+        <Box class='z--lp002-step_sticky'>
+          <Frame class='z--lp002-step_frame' ov='hidden' bdrs='0'>
             <Media
               src={stepImage.src}
               alt={stepImage.alt}
@@ -125,26 +125,26 @@ const stepCards: StepCard[] = [
 <style>
   @layer lism-custom {
     /* テキスト色を 15%（残りは base）でミックス — 薄すぎる base-2 より本文に近い階調 */
-    .z--p002-step_caret .a--icon {
+    .z--lp002-step_caret .a--icon {
       color: color-mix(in oklch, var(--text) 15%, var(--base));
       opacity: 1;
     }
 
-    .z--p002-step_main {
+    .z--lp002-step_main {
       min-width: 0;
     }
 
-    .z--p002-step_rail {
+    .z--lp002-step_rail {
       min-width: 0;
       /* グリッド行の高さを子の % 計算に渡す */
       align-self: stretch;
     }
 
-    .z--p002-step_sticky {
+    .z--lp002-step_sticky {
       position: relative;
     }
 
-    .z--p002-step_frame {
+    .z--lp002-step_frame {
       aspect-ratio: 4 / 3;
     }
 
@@ -153,7 +153,7 @@ const stepCards: StepCard[] = [
      * md 未満: DOM 順のまま（main → rail）で 1 列・テキスト上・画像下（Feature と同型）。
      */
     @container (min-width: 800px) {
-      .z--p002-step_rail {
+      .z--lp002-step_rail {
         order: 1;
         margin-inline-start: calc(-1 * (max(0px, (100vw - min(100vw, var(--sz--l))) / 2) + var(--gutter-size, 0px)));
         width: calc(100% + max(0px, (100vw - min(100vw, var(--sz--l))) / 2) + var(--gutter-size, 0px));
@@ -161,19 +161,19 @@ const stepCards: StepCard[] = [
         height: 100%;
       }
 
-      .z--p002-step_main {
+      .z--lp002-step_main {
         order: 2;
       }
 
-      .z--p002-step_sticky {
+      .z--lp002-step_sticky {
         position: sticky;
-        top: var(--z--p002-header-height--thin, 64px);
+        top: var(--z--lp002-header-height--thin, 64px);
         align-self: start;
-        height: min(calc(100dvh - var(--z--p002-header-height--thin, 64px)), 100%);
+        height: min(calc(100dvh - var(--z--lp002-header-height--thin, 64px)), 100%);
         min-height: 0;
       }
 
-      .z--p002-step_frame {
+      .z--lp002-step_frame {
         aspect-ratio: auto;
         height: 100%;
         min-height: 0;

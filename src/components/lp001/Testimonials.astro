@@ -48,13 +48,13 @@ const testimonialsAvatars = [
 ];
 ---
 
-<Container id='testimonials' class='z--p001-testimonials' isWrapper='l' bgc='base-2' py='60' hasGutter>
+<Container id='testimonials' class='z--lp001-testimonials' isWrapper='l' bgc='base-2' py='60' hasGutter>
   <Stack g='40'>
     <HGroup text='Testimonials' subText='お客様の声' />
     <AutoColumns cols='20rem' g='40'>
       {
         testimonialsAvatars.map((item) => (
-          <Grid class='z--p001-testimonials_item' gtr='subgrid' gr='span 3' g='30'>
+          <Grid class='z--lp001-testimonials_item' gtr='subgrid' gr='span 3' g='30'>
             <Grid gtc='auto 1fr' ai='center' g='20'>
               <Frame as='figure' ar='1/1' w='3.5rem' bdrs='99'>
                 <Lism
@@ -94,10 +94,10 @@ const testimonialsAvatars = [
 
 <style>
   @layer lism-custom {
-    .z--p001-testimonials .z--p001-testimonials_item {
-      view-timeline: --z--p001-testimonials_item y;
+    .z--lp001-testimonials .z--lp001-testimonials_item {
+      view-timeline: --z--lp001-testimonials_item y;
       animation: u--fadeIn linear both;
-      animation-timeline: --z--p001-testimonials_item;
+      animation-timeline: --z--lp001-testimonials_item;
       animation-range: var(--u--fadeIn--animation-range);
     }
   }

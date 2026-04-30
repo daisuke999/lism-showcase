@@ -55,11 +55,11 @@ const featureCards: { title: string; body: string; icon: FeatureCardIcon }[] = [
 ];
 ---
 
-<Box as='section' id='feature' class='z--p002-feature' ov-x='clip'>
+<Box as='section' id='feature' class='z--lp002-feature' ov-x='clip'>
   <Container isWrapper='l' hasGutter py='50'>
     <Grid gtc={['1fr', null, 'minmax(0, 1fr) minmax(0, 1fr)']} g={['30', null, '40']} ai='stretch'>
-      <Stack class='z--p002-feature_main' g='40' jc='start'>
-        <Stack g='10' ai='c' class='z--p002-feature_head'>
+      <Stack class='z--lp002-feature_main' g='40' jc='start'>
+        <Stack g='10' ai='c' class='z--lp002-feature_head'>
           <Heading level='2' fz='4xl' lts='l' m='0' ta='center' ff='accent'> Point </Heading>
           <Text as='p' fz='m' fw='bold' lts='l' m='0' c='text' o='p' ta='center'>暮らしに寄り添う特長</Text>
         </Stack>
@@ -67,10 +67,10 @@ const featureCards: { title: string; body: string; icon: FeatureCardIcon }[] = [
         <Stack g='30'>
           {
             featureCards.map((card) => (
-              <Stack class='z--p002-feature_card' p='30' bgc='base' bd bdc='divider' bdrs='10'>
-                <Flex ai='start' g='20' class='z--p002-feature_cardInner'>
+              <Stack class='z--lp002-feature_card' p='30' bgc='base' bd bdc='divider' bdrs='10'>
+                <Flex ai='start' g='20' class='z--lp002-feature_cardInner'>
                   <Icon icon={card.icon} size='2.5rem' c='text-2' />
-                  <Stack g='10' class='z--p002-feature_cardBody'>
+                  <Stack g='10' class='z--lp002-feature_cardBody'>
                     <Heading level='3' fz='l' m='0'>
                       {card.title}
                     </Heading>
@@ -85,9 +85,9 @@ const featureCards: { title: string; body: string; icon: FeatureCardIcon }[] = [
         </Stack>
       </Stack>
 
-      <Box class='z--p002-feature_rail'>
-        <Box class='z--p002-feature_sticky'>
-          <Frame class='z--p002-feature_frame' ov='hidden' bdrs='0'>
+      <Box class='z--lp002-feature_rail'>
+        <Box class='z--lp002-feature_sticky'>
+          <Frame class='z--lp002-feature_frame' ov='hidden' bdrs='0'>
             <Media
               src={featureImage.src}
               alt={featureImage.alt}
@@ -104,17 +104,17 @@ const featureCards: { title: string; body: string; icon: FeatureCardIcon }[] = [
 
 <style>
   @layer lism-custom {
-    .z--p002-feature_rail {
+    .z--lp002-feature_rail {
       min-width: 0;
       /* グリッド行の高さ（＝左カラムの内容高さ）を子の % 計算に渡す */
       align-self: stretch;
     }
 
-    .z--p002-feature_sticky {
+    .z--lp002-feature_sticky {
       position: relative;
     }
 
-    .z--p002-feature_frame {
+    .z--lp002-feature_frame {
       aspect-ratio: 4 / 3;
     }
 
@@ -123,16 +123,16 @@ const featureCards: { title: string; body: string; icon: FeatureCardIcon }[] = [
        * ヘッダー下端で固定。高さは「ビューポート」と「左テキスト列の高さ」の小さい方
        * （グリッド行高＝左カラムのため、100% は左側コンテンツの高さに一致）
        */
-      .z--p002-feature_sticky {
+      .z--lp002-feature_sticky {
         position: sticky;
         /* lp002 :root のヘッダー（スクロール後の高さ＝下端基準） */
-        top: var(--z--p002-header-height--thin, 64px);
+        top: var(--z--lp002-header-height--thin, 64px);
         align-self: start;
-        height: min(calc(100dvh - var(--z--p002-header-height--thin, 64px)), 100%);
+        height: min(calc(100dvh - var(--z--lp002-header-height--thin, 64px)), 100%);
         min-height: 0;
       }
 
-      .z--p002-feature_frame {
+      .z--lp002-feature_frame {
         aspect-ratio: auto;
         height: 100%;
         min-height: 0;
@@ -142,7 +142,7 @@ const featureCards: { title: string; body: string; icon: FeatureCardIcon }[] = [
        * 画像列だけ右端をビューポート端まで伸ばす（左端は2カラム境界のまま）
        * 中央寄せの `size=l` コンテナ外側〜画面右端の余白 + 右ガターを吸収
        */
-      .z--p002-feature_rail {
+      .z--lp002-feature_rail {
         width: calc(100% + max(0px, (100vw - min(100vw, var(--sz--l))) / 2) + var(--gutter-size, 0px));
         max-width: none;
         height: 100%;

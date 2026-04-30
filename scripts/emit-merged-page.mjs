@@ -82,8 +82,22 @@ function extractNonImports(script) {
       i++;
       continue;
     }
-    if (/^\s*(interface|export interface)\s/.test(line)) {
+    /** `export interface Props { ... }` を丸ごと除外（1行だけ除外すると本体が残って構文エラーになる） */
+    if (/^\s*(export\s+)?interface\s+\w+/.test(line)) {
+      let depth = 0;
+      for (const ch of line) {
+        if (ch === '{') depth++;
+        if (ch === '}') depth--;
+      }
       i++;
+      while (i < lines.length && depth > 0) {
+        const L = lines[i];
+        for (const ch of L) {
+          if (ch === '{') depth++;
+          if (ch === '}') depth--;
+        }
+        i++;
+      }
       continue;
     }
     out.push(line);
@@ -115,15 +129,15 @@ function mergeNamedSymbolImports(importLines, modulePath) {
   return [...names].sort();
 }
 
-/** lp001 用 HGroup（クラス接頭辞 z--p001-hgroup） */
+/** lp001 用 HGroup（クラス接頭辞 z--lp001-hgroup） */
 function inlineHGroup001(html) {
   let s = html.replace(
     /<HGroup\s+text=['"]([^'"]*)['"]\s+subText=['"]([^'"]*)['"](\s+variant=['"]light['"])?\s*\/>/g,
     (_, text, sub, variant) => {
-      const light = variant ? ', "z--p001-hgroup--light"' : '';
-      return `<Stack class:list={['z--p001-hgroup'${light}]} as='hgroup' ai='c' g='5'>
-      <Heading level='2' class='z--p001-hgroup_heading' fz='3xl' fw='400' lts='l' m='0'>${text}</Heading>
-      <Heading level='3' class='z--p001-hgroup_subHeading' d='inline-flex' ai='c' g='20' fz='s' fw='normal' lts='l' m='0'>
+      const light = variant ? ', "z--lp001-hgroup--light"' : '';
+      return `<Stack class:list={['z--lp001-hgroup'${light}]} as='hgroup' ai='c' g='5'>
+      <Heading level='2' class='z--lp001-hgroup_heading' fz='3xl' fw='400' lts='l' m='0'>${text}</Heading>
+      <Heading level='3' class='z--lp001-hgroup_subHeading' d='inline-flex' ai='c' g='20' fz='s' fw='normal' lts='l' m='0'>
         ${sub}
       </Heading>
     </Stack>`;
@@ -132,10 +146,10 @@ function inlineHGroup001(html) {
   s = s.replace(
     /<HGroup\s+text="([^"]*)"\s+subText="([^"]*)"(\s+variant="light")?\s*\/>/g,
     (_, text, sub, variant) => {
-      const light = variant ? ', "z--p001-hgroup--light"' : '';
-      return `<Stack class:list={["z--p001-hgroup"${light}]} as="hgroup" ai="c" g="5">
-      <Heading level="2" class="z--p001-hgroup_heading" fz="3xl" fw="400" lts="l" m="0">${text}</Heading>
-      <Heading level="3" class="z--p001-hgroup_subHeading" d="inline-flex" ai="c" g="20" fz="s" fw="normal" lts="l" m="0">
+      const light = variant ? ', "z--lp001-hgroup--light"' : '';
+      return `<Stack class:list={["z--lp001-hgroup"${light}]} as="hgroup" ai="c" g="5">
+      <Heading level="2" class="z--lp001-hgroup_heading" fz="3xl" fw="400" lts="l" m="0">${text}</Heading>
+      <Heading level="3" class="z--lp001-hgroup_subHeading" d="inline-flex" ai="c" g="20" fz="s" fw="normal" lts="l" m="0">
         ${sub}
       </Heading>
     </Stack>`;
@@ -147,7 +161,7 @@ function inlineHGroup001(html) {
 /** lp003: Logo を Header/Footer へインライン（logoLabel はマージ先 frontmatter で定義） */
 function inlineLogo003(html) {
   const headerLogo = `<Link
-      class='z--p003-header_logoLink'
+      class='z--lp003-header_logoLink'
       href='#'
       td='none'
       fw='normal'
@@ -191,7 +205,7 @@ const PAGE_CONFIG = {
     buildMainInner: (blocks) => `    <!-- Header -->
     ${blocks.Header}
     <!-- Main Content -->
-    <Container as='main' class='z--p001-main'>
+    <Container as='main' class='z--lp001-main'>
       ${blocks.MV}
       ${blocks.About}
       ${blocks.Feature}
@@ -214,11 +228,11 @@ const PAGE_CONFIG = {
     compOrder: ['Header', 'MV', 'Mission', 'Mission2', 'Footer', 'Feature', 'Service', 'Step', 'Voice', 'FAQ', 'Contact'],
     extraCompScripts: [],
     buildWrapper: () =>
-      `<DemoLayout title={title}>\n  <link rel='preconnect' href='https://fonts.googleapis.com' slot='head' />\n  <link rel='preconnect' href='https://fonts.gstatic.com' crossorigin slot='head' />\n  <link\n    href='https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap'\n    rel='stylesheet'\n    slot='head'\n  />\n  <Wrapper class='z--p002-root' contentSize='full'>\n`,
+      `<DemoLayout title={title}>\n  <link rel='preconnect' href='https://fonts.googleapis.com' slot='head' />\n  <link rel='preconnect' href='https://fonts.gstatic.com' crossorigin slot='head' />\n  <link\n    href='https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap'\n    rel='stylesheet'\n    slot='head'\n  />\n  <Wrapper class='z--lp002-root' contentSize='full'>\n`,
     buildMainInner: (blocks) => `    <!-- Header -->
     ${blocks.Header}
     <!-- Main Content -->
-    <Container as='main' class='z--p002-main' pos='relative' z='0'>
+    <Container as='main' class='z--lp002-main' pos='relative' z='0'>
       ${blocks.MV}
       ${blocks.Mission}
       ${blocks.Mission2}
@@ -253,12 +267,14 @@ const PAGE_CONFIG = {
     ],
     extraCompScripts: [],
     buildWrapper: () =>
-      `<DemoLayout title={title}>\n  <link rel='preconnect' href='https://fonts.googleapis.com' slot='head' />\n  <link rel='preconnect' href='https://fonts.gstatic.com' crossorigin slot='head' />\n  <link\n    href='https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@200..900&family=Yuji+Syuku&display=swap'\n    rel='stylesheet'\n    slot='head'\n  />\n  <Wrapper class='z--p003-root' contentSize='full'>\n`,
+      `<DemoLayout title={title}>\n  <link rel='preconnect' href='https://fonts.googleapis.com' slot='head' />\n  <link rel='preconnect' href='https://fonts.gstatic.com' crossorigin slot='head' />\n  <link\n    href='https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@200..900&family=Yuji+Syuku&display=swap'\n    rel='stylesheet'\n    slot='head'\n  />\n  <Wrapper class='z--lp003-root' contentSize='full'>\n`,
     buildMainInner: (blocks) => `    <!-- Header -->
     ${blocks.Header}
     <!-- Main Content -->
-    <Container as='main' class='z--p003-main' pos='relative' z='0'>
+    <Container as='main' class='z--lp003-main' pos='relative' z='0'>
       ${blocks.MV}
+      <!-- MV の動的 @keyframes はマージで抽出されないため、元コンポーネントと同じ set:html を明示注入 -->
+      <style set:html={mvLayeredKeyframesStyle} />
       ${blocks.About}
       ${blocks.Feature}
       ${blocks.Feature2}

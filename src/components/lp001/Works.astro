@@ -54,7 +54,7 @@ const worksItems = [
 ];
 ---
 
-<Container id='works' class='z--p001-works' isWrapper='l' py='60' hasGutter>
+<Container id='works' class='z--lp001-works' isWrapper='l' py='60' hasGutter>
   <Stack g='40'>
     <HGroup text='Works' subText='制作実績' />
     <Text as='p' class='u--fadeIn' max-sz='full' mx='auto' m='0'>
@@ -63,11 +63,11 @@ const worksItems = [
     <AutoColumns cols='20rem' g='40'>
       {
         worksItems.map((item) => (
-          <BoxLink class='z--p001-works_item' href='#' layout='stack' set='var:hov'>
-            <Frame class='z--p001-works_frame' ar='16/9' pos='relative' bdrs='20'>
+          <BoxLink class='z--lp001-works_item' href='#' layout='stack' set='var:hov'>
+            <Frame class='z--lp001-works_frame' ar='16/9' pos='relative' bdrs='20'>
               <Lism
                 as='img'
-                class='z--p001-works_media'
+                class='z--lp001-works_media'
                 src={item.src}
                 alt={worksDefaultImage.alt}
                 w='100%'
@@ -96,7 +96,7 @@ const worksItems = [
                 </Center>
               </Layer>
             </Frame>
-            <Stack g='15' py='20'>
+            <Stack g='10' py='20'>
               <Heading level='3' fz='m' m='0'>
                 {item.title}
               </Heading>
@@ -113,46 +113,44 @@ const worksItems = [
 
 <style>
   @layer lism-custom {
-
-  .z--p001-works .z--p001-works_item {
-    view-timeline: --z--p001-works_item y;
-    animation: z--p001-works_item linear both;
-    animation-timeline: --z--p001-works_item;
-    animation-range: var(--u--fadeIn--animation-range);
-  }
-  @keyframes z--p001-works_item {
-    from {
-      transform: translateY(32px) scale(1.04);
-      filter: blur(8px);
-      opacity: 0;
+    .z--lp001-works .z--lp001-works_item {
+      view-timeline: --z--lp001-works_item y;
+      animation: z--lp001-works_item linear both;
+      animation-timeline: --z--lp001-works_item;
+      animation-range: var(--u--fadeIn--animation-range);
     }
-    to {
-      transform: translateY(0) scale(1);
-      filter: blur(0);
-      opacity: 1;
+    @keyframes z--lp001-works_item {
+      from {
+        transform: translateY(32px) scale(1.04);
+        filter: blur(8px);
+        opacity: 0;
+      }
+      to {
+        transform: translateY(0) scale(1);
+        filter: blur(0);
+        opacity: 1;
+      }
     }
-  }
-  .z--p001-works .z--p001-works_frame {
-    view-timeline: --z--p001-works_frame y;
-  }
-  .z--p001-works .z--p001-works_media {
-    animation: z--p001-works_media linear both;
-    animation-timeline: --z--p001-works_frame;
-    animation-range: var(--u--fadeIn--animation-range);
-  }
-  @keyframes z--p001-works_media {
-    from {
-      transform: scale(1.2);
+    .z--lp001-works .z--lp001-works_frame {
+      view-timeline: --z--lp001-works_frame y;
     }
-    to {
-      transform: scale(1);
+    .z--lp001-works .z--lp001-works_media {
+      animation: z--lp001-works_media linear both;
+      animation-timeline: --z--lp001-works_frame;
+      animation-range: var(--u--fadeIn--animation-range);
     }
-  }
-  @media (any-hover: hover) {
-    .-hov\:in\:zoom {
-      scale: var(--_isHov, 1.1);
+    @keyframes z--lp001-works_media {
+      from {
+        transform: scale(1.2);
+      }
+      to {
+        transform: scale(1);
+      }
     }
-  }
-
+    @media (any-hover: hover) {
+      .-hov\:in\:zoom {
+        scale: var(--_isHov, 1.1);
+      }
+    }
   }
 </style>

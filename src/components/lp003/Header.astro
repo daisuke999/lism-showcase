@@ -12,15 +12,15 @@ const headerNavItems = [
 ] as const;
 ---
 
-<Lism as='header' class='z--p003-header' pos='fixed' i='0' w='100%' z='1' hasTransition>
-  <Container class='z--p003-header_bar' isWrapper='xl' mx='auto' hasGutter h='100%'>
-    <Grid class='z--p003-header_inner' gtc='minmax(0,auto) 1fr' ai='center' h='100%' g='20'>
-      <Stack class='z--p003-header_logo'>
+<Lism as='header' class='z--lp003-header' pos='fixed' i='0' w='100%' z='1' hasTransition>
+  <Container class='z--lp003-header_bar' isWrapper='xl' mx='auto' hasGutter h='100%'>
+    <Grid class='z--lp003-header_inner' gtc='minmax(0,auto) 1fr' ai='center' h='100%' g='20'>
+      <Stack class='z--lp003-header_logo'>
         <Logo variant='header' href='#' />
       </Stack>
-      <Flex class='z--p003-header_actions' jc='fe' g='20' ai='c'>
+      <Flex class='z--lp003-header_actions' jc='fe' g='20' ai='c'>
         <Flex
-          class='z--p003-headerNav'
+          class='z--lp003-headerNav'
           as='ul'
           d={['none', null, 'inline-flex']}
           ai='c'
@@ -33,7 +33,7 @@ const headerNavItems = [
             headerNavItems.map(({ href, ja, en }) => (
               <ListItem>
                 <Link
-                  class='z--p003-headerNav_link'
+                  class='z--lp003-headerNav_link'
                   href={href}
                   d='grid'
                   jc='c'
@@ -47,7 +47,7 @@ const headerNavItems = [
                   g='5'
                 >
                   <Inline>{ja}</Inline>
-                  <Inline as='span' class='z--p003-headerNav_en' fz='2xs' fw='normal' lts='l' lh='xs' m='0' ta='c' d='block'>
+                  <Inline as='span' class='z--lp003-headerNav_en' fz='2xs' fw='normal' lts='l' lh='xs' m='0' ta='c' d='block'>
                     {en}
                   </Inline>
                 </Link>
@@ -55,7 +55,7 @@ const headerNavItems = [
             ))
           }
         </Flex>
-        <Modal.OpenBtn modalId='p003-menu' d={['block', null, 'none']}>
+        <Modal.OpenBtn modalId='lp003-menu' d={['block', null, 'none']}>
           <Center p='5' ai='c' jc='c'>
             <Icon icon='menu' c='white' fz='2xl' aria-hidden='true' />
           </Center>
@@ -64,18 +64,18 @@ const headerNavItems = [
     </Grid>
   </Container>
 </Lism>
-<Modal.Root id='p003-menu' isContainer isWrapper='s' p='30'>
+<Modal.Root id='lp003-menu' isContainer isWrapper='s' p='30'>
   <Modal.Inner layout='stack' pos='relative' w='100%' p='30' bdrs='20' bxsh='50'>
-    <Modal.CloseBtn modalId='p003-menu' autofocus pos='absolute' t='0' r='0' z='1' fz='xl' p='10' m='15' />
+    <Modal.CloseBtn modalId='lp003-menu' autofocus pos='absolute' t='0' r='0' z='1' fz='xl' p='10' m='15' />
     <Modal.Body layout='stack' g='30' py='40'>
-      <Stack as='ul' class='z--p003-header_menuNav' g='0' m='0' p='0' ov='clip'>
+      <Stack as='ul' class='z--lp003-header_menuNav' g='0' m='0' p='0' ov='clip'>
         {
           headerNavItems.map(({ href, ja, en }) => (
             <ListItem>
               <BoxLink href={href} layout='grid' gtc='1fr auto' ai='c' fz='l' td='none' py='15' px='5' w='100%'>
                 <Stack g='5'>
                   <Inline>{ja}</Inline>
-                  <Inline as='span' class='z--p003-header_menuNav_en' fz='s' m='0' o='pp'>
+                  <Inline as='span' class='z--lp003-header_menuNav_en' fz='s' m='0' o='pp'>
                     {en}
                   </Inline>
                 </Stack>
@@ -88,7 +88,7 @@ const headerNavItems = [
           <BoxLink href='#reservation' layout='grid' gtc='1fr auto' ai='c' fz='l' td='none' py='15' px='5' w='100%'>
             <Stack g='5'>
               <Inline>ご予約はこちら</Inline>
-              <Inline as='span' class='z--p003-header_menuNav_en' fz='s' m='0' o='pp'> Reservation </Inline>
+              <Inline as='span' class='z--lp003-header_menuNav_en' fz='s' m='0' o='pp'> Reservation </Inline>
             </Stack>
             <Icon icon='caret-right' fz='s' o='pp' />
           </BoxLink>
@@ -100,7 +100,7 @@ const headerNavItems = [
 
 <style>
   @layer lism-custom {
-  .z--p003-header {
+  .z--lp003-header {
     height: var(--z--header-height);
     color: var(--white);
     background-color: transparent;
@@ -110,11 +110,11 @@ const headerNavItems = [
     --z--header-scroll-animation-start: 80px;
     --z--header-animation-range: var(--z--header-scroll-animation-start)
       calc(var(--z--header-scroll-animation-start) + 140px);
-    animation: z--header_p003 linear both;
+    animation: z--header_lp003 linear both;
     animation-timeline: scroll(root);
     animation-range: var(--z--header-animation-range);
   }
-  .z--p003-header :where(a) {
+  .z--lp003-header :where(a) {
     color: inherit;
   }
   /**
@@ -122,18 +122,18 @@ const headerNavItems = [
    * フッターは黒地へ `color-mix(…, var(--white) 38%, …)`。モーダルは `.c--modal_inner` の `var(--base)` 地のため `var(--text)` を使用
    * @see Footer.astro / tokens.md --text / `color-mix`
    */
-  .z--p003-header_menuNav {
+  .z--lp003-header_menuNav {
     list-style: none;
   }
-  .z--p003-header_menuNav > :global(li) {
+  .z--lp003-header_menuNav > :global(li) {
     list-style: none;
   }
-  .z--p003-header_menuNav > :global(li:not(:last-child)) {
+  .z--lp003-header_menuNav > :global(li:not(:last-child)) {
     border-block-end: 1px dashed color-mix(in srgb, var(--text) 38%, transparent);
   }
   /* md 以上: has--gutter の左右に s20 を上乗せ（Lism: `--gutter-size` 既定は `--s30`） */
   @media (min-width: 800px) {
-    .z--p003-header_bar {
+    .z--lp003-header_bar {
       padding-inline: calc(var(--gutter-size) + var(--s20));
     }
   }
@@ -141,18 +141,18 @@ const headerNavItems = [
    * ロゴは Logo.astro 内で描画されるため、Astro スコープ外。:global で子コンポーネントの a に一致させる。
    * @see https://docs.astro.build/en/guides/styling/#global-styles
    */
-  :global(.z--p003-header_logoLink) {
+  :global(.z--lp003-header_logoLink) {
     transform-origin: left center;
-    animation: z--p003-header_logo_p003 linear both;
+    animation: z--lp003-header_logo_lp003 linear both;
     animation-timeline: scroll(root);
-    /* 継承: 先祖 `.z--p003-header` の `--z--header-animation-range` */
+    /* 継承: 先祖 `.z--lp003-header` の `--z--header-animation-range` */
     animation-range: var(--z--header-animation-range);
   }
   /**
    * スクロール後: 黒ベースの半透明 + backdrop-filter で奥行きをぼかし視認性を確保。
    * 下端の極細ハイライトで帯として切り分ける。
    */
-  @keyframes z--header_p003 {
+  @keyframes z--header_lp003 {
     to {
       background-color: hsl(0 0% 0% / 0.78);
       color: var(--white);
@@ -164,7 +164,7 @@ const headerNavItems = [
         inset 0 -1px 0 hsl(0 0% 100% / 0.07);
     }
   }
-  @keyframes z--p003-header_logo_p003 {
+  @keyframes z--lp003-header_logo_lp003 {
     from {
       transform: scale(1);
     }
@@ -173,14 +173,14 @@ const headerNavItems = [
       transform: scale(0.75);
     }
   }
-  .z--p003-headerNav_en {
+  .z--lp003-headerNav_en {
     max-height: 2.5em;
     overflow: hidden;
-    animation: z--p003-headerNav_en_p003 linear both;
+    animation: z--lp003-headerNav_en_lp003 linear both;
     animation-timeline: scroll(root);
     animation-range: var(--z--header-animation-range);
   }
-  @keyframes z--p003-headerNav_en_p003 {
+  @keyframes z--lp003-headerNav_en_lp003 {
     to {
       opacity: 0;
       max-height: 0;

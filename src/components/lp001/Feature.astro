@@ -46,11 +46,11 @@ const featureCards: FeatureCard[] = [
 ];
 ---
 
-<Box id='feature' class='z--p001-feature' pos='relative'>
+<Box id='feature' class='z--lp001-feature' pos='relative'>
   <Frame isLayer>
     <Lism
       as='img'
-      class='z--p001-feature_media'
+      class='z--lp001-feature_media'
       src={featureHero.src}
       alt={featureHero.alt}
       exProps={{ width: featureHero.width, height: featureHero.height, loading: 'lazy', decoding: 'async' }}
@@ -68,16 +68,16 @@ const featureCards: FeatureCard[] = [
             const gta: [string, null, string] = [`'img' 'text'`, null, isReversed ? `'text img'` : `'img text'`];
             return (
               <Grid
-                class='z--p001-feature_item'
+                class='z--lp001-feature_item'
                 gtc={['auto', null, isReversed ? '3fr 2fr' : '2fr 3fr']}
                 gta={gta}
-                g='30'
+                g={['20', null, '30']}
                 ai='start'
               >
                 <Frame ar='16/9' pos='relative' bdrs='20' ga='img'>
                   <Lism
                     as='img'
-                    class='z--p001-feature_itemMedia'
+                    class='z--lp001-feature_itemMedia'
                     src={card.src}
                     alt={featureDefaultCardImageMeta.alt}
                     exProps={{
@@ -89,7 +89,7 @@ const featureCards: FeatureCard[] = [
                   />
                 </Frame>
                 <Stack
-                  class='z--p001-feature_itemContent'
+                  class='z--lp001-feature_itemContent'
                   g='15'
                   max-w={['none', null, '36rem']}
                   py='20'
@@ -113,19 +113,19 @@ const featureCards: FeatureCard[] = [
 
 <style>
   @layer lism-custom {
-    .z--p001-feature {
-      view-timeline: --z--p001-feature y;
+    .z--lp001-feature {
+      view-timeline: --z--lp001-feature y;
     }
-    .z--p001-feature .z--p001-feature_media {
+    .z--lp001-feature .z--lp001-feature_media {
       width: 100%;
       position: absolute;
       top: -20%;
       height: 140%;
-      animation: z--p001-feature_media linear both;
-      animation-timeline: --z--p001-feature;
+      animation: z--lp001-feature_media linear both;
+      animation-timeline: --z--lp001-feature;
       animation-range: entry 0% cover 100%;
     }
-    @keyframes z--p001-feature_media {
+    @keyframes z--lp001-feature_media {
       from {
         transform: translateY(-10%);
       }
@@ -133,22 +133,22 @@ const featureCards: FeatureCard[] = [
         transform: translateY(10%);
       }
     }
-    .z--p001-feature .z--p001-feature_item {
-      view-timeline: --z--p001-feature_item y;
+    .z--lp001-feature .z--lp001-feature_item {
+      view-timeline: --z--lp001-feature_item y;
       animation: u--fadeIn linear both;
-      animation-timeline: --z--p001-feature_item;
+      animation-timeline: --z--lp001-feature_item;
       animation-range: var(--u--fadeIn--animation-range);
     }
-    .z--p001-feature .z--p001-feature_itemMedia {
+    .z--lp001-feature .z--lp001-feature_itemMedia {
       width: 100%;
       position: absolute;
       top: -20%;
       height: 140%;
-      animation: z--p001-feature_itemMedia linear both;
-      animation-timeline: --z--p001-feature_item;
+      animation: z--lp001-feature_itemMedia linear both;
+      animation-timeline: --z--lp001-feature_item;
       animation-range: entry 0% cover 100%;
     }
-    @keyframes z--p001-feature_itemMedia {
+    @keyframes z--lp001-feature_itemMedia {
       from {
         transform: translateY(-10%);
       }
@@ -156,7 +156,7 @@ const featureCards: FeatureCard[] = [
         transform: translateY(10%);
       }
     }
-    .z--p001-feature .z--p001-feature_item:nth-child(even) .z--p001-feature_itemContent {
+    .z--lp001-feature .z--lp001-feature_item:nth-child(even) .z--lp001-feature_itemContent {
       justify-self: end;
     }
   }

@@ -10,11 +10,11 @@ const contactBg = {
 };
 ---
 
-<Box id="contact" class="z--p001-contact" pos="relative">
+<Box id="contact" class="z--lp001-contact" pos="relative">
   <Frame isLayer>
     <Lism
       as="img"
-      class="z--p001-contact_media"
+      class="z--lp001-contact_media"
       pos="absolute"
       t="-20%"
       h="140%"
@@ -63,15 +63,15 @@ const contactBg = {
 <style>
   @layer lism-custom {
 
-  .z--p001-contact {
-    view-timeline: --z--p001-contact y;
+  .z--lp001-contact {
+    view-timeline: --z--lp001-contact y;
   }
-  .z--p001-contact_media {
-    animation: z--p001-contact_media linear both;
-    animation-timeline: --z--p001-contact;
+  .z--lp001-contact_media {
+    animation: z--lp001-contact_media linear both;
+    animation-timeline: --z--lp001-contact;
     animation-range: entry 0% cover 100%;
   }
-  @keyframes z--p001-contact_media {
+  @keyframes z--lp001-contact_media {
     from {
       transform: translateY(-10%);
     }

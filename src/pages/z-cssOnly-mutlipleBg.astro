@@ -1,0 +1,111 @@
+---
+import 'lism-css/main.css';
+import { Container, Frame, Layer, Stack, Text } from 'lism-css/astro';
+
+// 1. ここに表示したい画像のパスを追加・変更するだけ！
+// 画像を増やす場合は、この配列に文字列を追加するだけで自動的にCSSが調整されます。
+const images = [
+  'https://cdn.lism-css.com/img/japan/u-Dczv0Klww4.jpg',
+  'https://cdn.lism-css.com/img/japan/a_JNaB1eSLPA.jpg',
+  // '/images/hero3.jpg', // ← 3枚目を追加する場合はコメントアウトを外すだけ
+];
+
+// 2. アニメーションの設定（必要に応じて数値を調整してください）
+const durationPerImage = 6; // 1枚の画像がメインで表示される時間（秒）
+const fadeTime = 1.5; // クロスフェード（切り替わり）にかかる時間（秒）
+
+// --- ここから下は自動計算のロジック ---
+const count = images.length;
+const totalDuration = durationPerImage * count;
+
+// CSSの @keyframes で使用するパーセンテージをビルド時に自動計算します
+const holdPercent = ((durationPerImage - fadeTime) / totalDuration) * 100;
+const fadeOutPercent = (durationPerImage / totalDuration) * 100;
+const hiddenPercent = ((totalDuration - fadeTime) / totalDuration) * 100;
+
+/**
+ * Property Class はレイヤー外で詳細度が高く取り扱われるため、
+ * `@layer lism-custom` だけでは `<Lism>` のレイアウト指定と競合しやすい。
+ * キーフレームも含めて同一レイヤーにまとめ、カスタム側の意図を揃える。
+ * @see https://lism-css.com/docs/css-methodology/
+ */
+const layeredKeyframesStyle = `@layer lism-custom {
+  @keyframes hero-fade {
+    0% { opacity: 1; }
+    ${holdPercent}% { opacity: 1; }
+    ${fadeOutPercent}% { opacity: 0; }
+    ${hiddenPercent}% { opacity: 0; }
+    100% { opacity: 1; }
+  }
+}`;
+---
+
+<Container
+  class='z--cssOnlyBg'
+  as='section'
+  pos='relative'
+  w='100%'
+  m='0'
+  p='0'
+  max-w='none'
+  ov='clip'
+  style={{
+    minHeight: '100svh',
+    '--z--hero-duration': `${totalDuration}s`,
+  }}
+>
+  <Frame isLayer class='z--cssOnlyBg_bg'>
+    {
+      images.map((src, index) => {
+        /*
+      各画像の開始タイミングをずらすための遅延時間を計算します。
+      最初の画像がページロード時にすぐ表示されるよう、マイナスの遅延値を使用します。
+    */
+        const delay = index * durationPerImage - totalDuration;
+
+        return (
+          <div
+            class='z--cssOnlyBg_layer'
+            style={{
+              '--z--hero-bg-image': `url('${src}')`,
+              '--z--hero-delay': `${delay}s`,
+            }}
+          />
+        );
+      })
+    }
+  </Frame>
+  <Layer bgc='black:30%' exProps={{ 'aria-hidden': 'true' }} />
+  <Stack pos='relative' z='1' ai='c' jc='c' min-h='100svh' c='white'>
+    <Text as='p' m='0' fz='xl' fw='600' lts='l'>
+      CSS only background slider sample
+    </Text>
+  </Stack>
+</Container>
+
+<style set:html={layeredKeyframesStyle} />
+
+<style>
+  @layer lism-custom {
+    .z--cssOnlyBg {
+      background-color: #000;
+    }
+
+    .z--cssOnlyBg_bg {
+      inset: 0;
+    }
+
+    /* Lism の生成クラスと競合させないためプレーン div にレイヤーを載せる */
+    .z--cssOnlyBg_layer {
+      position: absolute;
+      inset: 0;
+      background-image: var(--z--hero-bg-image);
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      opacity: 0;
+      animation: hero-fade var(--z--hero-duration) infinite;
+      animation-delay: var(--z--hero-delay);
+    }
+  }
+</style>

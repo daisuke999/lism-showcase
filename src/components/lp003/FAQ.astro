@@ -67,15 +67,15 @@ const faqImage = {
 
 <Lism as='section' id='faq' bgc='base' c='text' py='60'>
   <Container isWrapper='l' hasGutter>
-    <Grid class='z--p003-faq_layout' w='100%' g='50' ai='stretch'>
-      <Stack class='z--p003-faq_head' g='10' ai='center' ta='center'>
+    <Grid class='z--lp003-faq_layout' w='100%' g='50' ai='stretch'>
+      <Stack class='z--lp003-faq_head' g='10' ai='center' ta='center'>
         <Text as='p' m='0' fz='m' lts='l' ff='base' c='text-2' o='pp'> FAQ </Text>
         <Heading level='2' m='0' fz={['2xl', null, '3xl']} fw='500' lts='l'> よくあるご質問 </Heading>
       </Stack>
 
       <Frame
         as='figure'
-        class='z--p003-faq_media'
+        class='z--lp003-faq_media'
         m='0'
         ar={['16/10', null, '1/1']}
         ov='hidden'
@@ -93,7 +93,7 @@ const faqImage = {
         />
       </Frame>
 
-      <Lism class='z--p003-faq_acc' min-w='0'>
+      <Lism class='z--lp003-faq_acc' min-w='0'>
         <Accordion.Root g='0' p='0' ov='visible'>
           {
             faqItems.map((item) => (
@@ -136,22 +136,22 @@ const faqImage = {
    * 見出し＋（画像｜質問）をひとつの Grid で管理。
    * md 以上: 画像列と質問列を repeat(2, 1fr) で 1:1。
    */
-  .z--p003-faq_layout {
+  .z--lp003-faq_layout {
     display: grid;
     grid-template-areas: 'head' 'acc' 'img';
     grid-template-columns: minmax(0, 1fr);
   }
-  .z--p003-faq_head {
+  .z--lp003-faq_head {
     grid-area: head;
   }
-  .z--p003-faq_acc {
+  .z--lp003-faq_acc {
     grid-area: acc;
   }
-  .z--p003-faq_media {
+  .z--lp003-faq_media {
     grid-area: img;
   }
   @container (min-width: 800px) {
-    .z--p003-faq_layout {
+    .z--lp003-faq_layout {
       grid-template-columns: repeat(2, minmax(0, 1fr));
       grid-template-areas:
         'head head'
@@ -159,10 +159,10 @@ const faqImage = {
     }
   }
 
-  .z--p003-faq_acc :global(.c--accordion_item) {
+  .z--lp003-faq_acc :global(.c--accordion_item) {
     border-block-end: 1px solid var(--divider);
   }
-  .z--p003-faq_acc :global(.c--accordion_item:last-of-type) {
+  .z--lp003-faq_acc :global(.c--accordion_item:last-of-type) {
     border-block-end: none;
   }
 

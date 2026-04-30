@@ -24,11 +24,11 @@ export const title = 'LP002: Simple Natural LP';
     rel='stylesheet'
     slot='head'
   />
-  <Wrapper class='z--p002-root' contentSize='full'>
+  <Wrapper class='z--lp002-root' contentSize='full'>
     <!-- Header -->
     <Header />
     <!-- Main Content -->
-    <Container as='main' class='z--p002-main' pos='relative' z='0'>
+    <Container as='main' class='z--lp002-main' pos='relative' z='0'>
       <MV />
       <Mission />
       <Mission2 />
@@ -50,7 +50,7 @@ export const title = 'LP002: Simple Natural LP';
    * `ff:accent`（`--ff--accent`）: セリフに寄らないよう、Montserrat 以外は日本語ゴシック＋汎用 sans へ
    * @see https://fonts.google.com/specimen/Montserrat
    */
-    .z--p002-root {
+    .z--lp002-root {
       --ff--accent:
         'Montserrat', 'Hiragino Sans', 'Hiragino Kaku Gothic ProN', 'Hiragino Kaku Gothic Pro', 'Yu Gothic', 'YuGothic',
         'Noto Sans JP', 'BIZ UDGothic', ui-sans-serif, system-ui, sans-serif;
@@ -61,8 +61,8 @@ export const title = 'LP002: Simple Natural LP';
 <style>
   @layer lism-custom {
     :root {
-      --z--p002-header-height: 112px;
-      --z--p002-header-height--thin: 64px;
+      --z--lp002-header-height: 112px;
+      --z--lp002-header-height--thin: 64px;
       --base-2: #ececec;
     }
   }

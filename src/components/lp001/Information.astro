@@ -35,10 +35,10 @@ const informationMapEmbed = {
 } as const;
 ---
 
-<Container id='information' class='z--p001-information' isWrapper='m' py='60' hasGutter>
+<Container id='information' class='z--lp001-information' isWrapper='m' py='60' hasGutter>
   <Stack jc='c' g='40' w='100%'>
     <HGroup text='Information' subText='お知らせ' />
-    <Grid as='dl' class='z--p001-information_dl u--divide' gtc='auto 1fr' cg='40' p='0' ov='clip'>
+    <Grid as='dl' class='z--lp001-information_dl u--divide' gtc='auto 1fr' cg='40' p='0' ov='clip'>
       {
         informationRows.map((row) => (
           <Grid gtc='subgrid' gc='1/-1' p='30'>
@@ -48,7 +48,7 @@ const informationMapEmbed = {
         ))
       }
     </Grid>
-    <Frame class='z--p001-information_map' ar={['1/1', '5/2']}>
+    <Frame class='z--lp001-information_map' ar={['1/1', '5/2']}>
       <iframe
         src={informationMapEmbed.src}
         width={informationMapEmbed.width}
@@ -65,12 +65,12 @@ const informationMapEmbed = {
   @layer lism-custom {
 
   /* ページ全体の .u--fadeIn は同名 view-timeline が衝突するため、本セクションは view() で独立させる */
-  .z--p001-information .z--p001-information_dl {
+  .z--lp001-information .z--lp001-information_dl {
     animation: u--fadeIn linear both;
     animation-timeline: view(block);
     animation-range: var(--u--fadeIn--animation-range);
   }
-  .z--p001-information .z--p001-information_map {
+  .z--lp001-information .z--lp001-information_map {
     animation: u--fadeIn linear both;
     animation-timeline: view(block);
     animation-range: var(--u--fadeIn--animation-range);
