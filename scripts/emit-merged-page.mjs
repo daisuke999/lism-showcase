@@ -1,5 +1,5 @@
 /**
- * マージ元を読み取りのみで src/pages/merged/lpXXX/index.astro を生成する（同階に空の _style.css）。
+ * マージ元を読み取りのみで src/pages/merged/lpXXX/index.astro を生成する（同階に _style.css はタイトル行コメントのみ）。
  * Usage: node scripts/emit-merged-page.mjs <001|002|003|...>
  */
 import fs from 'fs';
@@ -18,6 +18,17 @@ function parsePageImports(pageAstroSrc) {
     if (!names.includes(m[1])) names.push(m[1]);
   }
   return names;
+}
+
+/** `export const title = '…'`（または "…" / \`…\`）からページタイトル文字列を取り出す */
+function extractExportedTitle(script) {
+  const sq = script.match(/export\s+const\s+title\s*=\s*'([^']*)'/);
+  if (sq) return sq[1];
+  const dq = script.match(/export\s+const\s+title\s*=\s*"([^"]*)"/);
+  if (dq) return dq[1];
+  const bt = script.match(/export\s+const\s+title\s*=\s*`([^`]*)`/);
+  if (bt) return bt[1];
+  return null;
 }
 
 function parseMultiStylePage(src) {
@@ -407,9 +418,13 @@ ${layerInners.filter(Boolean).join('\n\n')}
   const outPath = path.join(outDir, 'index.astro');
   fs.writeFileSync(outPath, out, 'utf8');
   const stylePath = path.join(outDir, '_style.css');
-  fs.writeFileSync(stylePath, '', 'utf8');
+  const pageTitle = extractExportedTitle(pageScript);
+  const stylePlaceholder = pageTitle
+    ? `/** ${pageTitle} */\n`
+    : `/** ${pageFolder} (マージ元に export const title が無い場合のプレースホルダ) */\n`;
+  fs.writeFileSync(stylePath, stylePlaceholder, 'utf8');
   console.log('Wrote', outPath, `(${(out.length / 1024).toFixed(1)} KB)`);
-  console.log('Wrote', stylePath, '(empty)');
+  console.log('Wrote', stylePath, '(title comment)');
 }
 
 const id = process.argv[2];

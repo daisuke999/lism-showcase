@@ -37,7 +37,11 @@ export const title = 'LP001: Minimal LP';
   </Wrapper>
 </DemoLayout>
 
-<style>
+<!--
+  子コンポーネント（MV / About 等）内の `.u--fadeIn` 等にも効かせるため global。
+  マージ版は1ファイル直書きのためスコープが及ぶが、分割構成ではここが必須。
+-->
+<style is:global>
   @layer lism-custom {
     /* Root */
     :root {
